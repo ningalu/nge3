@@ -15,6 +15,6 @@ Renderer::Renderer(const Window &window)
     renderer_.reset(renderer);
   }
 }
-
+void Renderer::Clear() { SDL_RenderClear(renderer_.get()); }
 void Renderer::Present() { SDL_RenderPresent(renderer_.get()); }
 } // namespace nge::sdl

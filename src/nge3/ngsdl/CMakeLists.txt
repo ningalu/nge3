@@ -6,6 +6,7 @@ add_library(
     ./Renderer.cpp
     ./Point.cpp
     ./WindowFlag.cpp
+    ./Texture.cpp
 )
 
 target_compile_features(

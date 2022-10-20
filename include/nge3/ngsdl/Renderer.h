@@ -8,11 +8,14 @@
 #include "Window.h"
 
 namespace nge::sdl {
+class Texture;
 class Renderer {
+  friend class Texture;
 
 public:
   Renderer(const Window &window);
 
+  void Clear();
   void Present();
 
 protected:

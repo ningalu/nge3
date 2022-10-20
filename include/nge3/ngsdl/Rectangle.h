@@ -6,7 +6,10 @@
 #include "SDL2/SDL.h"
 
 namespace nge::sdl {
+class Texture;
 class Rectangle {
+  friend class Texture;
+
 public:
   Rectangle();
   Rectangle(int x, int y, int w, int h);
