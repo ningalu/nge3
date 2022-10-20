@@ -17,7 +17,6 @@ int main(int argc, char **argv) {
   std::cout << p << "\n";
 
   SDL_Init(SDL_INIT_EVERYTHING);
-
   try {
     sdl::Window w;
     sdl::Renderer r(w);

@@ -34,11 +34,20 @@ Window::Window(std::string title, int x, int y, int w, int h, WindowFlag flags)
   }
 }
 
-void Window::SetPos(Point point) {
+std::tuple<int, int> Window::GetMaxSize() const {
+  int w, h;
+  SDL_GetWindowMaximumSize(window_.get(), &w, &h);
+  return {w, h};
+}
+void Window::SetMaxSize(int w, int h) {
+  SDL_SetWindowMaximumSize(window_.get(), w, h);
+}
+
+void Window::SetPosition(Point point) {
   SDL_SetWindowPosition(window_.get(), point.GetX(), point.GetY());
 }
 
-Point Window::GetPos() const {
+Point Window::GetPosition() const {
   int x, y;
   SDL_GetWindowPosition(window_.get(), &x, &y);
   return {x, y};
