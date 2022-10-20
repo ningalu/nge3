@@ -5,7 +5,7 @@
 #include "nge3/ngsdl/Renderer.h"
 #include "nge3/ngsdl/SDLException.h"
 #include "nge3/ngsdl/Window.h"
-#include "nge3/ngsdl/WindowFlags.h"
+#include "nge3/ngsdl/WindowFlag.h"
 
 int main(int argc, char **argv) {
 
@@ -24,9 +24,21 @@ int main(int argc, char **argv) {
     // for (int i = 0; i < 10000; i++) {
     //   r.Present();
     // }
+    SDL_Event buf;
+    bool running = true;
+    while (running) {
+      r.Present();
+      while (SDL_PollEvent(&buf)) {
+        switch (buf.type) {
+        case SDL_QUIT:
+          goto end;
+        }
+      }
+    }
   } catch (sdl::SDLException &e) {
     std::cout << e.what() << "\n";
   }
+end:
 
   SDL_Quit();
 

@@ -7,6 +7,7 @@
 #include "SDL2/SDL.h"
 
 #include "Point.h"
+#include "WindowFlag.h"
 
 namespace nge {
 namespace sdl {
@@ -15,10 +16,10 @@ class Window {
 public:
   friend class Renderer;
   Window();
-  Window(std::string name, int x, int y, int w, int h, int flags);
+  Window(std::string name, int x, int y, int w, int h, WindowFlag flags);
 
   Window &SetPos(Point point);
-  Point GetPoint();
+  Point GetPos();
 
 protected:
   std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)> window_;
