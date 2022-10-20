@@ -4,6 +4,7 @@ add_library(
     ./SDLException.cpp
     ./Window.cpp
     ./Renderer.cpp
+    ./Point.cpp
 )
 
 target_compile_features(
