@@ -21,12 +21,12 @@ Window::Window() : window_(nullptr, SDL_DestroyWindow) {
   }
 }
 
-Window::Window(std::string name, int x, int y, int w, int h, WindowFlag flags)
+Window::Window(std::string title, int x, int y, int w, int h, WindowFlag flags)
     : window_(nullptr, SDL_DestroyWindow) {
   // temporary pending a Display object
 
   SDL_Window *window =
-      SDL_CreateWindow(name.c_str(), x, y, w, h, static_cast<int>(flags));
+      SDL_CreateWindow(title.c_str(), x, y, w, h, static_cast<int>(flags));
   if (window == nullptr) {
     throw SDLException("Window couldn't be created");
   } else {
@@ -34,13 +34,28 @@ Window::Window(std::string name, int x, int y, int w, int h, WindowFlag flags)
   }
 }
 
-Window &Window::SetPos(Point point) {
+void Window::SetPos(Point point) {
   SDL_SetWindowPosition(window_.get(), point.GetX(), point.GetY());
-  return *this;
 }
-Point Window::GetPos() {
+
+Point Window::GetPos() const {
   int x, y;
   SDL_GetWindowPosition(window_.get(), &x, &y);
   return {x, y};
 }
+std::tuple<int, int> Window::GetSize() const {
+  int w, h;
+  SDL_GetWindowSize(window_.get(), &w, &h);
+  return {w, h};
+}
+void Window::SetSize(int w, int h) { SDL_SetWindowSize(window_.get(), w, h); }
+
+std::string_view Window::GetTitle() const {
+  return SDL_GetWindowTitle(window_.get());
+}
+
+void Window::SetTitle(const std::string &title) {
+  SDL_SetWindowTitle(window_.get(), title.c_str());
+}
+
 } // namespace nge::sdl
