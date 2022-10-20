@@ -7,8 +7,10 @@
 
 namespace nge {
 namespace sdl {
+class Renderer;
 class Window {
 public:
+  friend class Renderer;
   Window();
 
 protected:
