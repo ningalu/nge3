@@ -3,6 +3,7 @@ add_library(
     ./Rectangle.cpp
     ./SDLException.cpp
     ./Window.cpp
+    ./Renderer.cpp
 )
 
 target_compile_features(
