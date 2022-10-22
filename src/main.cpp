@@ -25,8 +25,8 @@ int main(int argc, char **argv) {
                            sdl::RendererFlags::ACCELERATED |
                                sdl::RendererFlags::TARGETTEXTURE};
 
-    sdl::Texture t = {r, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET,
-                      500, 500};
+    sdl::Texture t = {r, "./resources/parrot.jpg"};
+
     SDL_Event buf;
     bool running = true;
     while (running) {

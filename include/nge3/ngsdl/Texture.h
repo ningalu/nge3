@@ -2,6 +2,7 @@
 #define NGE3_NGSDL_TEXTURE_H
 
 #include <memory>
+#include <string>
 
 #include "SDL2/SDL.h"
 
@@ -15,7 +16,8 @@ class Texture {
   friend class TextureLoader;
 
 public:
-  Texture(Renderer &renderer, Uint32 format, int access, int w, int h);
+  Texture(const Renderer &renderer, Uint32 format, int access, int w, int h);
+  Texture(const Renderer &renderer, std::string filename);
 
 protected:
   Uint32 format_;
