@@ -26,12 +26,13 @@ int main(int argc, char **argv) {
                                sdl::RendererFlags::TARGETTEXTURE};
 
     sdl::Texture t = {r, "./resources/parrot.jpg"};
+    auto [t_w, t_h] = t.GetSize();
 
     SDL_Event buf;
     bool running = true;
     while (running) {
       r.Clear();
-      r.Copy(t, {0, 0, 500, 500}, {50, 50, 550, 550});
+      r.Copy(t, {0, 0, t_w, t_h}, {50, 50, 550, 550});
       r.Present();
       while (SDL_PollEvent(&buf)) {
         switch (buf.type) {
