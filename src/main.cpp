@@ -27,7 +27,6 @@ int main(int argc, char **argv) {
                                sdl::RendererFlags::TARGETTEXTURE};
 
     sdl::Texture t = {r, "./resources/parrot.jpg"};
-    auto [t_w, t_h] = t.GetSize();
     auto blend = t.GetBlendMode();
     std::cout << blend << "\n";
     t.SetBlendMode(sdl::BlendMode::ADD);
@@ -41,7 +40,7 @@ int main(int argc, char **argv) {
     bool running = true;
     while (running) {
       r.Clear();
-      r.Copy(t, {0, 0, t_w, t_h}, {50, 50, 550, 550});
+      r.Copy(t, std::nullopt, {50, 50, 550, 550});
       r.Present();
       while (SDL_PollEvent(&buf)) {
         switch (buf.type) {

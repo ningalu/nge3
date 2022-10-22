@@ -2,6 +2,7 @@
 #define NGE3_NGSDL_RENDERER_H
 
 #include <memory>
+#include <optional>
 
 #include "SDL2/SDL.h"
 
@@ -10,9 +11,8 @@
 #include "Window.h"
 
 namespace nge::sdl {
-class TextureLoader;
 class Renderer {
-  friend class TextureLoader;
+  friend class Texture;
 
 public:
   Renderer(const Window &window);
@@ -20,7 +20,8 @@ public:
 
   void Clear();
   void Present();
-  void Copy(const Texture &texture, const Rectangle &src, const Rectangle &dst);
+  void Copy(const Texture &texture, const std::optional<Rectangle> &src,
+            const Rectangle &dst);
 
 protected:
   std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)> renderer_;

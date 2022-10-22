@@ -12,10 +12,8 @@
 
 namespace nge::sdl {
 class Renderer;
-class TextureLoader;
 class Texture {
   friend class Renderer;
-  friend class TextureLoader;
 
 public:
   // SDL_CreateTexture

@@ -1,19 +1,21 @@
 #include "Texture.h"
 
+#include "SDL2/SDL_image.h"
+
 #include "Renderer.h"
 #include "SDLException.h"
-#include "TextureLoader.h"
 
 namespace nge::sdl {
 Texture::Texture(const Renderer &renderer, Uint32 format, int access, int w,
                  int h)
     : texture_(nullptr, SDL_DestroyTexture) {
-  texture_.reset(TextureLoader::CreateTexture(renderer, format, access, w, h));
+  texture_.reset(
+      SDL_CreateTexture(renderer.renderer_.get(), format, access, w, h));
 }
 
 Texture::Texture(const Renderer &renderer, std::string filename)
     : texture_(nullptr, SDL_DestroyTexture) {
-  texture_.reset(TextureLoader::LoadTexture(renderer, filename));
+  texture_.reset(IMG_LoadTexture(renderer.renderer_.get(), filename.c_str()));
 }
 
 Uint8 Texture::GetAlphaMod() const {
