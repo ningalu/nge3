@@ -9,10 +9,10 @@
 
 namespace nge::sdl {
 class Renderer;
+class TextureLoader;
 class Texture {
   friend class Renderer;
-  friend SDL_Texture *CreateTexture(Renderer &renderer, Uint32 format,
-                                    int access, int w, int h);
+  friend class TextureLoader;
 
 public:
   Texture(Renderer &renderer, Uint32 format, int access, int w, int h);

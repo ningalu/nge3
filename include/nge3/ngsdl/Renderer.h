@@ -10,9 +10,9 @@
 #include "Window.h"
 
 namespace nge::sdl {
+class TextureLoader;
 class Renderer {
-  friend SDL_Texture *CreateTexture(Renderer &renderer, Uint32 format,
-                                    int access, int w, int h);
+  friend class TextureLoader;
 
 public:
   Renderer(const Window &window);

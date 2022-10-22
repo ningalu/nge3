@@ -8,6 +8,7 @@ add_library(
     ./WindowFlags.cpp
     ./Texture.cpp
     ./RendererFlags.cpp
+    ./TextureLoader.cpp
 )
 
 target_compile_features(
