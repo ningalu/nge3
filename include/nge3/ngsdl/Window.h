@@ -9,7 +9,7 @@
 #include "SDL2/SDL.h"
 
 #include "Point.h"
-#include "WindowFlag.h"
+#include "WindowFlags.h"
 
 namespace nge {
 namespace sdl {
@@ -18,7 +18,7 @@ class Window {
 public:
   friend class Renderer;
   Window();
-  Window(std::string title, int x, int y, int w, int h, WindowFlag flags);
+  Window(std::string title, int x, int y, int w, int h, WindowFlags flags);
 
   // SDL_GetWindowBordersSize
 

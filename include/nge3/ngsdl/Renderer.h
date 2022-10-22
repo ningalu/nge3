@@ -5,6 +5,7 @@
 
 #include "SDL2/SDL.h"
 
+#include "RendererFlags.h"
 #include "Window.h"
 
 namespace nge::sdl {
@@ -14,6 +15,7 @@ class Renderer {
 
 public:
   Renderer(const Window &window);
+  Renderer(const Window &window, int index, RendererFlags flags);
 
   void Clear();
   void Present();

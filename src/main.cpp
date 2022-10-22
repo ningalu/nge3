@@ -6,7 +6,7 @@
 #include "nge3/ngsdl/SDLException.h"
 #include "nge3/ngsdl/Texture.h"
 #include "nge3/ngsdl/Window.h"
-#include "nge3/ngsdl/WindowFlag.h"
+#include "nge3/ngsdl/WindowFlags.h"
 
 int main(int argc, char **argv) {
 

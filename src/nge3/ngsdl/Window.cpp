@@ -1,7 +1,7 @@
 #include "Window.h"
 
 #include "SDLException.h"
-#include "WindowFlag.h"
+#include "WindowFlags.h"
 
 namespace nge::sdl {
 Window::Window() : window_(nullptr, SDL_DestroyWindow) {
@@ -10,10 +10,10 @@ Window::Window() : window_(nullptr, SDL_DestroyWindow) {
     throw SDLException("Desktop display mode couldn't be created");
   }
   SDL_Window *window = SDL_CreateWindow(
-      "NGSDL Window", static_cast<int>(WindowFlag::POS_CENTERED),
-      static_cast<int>(WindowFlag::POS_CENTERED), dm.w, dm.h,
-      static_cast<Uint32>(WindowFlag::OPENGL | WindowFlag::RESIZABLE |
-                          WindowFlag::MAXIMIZED));
+      "NGSDL Window", static_cast<int>(WindowFlags::POS_CENTERED),
+      static_cast<int>(WindowFlags::POS_CENTERED), dm.w, dm.h,
+      static_cast<Uint32>(WindowFlags::OPENGL | WindowFlags::RESIZABLE |
+                          WindowFlags::MAXIMIZED));
   if (window == nullptr) {
     throw SDLException("Window couldn't be created");
   } else {
@@ -21,7 +21,7 @@ Window::Window() : window_(nullptr, SDL_DestroyWindow) {
   }
 }
 
-Window::Window(std::string title, int x, int y, int w, int h, WindowFlag flags)
+Window::Window(std::string title, int x, int y, int w, int h, WindowFlags flags)
     : window_(nullptr, SDL_DestroyWindow) {
   // temporary pending a Display object
 

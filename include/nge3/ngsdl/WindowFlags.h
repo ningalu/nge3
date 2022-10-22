@@ -1,10 +1,10 @@
-#ifndef NGE3_SDL_WINDOWFLAG_H
-#define NGE3_SDL_WINDOWFLAG_H
+#ifndef NGE3_SDL_WINDOWFLAGS_H
+#define NGE3_SDL_WINDOWFLAGS_H
 
 #include "SDL2/SDL.h"
 
 namespace nge::sdl {
-enum class WindowFlag {
+enum class WindowFlags {
   FULLSCREEN = SDL_WINDOW_FULLSCREEN,
   FULLSCREEN_DESKTOP = SDL_WINDOW_FULLSCREEN_DESKTOP,
   OPENGL = SDL_WINDOW_OPENGL,
@@ -28,7 +28,7 @@ enum class WindowFlag {
   POPUP_MENU = SDL_WINDOW_POPUP_MENU,
   POS_CENTERED = SDL_WINDOWPOS_CENTERED
 };
-WindowFlag operator|(const WindowFlag &lhs, const WindowFlag &rhs);
+WindowFlags operator|(const WindowFlags &lhs, const WindowFlags &rhs);
 
 // inline const int WINDOW_FULLSCREEN = SDL_WINDOW_FULLSCREEN;
 // inline const int WINDOW_FULLSCREEN_DESKTOP = SDL_WINDOW_FULLSCREEN_DESKTOP;
