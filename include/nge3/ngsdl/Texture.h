@@ -6,17 +6,22 @@
 #include "SDL2/SDL.h"
 
 #include "Rectangle.h"
-#include "Renderer.h"
 
 namespace nge::sdl {
+class Renderer;
 class Texture {
+  friend class Renderer;
+  friend SDL_Texture *CreateTexture(Renderer &renderer, Uint32 format,
+                                    int access, int w, int h);
+
 public:
-  Texture(std::shared_ptr<Renderer> renderer, Uint32 format, int access, int w,
-          int h);
-  void Draw(const Rectangle &src, const Rectangle &dst);
+  Texture(Renderer &renderer, Uint32 format, int access, int w, int h);
 
 protected:
-  std::shared_ptr<Renderer> renderer_;
+  Uint32 format_;
+  int access_;
+  int w_;
+  int h_;
   std::unique_ptr<SDL_Texture, decltype(&SDL_DestroyTexture)> texture_;
 
 private:

@@ -31,4 +31,9 @@ Renderer::Renderer(const Window &window, int index, RendererFlags flags)
 
 void Renderer::Clear() { SDL_RenderClear(renderer_.get()); }
 void Renderer::Present() { SDL_RenderPresent(renderer_.get()); }
+void Renderer::Copy(const Texture &texture, const Rectangle &src,
+                    const Rectangle &dst) {
+  SDL_RenderCopy(renderer_.get(), texture.texture_.get(), &src.rect_,
+                 &dst.rect_);
+}
 } // namespace nge::sdl

@@ -5,8 +5,9 @@ add_library(
     ./Window.cpp
     ./Renderer.cpp
     ./Point.cpp
-    ./WindowFlag.cpp
+    ./WindowFlags.cpp
     ./Texture.cpp
+    ./RendererFlags.cpp
 )
 
 target_compile_features(

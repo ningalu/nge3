@@ -7,8 +7,10 @@
 
 namespace nge::sdl {
 class Texture;
+class Renderer;
 class Rectangle {
   friend class Texture;
+  friend class Renderer;
 
 public:
   Rectangle();
