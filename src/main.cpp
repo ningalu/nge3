@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "BlendMode.h"
 #include "nge3/ngsdl/Point.h"
 #include "nge3/ngsdl/Rectangle.h"
 #include "nge3/ngsdl/Renderer.h"
@@ -27,6 +28,14 @@ int main(int argc, char **argv) {
 
     sdl::Texture t = {r, "./resources/parrot.jpg"};
     auto [t_w, t_h] = t.GetSize();
+    auto blend = t.GetBlendMode();
+    std::cout << blend << "\n";
+    t.SetBlendMode(sdl::BlendMode::ADD);
+    blend = t.GetBlendMode();
+    std::cout << blend << "\n";
+    t.SetBlendMode(sdl::BlendMode::NONE);
+    blend = t.GetBlendMode();
+    std::cout << blend << "\n";
 
     SDL_Event buf;
     bool running = true;

@@ -9,6 +9,7 @@ add_library(
     ./Texture.cpp
     ./RendererFlags.cpp
     ./TextureLoader.cpp
+    ./BlendMode.cpp
 )
 
 target_compile_features(

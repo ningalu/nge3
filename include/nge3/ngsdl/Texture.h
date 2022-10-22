@@ -7,6 +7,7 @@
 
 #include "SDL2/SDL.h"
 
+#include "BlendMode.h"
 #include "Rectangle.h"
 
 namespace nge::sdl {
@@ -25,12 +26,20 @@ public:
 
   // SDL_GetTextureAlphaMod
   // SDL_SetTextureAlphaMod
+  Uint8 GetAlphaMod() const;
+  void SetAlphaMod(Uint8 mod);
 
   // SDL_GetTextureBlendMode
   // SDL_SetTextureBlendMode
+  BlendMode GetBlendMode() const;
+  void SetBlendMode(BlendMode mode);
 
   // SDL_GetTextureColorMod
   // SDL_SetTextureColorMod
+  std::tuple<Uint8, Uint8, Uint8> GetColorMod() const;
+  void SetColorMod(Uint8 r, Uint8 g, Uint8 b);
+  std::tuple<Uint8, Uint8, Uint8> GetColourMod() const;
+  void SetColourMod(Uint8 r, Uint8 g, Uint8 b);
 
   // SDL_LockTexture
   // SDL_UnlockTexture
