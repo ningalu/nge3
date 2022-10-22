@@ -1,6 +1,6 @@
 #include "Window.h"
 
-#include "SdlException.h"
+#include "SDLException.h"
 #include "WindowFlag.h"
 
 namespace nge::sdl {

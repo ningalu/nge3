@@ -1,6 +1,6 @@
-# ngraph
+# NGE3
 
-[![CMake](https://github.com/ningalu/ngraph/actions/workflows/cmake.yml/badge.svg?branch=main)](https://github.com/ningalu/ngraph/actions/workflows/cmake.yml)  
+[![CMake](https://github.com/ningalu/nge3/actions/workflows/cmake.yml/badge.svg?branch=main)](https://github.com/ningalu/nge3/actions/workflows/cmake.yml)  
 `cd ./build`  
 `conan install .. -build=missing`  
 `cd ..`  

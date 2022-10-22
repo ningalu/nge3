@@ -10,7 +10,7 @@ namespace nge::sdl {
 class SDLException : public std::exception {
 public:
   SDLException(std::string msg);
-  const char *what() const;
+  const char *what() const noexcept;
 
 protected:
   std::string message_;

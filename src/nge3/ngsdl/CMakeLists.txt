@@ -22,6 +22,6 @@ target_include_directories(
 target_link_libraries(
     ngsdl
     SDL2::SDL2main
-    sdl_image::sdl_image
+    SDL2_image::SDL2_image
     SDL2_ttf::SDL2_ttf
 )
