@@ -9,6 +9,9 @@ add_library(
     ./Texture.cpp
     ./RendererFlags.cpp
     ./BlendMode.cpp
+    ./Events/Event.cpp
+    ./Events/EventQueue.cpp
+    ./Events/QuitEvent.cpp
 )
 
 target_compile_features(

@@ -1,6 +1,8 @@
 #include <iostream>
 
 #include "BlendMode.h"
+#include "Events/Event.h"
+#include "Events/EventQueue.h"
 #include "nge3/ngsdl/Point.h"
 #include "nge3/ngsdl/Rectangle.h"
 #include "nge3/ngsdl/Renderer.h"
@@ -9,6 +11,9 @@
 #include "nge3/ngsdl/Texture.h"
 #include "nge3/ngsdl/Window.h"
 #include "nge3/ngsdl/WindowFlags.h"
+
+template <class... Ts> struct overloaded : Ts... { using Ts::operator()...; };
+template <class... Ts> overloaded(Ts...) -> overloaded<Ts...>;
 
 int main(int argc, char **argv) {
 
@@ -42,11 +47,22 @@ int main(int argc, char **argv) {
       r.Clear();
       r.Copy(t, std::nullopt, {50, 50, 550, 550});
       r.Present();
-      while (SDL_PollEvent(&buf)) {
-        switch (buf.type) {
-        case SDL_QUIT:
-          goto end;
-        }
+      // while (SDL_PollEvent(&buf)) {
+      //   switch (buf.type) {
+      //   case SDL_QUIT:
+      //     goto end;
+      //   }
+      // }
+      std::optional<sdl::Event> buffer = sdl::EventQueue::Poll();
+      while (buffer != std::nullopt) {
+
+        std::visit(overloaded{[](auto v) {},
+                              [&](sdl::QuitEvent event) {
+                                std::cout << "Quit\n";
+                                running = false;
+                              }},
+                   buffer->GetEventData());
+        buffer = sdl::EventQueue::Poll();
       }
     }
   } catch (sdl::SDLException &e) {
