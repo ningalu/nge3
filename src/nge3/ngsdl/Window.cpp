@@ -34,29 +34,77 @@ Window::Window(std::string title, int x, int y, int w, int h, WindowFlags flags)
   }
 }
 
+const Uint32 Window::GetID() const { return SDL_GetWindowID(window_.get()); }
+
 std::tuple<int, int> Window::GetMaxSize() const {
   int w, h;
   SDL_GetWindowMaximumSize(window_.get(), &w, &h);
   return {w, h};
 }
+
 void Window::SetMaxSize(int w, int h) {
   SDL_SetWindowMaximumSize(window_.get(), w, h);
+}
+
+int Window::GetMaxW() const {
+  int w;
+  SDL_GetWindowMaximumSize(window_.get(), &w, nullptr);
+  return w;
+}
+
+int Window::GetMaxH() const {
+  int h;
+  SDL_GetWindowMaximumSize(window_.get(), nullptr, &h);
+  return h;
+}
+
+std::tuple<int, int> Window::GetMinSize() const {
+  int w, h;
+  SDL_GetWindowMinimumSize(window_.get(), &w, &h);
+  return {w, h};
+}
+
+void Window::SetMinSize(int w, int h) {
+  SDL_SetWindowMinimumSize(window_.get(), w, h);
+}
+
+int Window::GetMinW() const {
+  int w;
+  SDL_GetWindowMinimumSize(window_.get(), &w, nullptr);
+  return w;
+}
+
+int Window::GetMinH() const {
+  int h;
+  SDL_GetWindowMinimumSize(window_.get(), nullptr, &h);
+  return h;
+}
+
+float Window::GetOpacity() const {
+  float o;
+  SDL_GetWindowOpacity(window_.get(), &o);
+  return o;
+}
+
+void Window::SetOpacity(float opacity) {
+  SDL_SetWindowOpacity(window_.get(), opacity);
 }
 
 void Window::SetPosition(Point point) {
   SDL_SetWindowPosition(window_.get(), point.GetX(), point.GetY());
 }
-
 Point Window::GetPosition() const {
   int x, y;
   SDL_GetWindowPosition(window_.get(), &x, &y);
   return {x, y};
 }
+
 std::tuple<int, int> Window::GetSize() const {
   int w, h;
   SDL_GetWindowSize(window_.get(), &w, &h);
   return {w, h};
 }
+
 void Window::SetSize(int w, int h) { SDL_SetWindowSize(window_.get(), w, h); }
 
 std::string_view Window::GetTitle() const {

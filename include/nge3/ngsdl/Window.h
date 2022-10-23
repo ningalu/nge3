@@ -39,14 +39,23 @@ public:
   // SDL_GetWindowGrab
 
   // SDL_GetWindowID
+  const Uint32 GetID() const;
 
   // SDL_GetWindowMaximumSize
   std::tuple<int, int> GetMaxSize() const;
+  int GetMaxW() const;
+  int GetMaxH() const;
   void SetMaxSize(int w, int h);
 
   // SDL_GetWindowMinimumSize
+  std::tuple<int, int> GetMinSize() const;
+  int GetMinW() const;
+  int GetMinH() const;
+  void SetMinSize(int w, int h);
 
   // SDL_GetWindowOpacity
+  float GetOpacity() const;
+  void SetOpacity(float opacity);
 
   // SDL_GetWindowPixelFormat
 
