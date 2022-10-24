@@ -3,7 +3,7 @@
 
 #include <optional>
 
-#include "Events/Event.h"
+#include "Events/Event.hpp"
 
 namespace nge::sdl {
 // The only real interpretation of the SDL Event Queue is that it's singleton

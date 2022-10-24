@@ -12,6 +12,7 @@ add_library(
     ./Events/Event.cpp
     ./Events/EventQueue.cpp
     ./Events/QuitEvent.cpp
+    ./Events/KeyUpEvent.cpp
 )
 
 target_compile_features(

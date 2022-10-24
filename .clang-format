@@ -1,1 +1,5 @@
 BasedOnStyle: LLVM
+AlwaysBreakTemplateDeclarations: 'Yes'
+AllowShortLambdasOnASingleLine: 'None'
+BinPackArguments: 'False'
+AlignAfterOpenBracket: BlockIndent

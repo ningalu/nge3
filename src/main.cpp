@@ -1,8 +1,9 @@
 #include <iostream>
 
 #include "BlendMode.h"
-#include "Events/Event.h"
+#include "Events/Event.hpp"
 #include "Events/EventQueue.h"
+#include "Events/EventVisitor.hpp"
 #include "nge3/ngsdl/Point.h"
 #include "nge3/ngsdl/Rectangle.h"
 #include "nge3/ngsdl/Renderer.h"
@@ -11,9 +12,6 @@
 #include "nge3/ngsdl/Texture.h"
 #include "nge3/ngsdl/Window.h"
 #include "nge3/ngsdl/WindowFlags.h"
-
-template <class... Ts> struct overloaded : Ts... { using Ts::operator()...; };
-template <class... Ts> overloaded(Ts...) -> overloaded<Ts...>;
 
 int main(int argc, char **argv) {
 
@@ -27,9 +25,10 @@ int main(int argc, char **argv) {
   SDL_Init(SDL_INIT_EVERYTHING);
   try {
     sdl::Window w;
-    auto r = sdl::Renderer{w, -1,
-                           sdl::RendererFlags::ACCELERATED |
-                               sdl::RendererFlags::TARGETTEXTURE};
+    auto r = sdl::Renderer{
+        w,
+        -1,
+        sdl::RendererFlags::ACCELERATED | sdl::RendererFlags::TARGETTEXTURE};
 
     sdl::Texture t = {r, "./resources/parrot.jpg"};
     auto blend = t.GetBlendMode();
@@ -56,12 +55,18 @@ int main(int argc, char **argv) {
       std::optional<sdl::Event> buffer = sdl::EventQueue::Poll();
       while (buffer != std::nullopt) {
 
-        std::visit(overloaded{[](auto v) {},
-                              [&](sdl::QuitEvent event) {
-                                std::cout << "Quit\n";
-                                running = false;
-                              }},
-                   buffer->GetEventData());
+        auto v = sdl::EventVisitor{
+            [](auto v) {
+            },
+            [&](const sdl::KeyUpEvent &event) {
+              std::cout << "Key Up\n";
+            },
+            [&](const sdl::QuitEvent &event) {
+              std::cout << "Quit\n";
+              running = false;
+            }};
+        buffer->Visit(v);
+
         buffer = sdl::EventQueue::Poll();
       }
     }

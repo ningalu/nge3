@@ -1,15 +1,17 @@
-#ifndef NGE3_NGSDL_EVENTS_EVENT_H
-#define NGE3_NGSDL_EVENTS_EVENT_H
+#ifndef NGE3_NGSDL_EVENTS_EVENT_HPP
+#define NGE3_NGSDL_EVENTS_EVENT_HPP
 
 #include <variant>
 
 #include "SDL2/SDL.h"
 
 #include "EventType.h"
-#include "QuitEvent.h"
+#include "EventVisitor.hpp"
+#include "Events/KeyUpEvent.h"
+#include "Events/QuitEvent.h"
 
 namespace nge::sdl {
-using EventVariants = std::variant<QuitEvent, int>;
+using EventVariants = std::variant<KeyUpEvent, QuitEvent, int>;
 class EventQueue;
 class Event {
   friend class EventQueue;
@@ -19,6 +21,11 @@ public:
 
   EventType GetType() const;
   void SetType(EventType type);
+
+  template <class... Ts>
+  void Visit(EventVisitor<Ts...> callbacks) const {
+    std::visit(callbacks, data_);
+  }
 
   const EventVariants &GetEventData() const;
 
