@@ -4,6 +4,7 @@
 #include "Events/Event.hpp"
 #include "Events/EventQueue.h"
 #include "Events/EventVisitor.hpp"
+#include "Events/Scancode.h"
 #include "nge3/ngsdl/Point.h"
 #include "nge3/ngsdl/Rectangle.h"
 #include "nge3/ngsdl/Renderer.h"
@@ -53,7 +54,12 @@ int main(int argc, char **argv) {
             [](auto v) {
             },
             [&](const sdl::KeyUpEvent &event) {
-              std::cout << event.GetTimestamp() << " Key Up\n";
+              std::cout << event.GetTimestamp() << " Key Up Event\n";
+              switch (event.GetKeySym().GetScancode()) {
+              case sdl::Scancode::ESCAPE:
+                running = false;
+                break;
+              }
             },
             [&](const sdl::QuitEvent &event) {
               std::cout << event.GetTimestamp() << " Quit\n";

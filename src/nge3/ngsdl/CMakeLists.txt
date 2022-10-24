@@ -11,6 +11,7 @@ add_library(
     ./BlendMode.cpp
     ./Events/Event.cpp
     ./Events/EventQueue.cpp
+    ./Events/KeySym.cpp
     ./EventTypes/QuitEvent.cpp
     ./EventTypes/KeyUpEvent.cpp
     ./EventTypes/DefaultEvent.cpp
