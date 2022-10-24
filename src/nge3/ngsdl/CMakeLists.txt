@@ -11,9 +11,9 @@ add_library(
     ./BlendMode.cpp
     ./Events/Event.cpp
     ./Events/EventQueue.cpp
-    ./Events/QuitEvent.cpp
-    ./Events/KeyUpEvent.cpp
-    ./Events/DefaultEvent.cpp
+    ./EventTypes/QuitEvent.cpp
+    ./EventTypes/KeyUpEvent.cpp
+    ./EventTypes/DefaultEvent.cpp
 )
 
 target_compile_features(

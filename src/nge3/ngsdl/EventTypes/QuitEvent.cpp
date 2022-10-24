@@ -1,4 +1,4 @@
-#include "Events/QuitEvent.h"
+#include "EventTypes/QuitEvent.h"
 
 namespace nge::sdl {
 QuitEvent::QuitEvent(Uint32 timestamp) { timestamp_ = timestamp; }

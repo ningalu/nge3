@@ -6,10 +6,10 @@
 #include "SDL2/SDL.h"
 
 #include "EventType.h"
+#include "EventTypes/DefaultEvent.h"
+#include "EventTypes/KeyUpEvent.h"
+#include "EventTypes/QuitEvent.h"
 #include "EventVisitor.hpp"
-#include "Events/DefaultEvent.h"
-#include "Events/KeyUpEvent.h"
-#include "Events/QuitEvent.h"
 
 namespace nge::sdl {
 using EventVariants = std::variant<KeyUpEvent, QuitEvent, DefaultEvent>;

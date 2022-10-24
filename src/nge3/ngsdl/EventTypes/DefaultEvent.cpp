@@ -1,4 +1,4 @@
-#include "Events/DefaultEvent.h"
+#include "EventTypes/DefaultEvent.h"
 
 namespace nge::sdl {
 DefaultEvent::DefaultEvent(SDL_CommonEvent e) { timestamp_ = e.timestamp; }

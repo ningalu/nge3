@@ -1,4 +1,4 @@
-#include "Events/KeyUpEvent.h"
+#include "EventTypes/KeyUpEvent.h"
 
 namespace nge::sdl {
 KeyUpEvent::KeyUpEvent(SDL_KeyboardEvent e) {

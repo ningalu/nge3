@@ -1,9 +1,9 @@
-#ifndef NGE3_NGSDL_EVENTS_KEYUPEVENT_H
-#define NGE3_NGSDL_EVENTS_KEYUPEVENT_H
+#ifndef NGE3_NGSDL_EVENTTYPES_KEYUPEVENT_H
+#define NGE3_NGSDL_EVENTTYPES_KEYUPEVENT_H
 
 #include "SDL2/SDL.h"
 
-#include "Events/DefaultEvent.h"
+#include "EventTypes/DefaultEvent.h"
 #include "Events/KeyState.h"
 
 namespace nge::sdl {

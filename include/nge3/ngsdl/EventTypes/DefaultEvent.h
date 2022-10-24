@@ -1,7 +1,7 @@
-#ifndef NGE3_NGSDL_EVENTS_DEFAULTEVENT_H
-#define NGE3_NGSDL_EVENTS_DEFAULTEVENT_H
+#ifndef NGE3_NGSDL_EVENTTYPES_DEFAULTEVENT_H
+#define NGE3_NGSDL_EVENTTYPES_DEFAULTEVENT_H
 
-#include "EventType.h"
+#include "Events/EventType.h"
 #include "SDL2/SDL.h"
 
 namespace nge::sdl {
