@@ -7,11 +7,12 @@
 
 #include "EventType.h"
 #include "EventVisitor.hpp"
+#include "Events/DefaultEvent.h"
 #include "Events/KeyUpEvent.h"
 #include "Events/QuitEvent.h"
 
 namespace nge::sdl {
-using EventVariants = std::variant<KeyUpEvent, QuitEvent, int>;
+using EventVariants = std::variant<KeyUpEvent, QuitEvent, DefaultEvent>;
 class EventQueue;
 class Event {
   friend class EventQueue;

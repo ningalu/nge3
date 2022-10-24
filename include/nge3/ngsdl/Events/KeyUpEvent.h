@@ -3,21 +3,21 @@
 
 #include "SDL2/SDL.h"
 
+#include "Events/DefaultEvent.h"
 #include "Events/KeyState.h"
 
 namespace nge::sdl {
-class KeyUpEvent {
+class KeyUpEvent : public DefaultEvent {
 public:
   KeyUpEvent() = default;
   KeyUpEvent(SDL_KeyboardEvent e);
 
-  Uint32 GetTimestamp() const;
   Uint32 GetWindowID() const;
   KeyState GetState() const;
   bool IsRepeat() const;
 
 protected:
-  Uint32 timestamp_, window_id_;
+  Uint32 window_id_;
   KeyState state_;
   bool repeat_;
 };

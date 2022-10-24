@@ -3,18 +3,13 @@
 
 #include "SDL2/SDL.h"
 
+#include "Events/DefaultEvent.h"
+
 namespace nge::sdl {
-class QuitEvent {
+class QuitEvent : public DefaultEvent {
 public:
   QuitEvent() = default;
   QuitEvent(Uint32 timestamp);
-
-  Uint32 GetTimestamp() const;
-
-protected:
-  Uint32 timestamp_;
-
-private:
 };
 } // namespace nge::sdl
 

@@ -8,7 +8,6 @@ KeyUpEvent::KeyUpEvent(SDL_KeyboardEvent e) {
   repeat_ = e.repeat;
 }
 
-Uint32 KeyUpEvent::GetTimestamp() const { return timestamp_; }
 Uint32 KeyUpEvent::GetWindowID() const { return window_id_; }
 KeyState KeyUpEvent::GetState() const { return state_; }
 bool KeyUpEvent::IsRepeat() const { return repeat_; }

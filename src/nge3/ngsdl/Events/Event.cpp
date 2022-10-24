@@ -11,7 +11,7 @@ Event::Event(SDL_Event e) {
     data_ = KeyUpEvent(e.key);
     break;
   default:
-    data_ = 0;
+    data_ = DefaultEvent(e.common);
   }
   type_ = EventType(e.type);
 }

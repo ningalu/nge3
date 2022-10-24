@@ -46,26 +46,19 @@ int main(int argc, char **argv) {
       r.Clear();
       r.Copy(t, std::nullopt, {50, 50, 550, 550});
       r.Present();
-      // while (SDL_PollEvent(&buf)) {
-      //   switch (buf.type) {
-      //   case SDL_QUIT:
-      //     goto end;
-      //   }
-      // }
       std::optional<sdl::Event> buffer = sdl::EventQueue::Poll();
       while (buffer != std::nullopt) {
 
-        auto v = sdl::EventVisitor{
+        buffer->Visit(sdl::EventVisitor{
             [](auto v) {
             },
             [&](const sdl::KeyUpEvent &event) {
-              std::cout << "Key Up\n";
+              std::cout << event.GetTimestamp() << " Key Up\n";
             },
             [&](const sdl::QuitEvent &event) {
-              std::cout << "Quit\n";
+              std::cout << event.GetTimestamp() << " Quit\n";
               running = false;
-            }};
-        buffer->Visit(v);
+            }});
 
         buffer = sdl::EventQueue::Poll();
       }
