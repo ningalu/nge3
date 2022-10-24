@@ -8,6 +8,9 @@ find_package(SDL2_ttf)
 find_package(nlohmann_json)
 find_package(GTest)
 
+# Declare ngsdl library
+add_subdirectory(${CMAKE_SOURCE_DIR}/src/nge3/ngsdl)
+
 add_executable(
     nge3_test_app 
     src/main.cpp
@@ -32,4 +35,4 @@ add_custom_command(
 )
 
 enable_testing()
-add_subdirectory(${CMAKE_SOURCE_DIR}/src/nge3/ngsdl)
+add_subdirectory(${CMAKE_SOURCE_DIR}/tests)
