@@ -1,6 +1,7 @@
 #include "Point.h"
 
 namespace nge::sdl {
+Point::Point() { point_ = {0, 0}; }
 Point::Point(int x, int y) { point_ = {x, y}; }
 int Point::GetX() const { return point_.x; }
 int Point::GetY() const { return point_.y; }

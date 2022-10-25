@@ -10,6 +10,12 @@ Event::Event(SDL_Event e) {
   case (SDL_KEYUP):
     data_ = KeyUpEvent(e.key);
     break;
+  case (SDL_KEYDOWN):
+    data_ = KeyDownEvent(e.key);
+    break;
+  case (SDL_MOUSEBUTTONUP):
+    data_ = MouseButtonUpEvent(e.button);
+    break;
   default:
     data_ = DefaultEvent(e.common);
   }

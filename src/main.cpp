@@ -61,6 +61,15 @@ int main(int argc, char **argv) {
                 break;
               }
             },
+            [&](const sdl::MouseUpEvent &event) {
+              std::cout << event.GetTimestamp() << " Mouse Up Event\n";
+              if (event.GetButton() == sdl::MouseButton::MIDDLE) {
+                std::cout << "Middle Click wow crazy\n";
+              }
+            },
+            [&](const sdl::KeyDownEvent &event) {
+              std::cout << event.GetTimestamp() << " Key Down Event\n";
+            },
             [&](const sdl::QuitEvent &event) {
               std::cout << event.GetTimestamp() << " Quit\n";
               running = false;
