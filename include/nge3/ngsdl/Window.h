@@ -8,6 +8,7 @@
 
 #include "SDL2/SDL.h"
 
+#include "Events/MouseButton.h"
 #include "Point.h"
 #include "WindowFlags.h"
 
@@ -72,6 +73,13 @@ public:
   // SDL_GetWindowTitle
   std::string_view GetTitle() const;
   void SetTitle(const std::string &title);
+
+  // SDL_GetMouseState
+  std::tuple<MouseButton, Point> GetMouseState() const;
+  MouseButton GetMouseButtons() const;
+  Point GetMousePos() const;
+  int GetMouseX() const;
+  int GetMouseY() const;
 
 protected:
   std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)> window_;

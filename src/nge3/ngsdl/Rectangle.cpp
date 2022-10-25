@@ -1,11 +1,32 @@
 #include "Rectangle.h"
 
+#include "Point.h"
+
 namespace nge::sdl {
 Rectangle::Rectangle() { rect_ = {0, 0, 0, 0}; }
 Rectangle::Rectangle(int x, int y, int w, int h) { rect_ = {x, y, w, h}; }
+Rectangle::Rectangle(const Point &p, int w, int h) {
+  rect_ = {p.GetX(), p.GetY(), w, h};
+}
+Rectangle::Rectangle(SDL_Rect r) { rect_ = r; }
+
+Rectangle::Rectangle(int x, int y, std::tuple<int, int> size) {
+  rect_ = {x, y, std::get<0>(size), std::get<1>(size)};
+}
+
+Rectangle::Rectangle(const Point &p, std::tuple<int, int> size) {
+  rect_ = {p.GetX(), p.GetY(), std::get<0>(size), std::get<1>(size)};
+}
 
 bool Rectangle::Intersects(const Rectangle &r) const {
   return SDL_HasIntersection(&rect_, &r.rect_);
+}
+
+std::optional<Rectangle> Rectangle::GetIntersection(const Rectangle &r) const {
+  SDL_Rect out;
+  return SDL_IntersectRect(&rect_, &r.rect_, &out)
+             ? std::optional(Rectangle{out})
+             : std::nullopt;
 }
 
 int Rectangle::GetX() const { return rect_.x; }

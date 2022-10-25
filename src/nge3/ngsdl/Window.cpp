@@ -10,10 +10,15 @@ Window::Window() : window_(nullptr, SDL_DestroyWindow) {
     throw SDLException("Desktop display mode couldn't be created");
   }
   SDL_Window *window = SDL_CreateWindow(
-      "NGSDL Window", static_cast<int>(WindowFlags::POS_CENTERED),
-      static_cast<int>(WindowFlags::POS_CENTERED), dm.w, dm.h,
-      static_cast<Uint32>(WindowFlags::OPENGL | WindowFlags::RESIZABLE |
-                          WindowFlags::MAXIMIZED));
+      "NGSDL Window",
+      static_cast<int>(WindowFlags::POS_CENTERED),
+      static_cast<int>(WindowFlags::POS_CENTERED),
+      dm.w,
+      dm.h,
+      static_cast<Uint32>(
+          WindowFlags::OPENGL | WindowFlags::RESIZABLE | WindowFlags::MAXIMIZED
+      )
+  );
   if (window == nullptr) {
     throw SDLException("Window couldn't be created");
   } else {
@@ -114,5 +119,20 @@ std::string_view Window::GetTitle() const {
 void Window::SetTitle(const std::string &title) {
   SDL_SetWindowTitle(window_.get(), title.c_str());
 }
+
+std::tuple<MouseButton, Point> Window::GetMouseState() const {
+  int x, y;
+  auto button_flags = SDL_GetMouseState(&x, &y);
+  MouseButton b = static_cast<MouseButton>(button_flags);
+  return {b, {x, y}};
+}
+
+MouseButton Window::GetMouseButtons() const {
+  return std::get<0>(GetMouseState());
+}
+
+Point Window::GetMousePos() const { return std::get<1>(GetMouseState()); }
+int Window::GetMouseX() const { return GetMousePos().GetX(); }
+int Window::GetMouseY() const { return GetMousePos().GetY(); }
 
 } // namespace nge::sdl
