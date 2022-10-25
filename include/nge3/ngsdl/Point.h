@@ -19,12 +19,22 @@ public:
   void SetX(int x);
   void SetY(int y);
 
+  Point operator+(const Point &rhs);
+  Point &operator+=(const Point &rhs);
+  Point operator-(const Point &rhs);
+  Point &operator-=(const Point &rhs);
+  Point operator*(const Point &rhs);
+  Point &operator*=(const Point &rhs);
+  Point operator/(const Point &rhs);
+  Point &operator/=(const Point &rhs);
+
 protected:
   SDL_Point point_;
-
-private:
 };
 
+// finnicky about const
+bool operator==(const Point &lhs, const Point &rhs);
+bool operator==(Point &lhs, Point &rhs);
 std::ostream &operator<<(std::ostream &os, const Point &point);
 
 } // namespace nge::sdl

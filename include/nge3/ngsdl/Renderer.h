@@ -36,6 +36,9 @@ public:
     const RendererFlip flip
   );
 
+  void SetTarget(Texture texture);
+  void SetTarget(Window window);
+
 protected:
   std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)> renderer_;
 

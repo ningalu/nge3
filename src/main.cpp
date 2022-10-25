@@ -55,7 +55,7 @@ int main(int argc, char **argv) {
     while (running) {
 
       if (dragging) {
-        pos = w.GetMousePos();
+        pos = w.GetMousePos() - sdl::Point{t.GetW() / 2, t.GetH() / 2};
       }
 
       if (frames.GetTicks() > (1000 / 60)) {

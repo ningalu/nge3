@@ -1,5 +1,6 @@
 add_executable(
     unit_tests
+    ./nge3/ngsdl/PointTests.cpp
     ./nge3/ngsdl/Events/KeyModTests.cpp
 )
 target_compile_features(

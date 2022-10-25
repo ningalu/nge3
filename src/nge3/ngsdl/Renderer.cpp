@@ -69,4 +69,11 @@ void Renderer::CopyEx(
     static_cast<SDL_RendererFlip>(flip)
   );
 }
+
+void Renderer::SetTarget(Texture texture) {
+  SDL_SetRenderTarget(renderer_.get(), texture.texture_.get());
+}
+void Renderer::SetTarget(Window window) {
+  SDL_SetRenderTarget(renderer_.get(), nullptr);
+}
 } // namespace nge::sdl
