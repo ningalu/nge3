@@ -1,25 +1,32 @@
 add_library(
     ngsdl
-    ./Rectangle.cpp
     ./SDLException.cpp
-    ./Window.cpp
-    ./Renderer.cpp
     ./Point.cpp
+    ./Rectangle.cpp
+
+    ./Window.cpp
     ./WindowFlags.cpp
-    ./Texture.cpp
+    
+    ./Renderer.cpp
     ./RendererFlags.cpp
+    
+    ./Texture.cpp
     ./BlendMode.cpp
+    
+    ./Timer.cpp
+
     ./Events/Event.cpp
     ./Events/EventQueue.cpp
     ./Events/KeySym.cpp
     ./Events/KeyMod.cpp
     ./Events/MouseButton.cpp
+
+    ./EventTypes/DefaultEvent.cpp
     ./EventTypes/QuitEvent.cpp
     ./EventTypes/KeyUpEvent.cpp
     ./EventTypes/KeyDownEvent.cpp
     ./EventTypes/MouseButtonUpEvent.cpp
     ./EventTypes/MouseButtonDownEvent.cpp
-    ./EventTypes/DefaultEvent.cpp
 )
 
 target_compile_features(

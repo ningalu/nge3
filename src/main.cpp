@@ -11,6 +11,7 @@
 #include "nge3/ngsdl/RendererFlags.h"
 #include "nge3/ngsdl/SDLException.h"
 #include "nge3/ngsdl/Texture.h"
+#include "nge3/ngsdl/Timer.h"
 #include "nge3/ngsdl/Window.h"
 #include "nge3/ngsdl/WindowFlags.h"
 
@@ -24,6 +25,7 @@ int main(int argc, char **argv) {
   std::cout << p << "\n";
 
   SDL_Init(SDL_INIT_EVERYTHING);
+
   try {
     sdl::Window w;
     auto r = sdl::Renderer{
@@ -46,54 +48,64 @@ int main(int argc, char **argv) {
     SDL_Event buf;
     bool running = true;
     bool dragging = false;
+    sdl::Timer frames, events;
     while (running) {
+
       if (dragging) {
         pos = w.GetMousePos();
       }
 
-      r.Clear();
-      r.Copy(t, std::nullopt, {pos, {550, 550}});
-      r.Present();
-      std::optional<sdl::Event> buffer = sdl::EventQueue::Poll();
-      while (buffer != std::nullopt) {
+      if (frames.GetTicks() > (1000 / 60)) {
+        frames.Restart();
+        r.Clear();
+        r.Copy(t, std::nullopt, {pos, {550, 550}});
+        r.Present();
+      }
 
-        buffer->Visit(sdl::EventVisitor{
-            [](auto v) {
-            },
-            [&](const sdl::KeyUpEvent &event) {
-              std::cout << event.GetTimestamp() << " Key Up Event\n";
-              switch (event.GetKeySym().GetScancode()) {
-              case sdl::Scancode::ESCAPE:
+      if (events.GetTicks() > (1000 / 1000)) {
+        events.Restart();
+        std::optional<sdl::Event> buffer = sdl::EventQueue::Poll();
+
+        while (buffer != std::nullopt) {
+
+          buffer->Visit(sdl::EventVisitor{
+              [](auto v) {
+              },
+              [&](const sdl::KeyUpEvent &event) {
+                std::cout << event.GetTimestamp() << " Key Up Event\n";
+                switch (event.GetKeySym().GetScancode()) {
+                case sdl::Scancode::ESCAPE:
+                  running = false;
+                  break;
+                }
+              },
+              [&](const sdl::MouseUpEvent &event) {
+                std::cout << event.GetTimestamp() << " Mouse Up Event\n";
+                switch (event.GetButton()) {
+                case sdl::MouseButton::LEFT:
+                  dragging = false;
+                  break;
+                }
+              },
+              [&](const sdl::MouseDownEvent &event) {
+                std::cout << event.GetTimestamp() << " Mouse Down Event\n";
+                pos = event.GetPos();
+                switch (event.GetButton()) {
+                case sdl::MouseButton::LEFT:
+                  dragging = true;
+                  break;
+                }
+              },
+              [&](const sdl::KeyDownEvent &event) {
+                std::cout << event.GetTimestamp() << " Key Down Event\n";
+              },
+              [&](const sdl::QuitEvent &event) {
+                std::cout << event.GetTimestamp() << " Quit\n";
                 running = false;
-                break;
-              }
-            },
-            [&](const sdl::MouseUpEvent &event) {
-              std::cout << event.GetTimestamp() << " Mouse Up Event\n";
-              switch (event.GetButton()) {
-              case sdl::MouseButton::LEFT:
-                dragging = false;
-                break;
-              }
-            },
-            [&](const sdl::MouseDownEvent &event) {
-              std::cout << event.GetTimestamp() << " Mouse Down Event\n";
-              pos = event.GetPos();
-              switch (event.GetButton()) {
-              case sdl::MouseButton::LEFT:
-                dragging = true;
-                break;
-              }
-            },
-            [&](const sdl::KeyDownEvent &event) {
-              std::cout << event.GetTimestamp() << " Key Down Event\n";
-            },
-            [&](const sdl::QuitEvent &event) {
-              std::cout << event.GetTimestamp() << " Quit\n";
-              running = false;
-            }});
+              }});
 
-        buffer = sdl::EventQueue::Poll();
+          buffer = sdl::EventQueue::Poll();
+        }
       }
     }
   } catch (sdl::SDLException &e) {
