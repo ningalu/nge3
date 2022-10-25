@@ -6,7 +6,10 @@
 #include "SDL2/SDL.h"
 
 namespace nge::sdl {
+class Renderer;
 class Point {
+  friend class Renderer;
+
 public:
   Point();
   Point(int x, int y);

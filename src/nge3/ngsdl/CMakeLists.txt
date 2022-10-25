@@ -9,6 +9,7 @@ add_library(
     
     ./Renderer.cpp
     ./RendererFlags.cpp
+    ./RendererFlip.cpp
     
     ./Texture.cpp
     ./BlendMode.cpp

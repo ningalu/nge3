@@ -9,6 +9,7 @@
 #include "nge3/ngsdl/Rectangle.h"
 #include "nge3/ngsdl/Renderer.h"
 #include "nge3/ngsdl/RendererFlags.h"
+#include "nge3/ngsdl/RendererFlip.h"
 #include "nge3/ngsdl/SDLException.h"
 #include "nge3/ngsdl/Texture.h"
 #include "nge3/ngsdl/Timer.h"
@@ -31,9 +32,9 @@ int main(int argc, char **argv) {
     std::cout << w.GetKeyboardState().size() << "\n";
 
     auto r = sdl::Renderer{
-        w,
-        -1,
-        sdl::RendererFlags::ACCELERATED | sdl::RendererFlags::TARGETTEXTURE};
+      w,
+      -1,
+      sdl::RendererFlags::ACCELERATED | sdl::RendererFlags::TARGETTEXTURE};
 
     sdl::Texture t = {r, "./resources/parrot.jpg"};
     auto blend = t.GetBlendMode();
@@ -60,7 +61,14 @@ int main(int argc, char **argv) {
       if (frames.GetTicks() > (1000 / 60)) {
         frames.Restart();
         r.Clear();
-        r.Copy(t, std::nullopt, {pos, {550, 550}});
+        r.CopyEx(
+          t,
+          std::nullopt,
+          {pos, {550, 550}},
+          5.0,
+          std::nullopt,
+          sdl::RendererFlip::HORIZONTAL | sdl::RendererFlip::VERTICAL
+        );
         r.Present();
       }
 
@@ -71,40 +79,40 @@ int main(int argc, char **argv) {
         while (buffer != std::nullopt) {
 
           buffer->Visit(sdl::EventVisitor{
-              [](auto v) {
-              },
-              [&](const sdl::KeyUpEvent &event) {
-                std::cout << event.GetTimestamp() << " Key Up Event\n";
-                switch (event.GetKeySym().GetScancode()) {
-                case sdl::Scancode::ESCAPE:
-                  running = false;
-                  break;
-                }
-              },
-              [&](const sdl::MouseUpEvent &event) {
-                std::cout << event.GetTimestamp() << " Mouse Up Event\n";
-                switch (event.GetButton()) {
-                case sdl::MouseButton::LEFT:
-                  dragging = false;
-                  break;
-                }
-              },
-              [&](const sdl::MouseDownEvent &event) {
-                std::cout << event.GetTimestamp() << " Mouse Down Event\n";
-                pos = event.GetPos();
-                switch (event.GetButton()) {
-                case sdl::MouseButton::LEFT:
-                  dragging = true;
-                  break;
-                }
-              },
-              [&](const sdl::KeyDownEvent &event) {
-                std::cout << event.GetTimestamp() << " Key Down Event\n";
-              },
-              [&](const sdl::QuitEvent &event) {
-                std::cout << event.GetTimestamp() << " Quit\n";
+            [](auto v) {
+            },
+            [&](const sdl::KeyUpEvent &event) {
+              std::cout << event.GetTimestamp() << " Key Up Event\n";
+              switch (event.GetKeySym().GetScancode()) {
+              case sdl::Scancode::ESCAPE:
                 running = false;
-              }});
+                break;
+              }
+            },
+            [&](const sdl::MouseUpEvent &event) {
+              std::cout << event.GetTimestamp() << " Mouse Up Event\n";
+              switch (event.GetButton()) {
+              case sdl::MouseButton::LEFT:
+                dragging = false;
+                break;
+              }
+            },
+            [&](const sdl::MouseDownEvent &event) {
+              std::cout << event.GetTimestamp() << " Mouse Down Event\n";
+              pos = event.GetPos();
+              switch (event.GetButton()) {
+              case sdl::MouseButton::LEFT:
+                dragging = true;
+                break;
+              }
+            },
+            [&](const sdl::KeyDownEvent &event) {
+              std::cout << event.GetTimestamp() << " Key Down Event\n";
+            },
+            [&](const sdl::QuitEvent &event) {
+              std::cout << event.GetTimestamp() << " Quit\n";
+              running = false;
+            }});
 
           buffer = sdl::EventQueue::Poll();
         }
