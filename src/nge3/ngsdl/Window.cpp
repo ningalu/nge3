@@ -10,14 +10,14 @@ Window::Window() : window_(nullptr, SDL_DestroyWindow) {
     throw SDLException("Desktop display mode couldn't be created");
   }
   SDL_Window *window = SDL_CreateWindow(
-      "NGSDL Window",
-      static_cast<int>(WindowFlags::POS_CENTERED),
-      static_cast<int>(WindowFlags::POS_CENTERED),
-      dm.w,
-      dm.h,
-      static_cast<Uint32>(
-          WindowFlags::OPENGL | WindowFlags::RESIZABLE | WindowFlags::MAXIMIZED
-      )
+    "NGSDL Window",
+    static_cast<int>(WindowFlags::POS_CENTERED),
+    static_cast<int>(WindowFlags::POS_CENTERED),
+    dm.w,
+    dm.h,
+    static_cast<Uint32>(
+      WindowFlags::OPENGL | WindowFlags::RESIZABLE | WindowFlags::MAXIMIZED
+    )
   );
   if (window == nullptr) {
     throw SDLException("Window couldn't be created");
@@ -30,8 +30,8 @@ Window::Window(std::string title, int x, int y, int w, int h, WindowFlags flags)
     : window_(nullptr, SDL_DestroyWindow) {
   // temporary pending a Display object
 
-  SDL_Window *window =
-      SDL_CreateWindow(title.c_str(), x, y, w, h, static_cast<int>(flags));
+  SDL_Window *window
+    = SDL_CreateWindow(title.c_str(), x, y, w, h, static_cast<int>(flags));
   if (window == nullptr) {
     throw SDLException("Window couldn't be created");
   } else {

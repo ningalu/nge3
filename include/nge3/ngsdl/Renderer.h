@@ -22,18 +22,18 @@ public:
   void Clear();
   void Present();
   void Copy(
-      const Texture &texture,
-      const std::optional<Rectangle> &src,
-      const Rectangle &dst
+    const Texture &texture,
+    const std::optional<Rectangle> &src,
+    const Rectangle &dst
   );
 
   void CopyEx(
-      const Texture &texture,
-      const std::optional<Rectangle> &src,
-      const Rectangle &dst,
-      const double angle,
-      const std::optional<Point> &center,
-      const RendererFlip flip
+    const Texture &texture,
+    const std::optional<Rectangle> &src,
+    const Rectangle &dst,
+    const double angle,
+    const std::optional<Point> &center,
+    const RendererFlip flip
   );
 
 protected:

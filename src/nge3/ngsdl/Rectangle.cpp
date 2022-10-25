@@ -24,9 +24,9 @@ bool Rectangle::Intersects(const Rectangle &r) const {
 
 std::optional<Rectangle> Rectangle::GetIntersection(const Rectangle &r) const {
   SDL_Rect out;
-  return SDL_IntersectRect(&rect_, &r.rect_, &out)
-             ? std::optional(Rectangle{out})
-             : std::nullopt;
+  return SDL_IntersectRect(&rect_, &r.rect_, &out) ?
+           std::optional(Rectangle{out}) :
+           std::nullopt;
 }
 
 int Rectangle::GetX() const { return rect_.x; }

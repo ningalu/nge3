@@ -3,7 +3,7 @@
 namespace nge::sdl {
 RendererFlip operator|(const RendererFlip &lhs, const RendererFlip &rhs) {
   return static_cast<RendererFlip>(
-      static_cast<int>(lhs) | static_cast<int>(rhs)
+    static_cast<int>(lhs) | static_cast<int>(rhs)
   );
 }
 

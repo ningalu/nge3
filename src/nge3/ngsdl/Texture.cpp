@@ -6,11 +6,13 @@
 #include "SDLException.h"
 
 namespace nge::sdl {
-Texture::Texture(const Renderer &renderer, Uint32 format, int access, int w,
-                 int h)
+Texture::Texture(
+  const Renderer &renderer, Uint32 format, int access, int w, int h
+)
     : texture_(nullptr, SDL_DestroyTexture) {
   texture_.reset(
-      SDL_CreateTexture(renderer.renderer_.get(), format, access, w, h));
+    SDL_CreateTexture(renderer.renderer_.get(), format, access, w, h)
+  );
 }
 
 Texture::Texture(const Renderer &renderer, std::string filename)
@@ -41,8 +43,7 @@ BlendMode Texture::GetBlendMode() const {
 }
 
 void Texture::SetBlendMode(BlendMode mode) {
-  if (SDL_SetTextureBlendMode(texture_.get(),
-                              static_cast<SDL_BlendMode>(mode)) != 0) {
+  if (SDL_SetTextureBlendMode(texture_.get(), static_cast<SDL_BlendMode>(mode)) != 0) {
     throw SDLException("Blend Mode couldn't be set");
   }
 }

@@ -16,8 +16,12 @@
 
 namespace nge::sdl {
 using EventVariants = std::variant<
-    MouseButtonDownEvent, MouseButtonUpEvent, KeyDownEvent, KeyUpEvent,
-    QuitEvent, DefaultEvent>;
+  MouseButtonDownEvent,
+  MouseButtonUpEvent,
+  KeyDownEvent,
+  KeyUpEvent,
+  QuitEvent,
+  DefaultEvent>;
 class EventQueue;
 class Event {
   friend class EventQueue;

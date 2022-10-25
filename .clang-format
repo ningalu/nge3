@@ -1,5 +1,9 @@
 BasedOnStyle: LLVM
-AlwaysBreakTemplateDeclarations: 'Yes'
-AllowShortLambdasOnASingleLine: 'None'
-BinPackArguments: 'False'
+AlwaysBreakTemplateDeclarations: "Yes"
+AllowShortLambdasOnASingleLine: "None"
+BinPackArguments: false
+BinPackParameters: false
+BreakBeforeBinaryOperators: "All"
 AlignAfterOpenBracket: BlockIndent
+ContinuationIndentWidth: 2
+BreakBeforeTernaryOperators: false
