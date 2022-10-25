@@ -17,7 +17,7 @@ add_executable(
 )
 target_compile_features(
     nge3_test_app 
-    PRIVATE cxx_std_17
+    PRIVATE cxx_std_20
 )
 target_include_directories(
     nge3_test_app

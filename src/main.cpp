@@ -28,6 +28,8 @@ int main(int argc, char **argv) {
 
   try {
     sdl::Window w;
+    std::cout << w.GetKeyboardState().size() << "\n";
+
     auto r = sdl::Renderer{
         w,
         -1,

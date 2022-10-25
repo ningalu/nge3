@@ -31,7 +31,7 @@ add_library(
 
 target_compile_features(
     ngsdl 
-    PRIVATE cxx_std_17
+    PRIVATE cxx_std_20
 )
 
 target_include_directories(
