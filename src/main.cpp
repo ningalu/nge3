@@ -41,11 +41,13 @@ int main(int argc, char **argv) {
     blend = t.GetBlendMode();
     std::cout << blend << "\n";
 
+    sdl::Point pos = {50, 50};
+
     SDL_Event buf;
     bool running = true;
     while (running) {
       r.Clear();
-      r.Copy(t, std::nullopt, {50, 50, 550, 550});
+      r.Copy(t, std::nullopt, {pos.GetX(), pos.GetY(), 550, 550});
       r.Present();
       std::optional<sdl::Event> buffer = sdl::EventQueue::Poll();
       while (buffer != std::nullopt) {
@@ -64,7 +66,14 @@ int main(int argc, char **argv) {
             [&](const sdl::MouseUpEvent &event) {
               std::cout << event.GetTimestamp() << " Mouse Up Event\n";
               if (event.GetButton() == sdl::MouseButton::MIDDLE) {
-                std::cout << "Middle Click wow crazy\n";
+                std::cout << "Middle unclick wow crazy\n";
+              }
+            },
+            [&](const sdl::MouseDownEvent &event) {
+              std::cout << event.GetTimestamp() << " Mouse Down Event\n";
+              pos = event.GetPos();
+              if (event.GetButton() == sdl::MouseButton::RIGHT) {
+                std::cout << "Right click wow crazy\n";
               }
             },
             [&](const sdl::KeyDownEvent &event) {

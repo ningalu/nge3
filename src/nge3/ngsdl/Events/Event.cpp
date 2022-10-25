@@ -16,6 +16,9 @@ Event::Event(SDL_Event e) {
   case (SDL_MOUSEBUTTONUP):
     data_ = MouseButtonUpEvent(e.button);
     break;
+  case (SDL_MOUSEBUTTONDOWN):
+    data_ = MouseButtonDownEvent(e.button);
+    break;
   default:
     data_ = DefaultEvent(e.common);
   }

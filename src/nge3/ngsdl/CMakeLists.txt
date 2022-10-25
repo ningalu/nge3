@@ -17,6 +17,7 @@ add_library(
     ./EventTypes/KeyUpEvent.cpp
     ./EventTypes/KeyDownEvent.cpp
     ./EventTypes/MouseButtonUpEvent.cpp
+    ./EventTypes/MouseButtonDownEvent.cpp
     ./EventTypes/DefaultEvent.cpp
 )
 
