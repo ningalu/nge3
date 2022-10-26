@@ -1,5 +1,7 @@
 #include "Renderer.h"
 
+#include <iostream>
+
 #include "RendererFlags.h"
 #include "SDLException.h"
 
@@ -31,6 +33,25 @@ Renderer::Renderer(const Window &window, int index, RendererFlags flags)
   } else {
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
     renderer_.reset(renderer);
+  }
+}
+
+void Renderer::SetTarget(Texture texture) {
+  SDL_SetRenderTarget(renderer_.get(), texture.texture_.get());
+}
+void Renderer::SetTarget(Window window) {
+  SDL_SetRenderTarget(renderer_.get(), nullptr);
+}
+
+std::tuple<Uint8, Uint8, Uint8, Uint8> Renderer::GetDrawColor() const {
+  Uint8 r, g, b, a;
+  SDL_GetRenderDrawColor(renderer_.get(), &r, &g, &b, &a);
+  return {r, g, b, a};
+}
+
+void Renderer::SetDrawColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
+  if (SDL_SetRenderDrawColor(renderer_.get(), r, g, b, a) != 0) {
+    throw SDLException("Render Draw Colour couldn't be set");
   }
 }
 
@@ -70,10 +91,41 @@ void Renderer::CopyEx(
   );
 }
 
-void Renderer::SetTarget(Texture texture) {
-  SDL_SetRenderTarget(renderer_.get(), texture.texture_.get());
+void Renderer::DrawLine(int x1, int y1, int x2, int y2) {
+  SDL_RenderDrawLine(renderer_.get(), x1, y1, x2, y2);
 }
-void Renderer::SetTarget(Window window) {
-  SDL_SetRenderTarget(renderer_.get(), nullptr);
+void Renderer::DrawLine(const Point &p1, const Point &p2) {
+  DrawLine(p1.GetX(), p1.GetY(), p2.GetX(), p2.GetY());
 }
+
+// this is not ideal
+// i dont think creating a new collection here is avoidable without maybe
+// creating collection classes for these wrappers that maintains the list of
+// wrapped objects as well
+// maybe i can hijack the specialisation of the std::vector<Point> constructor
+// maybe look into custom allocators for vector
+// maybe hard cap the number of points so it can be statically allocated each
+// function call
+void Renderer::DrawLines(const std::vector<Point> &points) {
+  std::vector<SDL_Point> sdl_points;
+  sdl_points.reserve(points.size());
+  for (auto it : points) {
+    sdl_points.push_back(it.point_);
+  }
+  SDL_RenderDrawLines(renderer_.get(), sdl_points.data(), sdl_points.size());
+}
+
+void Renderer::DrawPoint(int x, int y) {
+  SDL_RenderDrawPoint(renderer_.get(), x, y);
+}
+void Renderer::DrawPoint(const Point &p) { DrawPoint(p.GetX(), p.GetY()); }
+
+void Renderer::DrawRect(const Rectangle &r) {
+  SDL_RenderDrawRect(renderer_.get(), &r.rect_);
+}
+
+void Renderer::FillRect(const Rectangle &r) {
+  SDL_RenderFillRect(renderer_.get(), &r.rect_);
+}
+
 } // namespace nge::sdl

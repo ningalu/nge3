@@ -25,6 +25,9 @@ int main(int argc, char **argv) {
   sdl::Point p(5, 6);
   std::cout << p << "\n";
 
+  std::vector<sdl::Point> shape = {
+    {0, 0}, {50, 0}, {50, 10}, {30, 80}, {20, 80}, {40, 20}, {0, 10}, {0, 0}};
+
   SDL_Init(SDL_INIT_EVERYTHING);
 
   try {
@@ -69,6 +72,15 @@ int main(int argc, char **argv) {
           std::nullopt,
           sdl::RendererFlip::HORIZONTAL | sdl::RendererFlip::VERTICAL
         );
+        r.SetDrawColor(255, 0, 0, 255);
+        r.DrawLine({0, 0}, {600, 50});
+        r.SetDrawColor(0, 0, 255, 255);
+        r.DrawLines(shape);
+        r.SetDrawColor(0, 255, 0, 255);
+        r.DrawRect({40, 40, 100, 100});
+        r.SetDrawColor(0, 255, 255, 255);
+        r.FillRect({150, 50, 100, 100});
+        r.SetDrawColor(255, 255, 255, 255);
         r.Present();
       }
 
