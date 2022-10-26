@@ -43,7 +43,7 @@ void Renderer::SetTarget(Window window) {
   SDL_SetRenderTarget(renderer_.get(), nullptr);
 }
 
-std::tuple<Uint8, Uint8, Uint8, Uint8> Renderer::GetDrawColor() const {
+Color Renderer::GetDrawColor() const {
   Uint8 r, g, b, a;
   SDL_GetRenderDrawColor(renderer_.get(), &r, &g, &b, &a);
   return {r, g, b, a};
@@ -53,6 +53,11 @@ void Renderer::SetDrawColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
   if (SDL_SetRenderDrawColor(renderer_.get(), r, g, b, a) != 0) {
     throw SDLException("Render Draw Colour couldn't be set");
   }
+}
+
+void Renderer::SetDrawColor(Color c) {
+  auto [r, g, b, a] = c.GetColors();
+  SetDrawColor(r, g, b, a);
 }
 
 void Renderer::Clear() { SDL_RenderClear(renderer_.get()); }

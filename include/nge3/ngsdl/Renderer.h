@@ -7,6 +7,7 @@
 
 #include "SDL2/SDL.h"
 
+#include "Color.h"
 #include "RendererFlags.h"
 #include "RendererFlip.h"
 #include "Texture.h"
@@ -25,8 +26,9 @@ public:
   // SDL_GetRenderDrawBlendMode
 
   // SDL_GetRenderDrawColor
-  std::tuple<Uint8, Uint8, Uint8, Uint8> GetDrawColor() const;
+  Color GetDrawColor() const;
   void SetDrawColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+  void SetDrawColor(Color c);
 
   // SDL_GetRendererInfo
 
