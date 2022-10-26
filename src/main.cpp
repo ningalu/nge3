@@ -1,10 +1,15 @@
 #include <iostream>
 
+#include "SDL2/SDL_image.h"
+#include "SDL2/SDL_ttf.h"
+
 #include "BlendMode.h"
 #include "Events/Event.hpp"
 #include "Events/EventQueue.h"
 #include "Events/EventVisitor.hpp"
 #include "Events/Scancode.h"
+#include "nge3/ngsdl/Font.h"
+#include "nge3/ngsdl/FontRenderType.h"
 #include "nge3/ngsdl/Point.h"
 #include "nge3/ngsdl/Rectangle.h"
 #include "nge3/ngsdl/Renderer.h"
@@ -29,6 +34,8 @@ int main(int argc, char **argv) {
     {0, 0}, {50, 0}, {50, 10}, {30, 80}, {20, 80}, {40, 20}, {0, 10}, {0, 0}};
 
   SDL_Init(SDL_INIT_EVERYTHING);
+  IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
+  TTF_Init();
 
   try {
     sdl::Window w;
@@ -48,6 +55,15 @@ int main(int argc, char **argv) {
     t.SetBlendMode(sdl::BlendMode::NONE);
     blend = t.GetBlendMode();
     std::cout << blend << "\n";
+
+    sdl::Font font{"./resources/pokemon_pixel_font.ttf", 72};
+
+    sdl::Texture text{
+      r,
+      font,
+      "font test",
+      sdl::FontRenderType::SOLID,
+      sdl::Colour{216, 191, 216, 255}};
 
     sdl::Point pos = {50, 50};
 
@@ -72,6 +88,7 @@ int main(int argc, char **argv) {
           std::nullopt,
           sdl::RendererFlip::HORIZONTAL | sdl::RendererFlip::VERTICAL
         );
+        r.Copy(text, std::nullopt, {500, 500, text.GetW(), text.GetH()});
         r.SetDrawColor(255, 0, 0, 255);
         r.DrawLine({0, 0}, {600, 50});
         r.SetDrawColor(0, 0, 255, 255);
@@ -133,8 +150,9 @@ int main(int argc, char **argv) {
   } catch (sdl::SDLException &e) {
     std::cout << e.what() << "\n";
   }
-end:
 
+  TTF_Quit();
+  IMG_Quit();
   SDL_Quit();
 
   return 0;

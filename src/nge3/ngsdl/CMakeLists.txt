@@ -1,8 +1,10 @@
 add_library(
     ngsdl
     ./SDLException.cpp
+    ./TTFException.cpp
     ./Point.cpp
     ./Rectangle.cpp
+    ./Color.cpp
 
     ./Window.cpp
     ./WindowFlags.cpp
@@ -15,6 +17,8 @@ add_library(
     ./BlendMode.cpp
     
     ./Timer.cpp
+
+    ./Font.cpp
 
     ./Events/Event.cpp
     ./Events/EventQueue.cpp
