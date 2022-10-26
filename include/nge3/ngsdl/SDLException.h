@@ -4,8 +4,6 @@
 #include <stdexcept>
 #include <string>
 
-#include "SDL2/SDL.h"
-
 namespace nge::sdl {
 class SDLException : public std::exception {
 public:

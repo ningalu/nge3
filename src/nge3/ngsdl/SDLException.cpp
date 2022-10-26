@@ -1,5 +1,5 @@
 #include "SDLException.h"
-
+#include "SDL2/SDL.h"
 namespace nge::sdl {
 SDLException::SDLException(std::string msg) : message_(msg){};
 const char *SDLException::what() const noexcept {
