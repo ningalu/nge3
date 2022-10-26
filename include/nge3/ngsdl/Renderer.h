@@ -13,8 +13,10 @@
 #include "Window.h"
 
 namespace nge::sdl {
+class Font;
 class Renderer {
   friend class Texture;
+  friend class Font;
 
 public:
   Renderer(const Window &window);

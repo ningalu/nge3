@@ -101,6 +101,9 @@ Texture::Texture(
   texture_.reset(temp_tex);
 }
 
+Texture::Texture(SDL_Texture *texture)
+    : texture_(texture, SDL_DestroyTexture) {}
+
 Uint8 Texture::GetAlphaMod() const {
   Uint8 mod;
   if (SDL_GetTextureAlphaMod(texture_.get(), &mod) != 0) {

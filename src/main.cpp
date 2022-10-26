@@ -58,12 +58,16 @@ int main(int argc, char **argv) {
 
     sdl::Font font{"./resources/pokemon_pixel_font.ttf", 72};
 
-    sdl::Texture text{
+    sdl::Texture text1{
       r,
       font,
       "font test",
       sdl::FontRenderType::SOLID,
       sdl::Colour{216, 191, 216, 255}};
+
+    sdl::Texture text2 = font.CreateShadedTexture(
+      r, "shaded", {0, 255, 0, 255}, {0, 0, 255, 255}
+    );
 
     sdl::Point pos = {50, 50};
 
@@ -88,7 +92,8 @@ int main(int argc, char **argv) {
           std::nullopt,
           sdl::RendererFlip::HORIZONTAL | sdl::RendererFlip::VERTICAL
         );
-        r.Copy(text, std::nullopt, {500, 500, text.GetW(), text.GetH()});
+        r.Copy(text1, std::nullopt, {500, 500, text1.GetW(), text1.GetH()});
+        r.Copy(text2, std::nullopt, {600, 600, text2.GetW(), text2.GetH()});
         r.SetDrawColor(255, 0, 0, 255);
         r.DrawLine({0, 0}, {600, 50});
         r.SetDrawColor(0, 0, 255, 255);
