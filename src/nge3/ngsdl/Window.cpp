@@ -109,6 +109,8 @@ std::tuple<int, int> Window::GetSize() const {
   SDL_GetWindowSize(window_.get(), &w, &h);
   return {w, h};
 }
+int Window::GetW() const { return std::get<0>(GetSize()); }
+int Window::GetH() const { return std::get<1>(GetSize()); }
 
 void Window::SetSize(int w, int h) { SDL_SetWindowSize(window_.get(), w, h); }
 

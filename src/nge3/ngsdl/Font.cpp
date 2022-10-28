@@ -95,4 +95,19 @@ Font::TextureFromSurface(SDL_Renderer *renderer, SDL_Surface *surf) {
   }
   return temp_tex;
 }
+
+void Font::SetFontSize(int point_size) {
+  if (TTF_SetFontSize(font_.get(), point_size) != 0) {
+    throw TTFException("Font couldn't be resized");
+  }
+}
+
+std::tuple<int, int> Font::CalcTextSize(const std::string &text) const {
+  int w, h;
+  if (TTF_SizeText(font_.get(), text.c_str(), &w, &h) != 0) {
+    throw TTFException("Text size coudln't be calculated");
+  }
+  return {w, h};
+}
+
 } // namespace nge::sdl

@@ -67,6 +67,8 @@ public:
 
   // SDL_GetWindowSize
   std::tuple<int, int> GetSize() const;
+  int GetW() const;
+  int GetH() const;
   void SetSize(int w, int h);
 
   // SDL_GetWindowSurface

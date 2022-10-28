@@ -48,6 +48,12 @@ public:
     std::optional<uint32_t> wrap_length = std::nullopt
   );
 
+  // IMG_SetFontSize
+  void SetFontSize(int point_size);
+
+  // IMG_SizeText
+  std::tuple<int, int> CalcTextSize(const std::string &text) const;
+
 protected:
   std::unique_ptr<TTF_Font, decltype(&TTF_CloseFont)> font_;
 
