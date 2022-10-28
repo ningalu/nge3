@@ -1,4 +1,4 @@
-add_library(nge3 App.cpp)
+add_library(nge3 App.cpp View.cpp Component.cpp)
 
 target_compile_features(nge3 PRIVATE cxx_std_20)
 
