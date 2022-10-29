@@ -9,6 +9,8 @@
 #include "ngsdl/TTFException.h"
 #include "ngsdl/Window.h"
 
+#include "nge3/View.h"
+
 #include <iostream>
 
 namespace nge {
@@ -25,6 +27,22 @@ App::App() {
   }
   window_ = std::make_shared<sdl::Window>();
   renderer_ = std::make_shared<sdl::Renderer>(*window_);
+}
+
+void App::SetInitialView(View *v) {
+  std::unique_ptr<View> initial_view;
+  initial_view.reset(v);
+  view_stack_.push(std::move(initial_view));
+}
+
+void App::SetInitialView(std::unique_ptr<View> v) {
+  view_stack_.push(std::move(v));
+}
+
+void App::Run() {
+  while (running_) {
+    view_stack_.top()->Render();
+  }
 }
 
 App::~App() {

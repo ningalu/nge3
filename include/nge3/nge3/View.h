@@ -6,6 +6,8 @@
 namespace nge {
 class View {
 public:
+  virtual void Render();
+
 protected:
   sdl::Rect viewport_;
 
