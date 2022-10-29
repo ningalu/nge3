@@ -25,8 +25,11 @@ App::App() {
   if (TTF_Init() != 0) {
     throw sdl::TTFException("SDL_ttf couldn't be initialised");
   }
+
   window_ = std::make_shared<sdl::Window>();
   renderer_ = std::make_shared<sdl::Renderer>(*window_);
+  fps_ = 60;
+  tps_ = 1000;
 }
 
 void App::SetInitialView(View *v) {
@@ -40,8 +43,17 @@ void App::SetInitialView(std::unique_ptr<View> v) {
 }
 
 void App::Run() {
+  running_ = true;
   while (running_) {
-    view_stack_.top()->Render();
+
+    if (tps_timer_.GetElapsedTime() > (static_cast<long double>(1) / static_cast<long double>(tps_))) {
+      tps_timer_.Restart();
+    }
+
+    if (fps_timer_.GetElapsedTime() > (static_cast<long double>(1) / static_cast<long double>(fps_))) {
+      fps_timer_.Restart();
+      view_stack_.top()->Render();
+    }
   }
 }
 

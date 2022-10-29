@@ -4,6 +4,8 @@
 #include <memory>
 #include <stack>
 
+#include "nge3/Timer.h"
+
 namespace nge {
 class View;
 
@@ -34,6 +36,8 @@ protected:
   std::stack<std::unique_ptr<View>> view_stack_;
 
   bool running_;
+  int fps_, tps_;
+  Timer fps_timer_, tps_timer_;
 };
 } // namespace nge
 
