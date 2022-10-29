@@ -66,7 +66,6 @@ void App::Run() {
         e = sdl::EventQueue::Poll();
       }
     }
-    std::cout << "end input\n";
     if (fps_timer_.GetElapsedTime() > (static_cast<long double>(1) / static_cast<long double>(fps_))) {
       fps_timer_.Restart();
       view_stack_.top()->Render();

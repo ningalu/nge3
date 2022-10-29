@@ -1,2 +1,2 @@
-cd ./build/Release
-%1
+cd ./build/%1/%1
+%2
