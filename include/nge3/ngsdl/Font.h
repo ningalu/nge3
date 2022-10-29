@@ -4,7 +4,9 @@
 #include <memory>
 #include <string>
 
+#pragma warning(push, 0)
 #include "SDL2/SDL_ttf.h"
+#pragma warning(pop)
 
 #include "Color.h"
 #include "Texture.h"
@@ -15,6 +17,8 @@ class Font {
   friend class Texture;
 
 public:
+  Font(const Font &) = delete;
+  Font &operator=(const Font &) = delete;
   Font(const std::string &filename, int point_size);
 
   // TTF_RenderText_Blended

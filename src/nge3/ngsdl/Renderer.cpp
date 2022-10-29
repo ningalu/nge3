@@ -25,8 +25,9 @@ Renderer::Renderer(const Window &window)
 
 Renderer::Renderer(const Window &window, int index, RendererFlags flags)
     : renderer_(nullptr, SDL_DestroyRenderer) {
-  SDL_Renderer *renderer
-    = SDL_CreateRenderer(window.window_.get(), index, static_cast<int>(flags));
+  SDL_Renderer *renderer = SDL_CreateRenderer(
+    window.window_.get(), index, static_cast<Uint32>(flags)
+  );
 
   if (renderer == nullptr) {
     throw SDLException("Renderer couldn't be constructed");
@@ -117,7 +118,9 @@ void Renderer::DrawLines(const std::vector<Point> &points) {
   for (auto it : points) {
     sdl_points.push_back(it.point_);
   }
-  SDL_RenderDrawLines(renderer_.get(), sdl_points.data(), sdl_points.size());
+  SDL_RenderDrawLines(
+    renderer_.get(), sdl_points.data(), static_cast<int>(sdl_points.size())
+  );
 }
 
 void Renderer::DrawPoint(int x, int y) {

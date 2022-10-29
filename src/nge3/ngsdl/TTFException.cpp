@@ -1,5 +1,8 @@
 #include "TTFException.h"
+
+#pragma warning(push, 0)
 #include "SDL2/SDL_ttf.h"
+#pragma warning(pop)
 
 namespace nge::sdl {
 TTFException::TTFException(std::string msg) : message_(msg){};

@@ -152,7 +152,7 @@ int main(int argc, char **argv) {
         }
       }
     }
-  } catch (sdl::SDLException &e) {
+  } catch (std::exception &e) {
     std::cout << e.what() << "\n";
   }
 

@@ -5,7 +5,9 @@
 #include <optional>
 #include <vector>
 
+#pragma warning(push, 0)
 #include "SDL2/SDL.h"
+#pragma warning(pop)
 
 #include "Color.h"
 #include "RendererFlags.h"
@@ -20,6 +22,8 @@ class Renderer {
   friend class Font;
 
 public:
+  Renderer(const Renderer &) = delete;
+  Renderer &operator=(const Renderer &) = delete;
   Renderer(const Window &window);
   Renderer(const Window &window, int index, RendererFlags flags);
 

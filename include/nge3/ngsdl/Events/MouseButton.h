@@ -1,7 +1,9 @@
 #ifndef NGE3_NGSDL_EVENTS_MOUSEBUTTON
 #define NGE3_NGSDL_EVENTS_MOUSEBUTTON
 
+#pragma warning(push, 0)
 #include "SDL2/SDL.h"
+#pragma warning(pop)
 
 namespace nge::sdl {
 enum class MouseButton {

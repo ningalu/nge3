@@ -1,5 +1,9 @@
 #include "SDLException.h"
+
+#pragma warning(push, 0)
 #include "SDL2/SDL.h"
+#pragma warning(pop)
+
 namespace nge::sdl {
 SDLException::SDLException(std::string msg) : message_(msg){};
 const char *SDLException::what() const noexcept {

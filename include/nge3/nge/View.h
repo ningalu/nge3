@@ -16,6 +16,7 @@ public:
     std::optional<sdl::Rectangle> viewport = std::nullopt
   );
   virtual void Render();
+  virtual ~View() = default;
 
 protected:
   std::optional<sdl::Rect> viewport_;

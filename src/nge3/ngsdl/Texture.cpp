@@ -1,7 +1,9 @@
 #include "Texture.h"
 
+#pragma warning(push, 0)
 #include "SDL2/SDL_image.h"
 #include "SDL2/SDL_ttf.h"
+#pragma warning(pop)
 
 #include "Font.h"
 #include "Renderer.h"
@@ -33,7 +35,7 @@ Texture::Texture(
 )
     : texture_(nullptr, SDL_DestroyTexture) {
   // no real reason to use library objects internally
-  SDL_Surface *temp_surf;
+  SDL_Surface *temp_surf = nullptr;
   switch (type) {
   case FontRenderType::SOLID:
     temp_surf
@@ -71,7 +73,7 @@ Texture::Texture(
   Color bg
 )
     : texture_(nullptr, SDL_DestroyTexture) {
-  SDL_Surface *temp_surf;
+  SDL_Surface *temp_surf = nullptr;
   switch (type) {
   case FontRenderType::SOLID:
     temp_surf = TTF_RenderText_Solid_Wrapped(

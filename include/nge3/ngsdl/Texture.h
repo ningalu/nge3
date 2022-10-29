@@ -6,7 +6,9 @@
 #include <string>
 #include <tuple>
 
+#pragma warning(push, 0)
 #include "SDL2/SDL.h"
+#pragma warning(pop)
 
 #include "BlendMode.h"
 #include "Color.h"
@@ -23,6 +25,11 @@ class Texture {
 public:
   // SDL_CreateTexture
   Texture(const Renderer &renderer, Uint32 format, int access, int w, int h);
+
+  // Internal SDL_Texture* could get deleted if you can copy from a Texture;
+  // Textures must exclusively own their SDL_Texture*
+  Texture(const Texture &) = delete;
+  Texture &operator=(const Texture &) = delete;
 
   // IMG_LoadTexture
   Texture(const Renderer &renderer, std::string filename);

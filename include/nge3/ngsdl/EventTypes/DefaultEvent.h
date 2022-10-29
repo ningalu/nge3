@@ -2,7 +2,10 @@
 #define NGE3_NGSDL_EVENTTYPES_DEFAULTEVENT_H
 
 #include "Events/EventType.h"
+
+#pragma warning(push, 0)
 #include "SDL2/SDL.h"
+#pragma warning(pop)
 
 namespace nge::sdl {
 class DefaultEvent {

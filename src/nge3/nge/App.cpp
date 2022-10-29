@@ -2,9 +2,11 @@
 
 #include <optional>
 
+#pragma warning(push, 0)
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include "SDL2/SDL_ttf.h"
+#pragma warning(pop)
 
 #include "ngsdl/Events/Event.hpp"
 #include "ngsdl/Events/EventQueue.h"
@@ -58,9 +60,9 @@ void App::Run() {
       auto e = sdl::EventQueue::Poll();
       while (e != std::nullopt) {
         e->Visit(sdl::EventVisitor{
-          [](const sdl::DefaultEvent &event) {
+          [](const sdl::DefaultEvent &) {
           },
-          [&](const sdl::QuitEvent &event) {
+          [&](const sdl::QuitEvent &) {
             running_ = false;
           }});
         e = sdl::EventQueue::Poll();

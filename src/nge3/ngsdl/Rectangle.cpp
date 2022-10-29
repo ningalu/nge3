@@ -14,12 +14,12 @@ Rectangle::Rectangle(int x, int y, std::tuple<int, int> size) {
   rect_ = {x, y, std::get<0>(size), std::get<1>(size)};
 }
 
-Rectangle::Rectangle(const Point &p, std::tuple<int, int> size) {
+Rectangle::Rectangle(const Point &p, const std::tuple<int, int> &size) {
   rect_ = {p.GetX(), p.GetY(), std::get<0>(size), std::get<1>(size)};
 }
 
 bool Rectangle::Intersects(const Rectangle &r) const {
-  return SDL_HasIntersection(&rect_, &r.rect_);
+  return static_cast<bool>(SDL_HasIntersection(&rect_, &r.rect_));
 }
 
 std::optional<Rectangle> Rectangle::GetIntersection(const Rectangle &r) const {

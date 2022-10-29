@@ -5,7 +5,9 @@
 #include <ostream>
 #include <tuple>
 
+#pragma warning(push, 0)
 #include "SDL2/SDL.h"
+#pragma warning(pop)
 
 namespace nge::sdl {
 class Texture;
@@ -20,7 +22,7 @@ public:
   Rectangle(int x, int y, int w, int h);
   Rectangle(const Point &p, int w, int h);
   Rectangle(int x, int y, std::tuple<int, int> size);
-  Rectangle(const Point &p, std::tuple<int, int> size);
+  Rectangle(const Point &p, const std::tuple<int, int> &size);
 
   int GetX() const;
   int GetY() const;

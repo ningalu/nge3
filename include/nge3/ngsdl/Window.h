@@ -7,7 +7,9 @@
 #include <string_view>
 #include <tuple>
 
+#pragma warning(push, 0)
 #include "SDL2/SDL.h"
+#pragma warning(pop)
 
 #include "Events/MouseButton.h"
 #include "Point.h"
@@ -21,6 +23,8 @@ class Window {
 public:
   friend class Renderer;
   Window();
+  Window(const Window &) = delete;
+  Window &operator=(const Window &) = delete;
   Window(std::string title, int x, int y, int w, int h, WindowFlags flags);
   Window(std::string title, Rectangle r, WindowFlags flags);
 

@@ -28,6 +28,17 @@ add_library(
 
 target_compile_features(ngsdl PRIVATE cxx_std_20)
 
+target_compile_options(
+  ngsdl
+  PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/W4
+          /Wall
+          /WX
+          /wd4820>
+          $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall
+          -Wextra
+          -Wpedantic
+          -Werror>)
+
 target_include_directories(ngsdl PUBLIC ${CMAKE_SOURCE_DIR}/include/nge3/ngsdl)
 
 target_link_libraries(ngsdl SDL2::SDL2main SDL2_image::SDL2_image

@@ -21,6 +21,9 @@ public:
     sdl::RendererFlags renderer_flags
   );
 
+  Graphics(const Graphics &) = delete;
+  Graphics &operator=(const Graphics &) = delete;
+
   void Render();
 
   void SetWindowSize(int w, int h);

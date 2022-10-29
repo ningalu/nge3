@@ -5,7 +5,7 @@ KeyUpEvent::KeyUpEvent(SDL_KeyboardEvent e) {
   timestamp_ = e.timestamp;
   window_id_ = e.windowID;
   state_ = KeyState(e.state);
-  repeat_ = e.repeat;
+  repeat_ = static_cast<bool>(e.repeat);
   keysym_ = {
     Scancode{e.keysym.scancode}, Keycode{e.keysym.sym}, KeyMod{e.keysym.mod}};
 }

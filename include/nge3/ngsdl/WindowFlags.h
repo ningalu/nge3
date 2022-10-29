@@ -1,7 +1,9 @@
 #ifndef NGE3_SDL_WINDOWFLAGS_H
 #define NGE3_SDL_WINDOWFLAGS_H
 
+#pragma warning(push, 0)
 #include "SDL2/SDL.h"
+#pragma warning(pop)
 
 namespace nge::sdl {
 enum class WindowFlags {

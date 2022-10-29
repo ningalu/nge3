@@ -15,8 +15,8 @@ View::View(
     graphics_->SetWindowSize(viewport_->GetW(), viewport_->GetH());
   } else {
     auto p = graphics_->GetWindowPos();
-    auto [w, h] = graphics_->GetWindowSize();
-    viewport_ = {p, {w, h}};
+    auto size = graphics_->GetWindowSize();
+    viewport_ = {p, size};
   }
 }
 void View::Render() { /*std::cout << "Rendering\n";*/
