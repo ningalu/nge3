@@ -8,8 +8,8 @@
 
 int main(int argc, char **argv) {
   try {
-    nge::App app;
-    app.SetInitialView(new nge::View);
+    nge::App app = {"test app", {50, 50, 800, 600}};
+    app.SetInitialView(new nge::View(app.GetGraphics()));
     app.Run();
 
   } catch (const std::exception &e) {

@@ -2,6 +2,7 @@
 #define NGE3_NGE_GRAPHICS_H
 
 #include <string>
+#include <tuple>
 
 #include "ngsdl/Rectangle.h"
 #include "ngsdl/Renderer.h"
@@ -21,6 +22,12 @@ public:
   );
 
   void Render();
+
+  void SetWindowSize(int w, int h);
+  std::tuple<int, int> GetWindowSize() const;
+  void SetWindowPos(int x, int y);
+  void SetWindowPos(sdl::Point pos);
+  sdl::Point GetWindowPos() const;
 
 protected:
   sdl::Window window_;

@@ -1,16 +1,25 @@
 #ifndef NGE3_NGE_VIEW_H
 #define NGE3_NGE_VIEW_H
 
+#include <memory>
+#include <optional>
+
 #include "ngsdl/Rectangle.h"
 
 namespace nge {
+class Graphics;
+
 class View {
 public:
-  View();
+  View(
+    std::shared_ptr<Graphics> graphics,
+    std::optional<sdl::Rectangle> viewport = std::nullopt
+  );
   virtual void Render();
 
 protected:
-  sdl::Rect viewport_;
+  std::optional<sdl::Rect> viewport_;
+  std::shared_ptr<Graphics> graphics_;
 
 private:
 };
