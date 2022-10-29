@@ -39,6 +39,23 @@ Window::Window(std::string title, int x, int y, int w, int h, WindowFlags flags)
   }
 }
 
+Window::Window(std::string title, Rectangle r, WindowFlags flags)
+    : window_(nullptr, SDL_DestroyWindow) {
+  SDL_Window *window = SDL_CreateWindow(
+    title.c_str(),
+    r.GetX(),
+    r.GetY(),
+    r.GetW(),
+    r.GetH(),
+    static_cast<int>(flags)
+  );
+  if (window == nullptr) {
+    throw SDLException("Window couldn't be created");
+  } else {
+    window_.reset(window);
+  }
+}
+
 const Uint32 Window::GetID() const { return SDL_GetWindowID(window_.get()); }
 
 std::tuple<int, int> Window::GetMaxSize() const {

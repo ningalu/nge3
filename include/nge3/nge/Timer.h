@@ -1,5 +1,5 @@
-#ifndef NGE3_NGE3_TIMER_H
-#define NGE3_NGE3_TIMER_H
+#ifndef NGE3_NGE_TIMER_H
+#define NGE3_NGE_TIMER_H
 
 #include <chrono>
 

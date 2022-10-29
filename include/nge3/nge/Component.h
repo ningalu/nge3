@@ -1,5 +1,5 @@
-#ifndef NGE3_NGE3_COMPONENT_H
-#define NGE3_NGE3_COMPONENT_H
+#ifndef NGE3_NGE_COMPONENT_H
+#define NGE3_NGE_COMPONENT_H
 
 namespace nge {
 class Component {};

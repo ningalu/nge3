@@ -3,5 +3,7 @@
 #include <iostream>
 
 namespace nge {
-void View::Render() { std::cout << "Rendering\n"; }
+View::View() {}
+void View::Render() { /*std::cout << "Rendering\n";*/
+}
 } // namespace nge

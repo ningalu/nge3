@@ -1,5 +1,5 @@
-#ifndef NGE3_NGE3_APP_H
-#define NGE3_NGE3_APP_H
+#ifndef NGE3_NGE_APP_H
+#define NGE3_NGE_APP_H
 
 #include <memory>
 #include <stack>
@@ -8,7 +8,7 @@
 
 namespace nge {
 class View;
-
+class Graphics;
 namespace sdl {
 
 class Window;
@@ -30,8 +30,7 @@ public:
   ~App();
 
 protected:
-  std::shared_ptr<sdl::Window> window_;
-  std::shared_ptr<sdl::Renderer> renderer_;
+  std::shared_ptr<Graphics> graphics_;
 
   std::stack<std::unique_ptr<View>> view_stack_;
 

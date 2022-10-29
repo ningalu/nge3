@@ -11,6 +11,7 @@
 
 #include "Events/MouseButton.h"
 #include "Point.h"
+#include "Rectangle.h"
 #include "WindowFlags.h"
 
 namespace nge {
@@ -21,6 +22,7 @@ public:
   friend class Renderer;
   Window();
   Window(std::string title, int x, int y, int w, int h, WindowFlags flags);
+  Window(std::string title, Rectangle r, WindowFlags flags);
 
   // SDL_GetWindowBordersSize
 
