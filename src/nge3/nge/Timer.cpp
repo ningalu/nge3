@@ -1,4 +1,4 @@
-#include "nge3/Timer.h"
+#include "nge/Timer.h"
 
 namespace nge {
 Timer::Timer() { start_ = std::chrono::high_resolution_clock::now(); }

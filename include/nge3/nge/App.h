@@ -4,7 +4,7 @@
 #include <memory>
 #include <stack>
 
-#include "nge3/Timer.h"
+#include "nge/Timer.h"
 
 namespace nge {
 class View;

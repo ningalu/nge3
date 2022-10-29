@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include "nge3/nge3/App.h"
-#include "nge3/nge3/View.h"
+#include "nge3/nge/App.h"
+#include "nge3/nge/View.h"
 
 #include "nge3/ngsdl/SDLException.h"
 #include "nge3/ngsdl/TTFException.h"

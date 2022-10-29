@@ -13,7 +13,7 @@ find_package(GTest)
 
 # Declare ngsdl and nge3 libs
 add_subdirectory(${CMAKE_SOURCE_DIR}/src/nge3/ngsdl)
-add_subdirectory(${CMAKE_SOURCE_DIR}/src/nge3/nge3)
+add_subdirectory(${CMAKE_SOURCE_DIR}/src/nge3/nge)
 
 # NGSDL test app target setup
 add_executable(${ngsdl_app} src/ngsdl_test_app.cpp)

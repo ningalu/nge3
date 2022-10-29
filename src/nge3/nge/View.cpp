@@ -1,4 +1,4 @@
-#include "nge3/View.h"
+#include "nge/View.h"
 
 #include <iostream>
 

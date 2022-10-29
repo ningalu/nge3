@@ -9,7 +9,7 @@
 #include "ngsdl/TTFException.h"
 #include "ngsdl/Window.h"
 
-#include "nge3/View.h"
+#include "nge/View.h"
 
 #include <iostream>
 

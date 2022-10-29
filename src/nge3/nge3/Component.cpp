@@ -1,1 +1,0 @@
-#include "nge3/Component.h"

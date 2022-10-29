@@ -6,6 +6,6 @@ target_include_directories(
   nge3
   PUBLIC ${CMAKE_SOURCE_DIR}/include
   PUBLIC ${CMAKE_SOURCE_DIR}/include/nge3
-  PUBLIC ${CMAKE_SOURCE_DIR}/include/nge3/nge3)
+  PUBLIC ${CMAKE_SOURCE_DIR}/include/nge3/nge)
 
 target_link_libraries(nge3 ngsdl)
