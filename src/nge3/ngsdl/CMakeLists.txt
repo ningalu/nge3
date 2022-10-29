@@ -33,11 +33,10 @@ target_compile_options(
   PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/W4
           /Wall
           /WX
-          /wd4820>
-          $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall
-          -Wextra
-          -Wpedantic
-          -Werror>)
+          /wd4820
+          /wd4710
+          /wd4711>
+          $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:>)
 
 target_include_directories(ngsdl PUBLIC ${CMAKE_SOURCE_DIR}/include/nge3/ngsdl)
 
