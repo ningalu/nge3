@@ -45,7 +45,7 @@ public:
   // SDL_GetWindowGrab
 
   // SDL_GetWindowID
-  const Uint32 GetID() const;
+  Uint32 GetID() const;
 
   // SDL_GetWindowMaximumSize
   std::tuple<int, int> GetMaxSize() const;

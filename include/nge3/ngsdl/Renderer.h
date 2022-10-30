@@ -37,8 +37,8 @@ public:
   // SDL_GetRendererOutputSize
 
   // SDL_GetRendererTarget
-  void SetTarget(Texture texture);
-  void SetTarget(Window window);
+  void SetTarget(const Texture &texture);
+  void SetTarget(const Window &window);
 
   // SDL_RenderClear
   void Clear();

@@ -11,7 +11,7 @@ class EventQueue {
 public:
   const static std::optional<Event> Poll();
   const static std::optional<Event> Peep();
-  const static void Push(Event e);
+  static void Push(Event e);
 
   // SDL_WaitEvent
   // SDL_WaitEventTimeout

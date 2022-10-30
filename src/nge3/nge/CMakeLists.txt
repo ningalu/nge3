@@ -4,17 +4,36 @@ target_compile_features(nge3 PRIVATE cxx_std_20)
 target_compile_options(
   nge3
   PRIVATE $<$<CXX_COMPILER_ID:MSVC>:
-          /W4
-          /Wall
-          /WX
-          /wd4820
-          /wd5045
-          /wd4710
-          /wd4711
-          /external:anglebrackets 
-          /external:W0>
-          $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:
-          >)
+    /W4
+    /Wall
+    /WX
+
+    # Padding added to class
+    /wd4820
+
+    # Qspectre thing
+    /wd5045
+
+    # Function not inlined
+    /wd4710
+
+    # Selected for automatic inline expansion
+    /wd4711
+
+    /external:anglebrackets 
+    /external:W0
+  >
+  $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:
+    -Wall 
+    -Wextra 
+    -Wshadow 
+    -Wnon-virtual-dtor 
+    -pedantic
+    -Werror
+
+    # Clashes with an MSVC pragma
+    -Wno-unknown-pragmas
+  >)
 target_include_directories(
   nge3
   PUBLIC ${CMAKE_SOURCE_DIR}/include

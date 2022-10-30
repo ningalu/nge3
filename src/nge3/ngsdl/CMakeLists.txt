@@ -30,15 +30,37 @@ target_compile_features(ngsdl PRIVATE cxx_std_20)
 
 target_compile_options(
   ngsdl
-  PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/W4
-          /Wall
-          /WX
-          /wd4820
-          /wd4710
-          /wd4711
-          /external:anglebrackets 
-          /external:W0>
-          $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:>)
+  PRIVATE $<$<CXX_COMPILER_ID:MSVC>:
+    /W4
+    /Wall
+    /WX
+
+    # Padding added to class
+    /wd4820
+
+    # Qspectre thing
+    /wd5045
+
+    # Function not inlined
+    /wd4710
+
+    # Selected for automatic inline expansion
+    /wd4711
+    
+    /external:anglebrackets 
+    /external:W0
+  >
+  $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:
+    -Wall 
+    -Wextra 
+    -Wshadow 
+    -Wnon-virtual-dtor 
+    -pedantic
+    -Werror
+
+    # Clashes with an MSVC pragma
+    -Wno-unknown-pragmas
+  >)
 
 target_include_directories(ngsdl PUBLIC ${CMAKE_SOURCE_DIR}/include/nge3/ngsdl)
 

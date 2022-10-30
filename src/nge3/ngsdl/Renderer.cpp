@@ -37,10 +37,10 @@ Renderer::Renderer(const Window &window, int index, RendererFlags flags)
   }
 }
 
-void Renderer::SetTarget(Texture texture) {
+void Renderer::SetTarget(const Texture &texture) {
   SDL_SetRenderTarget(renderer_.get(), texture.texture_.get());
 }
-void Renderer::SetTarget(Window window) {
+void Renderer::SetTarget([[maybe_unused]] const Window &window) {
   SDL_SetRenderTarget(renderer_.get(), nullptr);
 }
 

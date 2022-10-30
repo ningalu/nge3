@@ -56,7 +56,7 @@ Window::Window(std::string title, Rectangle r, WindowFlags flags)
   }
 }
 
-const Uint32 Window::GetID() const { return SDL_GetWindowID(window_.get()); }
+Uint32 Window::GetID() const { return SDL_GetWindowID(window_.get()); }
 
 std::tuple<int, int> Window::GetMaxSize() const {
   int w, h;
