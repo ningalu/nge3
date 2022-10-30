@@ -4,9 +4,7 @@
 #include <memory>
 #include <string>
 
-#pragma warning(push, 0)
-#include "SDL2/SDL_ttf.h"
-#pragma warning(pop)
+#include <SDL2/SDL_ttf.h>
 
 #include "Color.h"
 #include "Texture.h"

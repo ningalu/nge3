@@ -2,11 +2,9 @@
 
 #include <optional>
 
-#pragma warning(push, 0)
-#include "SDL2/SDL.h"
-#include "SDL2/SDL_image.h"
-#include "SDL2/SDL_ttf.h"
-#pragma warning(pop)
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 
 #include "ngsdl/Events/Event.hpp"
 #include "ngsdl/Events/EventQueue.h"

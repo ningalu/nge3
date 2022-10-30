@@ -6,9 +6,7 @@
 #include <string>
 #include <tuple>
 
-#pragma warning(push, 0)
-#include "SDL2/SDL.h"
-#pragma warning(pop)
+#include <SDL2/SDL.h>
 
 #include "BlendMode.h"
 #include "Color.h"

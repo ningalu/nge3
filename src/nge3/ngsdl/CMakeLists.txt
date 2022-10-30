@@ -35,7 +35,9 @@ target_compile_options(
           /WX
           /wd4820
           /wd4710
-          /wd4711>
+          /wd4711
+          /external:anglebrackets 
+          /external:W0>
           $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:>)
 
 target_include_directories(ngsdl PUBLIC ${CMAKE_SOURCE_DIR}/include/nge3/ngsdl)

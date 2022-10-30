@@ -1,9 +1,7 @@
 #ifndef NGE3_NGSDL_EVENTTYPES_MOUSEBUTTONDOWNEVENT_H
 #define NGE3_NGSDL_EVENTTYPES_MOUSEBUTTONDOWNEVENT_H
 
-#pragma warning(push, 0)
-#include "SDL2/SDL.h"
-#pragma warning(pop)
+#include <SDL2/SDL.h>
 
 #include "EventTypes/DefaultEvent.h"
 #include "Events/MouseButton.h"

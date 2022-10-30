@@ -3,9 +3,7 @@
 
 #include <optional>
 
-#pragma warning(push, 0)
 #include "Events/Event.hpp"
-#pragma warning(pop)
 
 namespace nge::sdl {
 // The only real interpretation of the SDL Event Queue is that it's singleton

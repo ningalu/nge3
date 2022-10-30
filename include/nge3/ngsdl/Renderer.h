@@ -5,9 +5,7 @@
 #include <optional>
 #include <vector>
 
-#pragma warning(push, 0)
-#include "SDL2/SDL.h"
-#pragma warning(pop)
+#include <SDL2/SDL.h>
 
 #include "Color.h"
 #include "RendererFlags.h"

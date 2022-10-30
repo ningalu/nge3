@@ -1,9 +1,7 @@
 #include "Texture.h"
 
-#pragma warning(push, 0)
-#include "SDL2/SDL_image.h"
-#include "SDL2/SDL_ttf.h"
-#pragma warning(pop)
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 
 #include "Font.h"
 #include "Renderer.h"

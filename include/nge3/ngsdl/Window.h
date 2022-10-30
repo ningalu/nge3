@@ -7,9 +7,7 @@
 #include <string_view>
 #include <tuple>
 
-#pragma warning(push, 0)
-#include "SDL2/SDL.h"
-#pragma warning(pop)
+#include <SDL2/SDL.h>
 
 #include "Events/MouseButton.h"
 #include "Point.h"

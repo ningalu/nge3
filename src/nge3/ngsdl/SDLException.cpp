@@ -1,8 +1,6 @@
 #include "SDLException.h"
 
-#pragma warning(push, 0)
-#include "SDL2/SDL.h"
-#pragma warning(pop)
+#include <SDL2/SDL.h>
 
 namespace nge::sdl {
 SDLException::SDLException(std::string msg) : message_(msg){};
