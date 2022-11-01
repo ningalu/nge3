@@ -30,8 +30,14 @@ std::optional<Rectangle> Rectangle::GetIntersection(const Rectangle &r) const {
 }
 
 int Rectangle::GetX() const { return rect_.x; }
-
 int Rectangle::GetY() const { return rect_.y; }
+Point Rectangle::GetPos() const { return {rect_.x, rect_.y}; }
+void Rectangle::SetPos(const Point p) {
+  rect_.x = p.GetX();
+  rect_.y = p.GetY();
+}
+void Rectangle::MoveX(int dx) { rect_.x += dx; }
+void Rectangle::MoveY(int dy) { rect_.y += dy; }
 
 int Rectangle::GetW() const { return rect_.w; }
 

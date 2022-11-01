@@ -11,6 +11,11 @@
 #include "ngsdl/WindowFlags.h"
 
 namespace nge {
+
+namespace sdl {
+class Texture;
+}
+
 class Graphics {
 public:
   Graphics();
@@ -24,7 +29,18 @@ public:
   Graphics(const Graphics &) = delete;
   Graphics &operator=(const Graphics &) = delete;
 
+  const sdl::Renderer &GetRenderer() const;
+
   void Render();
+  void Draw(
+    const sdl::Texture &texture,
+    const std::optional<sdl::Rectangle> src,
+    const sdl::Rectangle dst,
+    const double angle = 0,
+    const std::optional<sdl::Point> center = std::nullopt,
+    const sdl::RendererFlip flip = sdl::RendererFlip::NONE
+  );
+  void Clear();
 
   void SetWindowSize(int w, int h);
   void SetWindowSize(const std::tuple<int, int> &size);

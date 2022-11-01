@@ -11,7 +11,20 @@ Graphics::Graphics(
     : window_(name, viewport, window_flags),
       renderer_(window_, -1, renderer_flags) {}
 
+const sdl::Renderer &Graphics::GetRenderer() const { return renderer_; }
+
 void Graphics::Render() { renderer_.Present(); }
+void Graphics::Draw(
+  const sdl::Texture &texture,
+  const std::optional<sdl::Rectangle> src,
+  const sdl::Rectangle dst,
+  const double angle,
+  const std::optional<sdl::Point> center,
+  const sdl::RendererFlip flip
+) {
+  renderer_.CopyEx(texture, src, dst, angle, center, flip);
+}
+void Graphics::Clear() { renderer_.Clear(); }
 
 void Graphics::SetWindowSize(int w, int h) { window_.SetSize(w, h); }
 void Graphics::SetWindowSize(const std::tuple<int, int> &size) {

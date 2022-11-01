@@ -36,9 +36,6 @@ target_compile_options(
   >)
 target_include_directories(
   demo
-  PUBLIC ${CMAKE_SOURCE_DIR}/include
-  PUBLIC ${CMAKE_SOURCE_DIR}/include/nge3
-  PUBLIC ${CMAKE_SOURCE_DIR}/include/nge3/nge
-  PUBLIC ${CMAKE_SOURCE_DIR}/include/nge3/demo)
+  PUBLIC ${CMAKE_SOURCE_DIR}/include)
 
 target_link_libraries(demo nge3)

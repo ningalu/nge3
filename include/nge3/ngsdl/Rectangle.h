@@ -7,10 +7,11 @@
 
 #include <SDL2/SDL.h>
 
+#include "Point.h"
+
 namespace nge::sdl {
 class Texture;
 class Renderer;
-class Point;
 class Rectangle {
   friend class Texture;
   friend class Renderer;
@@ -24,6 +25,11 @@ public:
 
   int GetX() const;
   int GetY() const;
+  Point GetPos() const;
+  void SetPos(const Point pos);
+  void MoveX(int dx);
+  void MoveY(int dy);
+
   int GetW() const;
   int GetH() const;
   void SetX(int x);

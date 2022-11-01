@@ -70,6 +70,7 @@ void App::Run() {
     }
     if (fps_timer_.GetElapsedTime() > (static_cast<long double>(1) / static_cast<long double>(fps_))) {
       fps_timer_.Restart();
+      graphics_->Clear();
       view_stack_.top()->Render();
       graphics_->Render();
     }

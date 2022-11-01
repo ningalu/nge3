@@ -17,6 +17,7 @@ public:
   );
 
   virtual void Render();
+  virtual void Tick();
 
   const sdl::Rect &GetViewport() const;
   std::tuple<int, int> GetSize() const;

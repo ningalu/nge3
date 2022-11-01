@@ -31,7 +31,7 @@ add_custom_command(
 add_executable(${nge3_app} src/nge3_test_app.cpp)
 target_compile_features(${nge3_app} PRIVATE cxx_std_20)
 target_include_directories(${nge3_app} PUBLIC ${CMAKE_SOURCE_DIR}/include)
-target_link_libraries(${nge3_app} PUBLIC ngsdl nge3 demo)
+target_link_libraries(${nge3_app} ngsdl nge3 demo)
 add_custom_command(
   TARGET ${nge3_app}
   POST_BUILD

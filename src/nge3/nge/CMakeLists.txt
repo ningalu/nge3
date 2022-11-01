@@ -1,4 +1,16 @@
-add_library(nge3 App.cpp View.cpp Component.cpp Timer.cpp Graphics.cpp)
+add_library(
+  nge3 
+  App.cpp 
+  View.cpp 
+  Timer.cpp 
+  Graphics.cpp
+
+  Components/Component.cpp 
+  Components/Sprite.cpp 
+  Components/Drawable.cpp 
+  Components/Rotatable.cpp 
+  Components/Translatable.cpp 
+)
 
 target_compile_features(nge3 PRIVATE cxx_std_20)
 target_compile_options(
