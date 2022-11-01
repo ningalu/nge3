@@ -27,7 +27,9 @@ public:
   void Render();
 
   void SetWindowSize(int w, int h);
+  void SetWindowSize(const std::tuple<int, int> &size);
   std::tuple<int, int> GetWindowSize() const;
+
   void SetWindowPos(int x, int y);
   void SetWindowPos(sdl::Point pos);
   sdl::Point GetWindowPos() const;

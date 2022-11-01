@@ -41,10 +41,12 @@ App::App(const std::string &name, sdl::Rect viewport) {
 void App::SetInitialView(View *v) {
   std::unique_ptr<View> initial_view;
   initial_view.reset(v);
-  view_stack_.push(std::move(initial_view));
+  SetInitialView(std::move(initial_view));
 }
 
 void App::SetInitialView(std::unique_ptr<View> v) {
+  graphics_->SetWindowSize(v->GetSize());
+  graphics_->SetWindowPos(v->GetPos());
   view_stack_.push(std::move(v));
 }
 

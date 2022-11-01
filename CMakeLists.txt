@@ -14,6 +14,7 @@ find_package(GTest)
 # Declare ngsdl and nge3 libs
 add_subdirectory(${CMAKE_SOURCE_DIR}/src/nge3/ngsdl)
 add_subdirectory(${CMAKE_SOURCE_DIR}/src/nge3/nge)
+add_subdirectory(${CMAKE_SOURCE_DIR}/src/nge3/demo)
 
 # NGSDL test app target setup
 add_executable(${ngsdl_app} src/ngsdl_test_app.cpp)
@@ -30,7 +31,7 @@ add_custom_command(
 add_executable(${nge3_app} src/nge3_test_app.cpp)
 target_compile_features(${nge3_app} PRIVATE cxx_std_20)
 target_include_directories(${nge3_app} PUBLIC ${CMAKE_SOURCE_DIR}/include)
-target_link_libraries(${nge3_app} PUBLIC ngsdl nge3)
+target_link_libraries(${nge3_app} PUBLIC ngsdl nge3 demo)
 add_custom_command(
   TARGET ${nge3_app}
   POST_BUILD

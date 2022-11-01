@@ -12,10 +12,16 @@ class Graphics;
 class View {
 public:
   View(
-    std::shared_ptr<Graphics> graphics,
+    const std::shared_ptr<Graphics> &graphics,
     std::optional<sdl::Rectangle> viewport = std::nullopt
   );
+
   virtual void Render();
+
+  const sdl::Rect &GetViewport() const;
+  std::tuple<int, int> GetSize() const;
+  sdl::Point GetPos() const;
+
   virtual ~View() = default;
 
 protected:

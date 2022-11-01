@@ -14,6 +14,9 @@ Graphics::Graphics(
 void Graphics::Render() { renderer_.Present(); }
 
 void Graphics::SetWindowSize(int w, int h) { window_.SetSize(w, h); }
+void Graphics::SetWindowSize(const std::tuple<int, int> &size) {
+  window_.SetSize(std::get<0>(size), std::get<1>(size));
+}
 
 std::tuple<int, int> Graphics::GetWindowSize() const {
   return window_.GetSize();
