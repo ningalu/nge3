@@ -1,6 +1,7 @@
 #ifndef NGE3_NGSDL_FONT_H
 #define NGE3_NGSDL_FONT_H
 
+#include <iostream>
 #include <memory>
 #include <string>
 
@@ -15,6 +16,7 @@ class Font {
   friend class Texture;
 
 public:
+  Font() = delete;
   Font(const Font &) = delete;
   Font &operator=(const Font &) = delete;
   Font(const std::string &filename, int point_size);
@@ -55,6 +57,8 @@ public:
 
   // IMG_SizeText
   std::tuple<int, int> CalcTextSize(const std::string &text) const;
+
+  ~Font();
 
 protected:
   std::unique_ptr<TTF_Font, decltype(&TTF_CloseFont)> font_;

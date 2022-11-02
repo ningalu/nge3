@@ -2,7 +2,9 @@
 #define NGE3_DEMO_INTROVIEW_H
 
 #include "nge3/nge/Components/Sprite.h"
+#include "nge3/nge/Components/Text.h"
 #include "nge3/nge/View.h"
+#include "nge3/ngsdl/Font.h"
 
 namespace demo {
 class IntroView : public nge::View {
@@ -14,6 +16,8 @@ public:
 
 protected:
   nge::Sprite among_us_;
+  nge::Text among_us_text_;
+  std::shared_ptr<nge::sdl::Font> f_;
 };
 } // namespace demo
 

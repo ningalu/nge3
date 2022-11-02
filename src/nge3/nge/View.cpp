@@ -20,10 +20,8 @@ View::View(
     viewport_ = {p, size};
   }
 }
-void View::Render() { /*std::cout << "Rendering\n";*/
-}
-void View::Tick() { /*std::cout << "Rendering\n";*/
-}
+void View::Render() {}
+void View::Tick() {}
 
 // Viewport should always be initialised to some actual value
 // I wonder if the compiler can see through this

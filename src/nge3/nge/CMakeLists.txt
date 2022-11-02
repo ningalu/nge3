@@ -6,7 +6,9 @@ add_library(
   Graphics.cpp
 
   Components/Component.cpp 
+  Components/SimpleComponent.cpp 
   Components/Sprite.cpp 
+  Components/Text.cpp 
   Components/Drawable.cpp 
   Components/Rotatable.cpp 
   Components/Translatable.cpp 

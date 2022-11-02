@@ -110,4 +110,6 @@ std::tuple<int, int> Font::CalcTextSize(const std::string &text) const {
   return {w, h};
 }
 
+Font::~Font() { std::cout << "die\n"; }
+
 } // namespace nge::sdl
