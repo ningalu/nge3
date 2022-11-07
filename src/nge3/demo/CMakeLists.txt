@@ -29,7 +29,7 @@ target_compile_options(
     -Wshadow 
     -Wnon-virtual-dtor 
     -pedantic
-    -Werror
+    # -Werror
 
     # Clashes with an MSVC pragma
     -Wno-unknown-pragmas

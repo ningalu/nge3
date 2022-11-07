@@ -4,9 +4,6 @@ cd ./build
 mkdir Debug
 mkdir Release
 
-export CC=/usr/bin/gcc-10
-export CXX=/usr/bin/g++-10
-
 export CONAN_SYSREQUIRES_MODE=enabled
 
 cd Debug

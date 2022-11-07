@@ -7,7 +7,7 @@ KeyUpEvent::KeyUpEvent(SDL_KeyboardEvent e) {
   state_ = KeyState(e.state);
   repeat_ = static_cast<bool>(e.repeat);
   keysym_ = {
-    Scancode{e.keysym.scancode}, Keycode{e.keysym.sym}, KeyMod{e.keysym.mod}};
+    static_cast<Scancode>(e.keysym.scancode), static_cast<Keycode>(e.keysym.sym), static_cast<KeyMod>(e.keysym.mod)};
 }
 
 Uint32 KeyUpEvent::GetWindowID() const { return window_id_; }

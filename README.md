@@ -3,7 +3,7 @@
 [![CMake](https://github.com/ningalu/nge3/actions/workflows/cmake.yml/badge.svg?branch=main)](https://github.com/ningalu/nge3/actions/workflows/cmake.yml)
 
 A toy GUI framework based on SDL2 and its supporting libraries  
-Building on Windows 10/MSVC 19, Ubuntu 20.04/GCC 10.3
+Building on Windows 10/MSVC 19, Ubuntu 20.04/GCC 10.3, macOS Ventura 13 x86_64/clang 14
 
 ## Build
 

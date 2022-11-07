@@ -123,7 +123,7 @@ BlendMode Texture::GetBlendMode() const {
   if (SDL_GetTextureBlendMode(texture_.get(), &b) != 0) {
     throw SDLException("Blend Mode couldn't be retrieved");
   }
-  return BlendMode{b};
+  return static_cast<BlendMode>(b);
 }
 
 void Texture::SetBlendMode(BlendMode mode) {
