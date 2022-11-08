@@ -14,6 +14,7 @@
 #include "ngsdl/Window.h"
 
 #include "nge/Graphics.h"
+#include "nge/Input.h"
 #include "nge/View.h"
 
 #include <iostream>
@@ -34,6 +35,7 @@ App::App(const std::string &name, sdl::Rect viewport) {
     sdl::WindowFlags::OPENGL,
     sdl::RendererFlags::ACCELERATED | sdl::RendererFlags::TARGETTEXTURE
   );
+
   fps_ = 60;
   tps_ = 1000;
 }
@@ -91,6 +93,10 @@ void App::Init() {
 }
 
 App::~App() {
+  // must delete views before the Quit functions deallocate their resources
+  while (view_stack_.size() > 0) {
+    view_stack_.pop();
+  }
   TTF_Quit();
   IMG_Quit();
   SDL_Quit();
