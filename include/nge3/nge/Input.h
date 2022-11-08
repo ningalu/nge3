@@ -14,7 +14,8 @@ public:
 
   void Update();
 
-  bool KeyDown(const sdl::Scancode key) const;
+  bool KeyIsDown(const sdl::Scancode key) const;
+  bool KeyIsUp(const sdl::Scancode key) const;
   bool KeyPressed(const sdl::Scancode key) const;
   bool KeyHeld(const sdl::Scancode key) const;
   bool KeyReleased(const sdl::Scancode key) const;

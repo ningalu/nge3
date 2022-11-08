@@ -71,8 +71,11 @@ void App::Run() {
         e = sdl::EventQueue::Poll();
       }
       input_->Update();
-      if (input_->KeyDown(sdl::Scancode::SPACE)) {
-        std::cout << "space\n";
+      if (input_->KeyPressed(sdl::Scancode::SPACE)) {
+        std::cout << "down\n";
+      }
+      if (input_->KeyReleased(sdl::Scancode::SPACE)) {
+        std::cout << "up\n";
       }
     }
     if (fps_timer_.GetElapsedTime() > (static_cast<long double>(1) / static_cast<long double>(fps_))) {

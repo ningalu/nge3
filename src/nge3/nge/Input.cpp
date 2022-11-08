@@ -18,8 +18,22 @@ void Input::Update() {
   }
 }
 
-bool Input::KeyDown(const sdl::Scancode key) const {
+bool Input::KeyIsDown(const sdl::Scancode key) const {
   return static_cast<bool>(current_input_.at(static_cast<uint32_t>(key)));
+}
+bool Input::KeyIsUp(const sdl::Scancode key) const { return !KeyIsDown(key); }
+
+bool Input::KeyPressed(const sdl::Scancode key) const {
+  return (current_input_.at(static_cast<uint32_t>(key)))
+         && !(prev_input_.at(static_cast<uint32_t>(key)));
+}
+bool Input::KeyHeld(const sdl::Scancode key) const {
+  return (current_input_.at(static_cast<uint32_t>(key)))
+         && (prev_input_.at(static_cast<uint32_t>(key)));
+}
+bool Input::KeyReleased(const sdl::Scancode key) const {
+  return !(current_input_.at(static_cast<uint32_t>(key)))
+         && (prev_input_.at(static_cast<uint32_t>(key)));
 }
 
 } // namespace nge
