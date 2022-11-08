@@ -154,12 +154,4 @@ Point Window::GetMousePos() const { return std::get<1>(GetMouseState()); }
 int Window::GetMouseX() const { return GetMousePos().GetX(); }
 int Window::GetMouseY() const { return GetMousePos().GetY(); }
 
-const std::span<const Uint8> Window::GetKeyboardState() const {
-  SDL_PumpEvents();
-  int l;
-  const Uint8 *kb = SDL_GetKeyboardState(&l);
-  std::span s{kb, static_cast<size_t>(l)};
-  return s;
-}
-
 } // namespace nge::sdl

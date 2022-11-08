@@ -8,6 +8,7 @@
 
 namespace nge {
 class Graphics;
+class Input;
 
 class View {
 public:

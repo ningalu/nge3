@@ -11,6 +11,7 @@
 namespace nge {
 class View;
 class Graphics;
+class Input;
 namespace sdl {
 
 class Window;
@@ -36,6 +37,7 @@ public:
 
 protected:
   std::shared_ptr<Graphics> graphics_;
+  std::shared_ptr<Input> input_;
 
   std::stack<std::unique_ptr<View>> view_stack_;
 

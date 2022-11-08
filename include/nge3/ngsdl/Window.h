@@ -2,7 +2,6 @@
 #define NGE3_NGSDL_WINDOW_H
 
 #include <memory>
-#include <span>
 #include <string>
 #include <string_view>
 #include <tuple>
@@ -87,9 +86,6 @@ public:
   Point GetMousePos() const;
   int GetMouseX() const;
   int GetMouseY() const;
-
-  // SDL_GetKeyboardState
-  const std::span<const Uint8> GetKeyboardState() const;
 
 protected:
   std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)> window_;

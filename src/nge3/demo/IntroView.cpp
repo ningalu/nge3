@@ -9,11 +9,9 @@ IntroView::IntroView(const std::shared_ptr<nge::Graphics> &graphics)
   among_us_ = {graphics_, "resources/parrot.jpg"};
   among_us_.SetScale(1.0);
   among_us_.SetPos({50, 50});
-  std::cout << "font\n";
   f_ = std::make_shared<nge::sdl::Font>(
-    std::string{"resources/pokemon_pixel_font.ttf"}, 72
+    std::string{SDL_GetBasePath()} + "resources/pokemon_pixel_font.ttf", 72
   );
-  std::cout << "end font\n";
   among_us_text_ = nge::Text{graphics_, f_, "parrot", {255, 0, 0, 255}};
   among_us_text_.SetPos({25, 25});
 }

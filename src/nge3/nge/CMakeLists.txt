@@ -4,6 +4,7 @@ add_library(
   View.cpp 
   Timer.cpp 
   Graphics.cpp
+  Input.cpp
 
   Components/Component.cpp 
   Components/SimpleComponent.cpp 

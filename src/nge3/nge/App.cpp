@@ -35,6 +35,7 @@ App::App(const std::string &name, sdl::Rect viewport) {
     sdl::WindowFlags::OPENGL,
     sdl::RendererFlags::ACCELERATED | sdl::RendererFlags::TARGETTEXTURE
   );
+  input_ = std::make_shared<Input>();
 
   fps_ = 60;
   tps_ = 1000;
@@ -68,6 +69,10 @@ void App::Run() {
             running_ = false;
           }});
         e = sdl::EventQueue::Poll();
+      }
+      input_->Update();
+      if (input_->KeyDown(sdl::Scancode::SPACE)) {
+        std::cout << "space\n";
       }
     }
     if (fps_timer_.GetElapsedTime() > (static_cast<long double>(1) / static_cast<long double>(fps_))) {

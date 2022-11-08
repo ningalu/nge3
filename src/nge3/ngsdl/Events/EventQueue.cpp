@@ -10,4 +10,13 @@ const std::optional<Event> EventQueue::Poll() {
   }
   return Event(e);
 }
+
+void EventQueue::Pump() { SDL_PumpEvents(); }
+
+const std::span<const uint8_t> EventQueue::GetKeyboardState() {
+  int l;
+  const uint8_t *kb = SDL_GetKeyboardState(&l);
+  std::span s{kb, static_cast<size_t>(l)};
+  return s;
+}
 } // namespace nge::sdl
