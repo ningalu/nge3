@@ -2,14 +2,16 @@
 
 #include <iostream>
 
-#include "nge/Graphics.h"
+#include "nge3/nge/Graphics.h"
+#include "nge3/nge/Input.h"
 
 namespace nge {
 View::View(
   const std::shared_ptr<Graphics> &graphics,
+  const std::shared_ptr<nge::Input> &input,
   std::optional<sdl::Rectangle> viewport
 )
-    : graphics_(graphics) {
+    : graphics_(graphics), input_(input) {
   if (viewport != std::nullopt) {
     viewport_ = viewport;
     graphics_->SetWindowPos({viewport_->GetX(), viewport_->GetY()});

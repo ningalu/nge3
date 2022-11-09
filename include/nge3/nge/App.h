@@ -30,6 +30,7 @@ public:
   void SetInitialView(std::unique_ptr<View> v);
 
   std::shared_ptr<Graphics> GetGraphics() const;
+  std::shared_ptr<Input> GetInput() const;
 
   void Run();
 

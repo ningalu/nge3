@@ -54,6 +54,7 @@ void App::SetInitialView(std::unique_ptr<View> v) {
 }
 
 std::shared_ptr<Graphics> App::GetGraphics() const { return graphics_; }
+std::shared_ptr<Input> App::GetInput() const { return input_; }
 
 void App::Run() {
   running_ = true;
@@ -71,12 +72,14 @@ void App::Run() {
         e = sdl::EventQueue::Poll();
       }
       input_->Update();
-      if (input_->KeyPressed(sdl::Scancode::SPACE)) {
-        std::cout << "down\n";
-      }
-      if (input_->KeyReleased(sdl::Scancode::SPACE)) {
-        std::cout << "up\n";
-      }
+      // if (input_->KeyPressed(sdl::Scancode::SPACE)) {
+      //   std::cout << "down\n";
+      // }
+      // if (input_->KeyReleased(sdl::Scancode::SPACE)) {
+      //   std::cout << "up\n";
+      // }
+
+      view_stack_.top()->Tick();
     }
     if (fps_timer_.GetElapsedTime() > (static_cast<long double>(1) / static_cast<long double>(fps_))) {
       fps_timer_.Restart();

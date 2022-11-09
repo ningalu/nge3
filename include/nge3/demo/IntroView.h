@@ -9,7 +9,10 @@
 namespace demo {
 class IntroView : public nge::View {
 public:
-  IntroView(const std::shared_ptr<nge::Graphics> &graphics);
+  IntroView(
+    const std::shared_ptr<nge::Graphics> &graphics,
+    const std::shared_ptr<nge::Input> &input
+  );
 
   virtual void Render() override;
   virtual void Tick() override;

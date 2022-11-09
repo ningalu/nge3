@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
   try {
     nge::App app = {"test app", {50, 50, 800, 600}};
     std::cout << SDL_GetBasePath() << "\n";
-    app.SetInitialView(new demo::IntroView(app.GetGraphics()));
+    app.SetInitialView(new demo::IntroView(app.GetGraphics(), app.GetInput()));
     app.Run();
 
   } catch (const std::exception &e) {

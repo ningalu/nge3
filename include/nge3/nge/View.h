@@ -14,6 +14,7 @@ class View {
 public:
   View(
     const std::shared_ptr<Graphics> &graphics,
+    const std::shared_ptr<nge::Input> &input,
     std::optional<sdl::Rectangle> viewport = std::nullopt
   );
 
@@ -29,6 +30,7 @@ public:
 protected:
   std::optional<sdl::Rect> viewport_;
   std::shared_ptr<Graphics> graphics_;
+  std::shared_ptr<Input> input_;
 
 private:
 };
