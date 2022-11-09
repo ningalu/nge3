@@ -60,7 +60,9 @@ void App::Run() {
   running_ = true;
   while (running_) {
     if (tps_timer_.GetElapsedTime() > (static_cast<long double>(1) / static_cast<long double>(tps_))) {
+
       tps_timer_.Restart();
+
       auto e = sdl::EventQueue::Poll();
       while (e != std::nullopt) {
         e->Visit(sdl::EventVisitor{
@@ -71,18 +73,14 @@ void App::Run() {
           }});
         e = sdl::EventQueue::Poll();
       }
-      input_->Update();
-      // if (input_->KeyPressed(sdl::Scancode::SPACE)) {
-      //   std::cout << "down\n";
-      // }
-      // if (input_->KeyReleased(sdl::Scancode::SPACE)) {
-      //   std::cout << "up\n";
-      // }
 
+      input_->Update();
       view_stack_.top()->Tick();
     }
     if (fps_timer_.GetElapsedTime() > (static_cast<long double>(1) / static_cast<long double>(fps_))) {
+
       fps_timer_.Restart();
+
       graphics_->Clear();
       view_stack_.top()->Render();
       graphics_->Render();

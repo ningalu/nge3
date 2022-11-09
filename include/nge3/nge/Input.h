@@ -5,6 +5,7 @@
 
 #include <SDL2/SDL.h>
 
+#include "nge3/ngsdl/Events/MouseButton.h"
 #include "nge3/ngsdl/Events/Scancode.h"
 
 namespace nge {
@@ -14,15 +15,25 @@ public:
 
   void Update();
 
-  bool KeyIsDown(const sdl::Scancode key) const;
-  bool KeyIsUp(const sdl::Scancode key) const;
+  bool KeyDown(const sdl::Scancode key) const;
+  bool KeyUp(const sdl::Scancode key) const;
+
   bool KeyPressed(const sdl::Scancode key) const;
   bool KeyHeld(const sdl::Scancode key) const;
   bool KeyReleased(const sdl::Scancode key) const;
 
+  bool MouseDown(const sdl::MouseButton button) const;
+  bool MouseUp(const sdl::MouseButton button) const;
+
+  bool MouseClicked(const sdl::MouseButton button) const;
+  bool MouseHeld(const sdl::MouseButton button) const;
+  bool MouseReleased(const sdl::MouseButton button) const;
+
 protected:
-  std::array<uint8_t, SDL_NUM_SCANCODES> current_input_;
-  std::array<uint8_t, SDL_NUM_SCANCODES> prev_input_;
+  std::array<uint8_t, SDL_NUM_SCANCODES> current_input_, prev_input_;
+
+  uint32_t current_mouse_, prev_mouse_;
+  int mouse_x_, mouse_y_, rel_mouse_x, rel_mouse_y_;
 };
 } // namespace nge
 

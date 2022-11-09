@@ -1,6 +1,8 @@
 #ifndef NGE3_DEMO_INTROVIEW_H
 #define NGE3_DEMO_INTROVIEW_H
 
+#include <tuple>
+
 #include "nge3/nge/Components/Sprite.h"
 #include "nge3/nge/Components/Text.h"
 #include "nge3/nge/View.h"
@@ -19,6 +21,7 @@ public:
 
 protected:
   nge::Sprite among_us_;
+  std::tuple<double, double> among_us_pos_;
   nge::Text among_us_text_;
   std::shared_ptr<nge::sdl::Font> f_;
 };

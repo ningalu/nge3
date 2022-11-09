@@ -3,8 +3,10 @@
 
 #include <optional>
 #include <span>
+#include <tuple>
 
 #include "Events/Event.hpp"
+#include "Point.h"
 
 namespace nge::sdl {
 // The only real interpretation of the SDL Event Queue is that it's singleton
@@ -17,6 +19,7 @@ public:
 
   // SDL_GetKeyboardState
   static const std::span<const uint8_t> GetKeyboardState();
+  static const std::tuple<uint32_t, Point> GetMouseState();
 
   // SDL_WaitEvent
   // SDL_WaitEventTimeout

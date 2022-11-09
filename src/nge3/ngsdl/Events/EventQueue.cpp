@@ -19,4 +19,11 @@ const std::span<const uint8_t> EventQueue::GetKeyboardState() {
   std::span s{kb, static_cast<size_t>(l)};
   return s;
 }
+
+const std::tuple<uint32_t, Point> EventQueue::GetMouseState() {
+  int x, y;
+  auto state = SDL_GetMouseState(&x, &y);
+  return {state, {x, y}};
+}
+
 } // namespace nge::sdl
