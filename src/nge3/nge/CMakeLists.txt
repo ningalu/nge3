@@ -13,6 +13,7 @@ add_library(
   Components/Drawable.cpp 
   Components/Rotatable.cpp 
   Components/Translatable.cpp 
+  Components/Button.cpp 
 )
 
 target_compile_features(nge3 PRIVATE cxx_std_20)

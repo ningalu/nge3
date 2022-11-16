@@ -35,7 +35,6 @@ App::App(const std::string &name, sdl::Rect viewport) {
     sdl::WindowFlags::OPENGL,
     sdl::RendererFlags::ACCELERATED | sdl::RendererFlags::TARGETTEXTURE
   );
-  input_ = std::make_shared<Input>();
 
   fps_ = 60;
   tps_ = 1000;
@@ -99,6 +98,7 @@ void App::Init() {
   if (TTF_Init() != 0) {
     throw sdl::TTFException("SDL_ttf couldn't be initialised");
   }
+  input_ = std::make_shared<Input>();
 }
 
 App::~App() {
