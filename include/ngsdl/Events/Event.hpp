@@ -1,5 +1,5 @@
-#ifndef NGE3_NGSDL_EVENTS_EVENT_HPP
-#define NGE3_NGSDL_EVENTS_EVENT_HPP
+#ifndef NGSDL_EVENTS_EVENT_HPP
+#define NGSDL_EVENTS_EVENT_HPP
 
 #include <variant>
 
@@ -15,6 +15,7 @@
 #include "ngsdl/Events/EventVisitor.hpp"
 
 namespace nge::sdl {
+
 using EventVariants = std::variant<
   MouseButtonDownEvent,
   MouseButtonUpEvent,
@@ -22,7 +23,9 @@ using EventVariants = std::variant<
   KeyUpEvent,
   QuitEvent,
   DefaultEvent>;
+
 class EventQueue;
+
 class Event {
   friend class EventQueue;
 

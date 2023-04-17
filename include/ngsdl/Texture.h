@@ -1,5 +1,5 @@
-#ifndef NGE3_NGSDL_TEXTURE_H
-#define NGE3_NGSDL_TEXTURE_H
+#ifndef NGSDL_TEXTURE_H
+#define NGSDL_TEXTURE_H
 
 #include <cstdint>
 #include <memory>
@@ -22,7 +22,9 @@ class Texture {
 
 public:
   // SDL_CreateTexture
-  Texture(const Renderer &renderer, Uint32 format, int access, int w, int h);
+  Texture(
+    const Renderer &renderer, uint32_t format, int access, int32_t w, int32_t h
+  );
 
   // Internal SDL_Texture* could get deleted if you can copy from a Texture;
   // Textures must exclusively own their SDL_Texture*

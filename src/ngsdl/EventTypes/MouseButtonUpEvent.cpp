@@ -1,5 +1,7 @@
 #include "ngsdl/EventTypes/MouseButtonUpEvent.h"
 
+#include <cstdint>
+
 namespace nge::sdl {
 MouseButtonUpEvent::MouseButtonUpEvent(SDL_MouseButtonEvent e) {
   timestamp_ = e.timestamp;
@@ -9,12 +11,28 @@ MouseButtonUpEvent::MouseButtonUpEvent(SDL_MouseButtonEvent e) {
   clicks_ = e.clicks;
   position_ = {e.x, e.y};
 }
-Uint32 MouseButtonUpEvent::GetWindowID() const { return window_id_; }
-Uint32 MouseButtonUpEvent::GetMouseID() const { return mouse_id_; }
-MouseButton MouseButtonUpEvent::GetMouseButton() const { return button_; }
-MouseButton MouseButtonUpEvent::GetButton() const { return GetMouseButton(); }
-int MouseButtonUpEvent::GetClicks() const { return clicks_; }
-Point MouseButtonUpEvent::GetPos() const { return position_; }
-int MouseButtonUpEvent::GetX() const { return position_.GetX(); }
-int MouseButtonUpEvent::GetY() const { return position_.GetY(); }
+[[nodiscard]] uint32_t MouseButtonUpEvent::GetWindowID() const noexcept {
+  return window_id_;
+}
+[[nodiscard]] uint32_t MouseButtonUpEvent::GetMouseID() const noexcept {
+  return mouse_id_;
+}
+[[nodiscard]] MouseButton MouseButtonUpEvent::GetMouseButton() const noexcept {
+  return button_;
+}
+[[nodiscard]] MouseButton MouseButtonUpEvent::GetButton() const noexcept {
+  return GetMouseButton();
+}
+[[nodiscard]] uint32_t MouseButtonUpEvent::GetClicks() const noexcept {
+  return clicks_;
+}
+[[nodiscard]] Point MouseButtonUpEvent::GetPos() const noexcept {
+  return position_;
+}
+[[nodiscard]] int32_t MouseButtonUpEvent::GetX() const noexcept {
+  return position_.GetX();
+}
+[[nodiscard]] int32_t MouseButtonUpEvent::GetY() const noexcept {
+  return position_.GetY();
+}
 } // namespace nge::sdl

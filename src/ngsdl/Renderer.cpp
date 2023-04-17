@@ -1,5 +1,6 @@
 #include "ngsdl/Renderer.h"
 
+#include <cstdint>
 #include <iostream>
 
 #include "ngsdl/RendererFlags.h"
@@ -50,7 +51,7 @@ Color Renderer::GetDrawColor() const {
   return {r, g, b, a};
 }
 
-void Renderer::SetDrawColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
+void Renderer::SetDrawColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
   if (SDL_SetRenderDrawColor(renderer_.get(), r, g, b, a) != 0) {
     throw SDLException("Render Draw Colour couldn't be set");
   }
@@ -97,7 +98,7 @@ void Renderer::CopyEx(
   );
 }
 
-void Renderer::DrawLine(int x1, int y1, int x2, int y2) {
+void Renderer::DrawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2) {
   SDL_RenderDrawLine(renderer_.get(), x1, y1, x2, y2);
 }
 void Renderer::DrawLine(const Point &p1, const Point &p2) {
@@ -119,13 +120,11 @@ void Renderer::DrawLines(const std::vector<Point> &points) {
     sdl_points.push_back(it.point_);
   }
   SDL_RenderDrawLines(
-    renderer_.get(),
-    sdl_points.data(),
-    static_cast<std::size_t>(sdl_points.size())
+    renderer_.get(), sdl_points.data(), static_cast<uint32_t>(sdl_points.size())
   );
 }
 
-void Renderer::DrawPoint(int x, int y) {
+void Renderer::DrawPoint(int32_t x, int32_t y) {
   SDL_RenderDrawPoint(renderer_.get(), x, y);
 }
 void Renderer::DrawPoint(const Point &p) { DrawPoint(p.GetX(), p.GetY()); }

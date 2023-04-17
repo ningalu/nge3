@@ -1,5 +1,5 @@
-#ifndef NGE3_NGSDL_EVENTS_H
-#define NGE3_NGSDL_EVENTS_H
+#ifndef NGSDL_EVENTS_H
+#define NGSDL_EVENTS_H
 
 #include <SDL2/SDL.h>
 

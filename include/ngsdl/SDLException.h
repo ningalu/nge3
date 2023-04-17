@@ -1,5 +1,5 @@
-#ifndef NGE3_NGSDL_SDLEXCEPTION_H
-#define NGE3_NGSDL_SDLEXCEPTION_H
+#ifndef NGSDL_SDLEXCEPTION_H
+#define NGSDL_SDLEXCEPTION_H
 
 #include <stdexcept>
 #include <string>

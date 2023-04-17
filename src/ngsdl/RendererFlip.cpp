@@ -1,9 +1,11 @@
 #include "ngsdl/RendererFlip.h"
 
+#include <cstdint>
+
 namespace nge::sdl {
-RendererFlip operator|(const RendererFlip &lhs, const RendererFlip &rhs) {
+RendererFlip operator|(RendererFlip lhs, RendererFlip rhs) {
   return static_cast<RendererFlip>(
-    static_cast<int>(lhs) | static_cast<int>(rhs)
+    static_cast<uint8_t>(lhs) | static_cast<uint8_t>(rhs)
   );
 }
 

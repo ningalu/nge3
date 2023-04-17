@@ -1,5 +1,5 @@
-#ifndef NGE3_NGSDL_EVENTTYPES_DEFAULTEVENT_H
-#define NGE3_NGSDL_EVENTTYPES_DEFAULTEVENT_H
+#ifndef NGSDL_EVENTTYPES_DEFAULTEVENT_H
+#define NGSDL_EVENTTYPES_DEFAULTEVENT_H
 
 #include "ngsdl/Events/EventType.h"
 
@@ -11,8 +11,8 @@ public:
   DefaultEvent() = default;
   DefaultEvent(SDL_CommonEvent e);
 
-  Uint32 GetTimestamp() const;
-  EventType GetType() const;
+  [[nodiscard]] Uint32 GetTimestamp() const noexcept;
+  [[nodiscard]] EventType GetType() const noexcept;
 
 protected:
   Uint32 timestamp_;

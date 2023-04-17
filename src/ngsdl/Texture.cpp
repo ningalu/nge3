@@ -1,5 +1,7 @@
 #include "ngsdl/Texture.h"
 
+#include <cstdint>
+
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 
@@ -10,7 +12,7 @@
 
 namespace nge::sdl {
 Texture::Texture(
-  const Renderer &renderer, Uint32 format, int access, int w, int h
+  const Renderer &renderer, uint32_t format, int access, int32_t w, int32_t h
 )
     : texture_(nullptr, SDL_DestroyTexture) {
   texture_.reset(

@@ -1,5 +1,7 @@
 #include "ngsdl/Window.h"
 
+#include <cstdint>
+
 #include "ngsdl/SDLException.h"
 #include "ngsdl/WindowFlags.h"
 
@@ -118,7 +120,7 @@ void Window::SetPosition(Point point) {
 Point Window::GetPosition() const {
   int x, y;
   SDL_GetWindowPosition(window_.get(), &x, &y);
-  return {x, y};
+  return {static_cast<int32_t>(x), static_cast<int32_t>(y)};
 }
 
 std::tuple<int, int> Window::GetSize() const {

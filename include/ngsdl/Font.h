@@ -1,5 +1,5 @@
-#ifndef NGE3_NGSDL_FONT_H
-#define NGE3_NGSDL_FONT_H
+#ifndef NGSDL_FONT_H
+#define NGSDL_FONT_H
 
 #include <iostream>
 #include <memory>

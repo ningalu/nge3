@@ -1,5 +1,5 @@
-#ifndef NGE3_NGSDL_BLENDMODEFLAGS_H
-#define NGE3_NGSDL_BLENDMODEFLAGS_H
+#ifndef NGSDL_BLENDMODEFLAGS_H
+#define NGSDL_BLENDMODEFLAGS_H
 
 #include <ostream>
 
@@ -12,7 +12,7 @@ enum class BlendMode {
   ADD = SDL_BLENDMODE_ADD,
   MOD = SDL_BLENDMODE_MOD
 };
-std::ostream &operator<<(std::ostream &os, const BlendMode blend);
+std::ostream &operator<<(std::ostream &os, BlendMode blend);
 } // namespace nge::sdl
 
 #endif

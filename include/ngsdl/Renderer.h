@@ -1,6 +1,7 @@
-#ifndef NGE3_NGSDL_RENDERER_H
-#define NGE3_NGSDL_RENDERER_H
+#ifndef NGSDL_RENDERER_H
+#define NGSDL_RENDERER_H
 
+#include <cstdint>
 #include <memory>
 #include <optional>
 #include <vector>
@@ -29,7 +30,7 @@ public:
 
   // SDL_GetRenderDrawColor
   Color GetDrawColor() const;
-  void SetDrawColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+  void SetDrawColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
   void SetDrawColor(Color c);
 
   // SDL_GetRendererInfo
@@ -61,14 +62,14 @@ public:
   );
 
   // SDL_RenderDrawLine
-  void DrawLine(int x1, int y1, int x2, int y2);
+  void DrawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2);
   void DrawLine(const Point &p1, const Point &p2);
 
   // SDL_RenderDrawLines
   void DrawLines(const std::vector<Point> &points);
 
   // SDL_RenderDrawPoint
-  void DrawPoint(int x, int y);
+  void DrawPoint(int32_t x, int32_t y);
   void DrawPoint(const Point &p);
 
   // SDL_RenderDrawPoints

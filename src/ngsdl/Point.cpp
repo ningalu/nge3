@@ -1,10 +1,12 @@
 #include "ngsdl/Point.h"
 
+#include <cstdint>
+
 namespace nge::sdl {
 Point::Point() { point_ = {0, 0}; }
 Point::Point(int x, int y) { point_ = {x, y}; }
-int Point::GetX() const { return point_.x; }
-int Point::GetY() const { return point_.y; }
+int32_t Point::GetX() const { return point_.x; }
+int32_t Point::GetY() const { return point_.y; }
 void Point::SetX(int x) { point_.x = x; }
 void Point::SetY(int y) { point_.y = y; }
 

@@ -1,7 +1,8 @@
-#ifndef NGE3_NGSDL_EVENTTYPES_MOUSEBUTTONDOWNEVENT_H
-#define NGE3_NGSDL_EVENTTYPES_MOUSEBUTTONDOWNEVENT_H
+#ifndef NGSDL_EVENTTYPES_MOUSEBUTTONDOWNEVENT_H
+#define NGSDL_EVENTTYPES_MOUSEBUTTONDOWNEVENT_H
 
 #include <SDL2/SDL.h>
+#include <cstdint>
 
 #include "ngsdl/EventTypes/DefaultEvent.h"
 #include "ngsdl/Events/MouseButton.h"
@@ -13,19 +14,19 @@ public:
   MouseButtonDownEvent() = default;
   MouseButtonDownEvent(SDL_MouseButtonEvent e);
 
-  Uint32 GetWindowID() const;
-  Uint32 GetMouseID() const;
-  MouseButton GetMouseButton() const;
-  MouseButton GetButton() const;
-  int GetClicks() const;
-  Point GetPos() const;
-  int GetX() const;
-  int GetY() const;
+  [[nodiscard]] uint32_t GetWindowID() const noexcept;
+  [[nodiscard]] uint32_t GetMouseID() const noexcept;
+  [[nodiscard]] MouseButton GetMouseButton() const noexcept;
+  [[nodiscard]] MouseButton GetButton() const noexcept;
+  [[nodiscard]] uint32_t GetClicks() const noexcept;
+  [[nodiscard]] Point GetPos() const noexcept;
+  [[nodiscard]] int32_t GetX() const noexcept;
+  [[nodiscard]] int32_t GetY() const noexcept;
 
 protected:
-  Uint32 window_id_, mouse_id_;
+  uint32_t window_id_, mouse_id_;
   MouseButton button_;
-  int clicks_;
+  uint32_t clicks_;
   Point position_;
 };
 using MouseDownEvent = MouseButtonDownEvent;

@@ -1,5 +1,5 @@
-#ifndef NGE3_NGSDL_EVENTS_KEYSYM_H
-#define NGE3_NGSDL_EVENTS_KEYSYM_H
+#ifndef NGSDL_EVENTS_KEYSYM_H
+#define NGSDL_EVENTS_KEYSYM_H
 
 #include "ngsdl/Events/KeyMod.h"
 #include "ngsdl/Events/Keycode.h"

@@ -1,6 +1,6 @@
 #include "ngsdl/EventTypes/QuitEvent.h"
 
 namespace nge::sdl {
-QuitEvent::QuitEvent(Uint32 timestamp) { timestamp_ = timestamp; }
+QuitEvent::QuitEvent(uint32_t timestamp) { timestamp_ = timestamp; }
 
 } // namespace nge::sdl

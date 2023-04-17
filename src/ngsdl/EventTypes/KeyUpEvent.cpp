@@ -12,8 +12,10 @@ KeyUpEvent::KeyUpEvent(SDL_KeyboardEvent e) {
     static_cast<KeyMod>(e.keysym.mod)};
 }
 
-Uint32 KeyUpEvent::GetWindowID() const { return window_id_; }
-KeyState KeyUpEvent::GetState() const { return state_; }
-bool KeyUpEvent::IsRepeat() const { return repeat_; }
-KeySym KeyUpEvent::GetKeySym() const { return keysym_; }
+[[nodiscard]] uint32_t KeyUpEvent::GetWindowID() const noexcept {
+  return window_id_;
+}
+[[nodiscard]] KeyState KeyUpEvent::GetState() const noexcept { return state_; }
+[[nodiscard]] bool KeyUpEvent::IsRepeat() const noexcept { return repeat_; }
+[[nodiscard]] KeySym KeyUpEvent::GetKeySym() const noexcept { return keysym_; }
 } // namespace nge::sdl

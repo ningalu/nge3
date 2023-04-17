@@ -9,12 +9,29 @@ MouseButtonDownEvent::MouseButtonDownEvent(SDL_MouseButtonEvent e) {
   clicks_ = e.clicks;
   position_ = {e.x, e.y};
 }
-Uint32 MouseButtonDownEvent::GetWindowID() const { return window_id_; }
-Uint32 MouseButtonDownEvent::GetMouseID() const { return mouse_id_; }
-MouseButton MouseButtonDownEvent::GetMouseButton() const { return button_; }
-MouseButton MouseButtonDownEvent::GetButton() const { return GetMouseButton(); }
-int MouseButtonDownEvent::GetClicks() const { return clicks_; }
-Point MouseButtonDownEvent::GetPos() const { return position_; }
-int MouseButtonDownEvent::GetX() const { return position_.GetX(); }
-int MouseButtonDownEvent::GetY() const { return position_.GetY(); }
+[[nodiscard]] uint32_t MouseButtonDownEvent::GetWindowID() const noexcept {
+  return window_id_;
+}
+[[nodiscard]] uint32_t MouseButtonDownEvent::GetMouseID() const noexcept {
+  return mouse_id_;
+}
+[[nodiscard]] MouseButton
+MouseButtonDownEvent::GetMouseButton() const noexcept {
+  return button_;
+}
+[[nodiscard]] MouseButton MouseButtonDownEvent::GetButton() const noexcept {
+  return GetMouseButton();
+}
+[[nodiscard]] uint32_t MouseButtonDownEvent::GetClicks() const noexcept {
+  return clicks_;
+}
+[[nodiscard]] Point MouseButtonDownEvent::GetPos() const noexcept {
+  return position_;
+}
+[[nodiscard]] int32_t MouseButtonDownEvent::GetX() const noexcept {
+  return position_.GetX();
+}
+[[nodiscard]] int32_t MouseButtonDownEvent::GetY() const noexcept {
+  return position_.GetY();
+}
 } // namespace nge::sdl

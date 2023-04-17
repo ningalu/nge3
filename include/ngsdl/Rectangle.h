@@ -1,6 +1,7 @@
-#ifndef NGE3_NGSDL_RECTANGLE_H
-#define NGE3_NGSDL_RECTANGLE_H
+#ifndef NGSDL_RECTANGLE_H
+#define NGSDL_RECTANGLE_H
 
+#include <cstdint>
 #include <optional>
 #include <ostream>
 #include <tuple>
@@ -18,27 +19,28 @@ class Rectangle {
 
 public:
   Rectangle();
-  Rectangle(int x, int y, int w, int h);
-  Rectangle(const Point &p, int w, int h);
-  Rectangle(int x, int y, std::tuple<int, int> size);
-  Rectangle(const Point &p, const std::tuple<int, int> &size);
+  Rectangle(int32_t x, int32_t y, int32_t w, int32_t h);
+  Rectangle(const Point &p, int32_t w, int32_t h);
+  Rectangle(int32_t x, int32_t y, std::tuple<int32_t, int32_t> size);
+  Rectangle(const Point &p, const std::tuple<int32_t, int32_t> &size);
 
-  int GetX() const;
-  int GetY() const;
-  Point GetPos() const;
-  void SetPos(const Point pos);
-  void MoveX(int dx);
-  void MoveY(int dy);
+  [[nodiscard]] int32_t GetX() const noexcept;
+  [[nodiscard]] int32_t GetY() const noexcept;
+  [[nodiscard]] Point GetPos() const noexcept;
+  void SetPos(const Point pos) noexcept;
+  void MoveX(int32_t dx) noexcept;
+  void MoveY(int32_t dy) noexcept;
 
-  int GetW() const;
-  int GetH() const;
-  void SetX(int x);
-  void SetY(int y);
-  void SetW(int w);
-  void SetH(int h);
+  [[nodiscard]] int32_t GetW() const noexcept;
+  [[nodiscard]] int32_t GetH() const noexcept;
+  void SetX(int32_t x) noexcept;
+  void SetY(int32_t y) noexcept;
+  void SetW(int32_t w) noexcept;
+  void SetH(int32_t h) noexcept;
 
-  bool Intersects(const Rectangle &r) const;
-  std::optional<Rectangle> GetIntersection(const Rectangle &r) const;
+  [[nodiscard]] bool Intersects(const Rectangle &r) const noexcept;
+  [[nodiscard]] std::optional<Rectangle> GetIntersection(const Rectangle &r
+  ) const noexcept;
 
 protected:
   Rectangle(SDL_Rect r);

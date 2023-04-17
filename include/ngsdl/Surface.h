@@ -1,4 +1,4 @@
-#ifndef NGE3_NGSDL_SURFACE_H
-#define NGE3_NGSDL_SURFACE_H
+#ifndef NGSDL_SURFACE_H
+#define NGSDL_SURFACE_H
 
 #endif

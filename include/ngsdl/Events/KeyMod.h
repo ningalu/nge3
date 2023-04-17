@@ -1,10 +1,11 @@
-#ifndef NGE3_NGSDL_EVENTS_KEYMOD_H
-#define NGE3_NGSDL_EVENTS_KEYMOD_H
+#ifndef NGSDL_EVENTS_KEYMOD_H
+#define NGSDL_EVENTS_KEYMOD_H
 
 #include <SDL2/SDL.h>
 
 namespace nge::sdl {
-enum class KeyMod {
+// probably doesnt need uint32_t
+enum class KeyMod : uint32_t {
   NONE = KMOD_NONE,
   LSHIFT = KMOD_LSHIFT,
   RSHIFT = KMOD_RSHIFT,
