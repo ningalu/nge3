@@ -2,7 +2,7 @@ set(subproject ngsdl_app)
 
 add_executable(
   ${subproject}-demo 
-  ./ngsdl_test_app.cpp
+  ./main.cpp
 )
 
 target_compile_features(

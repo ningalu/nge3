@@ -16,9 +16,9 @@ class Font {
   friend class Texture;
 
 public:
-  Font() = delete;
-  Font(const Font &) = delete;
-  Font &operator=(const Font &) = delete;
+  // Font() = delete;
+  // Font(const Font &) = delete;
+  // Font &operator=(const Font &) = delete;
   Font(const std::string &filename, int point_size);
 
   // TTF_RenderText_Blended

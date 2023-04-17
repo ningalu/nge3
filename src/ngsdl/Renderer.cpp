@@ -119,7 +119,9 @@ void Renderer::DrawLines(const std::vector<Point> &points) {
     sdl_points.push_back(it.point_);
   }
   SDL_RenderDrawLines(
-    renderer_.get(), sdl_points.data(), static_cast<int>(sdl_points.size())
+    renderer_.get(),
+    sdl_points.data(),
+    static_cast<std::size_t>(sdl_points.size())
   );
 }
 

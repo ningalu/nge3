@@ -14,11 +14,15 @@ add_library(
   ./BlendMode.cpp
   ./Timer.cpp
   ./Font.cpp
+  ./Init.cpp
+  ./InitFlags.cpp
+
   ./Events/Event.cpp
   ./Events/EventQueue.cpp
   ./Events/KeySym.cpp
   ./Events/KeyMod.cpp
   ./Events/MouseButton.cpp
+
   ./EventTypes/DefaultEvent.cpp
   ./EventTypes/QuitEvent.cpp
   ./EventTypes/KeyUpEvent.cpp

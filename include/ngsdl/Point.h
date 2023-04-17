@@ -1,5 +1,5 @@
-#ifndef NGE3_SDL_POINT_H
-#define NGE3_SDL_POINT_H
+#ifndef NGSDL_POINT_H
+#define NGSDL_POINT_H
 
 #include <ostream>
 

@@ -1,8 +1,5 @@
 #include <iostream>
 
-#include "SDL2/SDL_image.h"
-#include "SDL2/SDL_ttf.h"
-
 #include "ngsdl/BlendMode.h"
 #include "ngsdl/Events/Event.hpp"
 #include "ngsdl/Events/EventQueue.h"
@@ -10,6 +7,8 @@
 #include "ngsdl/Events/Scancode.h"
 #include "ngsdl/Font.h"
 #include "ngsdl/FontRenderType.h"
+#include "ngsdl/Init.h"
+#include "ngsdl/InitFlags.h"
 #include "ngsdl/Point.h"
 #include "ngsdl/Rectangle.h"
 #include "ngsdl/Renderer.h"
@@ -33,9 +32,7 @@ int main(int argc, char **argv) {
   std::vector<sdl::Point> shape = {
     {0, 0}, {50, 0}, {50, 10}, {30, 80}, {20, 80}, {40, 20}, {0, 10}, {0, 0}};
 
-  SDL_Init(SDL_INIT_EVERYTHING);
-  IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
-  TTF_Init();
+  nge::sdl::Init();
 
   try {
     sdl::Window w;
@@ -156,9 +153,7 @@ int main(int argc, char **argv) {
     std::cout << e.what() << "\n";
   }
 
-  TTF_Quit();
-  IMG_Quit();
-  SDL_Quit();
+  nge::sdl::Quit();
 
   return 0;
 }
