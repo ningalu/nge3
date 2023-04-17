@@ -13,5 +13,5 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/src/nge)
 add_subdirectory(${CMAKE_SOURCE_DIR}/src/demo)
 
 # # Set up unit tests
-# enable_testing()
-# add_subdirectory(${CMAKE_SOURCE_DIR}/tests)
+enable_testing()
+add_subdirectory(${CMAKE_SOURCE_DIR}/tests/ngsdl)

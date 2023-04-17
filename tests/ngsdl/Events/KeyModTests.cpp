@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 
-#include "Events/KeyMod.h"
+#include "ngsdl/Events/KeyMod.h"
 
 TEST(KeyModTests, Bitwise_Ops) {
   nge::sdl::KeyMod k1 = nge::sdl::KeyMod::ALT;

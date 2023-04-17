@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 
-#include "Point.h"
+#include "ngsdl/Point.h"
 
 TEST(PointTests, Addition) {
   using namespace nge::sdl;
