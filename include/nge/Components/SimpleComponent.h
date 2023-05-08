@@ -33,6 +33,8 @@ public:
 
   virtual void Draw() override;
 
+  virtual ~SimpleComponent();
+
 protected:
   std::shared_ptr<Graphics> graphics_;
   std::shared_ptr<sdl::Texture> texture_;

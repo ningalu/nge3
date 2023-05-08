@@ -2,7 +2,7 @@ set(subproject nge3_app)
 
 add_library(
   ${subproject}-lib 
-  ./IntroView.cpp
+  ./IntroScene.cpp
 )
 
 target_compile_features(
@@ -17,6 +17,7 @@ target_compile_options(
     /WX
     /external:anglebrackets 
     /external:W0
+    # /fsanitize=address
   >
   $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:
 

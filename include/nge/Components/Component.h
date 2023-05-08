@@ -6,7 +6,10 @@
 #include "nge/Components/Translatable.h"
 
 namespace nge {
-class Component : public Drawable, public Rotatable, public Translatable {};
+class Component : public Drawable, public Rotatable, public Translatable {
+public:
+  virtual ~Component() = default;
+};
 } // namespace nge
 
 #endif

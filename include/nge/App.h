@@ -6,12 +6,14 @@
 #include <string>
 
 #include "nge/Timer.h"
+
 #include "ngsdl/Rectangle.h"
 
 namespace nge {
-class View;
+class Scene;
 class Graphics;
 class Input;
+class SceneFactory;
 namespace sdl {
 
 class Window;
@@ -23,11 +25,13 @@ namespace nge {
 
 class App {
 public:
-  App();
-  App(const std::string &name, sdl::Rect viewport);
+  App(
+    const std::string &name = "DEFAULT APP NAME",
+    sdl::Rect viewport = sdl::Rect{0, 0, 800, 600}
+  );
 
-  void SetInitialView(View *v);
-  void SetInitialView(std::unique_ptr<View> v);
+  void SetInitialView(Scene *v);
+  void SetInitialView(std::unique_ptr<Scene> v);
 
   std::shared_ptr<Graphics> GetGraphics() const;
   std::shared_ptr<Input> GetInput() const;
@@ -39,14 +43,13 @@ public:
 protected:
   std::shared_ptr<Graphics> graphics_;
   std::shared_ptr<Input> input_;
+  std::shared_ptr<SceneFactory> scene_fact_;
 
-  std::stack<std::unique_ptr<View>> view_stack_;
+  std::stack<std::unique_ptr<Scene>> view_stack_;
 
   bool running_;
   int fps_, tps_;
   Timer fps_timer_, tps_timer_;
-
-  void Init();
 };
 } // namespace nge
 

@@ -1,10 +1,19 @@
-#ifndef NGE3_NGE_COMPONENTS_DRAWABLE_H
-#define NGE3_NGE_COMPONENTS_DRAWABLE_H
+#ifndef NGE_COMPONENTS_DRAWABLE_H
+#define NGE_COMPONENTS_DRAWABLE_H
+
+#include <cstdint>
+#include <memory>
 
 namespace nge {
 class Drawable {
 public:
   virtual void Draw() = 0;
+  [[nodiscard]] virtual uint32_t GetDrawPriority() const noexcept;
+
+  [[nodiscard]] static bool CompareDrawPriority(
+    const std::shared_ptr<Drawable> &lhs, const std::shared_ptr<Drawable> &rhs
+  ) noexcept;
+
   virtual ~Drawable() = 0;
 };
 } // namespace nge

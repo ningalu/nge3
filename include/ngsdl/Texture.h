@@ -91,6 +91,8 @@ public:
 
   // SDL_UpdateTexture
 
+  ~Texture();
+
 protected:
   Texture(SDL_Texture *texture);
   std::unique_ptr<SDL_Texture, decltype(&SDL_DestroyTexture)> texture_;

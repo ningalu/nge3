@@ -1,6 +1,7 @@
 #include "ngsdl/Texture.h"
 
 #include <cstdint>
+#include <iostream>
 
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
@@ -190,4 +191,7 @@ std::tuple<int, int> Texture::GetSize() const {
   SDL_QueryTexture(texture_.get(), nullptr, nullptr, &w, &h);
   return {w, h};
 }
+
+Texture::~Texture() { std::cout << "texture destroyed: " << this << "\n\n"; }
+
 } // namespace nge::sdl

@@ -23,10 +23,11 @@ public:
     const std::shared_ptr<Graphics> &graphics,
     const std::shared_ptr<sdl::Font> &font,
     const std::string &text,
-    sdl::Color color = {255, 255, 255, 255},
+    sdl::Color color = {0, 0, 0, 255},
     sdl::FontRenderType type = {sdl::FontRenderType::SOLID},
     sdl::Color bg = {0, 0, 0, 0}
   );
+  ~Text();
 };
 } // namespace nge
 

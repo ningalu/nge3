@@ -3,8 +3,6 @@ nlohmann_json/3.11.2
 sigslot/1.2.2
 sdl/2.26.1
 sdl_image/2.0.5
-libpng/1.6.39
-zlib/1.2.13
 sdl_ttf/2.20.1
 gtest/cci.20210126
 

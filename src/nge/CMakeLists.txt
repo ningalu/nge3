@@ -1,11 +1,13 @@
 add_library(
   nge3 
   ./App.cpp 
-  ./View.cpp 
+  
   ./Timer.cpp 
   ./Graphics.cpp
   ./Input.cpp
-
+  ./Scene.cpp
+  ./SceneFactory.cpp 
+  
   ./Components/Component.cpp 
   ./Components/SimpleComponent.cpp 
   ./Components/Sprite.cpp 

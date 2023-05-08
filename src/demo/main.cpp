@@ -1,8 +1,9 @@
 #include <iostream>
 
-#include "demo/IntroView.h"
+#include "demo/IntroScene.h"
 #include "nge/App.h"
-#include "nge/View.h"
+#include "nge/Scene.h"
+#include "nge/SceneFactory.hpp"
 
 #include "ngsdl/SDLException.h"
 #include "ngsdl/TTFException.h"
@@ -10,8 +11,10 @@
 int main(int argc, char **argv) {
   try {
     nge::App app = {"test app", {50, 50, 800, 600}};
+    nge::SceneFactory sf{app.GetGraphics(), app.GetInput()};
     std::cout << SDL_GetBasePath() << "\n";
-    app.SetInitialView(new demo::IntroView(app.GetGraphics(), app.GetInput()));
+    auto initial = sf.Create<demo::IntroScene>();
+    app.SetInitialView(std::move(initial));
     app.Run();
 
   } catch (const std::exception &e) {

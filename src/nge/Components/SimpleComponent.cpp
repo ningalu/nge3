@@ -1,11 +1,18 @@
 #include "nge/Components/SimpleComponent.h"
 
+#include <iostream>
+
 #include "nge/Graphics.h"
 #include "ngsdl/Texture.h"
 
 namespace nge {
 SimpleComponent::SimpleComponent(const std::shared_ptr<Graphics> &graphics)
-    : graphics_(graphics) {}
+    : graphics_(graphics) {
+  std::cout << "simple component created: " << this << "\n\n";
+  angle_ = 0.0;
+  dst_ = {0, 0, 0, 0};
+  src_ = {0, 0, 0, 0};
+}
 
 void SimpleComponent::Rotate(double angle) { angle_ += angle; }
 double SimpleComponent::GetAngle() { return angle_; }
@@ -19,5 +26,9 @@ void SimpleComponent::MoveX(int x) { dst_.MoveX(x); }
 void SimpleComponent::MoveY(int y) { dst_.MoveY(y); }
 void SimpleComponent::Draw() {
   graphics_->Draw(*texture_, std::nullopt, dst_, angle_, std::nullopt);
+}
+SimpleComponent::~SimpleComponent() {
+  std::cout << "simple component destroyed: " << this << "\n\t"
+            << "texture: " << texture_ << "\n\n";
 }
 } // namespace nge
