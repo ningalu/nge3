@@ -52,6 +52,10 @@ void FrameAnimationController::Tick() {
   return current_frame_;
 }
 
+[[nodiscard]] uint32_t FrameAnimationController::TotalFrames() const {
+  return max_frames_;
+}
+
 [[nodiscard]] std::string FrameAnimationController::as_string() const {
   return std::format(
     "{}\n{}\n{}",

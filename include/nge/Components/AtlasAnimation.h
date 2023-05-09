@@ -17,15 +17,7 @@ public:
   AtlasAnimation(
     const std::shared_ptr<Graphics> &graphics,
     const std::string &filename,
-    std::shared_ptr<AnimationController> control,
-    sdl::Rect frame_size
-  );
-
-  AtlasAnimation(
-    const std::shared_ptr<Graphics> &graphics,
-    const std::string &filename,
-    std::shared_ptr<AnimationController> control,
-    uint32_t frame_count
+    std::shared_ptr<AnimationController> control
   );
 
   virtual void Draw() override;

@@ -28,7 +28,7 @@ void IntroScene::Setup() {
   );
 
   nge3_demo_app_text_ = std::make_shared<nge::Text>(
-    graphics_, h1_, "NGE3 Demo App>", nge::sdl::Colour{128, 128, 128, 128}
+    graphics_, h1_, "NGE3 Demo App", nge::sdl::Colour{128, 128, 128, 128}
   );
   nge3_demo_app_text_->SetPos({25, 25});
   RegisterDrawable(nge3_demo_app_text_);
@@ -42,10 +42,9 @@ void IntroScene::Setup() {
   text_select_ = std::make_shared<nge::AtlasAnimation>(
     graphics_,
     "resources/Intro/text_select.png",
-    std::make_shared<nge::FrameAnimationController>(45, 2),
-    2
+    std::make_shared<nge::FrameAnimationController>(45, 2)
   );
-  text_select_->SetPos(500, 500);
+  text_select_->SetPos(25, 100);
 }
 
 void IntroScene::Render() {

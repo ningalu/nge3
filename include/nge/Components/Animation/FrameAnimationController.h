@@ -20,6 +20,7 @@ public:
 
   virtual void Tick() override;
   [[nodiscard]] virtual uint32_t Frame() const override;
+  [[nodiscard]] virtual uint32_t TotalFrames() const override;
 
 protected:
   [[nodiscard]] virtual std::string as_string() const override;
