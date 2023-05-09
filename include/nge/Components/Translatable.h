@@ -9,6 +9,7 @@ class Translatable {
 public:
   virtual sdl::Point GetPos() = 0;
   virtual void SetPos(sdl::Point p) = 0;
+  virtual void SetPos(int32_t x, int32_t y) = 0;
   virtual void SetX(int x) = 0;
   virtual void SetY(int y) = 0;
   virtual void MoveX(int x) = 0;

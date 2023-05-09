@@ -40,13 +40,12 @@ void Scene::RegisterDrawable(std::shared_ptr<Drawable> d) {
   std::sort(
     draw_queue_.begin(), draw_queue_.end(), &Drawable::CompareDrawPriority
   );
-  std::cout << draw_queue_.size() << "\n";
 }
 
 void Scene::RenderQueue() noexcept {
-  // for (const auto &d : draw_queue_) {
-  //   // d->Draw();
-  // }
+  for (const auto &d : draw_queue_) {
+    d->Draw();
+  }
 }
 
 } // namespace nge

@@ -8,7 +8,7 @@ namespace nge {
 class Drawable {
 public:
   virtual void Draw() = 0;
-  [[nodiscard]] virtual uint32_t GetDrawPriority() const noexcept;
+  [[nodiscard]] virtual uint32_t GetDrawPriority() const;
 
   [[nodiscard]] static bool CompareDrawPriority(
     const std::shared_ptr<Drawable> &lhs, const std::shared_ptr<Drawable> &rhs

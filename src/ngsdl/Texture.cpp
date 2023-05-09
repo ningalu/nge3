@@ -192,6 +192,6 @@ std::tuple<int, int> Texture::GetSize() const {
   return {w, h};
 }
 
-Texture::~Texture() { std::cout << "texture destroyed: " << this << "\n\n"; }
+Texture::~Texture() {}
 
 } // namespace nge::sdl

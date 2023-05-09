@@ -80,8 +80,10 @@ void App::Run() {
       fps_timer_.Restart();
 
       graphics_->Clear();
+
+      view_stack_.top()->RenderQueue();
       view_stack_.top()->Render();
-      // view_stack_.top()->RenderQueue();
+
       graphics_->Render();
     }
   }

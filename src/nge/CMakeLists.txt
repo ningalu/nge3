@@ -15,6 +15,10 @@ add_library(
   ./Components/Drawable.cpp 
   ./Components/Rotatable.cpp 
   ./Components/Translatable.cpp
+  ./Components/AtlasAnimation.cpp
+
+  ./Components/Animation/AnimationController.cpp
+  ./Components/Animation/FrameAnimationController.cpp
 )
 
 target_compile_features(

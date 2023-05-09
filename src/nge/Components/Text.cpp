@@ -21,12 +21,6 @@ Text::Text(
 
   src_ = {{0, 0}, texture_->GetSize()};
   dst_ = src_;
-  std::cout << "text created " << this << " dst: " << dst_ << " src: " << src_
-            << " text: " << text << "\n\t"
-            << "texture: " << texture_.get() << "\n\n";
 }
-Text::~Text() {
-  std::cout << "text destroyed " << this << "\n\t"
-            << "texture: " << texture_.get() << "\n\n";
-}
+Text::~Text() {}
 } // namespace nge
