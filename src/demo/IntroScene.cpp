@@ -5,6 +5,8 @@
 #include <stdexcept>
 
 #include "nge/Components/Animation/FrameAnimationController.h"
+#include "nge/Components/Button.h"
+#include "nge/Components/Mouse/ClickController.h"
 #include "nge/Graphics.h"
 #include "nge/Input.h"
 
@@ -37,8 +39,19 @@ void IntroScene::Setup() {
     graphics_, h2_, "Pong", nge::sdl::Colour{0, 0, 0, 255}
   );
   pong_text_->SetPos({75, 100});
-  RegisterDrawable(pong_text_);
-
+  // RegisterDrawable(pong_text_);
+  text_button_ = std::make_shared<nge::Composite<nge::Text, nge::Button>>(
+    *pong_text_, nge::Button{}
+  );
+  text_button_->hover = [&]() {
+    return true;
+  };
+  std::shared_ptr<nge::ClickController> c
+    = std::make_shared<nge::ClickController>();
+  c->click = [&]() {
+    std::cout << "pos: " << text_button_->GetPos() << "\n";
+  };
+  text_button_->AddController(nge::sdl::MouseButton::LEFT, c);
   text_select_ = std::make_shared<nge::AtlasAnimation>(
     graphics_,
     "resources/Intro/text_select.png",
@@ -50,20 +63,21 @@ void IntroScene::Setup() {
 void IntroScene::Render() {
   // nge3_demo_app_text_->Draw();
   // pong_text_->Draw();
-  text_select_->Draw();
+  text_button_->Draw();
+  // text_select_->Draw();
   // s_->Draw();
 }
 void IntroScene::Tick() {
   if (input_->KeyDown(nge::sdl::Scancode::SPACE)) {
   }
   if (input_->MouseClicked(nge::sdl::MouseButton::LEFT)) {
-    std::cout << "left click\n";
+    text_button_->Click(nge::sdl::MouseButton::LEFT);
   }
   if (input_->MouseHeld(nge::sdl::MouseButton::LEFT)) {
-    std::cout << "left held\n";
+    // std::cout << "left held\n";
   }
   if (input_->MouseReleased(nge::sdl::MouseButton::LEFT)) {
-    std::cout << "left release\n";
+    // std::cout << "left release\n";
   }
 }
 IntroScene::~IntroScene() { std::cout << "destroy intro scene\n"; }
