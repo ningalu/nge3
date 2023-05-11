@@ -1,13 +1,12 @@
 #ifndef NGE_COMPONENTS_BUTTON_H
 #define NGE_COMPONENTS_BUTTON_H
 
-#include <functional>
-#include <memory>
+#include "nge/Components/SimpleComponent.h"
 
 namespace nge {
-class Clickable {
+class Button : SimpleComponent {
 public:
-  virtual bool Hovering() const;
+protected:
 };
 } // namespace nge
 

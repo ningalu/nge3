@@ -7,13 +7,13 @@
 
 #include "ngsdl/Rectangle.h"
 
-#include "nge/Components/Drawable.h"
-
 namespace nge {
 class Graphics;
 class Input;
 class SceneFactory;
 class App;
+class Drawable;
+class Clickable;
 class Scene {
   friend SceneFactory;
   friend App;
@@ -40,6 +40,7 @@ protected:
   std::shared_ptr<Graphics> graphics_;
   std::shared_ptr<Input> input_;
   std::vector<std::shared_ptr<Drawable>> draw_queue_;
+  std::vector<std::shared_ptr<Clickable>> click_queue_;
 
 private:
   void SetGraphics(const std::shared_ptr<Graphics> &graphics) noexcept;

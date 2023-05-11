@@ -6,6 +6,9 @@
 #include "nge/Graphics.h"
 #include "nge/Input.h"
 
+#include "nge/Components/Clickable.h"
+#include "nge/Components/Drawable.h"
+
 namespace nge {
 Scene::Scene() /* : draw_queue_(&Drawable::CompareDrawPriority) */ {}
 
