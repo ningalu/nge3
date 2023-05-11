@@ -7,7 +7,9 @@
 namespace nge {
 class Clickable {
 public:
-  virtual bool Hovering() const;
+  virtual bool Hovering() const = 0;
+
+  virtual ~Clickable() = 0;
 };
 } // namespace nge
 
