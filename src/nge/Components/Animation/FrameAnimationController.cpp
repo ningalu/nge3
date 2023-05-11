@@ -57,23 +57,25 @@ void FrameAnimationController::Tick() {
 }
 
 [[nodiscard]] std::string FrameAnimationController::as_string() const {
-  return std::format(
-    "{}\n{}\n{}",
-    std::format(
-      "Frame Duration: {} frames | Current Subframe: {}",
-      max_subframes_,
-      current_subframe_
-    ),
-    std::format(
-      "Total Frames: {} | Current Frame: {}", max_frames_, current_frame_
-    ),
-    std::format(
-      "Total Repeats: {} times | Current Repeat: {}",
-      max_repeats_ == std::nullopt ? "unlimited" :
-                                     std::to_string(max_repeats_.value()),
-      current_repeat_
-    )
-  );
+
+  // return std::format(
+  //   "{}\n{}\n{}",
+  //   std::format(
+  //     "Frame Duration: {} frames | Current Subframe: {}",
+  //     max_subframes_,
+  //     current_subframe_
+  //   ),
+  //   std::format(
+  //     "Total Frames: {} | Current Frame: {}", max_frames_, current_frame_
+  //   ),
+  //   std::format(
+  //     "Total Repeats: {} times | Current Repeat: {}",
+  //     max_repeats_ == std::nullopt ? "unlimited" :
+  //                                    std::to_string(max_repeats_.value()),
+  //     current_repeat_
+  //   )
+  // );
+  return "";
 }
 
 } // namespace nge

@@ -14,6 +14,8 @@ public:
   friend std::ostream &
   operator<<(std::ostream &os, const AnimationController &ac);
 
+  virtual ~AnimationController() = default;
+
 protected:
   [[nodiscard]] virtual std::string as_string() const = 0;
 };

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 mkdir build
 cd ./build
@@ -7,10 +7,10 @@ mkdir Release
 
 export CONAN_SYSREQUIRES_MODE=enabled
 # why is this literally the easiest solution
-alias gcc="gcc-10"
-alias g++="g++-10"
-export CC=gcc-10
-export CXX=g++-10
+# alias gcc="gcc-10"
+# alias g++="g++-10"
+# export CC=gcc-10
+# export CXX=g++-10
 
 cd Debug
 conan install ../.. --output-folder=. --build=missing -pr:b=default --update -c tools.system.package_manager:mode=install -c tools.system.package_manager:sudo=True -s build_type=Debug

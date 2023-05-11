@@ -4,7 +4,7 @@
         "conan": {}
     },
     "include": [
-        "A:\\Programming\\nge3\\build\\Debug\\CMakePresets.json",
-        "A:\\Programming\\nge3\\build\\Release\\CMakePresets.json"
+        "/Users/ningalu/Dev/nge3/build/Debug/CMakePresets.json",
+        "/Users/ningalu/Dev/nge3/build/Release/CMakePresets.json"
     ]
 }

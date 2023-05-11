@@ -36,7 +36,7 @@ target_compile_options(
   >
   $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:
 
-    -lstdc++
+    -stdlib=libc++
 
     -Wall 
     -Wextra 
@@ -45,7 +45,10 @@ target_compile_options(
     -pedantic
     -Werror
 
+    -DLIBCXX_ENABLE_INCOMPLETE_FEATURES=ON
+
     -Wno-unknown-pragmas
+    -Wno-unused-command-line-argument
 >)
 
 target_include_directories(

@@ -31,6 +31,7 @@ target_compile_options(
     -Werror
 
     -Wno-unknown-pragmas
+    -Wno-unused-command-line-argument
   >)
 
 target_include_directories(
