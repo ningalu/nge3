@@ -14,6 +14,7 @@ public:
 
 protected:
   std::string message_;
+  std::string what_;
 };
 } // namespace nge::sdl
 

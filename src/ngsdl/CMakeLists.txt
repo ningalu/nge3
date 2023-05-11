@@ -43,7 +43,6 @@ target_compile_options(
   >
   $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:
 
-    -lstdc++
 
     -Wall 
     -Wextra 
@@ -51,8 +50,10 @@ target_compile_options(
     -Wnon-virtual-dtor 
     -pedantic
     -Werror
+    -std=c++20
 
     -Wno-unknown-pragmas
+    -Wno-unused-command-line-argument
 >)
 
 target_include_directories(

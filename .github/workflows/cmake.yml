@@ -26,10 +26,10 @@ jobs:
         uses: turtlebrowser/get-conan@v1.0
 
       - name: Create default profile
-        run: conan profile new default --detect
+        run: conan profile detect
 
       - name: Install Dependencies
-        run: conan install . --build=missing --install-folder="${{github.workspace}}/build" -c tools.system.package_manager:mode=install -c tools.system.package_manager:sudo=True
+        run: conan install ${{github.workspace}}/build --output-folder=. --build=missing -pr:b=default --update -c tools.system.package_manager:mode=install -c tools.system.package_manager:sudo=True -s build_type=${{env.BUILD_TYPE}}
 
       - name: Configure CMake
         run: cmake -S . -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_TOOLCHAIN_FILE="build/conan_toolchain.cmake"

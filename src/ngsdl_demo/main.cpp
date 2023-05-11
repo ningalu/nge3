@@ -118,6 +118,8 @@ int main(int argc, char **argv) {
               case sdl::Scancode::ESCAPE:
                 running = false;
                 break;
+              default:
+                break;
               }
             },
             [&](const sdl::MouseUpEvent &event) {
@@ -125,6 +127,8 @@ int main(int argc, char **argv) {
               switch (event.GetButton()) {
               case sdl::MouseButton::LEFT:
                 dragging = false;
+                break;
+              default:
                 break;
               }
             },
@@ -134,6 +138,8 @@ int main(int argc, char **argv) {
               switch (event.GetButton()) {
               case sdl::MouseButton::LEFT:
                 dragging = true;
+                break;
+              default:
                 break;
               }
             },

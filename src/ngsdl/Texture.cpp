@@ -51,6 +51,8 @@ Texture::Texture(
       font.font_.get(), text.c_str(), color.color_, bg.color_
     );
     break;
+  default:
+    break;
   }
   if (temp_surf == nullptr) {
     throw TTFException("Surface couldn't be created from Font");
@@ -90,6 +92,8 @@ Texture::Texture(
     temp_surf = TTF_RenderText_Shaded_Wrapped(
       font.font_.get(), text.c_str(), color.color_, bg.color_, wrap_length
     );
+    break;
+  default:
     break;
   }
   if (temp_surf == nullptr) {
