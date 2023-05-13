@@ -1,8 +1,11 @@
 #include "nge/Components/Mouse/ClickController.h"
 
 namespace nge {
+
 void ClickController::OnClick() {
-  click();
+  if (click) {
+    click();
+  }
   held_ = true;
 }
 void ClickController::OnHold(bool hover) {
@@ -10,11 +13,15 @@ void ClickController::OnHold(bool hover) {
   if (!hover) {
     held_ = false;
   }
-  hold();
+  if (hold) {
+    hold();
+  }
 }
 void ClickController::OnRelease() {
   if (held_) {
-    release();
+    if (release) {
+      release();
+    }
     held_ = false;
   }
 }

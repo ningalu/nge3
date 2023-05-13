@@ -8,6 +8,7 @@ namespace nge {
 class Drawable {
 public:
   virtual void Draw() = 0;
+  [[nodiscard]] virtual bool Overlaps(int32_t x, int32_t y) const = 0;
   [[nodiscard]] virtual uint32_t GetDrawPriority() const;
 
   [[nodiscard]] static bool CompareDrawPriority(

@@ -9,7 +9,7 @@
 #include "nge/Components/Mouse/ClickController.h"
 
 namespace nge {
-class Button : Clickable {
+class Button : public Clickable {
 public:
   Button() = default;
   virtual bool Hovering() const override;

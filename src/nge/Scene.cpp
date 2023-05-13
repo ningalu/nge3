@@ -45,9 +45,30 @@ void Scene::RegisterDrawable(std::shared_ptr<Drawable> d) {
   );
 }
 
-void Scene::RenderQueue() noexcept {
+void Scene::RegisterClickable(std::shared_ptr<Clickable> d) {
+  mouse_queue_.push_back(d);
+}
+
+void Scene::RenderQueue() {
   for (const auto &d : draw_queue_) {
     d->Draw();
+  }
+}
+
+void Scene::ClickMouseQueue(sdl::MouseButton m) {
+  for (const auto &c : mouse_queue_) {
+    c->Click(m);
+  }
+}
+
+void Scene::HoldMouseQueue(sdl::MouseButton m) {
+  for (const auto &c : mouse_queue_) {
+    c->Hold(m);
+  }
+}
+void Scene::ReleaseMouseQueue(sdl::MouseButton m) {
+  for (const auto &c : mouse_queue_) {
+    c->Release(m);
   }
 }
 

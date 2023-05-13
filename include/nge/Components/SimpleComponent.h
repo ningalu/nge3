@@ -33,6 +33,7 @@ public:
   virtual void MoveY(int y) override;
 
   virtual void Draw() override;
+  [[nodiscard]] virtual bool Overlaps(int32_t x, int32_t y) const override;
   [[nodiscard]] virtual uint32_t GetDrawPriority() const override;
 
   void SetZ(int32_t z) noexcept;
