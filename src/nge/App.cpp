@@ -1,5 +1,6 @@
 #include "nge/App.h"
 
+#include <bitset>
 #include <iostream>
 #include <optional>
 
@@ -73,6 +74,16 @@ void App::Run() {
       }
 
       input_->Update();
+      for (auto m : input_->AllMouseClicked()) {
+        view_stack_.top()->ClickMouseQueue(m);
+      }
+      for (auto m : input_->AllMouseHeld()) {
+        view_stack_.top()->HoldMouseQueue(m);
+      }
+      for (auto m : input_->AllMouseReleased()) {
+        view_stack_.top()->ReleaseMouseQueue(m);
+      }
+
       view_stack_.top()->Tick();
     }
     if (fps_timer_.GetElapsedTime() > (static_cast<long double>(1) / static_cast<long double>(fps_))) {

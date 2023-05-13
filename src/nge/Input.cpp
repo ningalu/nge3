@@ -5,6 +5,7 @@
 #include "ngsdl/Events/Event.hpp"
 #include "ngsdl/Events/EventQueue.h"
 #include "ngsdl/Events/EventVisitor.hpp"
+#include "ngsdl/Events/MouseButtonMask.h"
 #include "ngsdl/Events/Scancode.h"
 
 namespace nge {
@@ -20,46 +21,79 @@ void Input::Update() {
   }
   auto [mouse, point] = sdl::EventQueue::GetMouseState();
   current_mouse_ = mouse;
-  mouse_x_ = point.GetX();
-  mouse_y_ = point.GetY();
+  mouse_pos_ = point;
 }
 
-bool Input::KeyDown(const sdl::Scancode key) const {
+[[nodiscard]] bool Input::KeyDown(const sdl::Scancode key) const {
   return static_cast<bool>(current_input_.at(static_cast<uint32_t>(key)));
 }
-bool Input::KeyUp(const sdl::Scancode key) const { return !KeyDown(key); }
+[[nodiscard]] bool Input::KeyUp(const sdl::Scancode key) const {
+  return !KeyDown(key);
+}
 
-bool Input::KeyPressed(const sdl::Scancode key) const {
+[[nodiscard]] bool Input::KeyPressed(const sdl::Scancode key) const {
   return (current_input_.at(static_cast<uint32_t>(key)))
          && !(prev_input_.at(static_cast<uint32_t>(key)));
 }
-bool Input::KeyHeld(const sdl::Scancode key) const {
+[[nodiscard]] bool Input::KeyHeld(const sdl::Scancode key) const {
   return (current_input_.at(static_cast<uint32_t>(key)))
          && (prev_input_.at(static_cast<uint32_t>(key)));
 }
-bool Input::KeyReleased(const sdl::Scancode key) const {
+[[nodiscard]] bool Input::KeyReleased(const sdl::Scancode key) const {
   return !(current_input_.at(static_cast<uint32_t>(key)))
          && (prev_input_.at(static_cast<uint32_t>(key)));
 }
 
-bool Input::MouseDown(const sdl::MouseButton button) const {
+[[nodiscard]] bool Input::MouseDown(const sdl::MouseButton button) const {
   return current_mouse_ & static_cast<uint32_t>(button);
 }
-bool Input::MouseUp(const sdl::MouseButton button) const {
+[[nodiscard]] bool Input::MouseUp(const sdl::MouseButton button) const {
   return !MouseDown(button);
 }
 
-bool Input::MouseClicked(const sdl::MouseButton button) const {
-  return (current_mouse_ & static_cast<uint32_t>(button))
-         && !(prev_mouse_ & static_cast<uint32_t>(button));
+[[nodiscard]] bool Input::MouseClicked(const sdl::MouseButton button) const {
+  return (current_mouse_ & static_cast<uint32_t>(sdl::Mask(button)))
+         && !(prev_mouse_ & static_cast<uint32_t>(sdl::Mask(button)));
 }
-bool Input::MouseHeld(const sdl::MouseButton button) const {
-  return (current_mouse_ & static_cast<uint32_t>(button))
-         && (prev_mouse_ & static_cast<uint32_t>(button));
+[[nodiscard]] bool Input::MouseHeld(const sdl::MouseButton button) const {
+  return (current_mouse_ & static_cast<uint32_t>(sdl::Mask(button)))
+         && (prev_mouse_ & static_cast<uint32_t>(sdl::Mask(button)));
 }
-bool Input::MouseReleased(const sdl::MouseButton button) const {
-  return !(current_mouse_ & static_cast<uint32_t>(button))
-         && (prev_mouse_ & static_cast<uint32_t>(button));
+[[nodiscard]] bool Input::MouseReleased(const sdl::MouseButton button) const {
+  return !(current_mouse_ & static_cast<uint32_t>(sdl::Mask(button)))
+         && (prev_mouse_ & static_cast<uint32_t>(sdl::Mask(button)));
+}
+
+// passing methods was annoying
+[[nodiscard]] std::vector<sdl::MouseButton> Input::AllMouseClicked() const {
+  return MouseInteraction_([&](const sdl::MouseButton m) {
+    return MouseClicked(m);
+  });
+}
+[[nodiscard]] std::vector<sdl::MouseButton> Input::AllMouseHeld() const {
+  return MouseInteraction_([&](const sdl::MouseButton m) {
+    return MouseHeld(m);
+  });
+}
+[[nodiscard]] std::vector<sdl::MouseButton> Input::AllMouseReleased() const {
+  return MouseInteraction_([&](const sdl::MouseButton m) {
+    return MouseReleased(m);
+  });
+}
+
+[[nodiscard]] int32_t Input::MouseX() const { return mouse_pos_.GetX(); }
+[[nodiscard]] int32_t Input::MouseY() const { return mouse_pos_.GetY(); }
+[[nodiscard]] sdl::Point Input::MousePos() const { return mouse_pos_; }
+
+[[nodiscard]] inline std::vector<sdl::MouseButton>
+Input::MouseInteraction_(std::function<bool(sdl::MouseButton)> f) const {
+  std::vector<sdl::MouseButton> t;
+  for (auto m : Input::MOUSE_BUTTONS) {
+    if (f(m)) {
+      t.push_back(m);
+    }
+  }
+  return t;
 }
 
 } // namespace nge

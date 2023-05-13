@@ -11,8 +11,8 @@ enum class MouseButton : uint8_t {
   X1 = SDL_BUTTON_X1,
   X2 = SDL_BUTTON_X2
 };
-MouseButton operator|(MouseButton lhs, MouseButton rhs);
-bool operator&(MouseButton lhs, MouseButton rhs);
+// MouseButton operator|(MouseButton lhs, MouseButton rhs);
+// bool operator&(MouseButton lhs, MouseButton rhs);
 } // namespace nge::sdl
 
 #endif

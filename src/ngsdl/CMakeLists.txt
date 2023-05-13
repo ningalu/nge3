@@ -22,6 +22,7 @@ add_library(
   ./Events/KeySym.cpp
   ./Events/KeyMod.cpp
   ./Events/MouseButton.cpp
+  ./Events/MouseButtonMask.cpp
 
   ./EventTypes/DefaultEvent.cpp
   ./EventTypes/QuitEvent.cpp
