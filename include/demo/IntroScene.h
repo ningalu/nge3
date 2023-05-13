@@ -26,7 +26,7 @@ public:
 
 protected:
   std::shared_ptr<nge::Sprite> s_;
-  std::shared_ptr<nge::Text> nge3_demo_app_text_, pong_text_;
+  std::shared_ptr<nge::Text> nge3_demo_app_text_;
   std::shared_ptr<nge::sdl::Font> h1_, h2_;
   std::shared_ptr<nge::AtlasAnimation> text_select_;
   std::shared_ptr<nge::Composite<nge::Text, nge::Button>> text_button_;

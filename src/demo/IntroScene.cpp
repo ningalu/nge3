@@ -35,16 +35,13 @@ void IntroScene::Setup() {
   nge3_demo_app_text_->SetPos({25, 25});
   RegisterDrawable(nge3_demo_app_text_);
 
-  pong_text_ = std::make_shared<nge::Text>(
-    graphics_, h2_, "Pong", nge::sdl::Colour{0, 0, 0, 255}
-  );
-  pong_text_->SetPos({75, 100});
-  // RegisterDrawable(pong_text_);
   text_button_ = std::make_shared<nge::Composite<nge::Text, nge::Button>>(
-    *pong_text_, nge::Button{}
+    nge::Text{graphics_, h2_, "Pong", nge::sdl::Colour{0, 0, 0, 255}},
+    nge::Button{}
   );
+  text_button_->SetPos(75, 100);
   text_button_->hover = [&]() {
-    return true;
+    return text_button_->Overlaps(input_->MouseX(), input_->MouseY());
   };
   std::shared_ptr<nge::ClickController> c
     = std::make_shared<nge::ClickController>();
@@ -57,28 +54,26 @@ void IntroScene::Setup() {
     "resources/Intro/text_select.png",
     std::make_shared<nge::FrameAnimationController>(45, 2)
   );
+  RegisterDrawable(text_button_);
+  RegisterClickable(text_button_);
+
   text_select_->SetPos(25, 100);
+  RegisterDrawable(text_select_);
 }
 
-void IntroScene::Render() {
-  // nge3_demo_app_text_->Draw();
-  // pong_text_->Draw();
-  text_button_->Draw();
-  // text_select_->Draw();
-  // s_->Draw();
-}
+void IntroScene::Render() {}
 void IntroScene::Tick() {
-  if (input_->KeyDown(nge::sdl::Scancode::SPACE)) {
-  }
-  if (input_->MouseClicked(nge::sdl::MouseButton::LEFT)) {
-    text_button_->Click(nge::sdl::MouseButton::LEFT);
-  }
-  if (input_->MouseHeld(nge::sdl::MouseButton::LEFT)) {
-    // std::cout << "left held\n";
-  }
-  if (input_->MouseReleased(nge::sdl::MouseButton::LEFT)) {
-    // std::cout << "left release\n";
-  }
+  // if (input_->KeyDown(nge::sdl::Scancode::SPACE)) {
+  // }
+  // if (input_->MouseClicked(nge::sdl::MouseButton::LEFT)) {
+  //   text_button_->Click(nge::sdl::MouseButton::LEFT);
+  // }
+  // if (input_->MouseHeld(nge::sdl::MouseButton::LEFT)) {
+  //   // std::cout << "left held\n";
+  // }
+  // if (input_->MouseReleased(nge::sdl::MouseButton::LEFT)) {
+  //   // std::cout << "left release\n";
+  // }
 }
 IntroScene::~IntroScene() { std::cout << "destroy intro scene\n"; }
 
