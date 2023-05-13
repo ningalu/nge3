@@ -26,6 +26,10 @@ Rectangle::Rectangle(const Point &p, const std::tuple<int32_t, int32_t> &size) {
   return static_cast<bool>(SDL_HasIntersection(&rect_, &r.rect_));
 }
 
+[[nodiscard]] bool Rectangle::Encloses(const Point &p) const noexcept {
+  return SDL_PointInRect(&(p.point_), &rect_);
+}
+
 [[nodiscard]] std::optional<Rectangle>
 Rectangle::GetIntersection(const Rectangle &r) const noexcept {
   SDL_Rect out;

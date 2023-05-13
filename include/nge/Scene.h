@@ -5,15 +5,16 @@
 #include <optional>
 #include <vector>
 
+#include "ngsdl/Events/MouseButton.h"
 #include "ngsdl/Rectangle.h"
-
-#include "nge/Components/Drawable.h"
 
 namespace nge {
 class Graphics;
 class Input;
 class SceneFactory;
 class App;
+class Drawable;
+class Clickable;
 class Scene {
   friend SceneFactory;
   friend App;
@@ -32,6 +33,7 @@ public:
   [[nodiscard]] sdl::Point GetPos() const;
 
   void RegisterDrawable(std::shared_ptr<Drawable> d);
+  void RegisterClickable(std::shared_ptr<Clickable> c);
 
   virtual ~Scene() = default;
 
@@ -40,11 +42,15 @@ protected:
   std::shared_ptr<Graphics> graphics_;
   std::shared_ptr<Input> input_;
   std::vector<std::shared_ptr<Drawable>> draw_queue_;
+  std::vector<std::shared_ptr<Clickable>> mouse_queue_;
 
 private:
   void SetGraphics(const std::shared_ptr<Graphics> &graphics) noexcept;
   void SetInput(const std::shared_ptr<Input> &input) noexcept;
-  void RenderQueue() noexcept;
+  void RenderQueue();
+  void ClickMouseQueue(sdl::MouseButton m);
+  void HoldMouseQueue(sdl::MouseButton m);
+  void ReleaseMouseQueue(sdl::MouseButton m);
 };
 } // namespace nge
 

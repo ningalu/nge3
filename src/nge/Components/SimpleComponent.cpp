@@ -27,6 +27,9 @@ void SimpleComponent::MoveY(int y) { dst_.MoveY(y); }
 void SimpleComponent::Draw() {
   graphics_->Draw(*texture_, std::nullopt, dst_, angle_, std::nullopt);
 }
+[[nodiscard]] bool SimpleComponent::Overlaps(int32_t x, int32_t y) const {
+  return dst_.Encloses(sdl::Point{x, y});
+}
 [[nodiscard]] uint32_t SimpleComponent::GetDrawPriority() const {
   return draw_priority_;
 }

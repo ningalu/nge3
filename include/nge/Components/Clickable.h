@@ -1,27 +1,20 @@
-#ifndef NGE3_NGE_COMPONENTS_BUTTON_H
-#define NGE3_NGE_COMPONENTS_BUTTON_H
+#ifndef NGE_COMPONENTS_CLICKABLE_H
+#define NGE_COMPONENTS_CLICKABLE_H
 
 #include <functional>
 #include <memory>
 
+#include "ngsdl/Events/MouseButton.h"
+
 namespace nge {
-
-class Input;
-
 class Clickable {
 public:
-  Clickable(const std::shared_ptr<Input> &input);
+  virtual bool Hovering() const = 0;
+  virtual void Click(nge::sdl::MouseButton b) = 0;
+  virtual void Hold(nge::sdl::MouseButton b) = 0;
+  virtual void Release(nge::sdl::MouseButton b) = 0;
 
-  virtual void OnClick();
-  virtual void OnHold();
-  virtual void OnRelease();
-
-  virtual bool Hovering() const;
-
-protected:
-  bool held_;
-  std::shared_ptr<Input> input_;
-  std::function<void(void)> on_click_, on_hold_, on_release_;
+  virtual ~Clickable() = default;
 };
 } // namespace nge
 

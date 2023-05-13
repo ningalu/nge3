@@ -4,11 +4,14 @@
 #include <memory>
 #include <tuple>
 
+#include "ngsdl/Font.h"
+
 #include "nge/Components/AtlasAnimation.h"
+#include "nge/Components/Button.h"
+#include "nge/Components/Composite.hpp"
 #include "nge/Components/Sprite.h"
 #include "nge/Components/Text.h"
 #include "nge/Scene.h"
-#include "ngsdl/Font.h"
 
 namespace demo {
 class IntroScene : public nge::Scene {
@@ -23,9 +26,10 @@ public:
 
 protected:
   std::shared_ptr<nge::Sprite> s_;
-  std::shared_ptr<nge::Text> nge3_demo_app_text_, pong_text_;
+  std::shared_ptr<nge::Text> nge3_demo_app_text_;
   std::shared_ptr<nge::sdl::Font> h1_, h2_;
   std::shared_ptr<nge::AtlasAnimation> text_select_;
+  std::shared_ptr<nge::Composite<nge::Text, nge::Button>> text_button_;
 };
 } // namespace demo
 
