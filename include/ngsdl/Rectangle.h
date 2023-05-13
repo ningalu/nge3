@@ -13,9 +13,11 @@
 namespace nge::sdl {
 class Texture;
 class Renderer;
+class Point;
 class Rectangle {
   friend class Texture;
   friend class Renderer;
+  friend class Point;
 
 public:
   Rectangle();
@@ -39,6 +41,7 @@ public:
   void SetH(int32_t h) noexcept;
 
   [[nodiscard]] bool Intersects(const Rectangle &r) const noexcept;
+  [[nodiscard]] bool Encloses(const Point &p) const noexcept;
   [[nodiscard]] std::optional<Rectangle> GetIntersection(const Rectangle &r
   ) const noexcept;
 

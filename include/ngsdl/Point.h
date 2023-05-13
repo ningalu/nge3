@@ -7,17 +7,21 @@
 
 namespace nge::sdl {
 class Renderer;
+class Rectangle;
 class Point {
   friend class Renderer;
+  friend class Rectangle;
 
 public:
   Point();
   Point(int32_t x, int32_t y);
 
-  int32_t GetX() const;
-  int32_t GetY() const;
+  [[nodiscard]] int32_t GetX() const;
+  [[nodiscard]] int32_t GetY() const;
   void SetX(int32_t x);
   void SetY(int32_t y);
+
+  [[nodiscard]] bool Within(const Rectangle &r) const;
 
   Point operator+(const Point &rhs);
   Point &operator+=(const Point &rhs);
