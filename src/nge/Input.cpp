@@ -14,6 +14,7 @@ Input::Input() : current_input_({0}), prev_input_({0}) {}
 void Input::Update() {
   prev_input_ = current_input_;
   prev_mouse_ = current_mouse_;
+  prev_mouse_pos_ = mouse_pos_;
 
   auto kb = sdl::EventQueue::GetKeyboardState();
   for (std::size_t i = 0; i < 512; i++) {
@@ -84,6 +85,14 @@ void Input::Update() {
 [[nodiscard]] int32_t Input::MouseX() const { return mouse_pos_.GetX(); }
 [[nodiscard]] int32_t Input::MouseY() const { return mouse_pos_.GetY(); }
 [[nodiscard]] sdl::Point Input::MousePos() const { return mouse_pos_; }
+
+[[nodiscard]] int32_t Input::PrevMouseX() const {
+  return prev_mouse_pos_.GetX();
+}
+[[nodiscard]] int32_t Input::PrevMouseY() const {
+  return prev_mouse_pos_.GetY();
+}
+[[nodiscard]] sdl::Point Input::PrevMousePos() const { return prev_mouse_pos_; }
 
 [[nodiscard]] inline std::vector<sdl::MouseButton>
 Input::MouseInteraction_(std::function<bool(sdl::MouseButton)> f) const {

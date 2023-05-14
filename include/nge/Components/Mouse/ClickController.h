@@ -6,6 +6,7 @@
 namespace nge {
 
 struct ClickController {
+public:
   void OnClick();
   void OnHold(bool hover);
   void OnRelease();

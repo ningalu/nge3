@@ -22,6 +22,7 @@ add_library(
   ./Components/Animation/FrameAnimationController.cpp
 
   ./Components/Mouse/ClickController.cpp
+  ./Components/Mouse/HoverController.cpp
 )
 
 target_compile_features(

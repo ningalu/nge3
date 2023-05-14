@@ -74,6 +74,9 @@ void App::Run() {
       }
 
       input_->Update();
+
+      view_stack_.top()->HoverQueue();
+
       for (auto m : input_->AllMouseClicked()) {
         view_stack_.top()->ClickMouseQueue(m);
       }
