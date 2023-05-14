@@ -51,6 +51,9 @@ public:
   [[nodiscard]] int32_t MouseX() const;
   [[nodiscard]] int32_t MouseY() const;
   [[nodiscard]] sdl::Point MousePos() const;
+  [[nodiscard]] int32_t PrevMouseX() const;
+  [[nodiscard]] int32_t PrevMouseY() const;
+  [[nodiscard]] sdl::Point PrevMousePos() const;
 
 protected:
   std::array<uint8_t, SDL_NUM_SCANCODES> current_input_, prev_input_;
@@ -60,7 +63,7 @@ protected:
 
   uint32_t current_mouse_, prev_mouse_;
   int rel_mouse_x, rel_mouse_y_;
-  sdl::Point mouse_pos_;
+  sdl::Point mouse_pos_, prev_mouse_pos_;
 };
 } // namespace nge
 

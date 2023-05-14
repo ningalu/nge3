@@ -7,6 +7,7 @@
 #include "nge/Components/Animation/FrameAnimationController.h"
 #include "nge/Components/Button.h"
 #include "nge/Components/Mouse/ClickController.h"
+#include "nge/Components/Mouse/HoverController.h"
 #include "nge/Graphics.h"
 #include "nge/Input.h"
 
@@ -40,23 +41,41 @@ void IntroScene::Setup() {
     nge::Button{}
   );
   text_button_->SetPos(75, 100);
+
   text_button_->hover = [&]() {
     return text_button_->Overlaps(input_->MouseX(), input_->MouseY());
   };
+  text_button_->prev_hover = [&]() {
+    return text_button_->Overlaps(input_->PrevMouseX(), input_->PrevMouseY());
+  };
+  text_button_->click_valid = text_button_->hover;
+
   std::shared_ptr<nge::ClickController> c
     = std::make_shared<nge::ClickController>();
   c->click = [&]() {
     std::cout << "pos: " << text_button_->GetPos() << "\n";
   };
-  text_button_->AddController(nge::sdl::MouseButton::LEFT, c);
+  text_button_->AddClickControl(nge::sdl::MouseButton::LEFT, c);
+
+  std::shared_ptr<nge::HoverController> h
+    = std::make_shared<nge::HoverController>();
+  h->start = [&]() {
+    std::cout << "hover start\n";
+  };
+  h->release = [&]() {
+    std::cout << "hover end\n";
+  };
+  text_button_->SetHoverControl(h);
+
+  RegisterDrawable(text_button_);
+  RegisterClickable(text_button_);
+  RegisterHoverable(text_button_);
+
   text_select_ = std::make_shared<nge::AtlasAnimation>(
     graphics_,
     "resources/Intro/text_select.png",
     std::make_shared<nge::FrameAnimationController>(45, 2)
   );
-  RegisterDrawable(text_button_);
-  RegisterClickable(text_button_);
-
   text_select_->SetPos(25, 100);
   RegisterDrawable(text_select_);
 }

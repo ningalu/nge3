@@ -8,6 +8,7 @@
 
 #include "nge/Components/Clickable.h"
 #include "nge/Components/Drawable.h"
+#include "nge/Components/Mouse/Hoverable.h"
 
 namespace nge {
 Scene::Scene() /* : draw_queue_(&Drawable::CompareDrawPriority) */ {}
@@ -46,7 +47,11 @@ void Scene::RegisterDrawable(std::shared_ptr<Drawable> d) {
 }
 
 void Scene::RegisterClickable(std::shared_ptr<Clickable> d) {
-  mouse_queue_.push_back(d);
+  click_queue_.push_back(d);
+}
+
+void Scene::RegisterHoverable(std::shared_ptr<Hoverable> h) {
+  hover_queue_.push_back(h);
 }
 
 void Scene::RenderQueue() {
@@ -56,19 +61,33 @@ void Scene::RenderQueue() {
 }
 
 void Scene::ClickMouseQueue(sdl::MouseButton m) {
-  for (const auto &c : mouse_queue_) {
+  for (const auto &c : click_queue_) {
     c->Click(m);
   }
 }
 
 void Scene::HoldMouseQueue(sdl::MouseButton m) {
-  for (const auto &c : mouse_queue_) {
+  for (const auto &c : click_queue_) {
     c->Hold(m);
   }
 }
 void Scene::ReleaseMouseQueue(sdl::MouseButton m) {
-  for (const auto &c : mouse_queue_) {
+  for (const auto &c : click_queue_) {
     c->Release(m);
+  }
+}
+
+void Scene::HoverQueue() {
+  for (auto &h : hover_queue_) {
+    if (h->Hovering() && !h->PrevHovering()) {
+      h->OnStartHover();
+    }
+    if (h->Hovering() && h->PrevHovering()) {
+      h->OnHoldHover();
+    }
+    if (!h->Hovering() && h->PrevHovering()) {
+      h->OnReleaseHover();
+    }
   }
 }
 
