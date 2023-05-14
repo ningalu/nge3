@@ -9,7 +9,7 @@
 namespace nge {
 class Clickable {
 public:
-  virtual bool Hovering() const = 0;
+  virtual bool ClickValid() const = 0;
   virtual void Click(nge::sdl::MouseButton b) = 0;
   virtual void Hold(nge::sdl::MouseButton b) = 0;
   virtual void Release(nge::sdl::MouseButton b) = 0;
