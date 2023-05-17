@@ -1,12 +1,12 @@
-#ifndef NGE_COMPONENTS_BUTTON_H
-#define NGE_COMPONENTS_BUTTON_H
+#ifndef NGE_COMPONENTS_MOUSE_BUTTON_H
+#define NGE_COMPONENTS_MOUSE_BUTTON_H
 
 #include <array>
 
 #include "ngsdl/Events/MouseButton.h"
 
-#include "nge/Components/Clickable.h"
 #include "nge/Components/Mouse/ClickController.h"
+#include "nge/Components/Mouse/Clickable.h"
 #include "nge/Components/Mouse/HoverController.h"
 #include "nge/Components/Mouse/Hoverable.h"
 

@@ -6,8 +6,8 @@
 #include "nge/Graphics.h"
 #include "nge/Input.h"
 
-#include "nge/Components/Clickable.h"
 #include "nge/Components/Drawable.h"
+#include "nge/Components/Mouse/Clickable.h"
 #include "nge/Components/Mouse/Hoverable.h"
 
 namespace nge {

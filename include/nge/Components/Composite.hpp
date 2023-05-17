@@ -6,9 +6,10 @@ template <typename... Ts>
 class Composite : public Ts... {
 public:
   Composite(Ts... ts) : Ts(ts)... {}
+
   template <typename T>
   void set(T t) {
-    Composite::T = t;
+    static_cast<T &>(*this) = t;
   }
 };
 } // namespace nge

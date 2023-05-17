@@ -16,13 +16,14 @@ add_library(
   ./Components/Rotatable.cpp 
   ./Components/Translatable.cpp
   ./Components/AtlasAnimation.cpp
-  ./Components/Button.cpp
-
+  
   ./Components/Animation/AnimationController.cpp
   ./Components/Animation/FrameAnimationController.cpp
-
+  
   ./Components/Mouse/ClickController.cpp
   ./Components/Mouse/HoverController.cpp
+  ./Components/Mouse/Clickable.cpp
+  ./Components/Mouse/Button.cpp
 )
 
 target_compile_features(
