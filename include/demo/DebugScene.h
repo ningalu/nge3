@@ -2,15 +2,8 @@
 #define NGE3_DEMO_DEBUGSCENE_H
 
 #include <memory>
-#include <tuple>
 
-#include "ngsdl/Font.h"
-
-#include "nge/Components/AtlasAnimation.h"
-#include "nge/Components/Composite.hpp"
-#include "nge/Components/Mouse/Button.h"
 #include "nge/Components/Sprite.h"
-#include "nge/Components/Text.h"
 #include "nge/Scene.h"
 
 namespace demo {

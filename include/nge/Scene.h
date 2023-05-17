@@ -8,15 +8,16 @@
 #include "ngsdl/Events/MouseButton.h"
 #include "ngsdl/Rectangle.h"
 
+#include "nge/Components/Drawable.h"
+#include "nge/Components/Mouse/Clickable.h"
+#include "nge/Components/Mouse/Hoverable.h"
+#include "nge/Graphics.h"
+#include "nge/Input.h"
+#include "nge/SceneFactory.hpp"
+#include "nge/SceneManager.h"
+
 namespace nge {
-class Graphics;
-class Input;
-class SceneManager;
-class SceneFactory;
 class App;
-class Drawable;
-class Clickable;
-class Hoverable;
 
 class Scene {
   friend SceneManager;

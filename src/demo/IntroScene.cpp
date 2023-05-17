@@ -8,10 +8,6 @@
 #include "nge/Components/Mouse/Button.h"
 #include "nge/Components/Mouse/ClickController.h"
 #include "nge/Components/Mouse/HoverController.h"
-#include "nge/Graphics.h"
-#include "nge/Input.h"
-#include "nge/SceneFactory.hpp"
-#include "nge/SceneManager.h"
 
 #include "ngsdl/Color.h"
 #include "ngsdl/Events/MouseButton.h"
@@ -46,12 +42,7 @@ void IntroScene::Setup() {
   pong_normal_->SetPos(75, 100);
 
   pong_selected_ = std::make_shared<nge::Text>(
-    graphics_,
-    h2_,
-    "Pong",
-    nge::sdl::Colour{0, 0, 0, 255},
-    nge::sdl::FontRenderType::SHADED,
-    nge::sdl::Colour{100, 100, 100, 100}
+    graphics_, h2_, "Pong", nge::sdl::Colour{100, 100, 100, 255}
   );
   pong_selected_->SetPos(75, 100);
 
@@ -73,6 +64,7 @@ void IntroScene::Setup() {
   c->click = [&]() {
     std::cout << "pos: " << text_button_->GetPos() << "\n";
     auto demo_scene = scene_factory_->Create<DebugScene>();
+
     scene_manager_->PushScene(demo_scene);
   };
   text_button_->AddClickControl(nge::sdl::MouseButton::LEFT, c);

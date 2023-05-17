@@ -18,7 +18,22 @@ SceneManager::SceneManager(
   }
 }
 
-void SceneManager::PushScene(std::shared_ptr<Scene> s) { scenes_.push(s); }
+void SceneManager::PushScene(std::shared_ptr<Scene> s) {
+  if (!scenes_.empty()) {
+    for (auto &h : scenes_.top()->hover_queue_) {
+      h->OnReleaseHover();
+    }
+    for (auto &c : scenes_.top()->click_queue_) {
+      for (auto m : Input::MOUSE_BUTTONS) {
+        // losing click/hold focus is semantically different to a mouse
+        // release
+        // probably needs 4th callback in ClickController like LoseHold
+        c->Release(m);
+      }
+    }
+  }
+  scenes_.push(s);
+}
 void SceneManager::PopScene() {
   scenes_.pop();
   graphics_->SetWindowSize(scenes_.top()->GetSize());
