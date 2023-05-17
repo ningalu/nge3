@@ -11,9 +11,9 @@
 int main(int argc, char **argv) {
   try {
     nge::App app = {"test app", {50, 50, 800, 600}};
-    nge::SceneFactory sf{app.GetGraphics(), app.GetInput()};
     std::cout << SDL_GetBasePath() << "\n";
-    auto initial = sf.Create<demo::IntroScene>();
+    auto initial = app.GetSceneFactory()->Create<demo::IntroScene>();
+
     app.SetInitialView(std::move(initial));
     app.Run();
 

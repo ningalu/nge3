@@ -1,5 +1,5 @@
-#ifndef NGE_VIEW_H
-#define NGE_VIEW_H
+#ifndef NGE_SCENE_H
+#define NGE_SCENE_H
 
 #include <memory>
 #include <optional>
@@ -11,12 +11,15 @@
 namespace nge {
 class Graphics;
 class Input;
+class SceneManager;
 class SceneFactory;
 class App;
 class Drawable;
 class Clickable;
 class Hoverable;
+
 class Scene {
+  friend SceneManager;
   friend SceneFactory;
   friend App;
 
@@ -43,6 +46,8 @@ protected:
   std::optional<sdl::Rect> viewport_;
   std::shared_ptr<Graphics> graphics_;
   std::shared_ptr<Input> input_;
+  std::shared_ptr<SceneManager> scene_manager_;
+  std::shared_ptr<SceneFactory> scene_factory_;
   std::vector<std::shared_ptr<Drawable>> draw_queue_;
   std::vector<std::shared_ptr<Clickable>> click_queue_;
   std::vector<std::shared_ptr<Hoverable>> hover_queue_;
@@ -50,6 +55,8 @@ protected:
 private:
   void SetGraphics(const std::shared_ptr<Graphics> &graphics) noexcept;
   void SetInput(const std::shared_ptr<Input> &input) noexcept;
+  void SetSceneManager(const std::shared_ptr<SceneManager> &sm) noexcept;
+  void SetSceneFactory(const std::shared_ptr<SceneFactory> &sf) noexcept;
 
   void RenderQueue();
 

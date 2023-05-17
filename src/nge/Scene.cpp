@@ -11,10 +11,11 @@
 #include "nge/Components/Mouse/Hoverable.h"
 
 namespace nge {
-Scene::Scene() /* : draw_queue_(&Drawable::CompareDrawPriority) */ {}
+Scene::Scene() {}
 
 void Scene::Init() {}
 void Scene::Teardown() {}
+
 // Viewport should always be initialised to some actual value
 // I wonder if the compiler can see through this
 [[nodiscard]] const std::optional<sdl::Rect> &Scene::GetViewport() const {
@@ -37,6 +38,12 @@ void Scene::SetGraphics(const std::shared_ptr<Graphics> &graphics) noexcept {
 }
 void Scene::SetInput(const std::shared_ptr<Input> &input) noexcept {
   input_ = input;
+}
+void Scene::SetSceneManager(const std::shared_ptr<SceneManager> &sm) noexcept {
+  scene_manager_ = sm;
+}
+void Scene::SetSceneFactory(const std::shared_ptr<SceneFactory> &sf) noexcept {
+  scene_factory_ = sf;
 }
 
 void Scene::RegisterDrawable(std::shared_ptr<Drawable> d) {

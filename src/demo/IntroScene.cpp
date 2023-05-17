@@ -10,10 +10,14 @@
 #include "nge/Components/Mouse/HoverController.h"
 #include "nge/Graphics.h"
 #include "nge/Input.h"
+#include "nge/SceneFactory.hpp"
+#include "nge/SceneManager.h"
 
 #include "ngsdl/Color.h"
 #include "ngsdl/Events/MouseButton.h"
 #include "ngsdl/FontRenderType.h"
+
+#include "demo/DebugScene.h"
 
 namespace demo {
 
@@ -68,6 +72,8 @@ void IntroScene::Setup() {
     = std::make_shared<nge::ClickController>();
   c->click = [&]() {
     std::cout << "pos: " << text_button_->GetPos() << "\n";
+    auto demo_scene = scene_factory_->Create<DebugScene>();
+    scene_manager_->PushScene(demo_scene);
   };
   text_button_->AddClickControl(nge::sdl::MouseButton::LEFT, c);
 

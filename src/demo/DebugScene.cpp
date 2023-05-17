@@ -10,9 +10,11 @@
 #include "nge/Components/Mouse/HoverController.h"
 #include "nge/Graphics.h"
 #include "nge/Input.h"
+#include "nge/SceneManager.h"
 
 #include "ngsdl/Color.h"
 #include "ngsdl/Events/MouseButton.h"
+#include "ngsdl/Events/Scancode.h"
 #include "ngsdl/FontRenderType.h"
 
 namespace demo {
@@ -26,7 +28,11 @@ void DebugScene::Setup() {
 }
 
 void DebugScene::Render() {}
-void DebugScene::Tick() {}
+void DebugScene::Tick() {
+  if (input_->KeyPressed(nge::sdl::Scancode::BACKSPACE)) {
+    scene_manager_->PopScene();
+  }
+}
 DebugScene::~DebugScene() { std::cout << "destroy debug scene\n"; }
 
 } // namespace demo

@@ -6,6 +6,7 @@ add_library(
   ./Graphics.cpp
   ./Input.cpp
   ./Scene.cpp
+  ./SceneManager.cpp 
   ./SceneFactory.cpp 
   
   ./Components/Component.cpp 

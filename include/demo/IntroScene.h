@@ -1,5 +1,5 @@
-#ifndef NGE3_DEMO_INTROVIEW_H
-#define NGE3_DEMO_INTROVIEW_H
+#ifndef NGE3_DEMO_INTROSCENE_H
+#define NGE3_DEMO_INTROSCENE_H
 
 #include <memory>
 #include <tuple>
