@@ -23,10 +23,19 @@ namespace demo {
 void DebugScene::Setup() {
   viewport_ = {100, 100, 1200, 900};
 
-  s_ = std::make_shared<nge::Sprite>(graphics_, "resources/Intro/parrot.jpg");
+  s_ = std::make_shared<nge::Sprite>(graphics_, "resources/Debug/parrot.jpg");
   s_->SetPos(50, 50);
   s_->SetScale(0.25);
   RegisterDrawable(s_);
+
+  a_ = std::make_shared<nge::AtlasAnimation>(
+    graphics_,
+    "resources/Debug/brendan.png",
+    std::make_shared<nge::FrameAnimationController>(15, 4)
+  );
+  a_->SetPos(50, 700);
+  a_->SetScale(6);
+  RegisterDrawable(a_);
 
   h1_ = std::make_shared<nge::sdl::Font>(
     "./resources/pokemon_pixel_font.ttf", 64
