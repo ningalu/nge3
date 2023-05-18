@@ -11,7 +11,7 @@ AtlasAnimation::AtlasAnimation(
   const std::string &filename,
   std::shared_ptr<AnimationController> control
 )
-    : SimpleComponent(graphics), control_(control) {
+    : Component(graphics), control_(control) {
   texture_ = std::make_shared<sdl::Texture>(graphics_->GetRenderer(), filename);
   src_ = {
     0,
