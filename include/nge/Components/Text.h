@@ -4,7 +4,7 @@
 #include <memory>
 #include <string>
 
-#include "nge/Components/Drawing/Component.h"
+#include "nge/Components/Drawing/BasicGraphicsUser.h"
 #include "ngsdl/Color.h"
 #include "ngsdl/FontRenderType.h"
 
@@ -16,7 +16,7 @@ class Graphics;
 } // namespace nge
 
 namespace nge {
-class Text : public Component {
+class Text : public BasicGraphicsUser {
 public:
   Text() = default;
 

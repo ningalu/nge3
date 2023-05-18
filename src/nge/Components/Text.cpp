@@ -14,7 +14,7 @@ Text::Text(
   sdl::FontRenderType type,
   sdl::Color bg
 )
-    : Component(graphics) {
+    : BasicGraphicsUser(graphics) {
   texture_ = std::make_shared<sdl::Texture>(
     graphics->GetRenderer(), *font, text, type, color, bg
   );
