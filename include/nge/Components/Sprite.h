@@ -4,7 +4,7 @@
 #include <memory>
 #include <tuple>
 
-#include "nge/Components/Component.h"
+#include "nge/Components/Drawing/Component.h"
 #include "ngsdl/Texture.h"
 
 namespace nge {

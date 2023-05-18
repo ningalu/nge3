@@ -1,4 +1,4 @@
-#include "nge/Components/Translatable.h"
+#include "nge/Components/Drawing/Translatable.h"
 
 namespace nge {
 Translatable::~Translatable() {}

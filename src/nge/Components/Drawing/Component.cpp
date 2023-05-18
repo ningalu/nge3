@@ -1,4 +1,4 @@
-#include "nge/Components/Component.h"
+#include "nge/Components/Drawing/Component.h"
 
 #include <iostream>
 

@@ -4,7 +4,7 @@
 #include <memory>
 #include <string>
 
-#include "nge/Components/Component.h"
+#include "nge/Components/Drawing/Component.h"
 #include "ngsdl/Color.h"
 #include "ngsdl/FontRenderType.h"
 

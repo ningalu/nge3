@@ -1,4 +1,4 @@
-#include "nge/Components/Drawable.h"
+#include "nge/Components/Drawing/Drawable.h"
 
 namespace nge {
 [[nodiscard]] uint32_t Drawable::GetDrawPriority() const { return 0; }
