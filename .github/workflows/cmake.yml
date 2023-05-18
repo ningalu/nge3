@@ -4,9 +4,9 @@ name: CMake
 # Off until sdl/26.whatever->libunwind/1.6.2->xz_utils/5.4.0 is compatible with sdl_image/2.0.5->libtiff/4.4.0->xz_utils/5.4.2 or I figure out how to resolve it
 on:
   # push:
-  # branches: ["main", "conan2-ci-fix"]
-  # pull_request:
-  # branches: ["main"]
+  #   branches: "conan2-ci-fix"
+  pull_request:
+    branches: "conan2-ci-fix"
 
 env:
   BUILD_TYPE: Release
