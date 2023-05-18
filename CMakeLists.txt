@@ -14,6 +14,7 @@ find_package(SDL2)
 find_package(SDL2_image)
 find_package(SDL2_ttf)
 find_package(nlohmann_json)
+find_package(fmt)
 find_package(GTest)
 
 add_subdirectory(${CMAKE_SOURCE_DIR}/src/ngsdl)

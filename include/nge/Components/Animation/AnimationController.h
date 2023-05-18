@@ -16,8 +16,9 @@ public:
 
   virtual ~AnimationController() = default;
 
-protected:
   [[nodiscard]] virtual std::string as_string() const = 0;
+
+protected:
 };
 } // namespace nge
 

@@ -1,5 +1,5 @@
-#ifndef NGE_COMPONENTS_ANIMATION_FRAMEANIMATIONCONTROLLER_H
-#define NGE_COMPONENTS_ANIMATION_FRAMEANIMATIONCONTROLLER_H
+#ifndef NGE_COMPONENTS_ANIMATION_TIMEDANIMATIONCONTROLLER_H
+#define NGE_COMPONENTS_ANIMATION_TIMEDANIMATIONCONTROLLER_H
 
 #include <cstdint>
 #include <optional>
@@ -7,13 +7,14 @@
 #include <string>
 
 #include "nge/Components/Animation/AnimationController.h"
+#include "nge/Timer.h"
 
 namespace nge {
-class FrameAnimationController : public AnimationController {
+class TimedAnimationController : public AnimationController {
 public:
-  FrameAnimationController() = delete;
-  FrameAnimationController(
-    uint32_t frames_per_frame,
+  TimedAnimationController() = delete;
+  TimedAnimationController(
+    double time_per_frame,
     uint32_t total_frames,
     std::optional<uint32_t> repeats = std::nullopt
   );
@@ -27,8 +28,8 @@ public:
 protected:
   bool active;
 
-  uint32_t max_subframes_;
-  uint32_t current_subframe_;
+  Timer timer_;
+  double time_per_frame_;
 
   uint32_t max_frames_;
   uint32_t current_frame_;

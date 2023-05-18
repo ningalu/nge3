@@ -16,6 +16,7 @@ add_library(
   
   ./Components/Animation/AnimationController.cpp
   ./Components/Animation/FrameAnimationController.cpp
+  ./Components/Animation/TimedAnimationController.cpp
   
   ./Components/Mouse/ClickController.cpp
   ./Components/Mouse/HoverController.cpp
@@ -65,4 +66,5 @@ target_include_directories(
 target_link_libraries(
   nge3 
   ngsdl
+  fmt::fmt
 )

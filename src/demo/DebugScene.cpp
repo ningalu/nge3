@@ -5,7 +5,7 @@
 #include <memory>
 #include <stdexcept>
 
-#include "nge/Components/Animation/FrameAnimationController.h"
+#include "nge/Components/Animation/TimedAnimationController.h"
 #include "nge/Components/Mouse/BasicMouseUser.h"
 #include "nge/Components/Mouse/ClickController.h"
 #include "nge/Components/Mouse/HoverController.h"
@@ -27,11 +27,9 @@ void DebugScene::Setup() {
   s_->SetPos(50, 50);
   s_->SetScale(0.25);
   RegisterDrawable(s_);
-
+  tc_ = std::make_shared<nge::TimedAnimationController>(.5, 4);
   a_ = std::make_shared<nge::AtlasAnimation>(
-    graphics_,
-    "resources/Debug/brendan.png",
-    std::make_shared<nge::FrameAnimationController>(15, 4)
+    graphics_, "resources/Debug/brendan.png", tc_
   );
   a_->SetPos(50, 700);
   a_->SetScale(6);
@@ -144,6 +142,7 @@ void DebugScene::Render() {
   );
   frame_timer_.Restart();
 }
+
 void DebugScene::Tick() {
   if (input_->KeyPressed(nge::sdl::Scancode::BACKSPACE)) {
     scene_manager_->PopScene();
