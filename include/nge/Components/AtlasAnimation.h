@@ -6,13 +6,13 @@
 
 #include "ngsdl/Rectangle.h"
 
-#include "nge/Components/SimpleComponent.h"
+#include "nge/Components/Drawing/BasicGraphicsUser.h"
 #include "nge/Graphics.h"
 
 namespace nge {
 class AnimationController;
 
-class AtlasAnimation : public SimpleComponent {
+class AtlasAnimation : public BasicGraphicsUser {
 public:
   AtlasAnimation(
     const std::shared_ptr<Graphics> &graphics,

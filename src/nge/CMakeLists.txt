@@ -9,14 +9,10 @@ add_library(
   ./SceneManager.cpp 
   ./SceneFactory.cpp 
   
-  ./Components/Component.cpp 
-  ./Components/SimpleComponent.cpp 
-  ./Components/Sprite.cpp 
-  ./Components/Text.cpp 
-  ./Components/Drawable.cpp 
-  ./Components/Rotatable.cpp 
-  ./Components/Translatable.cpp
-  ./Components/AtlasAnimation.cpp
+  ./Components/Drawing/BasicGraphicsUser.cpp 
+  ./Components/Drawing/Drawable.cpp 
+  ./Components/Drawing/Rotatable.cpp 
+  ./Components/Drawing/Translatable.cpp
   
   ./Components/Animation/AnimationController.cpp
   ./Components/Animation/FrameAnimationController.cpp
@@ -24,7 +20,11 @@ add_library(
   ./Components/Mouse/ClickController.cpp
   ./Components/Mouse/HoverController.cpp
   ./Components/Mouse/Clickable.cpp
-  ./Components/Mouse/Button.cpp
+  ./Components/Mouse/BasicMouseUser.cpp
+
+  ./Components/Sprite.cpp 
+  ./Components/Text.cpp
+  ./Components/AtlasAnimation.cpp
 )
 
 target_compile_features(

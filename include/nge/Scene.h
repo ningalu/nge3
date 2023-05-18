@@ -8,7 +8,7 @@
 #include "ngsdl/Events/MouseButton.h"
 #include "ngsdl/Rectangle.h"
 
-#include "nge/Components/Drawable.h"
+#include "nge/Components/Drawing/Drawable.h"
 #include "nge/Components/Mouse/Clickable.h"
 #include "nge/Components/Mouse/Hoverable.h"
 #include "nge/Graphics.h"

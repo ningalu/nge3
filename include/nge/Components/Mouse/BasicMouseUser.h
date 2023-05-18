@@ -11,12 +11,12 @@
 #include "nge/Components/Mouse/Hoverable.h"
 
 namespace nge {
-class Button : public Clickable, public Hoverable {
+class BasicMouseUser : public Clickable, public Hoverable {
 public:
   std::function<bool(void)> click_valid;
   std::function<bool(void)> hover, prev_hover;
 
-  Button();
+  BasicMouseUser();
   virtual bool ClickValid() const override;
   virtual void Click(nge::sdl::MouseButton b) override;
   virtual void Hold(nge::sdl::MouseButton b) override;

@@ -1,10 +1,13 @@
-#ifndef NGE3_NGE_COMPONENTS_SIMPLECOMPONENT_H
-#define NGE3_NGE_COMPONENTS_SIMPLECOMPONENT_H
+#ifndef NGE_COMPONENTS_COMPONENT_H
+#define NGE_COMPONENTS_COMPONENT_H
 
 #include <memory>
 #include <tuple>
 
-#include "nge/Components/Component.h"
+#include "nge/Components/Drawing/Drawable.h"
+#include "nge/Components/Drawing/Rotatable.h"
+#include "nge/Components/Drawing/Translatable.h"
+
 #include "ngsdl/Rectangle.h"
 
 namespace nge {
@@ -15,10 +18,12 @@ class Graphics;
 } // namespace nge
 
 namespace nge {
-class SimpleComponent : public Component {
+class BasicGraphicsUser : public Drawable,
+                          public Rotatable,
+                          public Translatable {
 public:
-  SimpleComponent() = default;
-  SimpleComponent(const std::shared_ptr<Graphics> &graphics);
+  BasicGraphicsUser() = default;
+  BasicGraphicsUser(const std::shared_ptr<Graphics> &graphics);
 
   virtual void Rotate(double angle) override;
   virtual double GetAngle() override;
@@ -41,12 +46,13 @@ public:
   void SetZ(int32_t z) noexcept;
   [[nodiscard]] int32_t GetZ() const noexcept;
   void SetDrawPriority(int32_t p) noexcept;
+  virtual void SetScale(double n) override;
 
   virtual std::tuple<int32_t, int32_t> GetSize() const noexcept;
   virtual int32_t GetW() const noexcept;
   virtual int32_t GetH() const noexcept;
 
-  virtual ~SimpleComponent();
+  virtual ~BasicGraphicsUser();
 
 protected:
   std::shared_ptr<Graphics> graphics_;
