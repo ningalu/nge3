@@ -33,6 +33,7 @@ void SceneManager::PushScene(std::shared_ptr<Scene> s) {
     }
   }
   scenes_.push(s);
+  graphics_->SetWindowSize(scenes_.top()->GetSize());
 }
 void SceneManager::PopScene() {
   scenes_.pop();

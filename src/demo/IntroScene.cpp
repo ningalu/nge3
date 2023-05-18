@@ -18,7 +18,7 @@
 namespace demo {
 
 void IntroScene::Setup() {
-  viewport_ = {50, 50, 1200, 900};
+  viewport_ = {50, 50, 800, 600};
 
   s_ = std::make_shared<nge::Sprite>(graphics_, "resources/Intro/parrot.jpg");
   s_->SetPos(400, 100);
