@@ -20,6 +20,7 @@ public:
   virtual bool ClickValid() const override;
   virtual void Click(nge::sdl::MouseButton b) override;
   virtual void Hold(nge::sdl::MouseButton b) override;
+  virtual void LoseHold(nge::sdl::MouseButton b) override;
   virtual void Release(nge::sdl::MouseButton b) override;
 
   [[nodiscard]] virtual bool Hovering() const override;

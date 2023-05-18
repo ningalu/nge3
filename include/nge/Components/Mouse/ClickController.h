@@ -9,8 +9,9 @@ struct ClickController {
 public:
   void OnClick();
   void OnHold(bool hover);
+  void OnLoseHold();
   void OnRelease();
-  std::function<void(void)> click, hold, release;
+  std::function<void(void)> click, hold, release, lose_hold;
 
 protected:
   bool held_;

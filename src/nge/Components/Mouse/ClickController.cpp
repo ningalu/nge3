@@ -12,11 +12,21 @@ void ClickController::OnHold(bool hover) {
 
   if (!hover) {
     held_ = false;
+    if (lose_hold) {
+      lose_hold();
+    }
   }
   if (hold) {
     hold();
   }
 }
+
+void ClickController::OnLoseHold() {
+  if (lose_hold) {
+    lose_hold();
+  }
+}
+
 void ClickController::OnRelease() {
   if (held_) {
     held_ = false;
