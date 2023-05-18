@@ -3,10 +3,10 @@
 namespace nge {
 
 void ClickController::OnClick() {
+  held_ = true;
   if (click) {
     click();
   }
-  held_ = true;
 }
 void ClickController::OnHold(bool hover) {
 
@@ -19,10 +19,10 @@ void ClickController::OnHold(bool hover) {
 }
 void ClickController::OnRelease() {
   if (held_) {
+    held_ = false;
     if (release) {
       release();
     }
-    held_ = false;
   }
 }
 } // namespace nge

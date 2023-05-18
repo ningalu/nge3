@@ -5,15 +5,15 @@
 #include <stdexcept>
 
 #include "nge/Components/Animation/FrameAnimationController.h"
-#include "nge/Components/Button.h"
+#include "nge/Components/Mouse/Button.h"
 #include "nge/Components/Mouse/ClickController.h"
 #include "nge/Components/Mouse/HoverController.h"
-#include "nge/Graphics.h"
-#include "nge/Input.h"
 
 #include "ngsdl/Color.h"
 #include "ngsdl/Events/MouseButton.h"
 #include "ngsdl/FontRenderType.h"
+
+#include "demo/DebugScene.h"
 
 namespace demo {
 
@@ -36,9 +36,18 @@ void IntroScene::Setup() {
   nge3_demo_app_text_->SetPos({25, 25});
   RegisterDrawable(nge3_demo_app_text_);
 
+  pong_normal_ = std::make_shared<nge::Text>(
+    graphics_, h2_, "Pong", nge::sdl::Colour{0, 0, 0, 255}
+  );
+  pong_normal_->SetPos(75, 100);
+
+  pong_selected_ = std::make_shared<nge::Text>(
+    graphics_, h2_, "Pong", nge::sdl::Colour{100, 100, 100, 255}
+  );
+  pong_selected_->SetPos(75, 100);
+
   text_button_ = std::make_shared<nge::Composite<nge::Text, nge::Button>>(
-    nge::Text{graphics_, h2_, "Pong", nge::sdl::Colour{0, 0, 0, 255}},
-    nge::Button{}
+    *pong_normal_, nge::Button{}
   );
   text_button_->SetPos(75, 100);
 
@@ -54,6 +63,9 @@ void IntroScene::Setup() {
     = std::make_shared<nge::ClickController>();
   c->click = [&]() {
     std::cout << "pos: " << text_button_->GetPos() << "\n";
+    auto demo_scene = scene_factory_->Create<DebugScene>();
+
+    scene_manager_->PushScene(demo_scene);
   };
   text_button_->AddClickControl(nge::sdl::MouseButton::LEFT, c);
 
@@ -61,9 +73,11 @@ void IntroScene::Setup() {
     = std::make_shared<nge::HoverController>();
   h->start = [&]() {
     std::cout << "hover start\n";
+    text_button_->set<nge::Text>(*pong_selected_);
   };
   h->release = [&]() {
     std::cout << "hover end\n";
+    text_button_->set<nge::Text>(*pong_normal_);
   };
   text_button_->SetHoverControl(h);
 
@@ -81,19 +95,7 @@ void IntroScene::Setup() {
 }
 
 void IntroScene::Render() {}
-void IntroScene::Tick() {
-  // if (input_->KeyDown(nge::sdl::Scancode::SPACE)) {
-  // }
-  // if (input_->MouseClicked(nge::sdl::MouseButton::LEFT)) {
-  //   text_button_->Click(nge::sdl::MouseButton::LEFT);
-  // }
-  // if (input_->MouseHeld(nge::sdl::MouseButton::LEFT)) {
-  //   // std::cout << "left held\n";
-  // }
-  // if (input_->MouseReleased(nge::sdl::MouseButton::LEFT)) {
-  //   // std::cout << "left release\n";
-  // }
-}
+void IntroScene::Tick() {}
 IntroScene::~IntroScene() { std::cout << "destroy intro scene\n"; }
 
 } // namespace demo

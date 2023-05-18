@@ -13,7 +13,9 @@ namespace nge {
 class Scene;
 class Graphics;
 class Input;
+class SceneManager;
 class SceneFactory;
+
 namespace sdl {
 
 class Window;
@@ -31,7 +33,9 @@ public:
   );
 
   void SetInitialView(Scene *v);
-  void SetInitialView(std::unique_ptr<Scene> v);
+  void SetInitialView(std::shared_ptr<Scene> v);
+
+  std::shared_ptr<SceneFactory> GetSceneFactory();
 
   std::shared_ptr<Graphics> GetGraphics() const;
   std::shared_ptr<Input> GetInput() const;
@@ -43,9 +47,8 @@ public:
 protected:
   std::shared_ptr<Graphics> graphics_;
   std::shared_ptr<Input> input_;
+  std::shared_ptr<SceneManager> scene_manager_;
   std::shared_ptr<SceneFactory> scene_fact_;
-
-  std::stack<std::unique_ptr<Scene>> view_stack_;
 
   bool running_;
   int fps_, tps_;

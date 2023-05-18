@@ -20,6 +20,7 @@
 #include "nge/Input.h"
 #include "nge/Scene.h"
 #include "nge/SceneFactory.hpp"
+#include "nge/SceneManager.h"
 
 #include <iostream>
 
@@ -34,24 +35,27 @@ App::App(const std::string &name, sdl::Rect viewport) {
     sdl::WindowFlags::OPENGL,
     sdl::RendererFlags::ACCELERATED | sdl::RendererFlags::TARGETTEXTURE
   );
-  scene_fact_ = std::make_shared<SceneFactory>(graphics_, input_);
-
+  scene_manager_ = std::make_shared<SceneManager>(graphics_, input_);
+  scene_fact_
+    = std::make_shared<nge::SceneFactory>(graphics_, input_, scene_manager_);
   fps_ = 60;
   tps_ = 1000;
 }
 
 void App::SetInitialView(Scene *v) {
-  std::unique_ptr<Scene> initial_view;
+  std::shared_ptr<Scene> initial_view;
   initial_view.reset(v);
   SetInitialView(std::move(initial_view));
 }
 
-void App::SetInitialView(std::unique_ptr<Scene> v) {
+void App::SetInitialView(std::shared_ptr<Scene> v) {
   graphics_->SetWindowSize(v->GetSize());
   graphics_->SetWindowPos(v->GetPos());
-  view_stack_.push(std::move(v));
+  // view_stack_.push(std::move(v));
+  scene_manager_->PushScene(v);
 }
 
+std::shared_ptr<SceneFactory> App::GetSceneFactory() { return scene_fact_; }
 std::shared_ptr<Graphics> App::GetGraphics() const { return graphics_; }
 std::shared_ptr<Input> App::GetInput() const { return input_; }
 
@@ -75,19 +79,21 @@ void App::Run() {
 
       input_->Update();
 
-      view_stack_.top()->HoverQueue();
+      std::shared_ptr<Scene> &current_scene = scene_manager_->GetCurrentScene();
+
+      current_scene->HoverQueue();
 
       for (auto m : input_->AllMouseClicked()) {
-        view_stack_.top()->ClickMouseQueue(m);
+        current_scene->ClickMouseQueue(m);
       }
       for (auto m : input_->AllMouseHeld()) {
-        view_stack_.top()->HoldMouseQueue(m);
+        current_scene->HoldMouseQueue(m);
       }
       for (auto m : input_->AllMouseReleased()) {
-        view_stack_.top()->ReleaseMouseQueue(m);
+        current_scene->ReleaseMouseQueue(m);
       }
 
-      view_stack_.top()->Tick();
+      current_scene->Tick();
     }
     if (fps_timer_.GetElapsedTime() > (static_cast<long double>(1) / static_cast<long double>(fps_))) {
 
@@ -95,8 +101,10 @@ void App::Run() {
 
       graphics_->Clear();
 
-      view_stack_.top()->RenderQueue();
-      view_stack_.top()->Render();
+      std::shared_ptr<Scene> &current_scene = scene_manager_->GetCurrentScene();
+
+      current_scene->RenderQueue();
+      current_scene->Render();
 
       graphics_->Render();
     }
@@ -104,10 +112,8 @@ void App::Run() {
 }
 
 App::~App() {
-  // must delete views before the Quit functions deallocate their resources
-  while (view_stack_.size() > 0) {
-    view_stack_.pop();
-  }
+  // i forgot why this needs to be destroyed in such a specific order
+  scene_manager_->Quit();
   sdl::Quit();
 }
 } // namespace nge

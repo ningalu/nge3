@@ -1,5 +1,5 @@
-#ifndef NGE_COMPONENTS_CLICKABLE_H
-#define NGE_COMPONENTS_CLICKABLE_H
+#ifndef NGE_COMPONENTS_MOUSE_CLICKABLE_H
+#define NGE_COMPONENTS_MOUSE_CLICKABLE_H
 
 #include <functional>
 #include <memory>
