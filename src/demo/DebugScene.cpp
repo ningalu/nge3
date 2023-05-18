@@ -6,7 +6,7 @@
 #include <stdexcept>
 
 #include "nge/Components/Animation/FrameAnimationController.h"
-#include "nge/Components/Mouse/Button.h"
+#include "nge/Components/Mouse/BasicMouseUser.h"
 #include "nge/Components/Mouse/ClickController.h"
 #include "nge/Components/Mouse/HoverController.h"
 #include "nge/Graphics.h"
