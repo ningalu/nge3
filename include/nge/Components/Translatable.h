@@ -7,7 +7,9 @@ namespace nge {
 
 class Translatable {
 public:
-  virtual sdl::Point GetPos() = 0;
+  [[nodiscard]] virtual sdl::Point GetPos() = 0;
+  [[nodiscard]] virtual int32_t GetX() const = 0;
+  [[nodiscard]] virtual int32_t GetY() const = 0;
   virtual void SetPos(sdl::Point p) = 0;
   virtual void SetPos(int32_t x, int32_t y) = 0;
   virtual void SetX(int x) = 0;

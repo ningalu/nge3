@@ -17,7 +17,9 @@ void SimpleComponent::Rotate(double angle) { angle_ += angle; }
 double SimpleComponent::GetAngle() { return angle_; }
 void SimpleComponent::SetAngle(double angle) { angle_ = angle; }
 
-sdl::Point SimpleComponent::GetPos() { return dst_.GetPos(); }
+[[nodiscard]] sdl::Point SimpleComponent::GetPos() { return dst_.GetPos(); }
+[[nodiscard]] int32_t SimpleComponent::GetX() const { return dst_.GetX(); }
+[[nodiscard]] int32_t SimpleComponent::GetY() const { return dst_.GetY(); }
 void SimpleComponent::SetPos(sdl::Point p) { dst_.SetPos(p); }
 void SimpleComponent::SetPos(int32_t x, int32_t y) { SetPos({x, y}); }
 void SimpleComponent::SetX(int x) { dst_.SetX(x); }
@@ -41,5 +43,12 @@ void SimpleComponent::SetZ(int32_t z) noexcept { draw_priority_ = z; }
 void SimpleComponent::SetDrawPriority(int32_t p) noexcept {
   draw_priority_ = p;
 }
+
+std::tuple<int32_t, int32_t> SimpleComponent::GetSize() const noexcept {
+  return std::tuple<int32_t, int32_t>{GetW(), GetH()};
+}
+int32_t SimpleComponent::GetW() const noexcept { return dst_.GetW(); }
+int32_t SimpleComponent::GetH() const noexcept { return dst_.GetH(); }
+
 SimpleComponent::~SimpleComponent() {}
 } // namespace nge

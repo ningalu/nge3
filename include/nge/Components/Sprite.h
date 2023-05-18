@@ -1,5 +1,5 @@
-#ifndef NGE3_NGE_COMPONENTS_SPRITE_H
-#define NGE3_NGE_COMPONENTS_SPRITE_H
+#ifndef NGE_COMPONENTS_SPRITE_H
+#define NGE_COMPONENTS_SPRITE_H
 
 #include <memory>
 #include <tuple>

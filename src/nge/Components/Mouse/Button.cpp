@@ -17,6 +17,13 @@ void Button::Hold(nge::sdl::MouseButton b) {
     click_controls_[static_cast<std::size_t>(b)]->OnHold(ClickValid());
   }
 }
+
+void Button::LoseHold(nge::sdl::MouseButton b) {
+  if (click_controls_[static_cast<std::size_t>(b)]) {
+    click_controls_[static_cast<std::size_t>(b)]->OnLoseHold();
+  }
+}
+
 void Button::Release(nge::sdl::MouseButton b) {
   if (click_controls_[static_cast<std::size_t>(b)]) {
     click_controls_[static_cast<std::size_t>(b)]->OnRelease();
