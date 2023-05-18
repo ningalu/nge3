@@ -5,7 +5,7 @@
 #include <stdexcept>
 
 #include "nge/Components/Animation/FrameAnimationController.h"
-#include "nge/Components/Mouse/Button.h"
+#include "nge/Components/Mouse/BasicMouseUser.h"
 #include "nge/Components/Mouse/ClickController.h"
 #include "nge/Components/Mouse/HoverController.h"
 
@@ -46,9 +46,10 @@ void IntroScene::Setup() {
   );
   pong_selected_->SetPos(75, 100);
 
-  text_button_ = std::make_shared<nge::Composite<nge::Text, nge::Button>>(
-    *pong_normal_, nge::Button{}
-  );
+  text_button_
+    = std::make_shared<nge::Composite<nge::Text, nge::BasicMouseUser>>(
+      *pong_normal_, nge::BasicMouseUser{}
+    );
   text_button_->SetPos(75, 100);
 
   text_button_->hover = [&]() {

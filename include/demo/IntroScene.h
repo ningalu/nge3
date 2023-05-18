@@ -8,7 +8,7 @@
 
 #include "nge/Components/AtlasAnimation.h"
 #include "nge/Components/Composite.hpp"
-#include "nge/Components/Mouse/Button.h"
+#include "nge/Components/Mouse/BasicMouseUser.h"
 #include "nge/Components/Sprite.h"
 #include "nge/Components/Text.h"
 #include "nge/Scene.h"
@@ -32,7 +32,7 @@ protected:
 
   std::shared_ptr<nge::sdl::Font> h1_, h2_;
   std::shared_ptr<nge::AtlasAnimation> text_select_;
-  std::shared_ptr<nge::Composite<nge::Text, nge::Button>> text_button_;
+  std::shared_ptr<nge::Composite<nge::Text, nge::BasicMouseUser>> text_button_;
 };
 } // namespace demo
 

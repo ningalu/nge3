@@ -20,7 +20,7 @@ add_library(
   ./Components/Mouse/ClickController.cpp
   ./Components/Mouse/HoverController.cpp
   ./Components/Mouse/Clickable.cpp
-  ./Components/Mouse/Button.cpp
+  ./Components/Mouse/BasicMouseUser.cpp
 
   ./Components/Sprite.cpp 
   ./Components/Text.cpp
