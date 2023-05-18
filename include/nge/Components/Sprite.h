@@ -4,12 +4,12 @@
 #include <memory>
 #include <tuple>
 
-#include "nge/Components/Drawing/Component.h"
+#include "nge/Components/Drawing/BasicGraphicsUser.h"
 #include "ngsdl/Texture.h"
 
 namespace nge {
 class Graphics;
-class Sprite : public Component {
+class Sprite : public BasicGraphicsUser {
 public:
   Sprite() = default;
   Sprite(

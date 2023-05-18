@@ -9,7 +9,7 @@ add_library(
   ./SceneManager.cpp 
   ./SceneFactory.cpp 
   
-  ./Components/Drawing/Component.cpp 
+  ./Components/Drawing/BasicGraphicsUser.cpp 
   ./Components/Drawing/Drawable.cpp 
   ./Components/Drawing/Rotatable.cpp 
   ./Components/Drawing/Translatable.cpp

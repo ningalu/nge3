@@ -18,10 +18,12 @@ class Graphics;
 } // namespace nge
 
 namespace nge {
-class Component : public Drawable, public Rotatable, public Translatable {
+class BasicGraphicsUser : public Drawable,
+                          public Rotatable,
+                          public Translatable {
 public:
-  Component() = default;
-  Component(const std::shared_ptr<Graphics> &graphics);
+  BasicGraphicsUser() = default;
+  BasicGraphicsUser(const std::shared_ptr<Graphics> &graphics);
 
   virtual void Rotate(double angle) override;
   virtual double GetAngle() override;
@@ -50,7 +52,7 @@ public:
   virtual int32_t GetW() const noexcept;
   virtual int32_t GetH() const noexcept;
 
-  virtual ~Component();
+  virtual ~BasicGraphicsUser();
 
 protected:
   std::shared_ptr<Graphics> graphics_;
