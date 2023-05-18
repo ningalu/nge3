@@ -1,12 +1,12 @@
-#ifndef NGE3_NGE_COMPONENTS_COMPONENT_H
-#define NGE3_NGE_COMPONENTS_COMPONENT_H
+#ifndef NGE_COMPONENTS_COMPONENT_H
+#define NGE_COMPONENTS_COMPONENT_H
 
 #include <memory>
 #include <tuple>
 
-#include "nge/Components/Drawable.h"
-#include "nge/Components/Rotatable.h"
-#include "nge/Components/Translatable.h"
+#include "nge/Components/Drawing/Drawable.h"
+#include "nge/Components/Drawing/Rotatable.h"
+#include "nge/Components/Drawing/Translatable.h"
 
 #include "ngsdl/Rectangle.h"
 
