@@ -4,19 +4,17 @@
 #include <memory>
 #include <tuple>
 
-#include "nge/Components/SimpleComponent.h"
+#include "nge/Components/Component.h"
 #include "ngsdl/Texture.h"
 
 namespace nge {
 class Graphics;
-class Sprite : public SimpleComponent {
+class Sprite : public Component {
 public:
   Sprite() = default;
   Sprite(
     const std::shared_ptr<Graphics> &graphics, const std::string &filename
   );
-
-  void SetScale(double scale);
 };
 } // namespace nge
 

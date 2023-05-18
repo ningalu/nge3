@@ -10,7 +10,6 @@ add_library(
   ./SceneFactory.cpp 
   
   ./Components/Component.cpp 
-  ./Components/SimpleComponent.cpp 
   ./Components/Sprite.cpp 
   ./Components/Text.cpp 
   ./Components/Drawable.cpp 
