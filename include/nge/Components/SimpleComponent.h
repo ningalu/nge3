@@ -24,7 +24,9 @@ public:
   virtual double GetAngle() override;
   virtual void SetAngle(double angle) override;
 
-  virtual sdl::Point GetPos() override;
+  [[nodiscard]] virtual sdl::Point GetPos() override;
+  [[nodiscard]] virtual int32_t GetX() const override;
+  [[nodiscard]] virtual int32_t GetY() const override;
   virtual void SetPos(sdl::Point p) override;
   virtual void SetPos(int32_t x, int32_t y) override;
   virtual void SetX(int x) override;
@@ -39,6 +41,10 @@ public:
   void SetZ(int32_t z) noexcept;
   [[nodiscard]] int32_t GetZ() const noexcept;
   void SetDrawPriority(int32_t p) noexcept;
+
+  virtual std::tuple<int32_t, int32_t> GetSize() const noexcept;
+  virtual int32_t GetW() const noexcept;
+  virtual int32_t GetH() const noexcept;
 
   virtual ~SimpleComponent();
 
