@@ -30,10 +30,10 @@ public:
     scene->SetInput(input_);
     scene->SetSceneManager(manager_);
     scene->SetSceneFactory(shared_from_this());
+    scene->Setup(args...);
     if (scene->GetViewport() == std::nullopt) {
       scene->SetViewport({50, 50, 800, 600});
     }
-    scene->Setup(args...);
     return scene;
   }
 
