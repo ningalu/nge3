@@ -1,5 +1,5 @@
-#ifndef COMPONENTS_ATLASANIMATION_H
-#define COMPONENTS_ATLASANIMATION_H
+#ifndef NGE_COMPONENTS_ATLASANIMATION_H
+#define NGE_COMPONENTS_ATLASANIMATION_H
 
 #include <memory>
 #include <optional>
@@ -17,6 +17,12 @@ public:
   AtlasAnimation(
     const std::shared_ptr<Graphics> &graphics,
     const std::string &filename,
+    std::shared_ptr<AnimationController> control
+  );
+  AtlasAnimation(
+    const std::shared_ptr<Graphics> &graphics,
+    const std::string &filename,
+    uint32_t atlas_frame_count,
     std::shared_ptr<AnimationController> control
   );
 

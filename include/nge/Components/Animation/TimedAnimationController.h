@@ -1,5 +1,5 @@
-#ifndef NGE_COMPONENTS_ANIMATION_FRAMEANIMATIONCONTROLLER_H
-#define NGE_COMPONENTS_ANIMATION_FRAMEANIMATIONCONTROLLER_H
+#ifndef NGE_COMPONENTS_ANIMATION_TIMEDANIMATIONCONTROLLER_H
+#define NGE_COMPONENTS_ANIMATION_TIMEDANIMATIONCONTROLLER_H
 
 #include <cstdint>
 #include <optional>
@@ -8,26 +8,27 @@
 #include <vector>
 
 #include "nge/Components/Animation/AnimationController.h"
+#include "nge/Timer.h"
 
 namespace nge {
-class FrameAnimationController : public AnimationController {
+class TimedAnimationController : public AnimationController {
 public:
-  // not sure if i like this more than optional arg with default value
-  FrameAnimationController() = delete;
-  FrameAnimationController(uint32_t frames_per_frame, uint32_t total_frames);
-  FrameAnimationController(
-    uint32_t frames_per_frame, uint32_t total_frames, uint32_t repeats
+  TimedAnimationController() = delete;
+  TimedAnimationController(double time_per_frame, uint32_t total_frames);
+  TimedAnimationController(
+    double time_per_frame, uint32_t total_frames, uint32_t repeats
   );
-  FrameAnimationController(
-    uint32_t frames_per_frame,
+  TimedAnimationController(
+    double time_per_frame,
     uint32_t total_frames,
     std::vector<uint32_t> frame_order
   );
-  FrameAnimationController(
-    uint32_t frames_per_frame,
+  TimedAnimationController(
+    double time_per_frame,
     uint32_t total_frames,
     uint32_t repeats,
     std::vector<uint32_t> frame_order
+
   );
 
   virtual void Tick() override;
@@ -39,7 +40,7 @@ public:
 
 protected:
   void Init_(
-    uint32_t frames_per_frame,
+    double time_per_frame,
     uint32_t total_frames,
     std::optional<uint32_t> repeats,
     std::optional<std::vector<uint32_t>> frame_order
@@ -49,8 +50,8 @@ protected:
   std::vector<uint32_t> frame_order_;
   uint32_t unique_frames_;
 
-  uint32_t max_subframes_;
-  uint32_t current_subframe_;
+  Timer timer_;
+  double time_per_frame_;
 
   uint32_t max_frames_;
   uint32_t current_frame_;
