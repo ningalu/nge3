@@ -25,7 +25,12 @@ Text::Text(
 }
 
 void Text::UpdateText(const std::string &text) {
-  UpdateText(font_, text, colour_, type_, bg_);
+  texture_ = std::make_shared<sdl::Texture>(
+    graphics_->GetRenderer(), *font_, text, type_, colour_, bg_
+  );
+  src_ = {{0, 0}, texture_->GetSize()};
+  dst_.SetW(src_.GetW());
+  dst_.SetH(src_.GetH());
 }
 void Text::UpdateText(
   const std::shared_ptr<sdl::Font> &font,
@@ -34,12 +39,11 @@ void Text::UpdateText(
   sdl::FontRenderType type,
   sdl::Color bg
 ) {
-  texture_ = std::make_shared<sdl::Texture>(
-    graphics_->GetRenderer(), *font, text, type, color, bg
-  );
-  src_ = {{0, 0}, texture_->GetSize()};
-  dst_.SetW(src_.GetW());
-  dst_.SetH(src_.GetH());
+  font_ = font;
+  colour_ = color;
+  type_ = type;
+  bg_ = bg;
+  UpdateText(text);
 }
 
 Text::~Text() {}

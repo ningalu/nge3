@@ -1,4 +1,7 @@
 BasedOnStyle: LLVM
+AlwaysBreakAfterDefinitionReturnType: None
+AlwaysBreakAfterReturnType: None
+PenaltyReturnTypeOnItsOwnLine: 1000000
 AlwaysBreakTemplateDeclarations: "Yes"
 AllowShortLambdasOnASingleLine: "None"
 BinPackArguments: false
