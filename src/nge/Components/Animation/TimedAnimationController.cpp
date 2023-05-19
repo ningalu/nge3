@@ -1,5 +1,6 @@
 #include "nge/Components/Animation/TimedAnimationController.h"
 
+#include <algorithm>
 #include <string>
 
 #include "fmt/format.h"
@@ -7,7 +8,36 @@
 namespace nge {
 
 TimedAnimationController::TimedAnimationController(
-  double time_per_frame, uint32_t total_frames, std::optional<uint32_t> repeats
+  double time_per_frame, uint32_t total_frames
+) {
+  Init_(time_per_frame, total_frames, std::nullopt, std::nullopt);
+}
+TimedAnimationController::TimedAnimationController(
+  double time_per_frame, uint32_t total_frames, uint32_t repeats
+) {
+  Init_(time_per_frame, total_frames, repeats, std::nullopt);
+}
+TimedAnimationController::TimedAnimationController(
+  double time_per_frame,
+  uint32_t total_frames,
+  std::vector<uint32_t> frame_order
+) {
+  Init_(time_per_frame, total_frames, std::nullopt, frame_order);
+}
+TimedAnimationController::TimedAnimationController(
+  double time_per_frame,
+  uint32_t total_frames,
+  uint32_t repeats,
+  std::vector<uint32_t> frame_order
+) {
+  Init_(time_per_frame, total_frames, repeats, frame_order);
+}
+
+void TimedAnimationController::Init_(
+  double time_per_frame,
+  uint32_t total_frames,
+  std::optional<uint32_t> repeats,
+  std::optional<std::vector<uint32_t>> frame_order
 ) {
   time_per_frame_ = time_per_frame;
 
@@ -16,6 +46,18 @@ TimedAnimationController::TimedAnimationController(
 
   max_repeats_ = repeats;
   current_repeat_ = 0;
+
+  if (frame_order == std::nullopt) {
+    frame_order_.reserve(total_frames);
+    for (uint32_t i = 0; i < total_frames; i++) {
+      frame_order_.push_back(i);
+    }
+  } else {
+    frame_order_ = frame_order.value();
+  }
+
+  unique_frames_
+    = *std::max_element(frame_order_.begin(), frame_order_.end()) + 1;
 
   active = true;
   timer_.Restart();
@@ -46,11 +88,15 @@ void TimedAnimationController::Tick() {
   }
 }
 [[nodiscard]] uint32_t TimedAnimationController::Frame() const {
-  return current_frame_;
+  return frame_order_[current_frame_];
 }
 
 [[nodiscard]] uint32_t TimedAnimationController::TotalFrames() const {
   return max_frames_;
+}
+
+[[nodiscard]] uint32_t TimedAnimationController::UniqueFrames() const {
+  return unique_frames_;
 }
 
 [[nodiscard]] std::string TimedAnimationController::as_string() const {

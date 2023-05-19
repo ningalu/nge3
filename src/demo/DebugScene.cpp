@@ -43,7 +43,9 @@ void DebugScene::Setup() {
   timer_anim_ = std::make_shared<nge::AtlasAnimation>(
     graphics_,
     "resources/Debug/brendan.png",
-    std::make_shared<nge::TimedAnimationController>(.25, 4)
+    std::make_shared<nge::TimedAnimationController>(
+      .25, 4, std::vector<uint32_t>{0, 1, 0, 2}
+    )
   );
   timer_anim_->SetPos(50, 700);
   timer_anim_->SetScale(6);
@@ -61,7 +63,9 @@ void DebugScene::Setup() {
   frame_anim_ = std::make_shared<nge::AtlasAnimation>(
     graphics_,
     "resources/Debug/brendan.png",
-    std::make_shared<nge::FrameAnimationController>(15, 4)
+    std::make_shared<nge::FrameAnimationController>(
+      15, 4, std::vector<uint32_t>{0, 1, 0, 2}
+    )
   );
   frame_anim_->SetPos(
     timer_anim_->GetPos() + nge::sdl::Point{timer_anim_label_->GetW() + 10, 0}
