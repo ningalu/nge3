@@ -8,9 +8,12 @@
 
 #include "nge/Components/Animation/FrameAnimationController.h"
 #include "nge/Components/Animation/TimedAnimationController.h"
+#include "nge/Components/BlendedText.h"
 #include "nge/Components/Mouse/BasicMouseUser.h"
 #include "nge/Components/Mouse/ClickController.h"
 #include "nge/Components/Mouse/HoverController.h"
+#include "nge/Components/ShadedText.h"
+#include "nge/Components/SolidText.h"
 #include "nge/Graphics.h"
 #include "nge/Input.h"
 #include "nge/SceneManager.h"
@@ -79,28 +82,25 @@ void DebugScene::Setup() {
   frame_anim_label_->SetPos(frame_anim_->GetX(), timer_anim_label_->GetY());
   RegisterDrawable(frame_anim_label_);
 
-  solid_ = std::make_shared<nge::Text>(
+  solid_ = std::make_shared<nge::SolidText>(
     graphics_, p_, "Solid Text Style", nge::sdl::Colour{128, 0, 128, 255}
   );
+
   solid_->SetPos(50, s_->GetY() + s_->GetH() + 20);
   RegisterDrawable(solid_);
 
-  shaded_ = std::make_shared<nge::Text>(
+  shaded_ = std::make_shared<nge::ShadedText>(
     graphics_,
     p_,
     "Shaded Text Style",
     nge::sdl::Colour{128, 128, 0, 255},
-    nge::sdl::FontRenderType::SHADED
+    nge::sdl::Colour{0, 128, 128, 255}
   );
   shaded_->SetPos(50, solid_->GetPos().GetY() + solid_->GetH());
   RegisterDrawable(shaded_);
 
-  blended_ = std::make_shared<nge::Text>(
-    graphics_,
-    p_,
-    "Blended Text Style",
-    nge::sdl::Colour{0, 128, 128, 255},
-    nge::sdl::FontRenderType::BLENDED
+  blended_ = std::make_shared<nge::BlendedText>(
+    graphics_, p_, "Blended Text Style", nge::sdl::Colour{0, 128, 128, 255}
   );
   blended_->SetPos(50, shaded_->GetPos().GetY() + shaded_->GetH());
   RegisterDrawable(blended_);
@@ -171,17 +171,11 @@ void DebugScene::Setup() {
 }
 
 void DebugScene::Render() {
-  mouse_x_->UpdateText(
-    h1_, std::to_string(input_->MouseX()), nge::sdl::Colour{0, 0, 0, 128}
-  );
-  mouse_y_->UpdateText(
-    h1_, std::to_string(input_->MouseY()), nge::sdl::Colour{0, 0, 0, 128}
-  );
+  mouse_x_->UpdateText(std::to_string(input_->MouseX()));
+  mouse_y_->UpdateText(std::to_string(input_->MouseY()));
 
   frame_interval_->UpdateText(
-    h1_,
-    fmt::format("{:.3f} ms", frame_timer_.GetElapsedTime() * 1000),
-    nge::sdl::Colour{0, 0, 0, 128}
+    fmt::format("{:.3f} ms", frame_timer_.GetElapsedTime() * 1000)
   );
 
   scene_open_time_->UpdateText(

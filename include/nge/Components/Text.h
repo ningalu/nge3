@@ -29,15 +29,22 @@ public:
     sdl::Color bg = {0, 0, 0, 0}
   );
 
+  void UpdateText(const std::string &text);
+
   void UpdateText(
     const std::shared_ptr<sdl::Font> &font,
     const std::string &text,
     sdl::Color color = {0, 0, 0, 255},
     sdl::FontRenderType type = sdl::FontRenderType::SOLID,
-    sdl::Color bg = {0, 0, 0, 0}
+    sdl::Color bg = {0, 0, 0, 255}
   );
 
   ~Text();
+
+protected:
+  std::shared_ptr<nge::sdl::Font> font_;
+  sdl::Colour colour_, bg_;
+  sdl::FontRenderType type_;
 };
 } // namespace nge
 

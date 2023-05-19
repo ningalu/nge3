@@ -5,6 +5,9 @@
 
 #include "nge/Components/Animation/TimedAnimationController.h"
 #include "nge/Components/AtlasAnimation.h"
+#include "nge/Components/BlendedText.h"
+#include "nge/Components/ShadedText.h"
+#include "nge/Components/SolidText.h"
 #include "nge/Components/Sprite.h"
 #include "nge/Components/Text.h"
 #include "nge/Scene.h"
@@ -31,7 +34,9 @@ protected:
   std::shared_ptr<nge::Text> frame_anim_label_, timer_anim_label_;
   std::shared_ptr<nge::AtlasAnimation> frame_anim_, timer_anim_;
 
-  std::shared_ptr<nge::Text> blended_, shaded_, solid_;
+  std::shared_ptr<nge::BlendedText> blended_;
+  std::shared_ptr<nge::ShadedText> shaded_;
+  std::shared_ptr<nge::SolidText> solid_;
 
   std::shared_ptr<nge::Text> mouse_x_label_, mouse_y_label_;
   std::shared_ptr<nge::Text> mouse_x_, mouse_y_;
