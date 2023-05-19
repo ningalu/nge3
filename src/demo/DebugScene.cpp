@@ -1,10 +1,12 @@
 #include "demo/DebugScene.h"
 
-#include <format>
 #include <iostream>
 #include <memory>
 #include <stdexcept>
 
+#include "fmt/format.h"
+
+#include "nge/Components/Animation/FrameAnimationController.h"
 #include "nge/Components/Animation/TimedAnimationController.h"
 #include "nge/Components/Mouse/BasicMouseUser.h"
 #include "nge/Components/Mouse/ClickController.h"
@@ -23,18 +25,6 @@ namespace demo {
 void DebugScene::Setup() {
   viewport_ = {100, 100, 1200, 900};
 
-  s_ = std::make_shared<nge::Sprite>(graphics_, "resources/Debug/parrot.jpg");
-  s_->SetPos(50, 50);
-  s_->SetScale(0.25);
-  RegisterDrawable(s_);
-  tc_ = std::make_shared<nge::TimedAnimationController>(.5, 4);
-  a_ = std::make_shared<nge::AtlasAnimation>(
-    graphics_, "resources/Debug/brendan.png", tc_
-  );
-  a_->SetPos(50, 700);
-  a_->SetScale(6);
-  RegisterDrawable(a_);
-
   h1_ = std::make_shared<nge::sdl::Font>(
     "./resources/pokemon_pixel_font.ttf", 64
   );
@@ -44,6 +34,46 @@ void DebugScene::Setup() {
   p_ = std::make_shared<nge::sdl::Font>(
     "./resources/pokemon_pixel_font.ttf", 32
   );
+
+  s_ = std::make_shared<nge::Sprite>(graphics_, "resources/Debug/parrot.jpg");
+  s_->SetPos(50, 50);
+  s_->SetScale(0.25);
+  RegisterDrawable(s_);
+
+  timer_anim_ = std::make_shared<nge::AtlasAnimation>(
+    graphics_,
+    "resources/Debug/brendan.png",
+    std::make_shared<nge::TimedAnimationController>(.25, 4)
+  );
+  timer_anim_->SetPos(50, 700);
+  timer_anim_->SetScale(6);
+  RegisterDrawable(timer_anim_);
+
+  timer_anim_label_ = std::make_shared<nge::Text>(
+    graphics_, p_, "Timer-based Animation", nge::sdl::Colour{0, 0, 0, 255}
+  );
+  timer_anim_label_->SetPos(
+    timer_anim_->GetPos() - nge::sdl::Point{0, timer_anim_label_->GetH() + 5}
+  );
+
+  RegisterDrawable(timer_anim_label_);
+
+  frame_anim_ = std::make_shared<nge::AtlasAnimation>(
+    graphics_,
+    "resources/Debug/brendan.png",
+    std::make_shared<nge::FrameAnimationController>(15, 4)
+  );
+  frame_anim_->SetPos(
+    timer_anim_->GetPos() + nge::sdl::Point{timer_anim_label_->GetW() + 10, 0}
+  );
+  frame_anim_->SetScale(6);
+  RegisterDrawable(frame_anim_);
+
+  frame_anim_label_ = std::make_shared<nge::Text>(
+    graphics_, p_, "Frame-based Animation", nge::sdl::Colour{0, 255, 0, 255}
+  );
+  frame_anim_label_->SetPos(frame_anim_->GetX(), timer_anim_label_->GetY());
+  RegisterDrawable(frame_anim_label_);
 
   solid_ = std::make_shared<nge::Text>(
     graphics_, p_, "Solid Text Style", nge::sdl::Colour{128, 0, 128, 255}
@@ -124,7 +154,16 @@ void DebugScene::Setup() {
   );
   RegisterDrawable(frame_interval_);
 
+  scene_open_time_ = std::make_shared<nge::Text>(
+    graphics_, h2_, "0", nge::sdl::Colour{0, 0, 0, 128}
+  );
+  scene_open_time_->SetPos(
+    timer_anim_->GetPos() + nge::sdl::Point{0, timer_anim_->GetH() + 10}
+  );
+  RegisterDrawable(scene_open_time_);
+
   frame_timer_.Restart();
+  scene_timer_.Restart();
 }
 
 void DebugScene::Render() {
@@ -137,9 +176,16 @@ void DebugScene::Render() {
 
   frame_interval_->UpdateText(
     h1_,
-    std::format("{:.3f} ms", frame_timer_.GetElapsedTime() * 1000),
+    fmt::format("{:.3f} ms", frame_timer_.GetElapsedTime() * 1000),
     nge::sdl::Colour{0, 0, 0, 128}
   );
+
+  scene_open_time_->UpdateText(
+    h2_,
+    fmt::format("{:.3f} s", scene_timer_.GetElapsedTime()),
+    nge::sdl::Colour{0, 0, 0, 128}
+  );
+
   frame_timer_.Restart();
 }
 

@@ -25,7 +25,7 @@ void TimedAnimationController::Tick() {
   if (active) {
     if (timer_.GetElapsedTime() < time_per_frame_) {
     } else {
-      timer_.Restart();
+      timer_.Restart(time_per_frame_ - timer_.GetElapsedTime());
       if (current_frame_ < (max_frames_ - 1)) {
         current_frame_++;
       } else {
