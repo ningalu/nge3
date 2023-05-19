@@ -14,7 +14,8 @@ Text::Text(
   sdl::FontRenderType type,
   sdl::Color bg
 )
-    : BasicGraphicsUser(graphics) {
+    : BasicGraphicsUser(graphics), font_(font), colour_(color), bg_(bg),
+      type_(type) {
   texture_ = std::make_shared<sdl::Texture>(
     graphics->GetRenderer(), *font, text, type, color, bg
   );
@@ -23,6 +24,9 @@ Text::Text(
   dst_ = src_;
 }
 
+void Text::UpdateText(const std::string &text) {
+  UpdateText(font_, text, colour_, type_, bg_);
+}
 void Text::UpdateText(
   const std::shared_ptr<sdl::Font> &font,
   const std::string &text,

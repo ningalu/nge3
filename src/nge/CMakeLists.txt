@@ -25,6 +25,9 @@ add_library(
 
   ./Components/Sprite.cpp 
   ./Components/Text.cpp
+  ./Components/SolidText.cpp
+  ./Components/ShadedText.cpp
+  ./Components/BlendedText.cpp
   ./Components/AtlasAnimation.cpp
 )
 
