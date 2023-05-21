@@ -9,6 +9,7 @@
 #include "nge/Components/Animation/FrameAnimationController.h"
 #include "nge/Components/Animation/TimedAnimationController.h"
 #include "nge/Components/BlendedText.h"
+#include "nge/Components/Keyboard/BasicKeyUser.h"
 #include "nge/Components/Mouse/BasicMouseUser.h"
 #include "nge/Components/Mouse/ClickController.h"
 #include "nge/Components/Mouse/HoverController.h"
@@ -165,6 +166,18 @@ void DebugScene::Setup() {
     timer_anim_->GetPos() + nge::sdl::Point{0, timer_anim_->GetH() + 10}
   );
   RegisterDrawable(scene_open_time_);
+
+  auto k = std::make_shared<nge::BasicKeyUser>();
+  k->press = [&](nge::sdl::Scancode s) {
+    std::cout << "Pressed: " << static_cast<uint32_t>(s) << "\n";
+  };
+  k->hold = [&](nge::sdl::Scancode s) {
+    std::cout << "Held: " << static_cast<uint32_t>(s) << "\n";
+  };
+  k->release = [&](nge::sdl::Scancode s) {
+    std::cout << "Released: " << static_cast<uint32_t>(s) << "\n";
+  };
+  RegisterKeyable(k);
 
   frame_timer_.Restart();
   scene_timer_.Restart();

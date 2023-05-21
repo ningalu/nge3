@@ -61,6 +61,10 @@ void Scene::RegisterHoverable(std::shared_ptr<Hoverable> h) {
   hover_queue_.push_back(h);
 }
 
+void Scene::RegisterKeyable(std::shared_ptr<Keyable> k) {
+  key_queue_.push_back(k);
+}
+
 void Scene::RenderQueue() {
   for (const auto &d : draw_queue_) {
     d->Draw();
@@ -95,6 +99,24 @@ void Scene::HoverQueue() {
     if (!h->Hovering() && h->PrevHovering()) {
       h->OnReleaseHover();
     }
+  }
+}
+
+void Scene::PressKeyQueue(sdl::Scancode s) {
+  for (auto &k : key_queue_) {
+    k->PressKey(s);
+  }
+}
+
+void Scene::HoldKeyQueue(sdl::Scancode s) {
+  for (auto &k : key_queue_) {
+    k->HoldKey(s);
+  }
+}
+
+void Scene::ReleaseKeyQueue(sdl::Scancode s) {
+  for (auto &k : key_queue_) {
+    k->ReleaseKey(s);
   }
 }
 

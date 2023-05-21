@@ -6,9 +6,11 @@
 #include <vector>
 
 #include "ngsdl/Events/MouseButton.h"
+#include "ngsdl/Events/Scancode.h"
 #include "ngsdl/Rectangle.h"
 
 #include "nge/Components/Drawing/Drawable.h"
+#include "nge/Components/Keyboard/Keyable.h"
 #include "nge/Components/Mouse/Clickable.h"
 #include "nge/Components/Mouse/Hoverable.h"
 #include "nge/Graphics.h"
@@ -40,6 +42,7 @@ public:
   void RegisterDrawable(std::shared_ptr<Drawable> d);
   void RegisterClickable(std::shared_ptr<Clickable> c);
   void RegisterHoverable(std::shared_ptr<Hoverable> h);
+  void RegisterKeyable(std::shared_ptr<Keyable> k);
 
   virtual ~Scene() = default;
 
@@ -52,6 +55,7 @@ protected:
   std::vector<std::shared_ptr<Drawable>> draw_queue_;
   std::vector<std::shared_ptr<Clickable>> click_queue_;
   std::vector<std::shared_ptr<Hoverable>> hover_queue_;
+  std::vector<std::shared_ptr<Keyable>> key_queue_;
 
 private:
   void SetGraphics(const std::shared_ptr<Graphics> &graphics) noexcept;
@@ -64,6 +68,10 @@ private:
   void ClickMouseQueue(sdl::MouseButton m);
   void HoldMouseQueue(sdl::MouseButton m);
   void ReleaseMouseQueue(sdl::MouseButton m);
+
+  void PressKeyQueue(sdl::Scancode s);
+  void HoldKeyQueue(sdl::Scancode s);
+  void ReleaseKeyQueue(sdl::Scancode s);
 
   void HoverQueue();
 };
