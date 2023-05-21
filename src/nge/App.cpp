@@ -93,6 +93,17 @@ void App::Run() {
         current_scene->ReleaseMouseQueue(m);
       }
 
+      auto a = input_->AllKeysPressed();
+      for (auto s : input_->AllKeysPressed()) {
+        current_scene->PressKeyQueue(s);
+      }
+      for (auto s : input_->AllKeysHeld()) {
+        current_scene->HoldKeyQueue(s);
+      }
+      for (auto s : input_->AllKeysReleased()) {
+        current_scene->ReleaseKeyQueue(s);
+      }
+
       current_scene->Tick();
     }
     if (fps_timer_.GetElapsedTime() > (static_cast<long double>(1) / static_cast<long double>(fps_))) {

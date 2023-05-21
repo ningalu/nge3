@@ -23,6 +23,9 @@ add_library(
   ./Components/Mouse/Clickable.cpp
   ./Components/Mouse/BasicMouseUser.cpp
 
+  ./Components/Keyboard/Keyable.cpp
+  ./Components/Keyboard/BasicKeyUser.cpp
+
   ./Components/Sprite.cpp 
   ./Components/Text.cpp
   ./Components/SolidText.cpp

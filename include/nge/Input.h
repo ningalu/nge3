@@ -37,6 +37,10 @@ public:
   [[nodiscard]] bool KeyHeld(const sdl::Scancode key) const;
   [[nodiscard]] bool KeyReleased(const sdl::Scancode key) const;
 
+  [[nodiscard]] std::vector<sdl::Scancode> AllKeysPressed() const;
+  [[nodiscard]] std::vector<sdl::Scancode> AllKeysHeld() const;
+  [[nodiscard]] std::vector<sdl::Scancode> AllKeysReleased() const;
+
   [[nodiscard]] bool MouseDown(const sdl::MouseButton button) const;
   [[nodiscard]] bool MouseUp(const sdl::MouseButton button) const;
 
@@ -58,8 +62,9 @@ public:
 protected:
   std::array<uint8_t, SDL_NUM_SCANCODES> current_input_, prev_input_;
 
-  [[nodiscard]] inline std::vector<sdl::MouseButton>
-  MouseInteraction_(std::function<bool(sdl::MouseButton)> f) const;
+  [[nodiscard]] inline std::vector<sdl::MouseButton> MouseInteraction_(
+    std::function<bool(sdl::MouseButton)> f
+  ) const;
 
   uint32_t current_mouse_, prev_mouse_;
   int rel_mouse_x, rel_mouse_y_;
