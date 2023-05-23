@@ -2,8 +2,11 @@ set(subproject nge3_app)
 
 add_library(
   ${subproject}-lib 
+
   ./IntroScene.cpp
   ./DebugScene.cpp
+
+  ./Pong/PongScene.cpp
 )
 
 target_compile_features(
