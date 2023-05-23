@@ -1,7 +1,8 @@
 #include "nge/Graphics.h"
 
 namespace nge {
-Graphics::Graphics() : renderer_(window_) {}
+Graphics::Graphics()
+    : renderer_(window_), background_colour_{255, 255, 255, 255} {}
 Graphics::Graphics(
   const std::string &name,
   sdl::Rectangle viewport,
@@ -9,11 +10,18 @@ Graphics::Graphics(
   sdl::RendererFlags renderer_flags
 )
     : window_(name, viewport, window_flags),
-      renderer_(window_, -1, renderer_flags) {}
+      renderer_(window_, -1, renderer_flags),
+      background_colour_{255, 255, 255, 255} {}
 
 const sdl::Renderer &Graphics::GetRenderer() const { return renderer_; }
 
 void Graphics::Render() { renderer_.Present(); }
+void Graphics::Draw(const sdl::Rectangle dst) { renderer_.FillRect(dst); }
+void Graphics::Draw(const sdl::Rectangle dst, sdl::Colour colour) {
+  renderer_.SetDrawColor(colour);
+  renderer_.FillRect(dst);
+  renderer_.SetDrawColor(background_colour_);
+}
 void Graphics::Draw(
   const sdl::Texture &texture,
   const std::optional<sdl::Rectangle> src,

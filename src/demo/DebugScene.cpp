@@ -14,6 +14,7 @@
 #include "nge/Components/Mouse/ClickController.h"
 #include "nge/Components/Mouse/HoverController.h"
 #include "nge/Components/ShadedText.h"
+#include "nge/Components/Shapes/Rectangle.h"
 #include "nge/Components/SolidText.h"
 #include "nge/Graphics.h"
 #include "nge/Input.h"
@@ -171,13 +172,19 @@ void DebugScene::Setup() {
   k->press = [&](nge::sdl::Scancode s) {
     std::cout << "Pressed: " << static_cast<uint32_t>(s) << "\n";
   };
-  k->hold = [&](nge::sdl::Scancode s) {
-    std::cout << "Held: " << static_cast<uint32_t>(s) << "\n";
-  };
+  // k->hold = [&](nge::sdl::Scancode s) {
+  //   std::cout << "Held: " << static_cast<uint32_t>(s) << "\n";
+  // };
   k->release = [&](nge::sdl::Scancode s) {
     std::cout << "Released: " << static_cast<uint32_t>(s) << "\n";
   };
   RegisterKeyable(k);
+
+  RegisterDrawable(std::make_shared<nge::Rectangle>(
+    graphics_,
+    nge::sdl::Rect{400, 400, 50, 50},
+    nge::sdl::Colour{255, 0, 0, 255}
+  ));
 
   frame_timer_.Restart();
   scene_timer_.Restart();

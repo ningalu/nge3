@@ -32,6 +32,8 @@ add_library(
   ./Components/ShadedText.cpp
   ./Components/BlendedText.cpp
   ./Components/AtlasAnimation.cpp
+
+  ./Components/Shapes/Rectangle.cpp
 )
 
 target_compile_features(
