@@ -14,6 +14,7 @@
 #include "ngsdl/FontRenderType.h"
 
 #include "demo/DebugScene.h"
+#include "demo/Pong/PongScene.h"
 
 namespace demo {
 
@@ -64,9 +65,7 @@ void IntroScene::Setup() {
     = std::make_shared<nge::ClickController>();
   c->click = [&]() {
     std::cout << "pos: " << text_button_->GetPos() << "\n";
-    auto demo_scene = scene_factory_->Create<DebugScene>();
-
-    scene_manager_->PushScene(demo_scene);
+    scene_manager_->PushScene(scene_factory_->Create<demo::PongScene>());
   };
   text_button_->AddClickControl(nge::sdl::MouseButton::LEFT, c);
 
@@ -96,7 +95,12 @@ void IntroScene::Setup() {
 }
 
 void IntroScene::Render() {}
-void IntroScene::Tick() {}
+void IntroScene::Tick() {
+  if (input_->KeyPressed(nge::sdl::Scancode::F5)) {
+    auto demo_scene = scene_factory_->Create<DebugScene>();
+    scene_manager_->PushScene(demo_scene);
+  }
+}
 IntroScene::~IntroScene() { std::cout << "destroy intro scene\n"; }
 
 } // namespace demo
