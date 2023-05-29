@@ -6,9 +6,9 @@
 namespace nge {
 class Keyable {
 public:
-  virtual void PressKey(nge::sdl::Scancode) = 0;
-  virtual void HoldKey(nge::sdl::Scancode) = 0;
-  virtual void ReleaseKey(nge::sdl::Scancode) = 0;
+  virtual void PressKey(nge::sdl::Scancode s) = 0;
+  virtual void HoldKey(nge::sdl::Scancode s) = 0;
+  virtual void ReleaseKey(nge::sdl::Scancode s) = 0;
   ~Keyable();
 };
 } // namespace nge
