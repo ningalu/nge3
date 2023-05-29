@@ -28,9 +28,20 @@ void Rectangle::SetScale(double n) {
 [[nodiscard]] int32_t Rectangle::GetY() const { return drawn_.GetY(); }
 void Rectangle::SetPos(sdl::Point p) { drawn_.SetPos(p); }
 void Rectangle::SetPos(int32_t x, int32_t y) { SetPos({x, y}); }
-void Rectangle::SetX(int x) { drawn_.SetX(x); }
-void Rectangle::SetY(int y) { drawn_.SetY(y); }
-void Rectangle::MoveX(int x) { drawn_.MoveX(x); }
-void Rectangle::MoveY(int y) { drawn_.MoveY(y); }
+void Rectangle::SetX(int32_t x) { drawn_.SetX(x); }
+void Rectangle::SetY(int32_t y) { drawn_.SetY(y); }
+void Rectangle::MoveX(int32_t x) { drawn_.MoveX(x); }
+void Rectangle::MoveY(int32_t y) { drawn_.MoveY(y); }
+
+std::tuple<int32_t, int32_t> Rectangle::GetSize() const noexcept {
+  return std::tuple<int32_t, int32_t>{GetW(), GetH()};
+}
+int32_t Rectangle::GetW() const noexcept { return drawn_.GetW(); }
+int32_t Rectangle::GetH() const noexcept { return drawn_.GetH(); }
+
+int32_t Rectangle::Top() const { return drawn_.GetY(); }
+int32_t Rectangle::Bottom() const { return drawn_.GetY() + drawn_.GetH(); }
+int32_t Rectangle::Left() const { return drawn_.GetX(); }
+int32_t Rectangle::Right() const { return drawn_.GetX() + drawn_.GetW(); }
 
 } // namespace nge

@@ -7,6 +7,8 @@ add_library(
   ./DebugScene.cpp
 
   ./Pong/PongScene.cpp
+  ./Pong/Ball.cpp
+  ./Pong/Paddle.cpp
 )
 
 target_compile_features(
