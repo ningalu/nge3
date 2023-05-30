@@ -50,7 +50,6 @@ protected:
   SDL_Rect rect_;
 };
 
-using Rect = Rectangle;
 std::ostream &operator<<(std::ostream &os, const Rectangle &rect);
 } // namespace nge::sdl
 

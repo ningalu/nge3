@@ -57,7 +57,7 @@ public:
 protected:
   std::shared_ptr<Graphics> graphics_;
   std::shared_ptr<sdl::Texture> texture_;
-  sdl::Rect src_, dst_;
+  sdl::Rectangle src_, dst_;
   double angle_;
   uint32_t draw_priority_;
 };

@@ -24,7 +24,7 @@ int main(int argc, char **argv) {
 
   using namespace nge;
 
-  sdl::Rect r(1, 2, 3, 4);
+  sdl::Rectangle r(1, 2, 3, 4);
   std::cout << r << "\n";
   sdl::Point p(5, 6);
   std::cout << p << "\n";
@@ -62,9 +62,8 @@ int main(int argc, char **argv) {
       sdl::FontRenderType::SOLID,
       sdl::Colour{216, 191, 216, 255}};
 
-    sdl::Texture text2 = font.CreateShadedTexture(
-      r, "shaded", {0, 255, 0, 255}, {0, 0, 255, 255}
-    );
+    sdl::Texture text2 =
+      font.CreateShadedTexture(r, "shaded", {0, 255, 0, 255}, {0, 0, 255, 255});
 
     sdl::Point pos = {50, 50};
 

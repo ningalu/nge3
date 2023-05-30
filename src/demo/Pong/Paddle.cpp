@@ -3,7 +3,7 @@ namespace demo {
 Paddle::Paddle(std::shared_ptr<nge::Graphics> graphics, PaddleSide side)
     : Rectangle(
       graphics,
-      nge::sdl::Rect{side == PaddleSide::LEFT ? 100 : 675, 75, 25, 150},
+      nge::sdl::Rectangle{side == PaddleSide::LEFT ? 100 : 675, 75, 25, 150},
       nge::sdl::Color{0, 0, 0, 255}
     ),
       up_code_(

@@ -2,18 +2,18 @@
 
 #include "ngsdl/Point.h"
 
-namespace nge {
-Rectangle::Rectangle(std::shared_ptr<Graphics> graphics, sdl::Rect rect)
+namespace nge::shape {
+Rectangle::Rectangle(std::shared_ptr<Graphics> graphics, sdl::Rectangle rect)
     : graphics_(graphics), base_(rect), drawn_(rect), colour_(0, 0, 0, 255) {}
 Rectangle::Rectangle(
-  std::shared_ptr<Graphics> graphics, sdl::Rect rect, sdl::Colour colour
+  std::shared_ptr<Graphics> graphics, sdl::Rectangle rect, sdl::Colour colour
 )
     : graphics_(graphics), base_(rect), drawn_(rect), colour_(colour) {}
 
 void Rectangle::Draw() { graphics_->Draw(drawn_, colour_); }
 
 void Rectangle::SetScale(double n) {
-  drawn_ = sdl::Rect{
+  drawn_ = sdl::Rectangle{
     base_.GetX(),
     base_.GetY(),
     static_cast<int32_t>(base_.GetW() * n),

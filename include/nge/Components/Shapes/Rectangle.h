@@ -10,14 +10,14 @@
 #include "ngsdl/Color.h"
 #include "ngsdl/Rectangle.h"
 
-namespace nge {
+namespace nge::shape {
 class Rectangle : public Drawable, public Translatable {
 public:
   Rectangle() = delete;
 
-  Rectangle(std::shared_ptr<Graphics> graphics, sdl::Rect rect);
+  Rectangle(std::shared_ptr<Graphics> graphics, sdl::Rectangle rect);
   Rectangle(
-    std::shared_ptr<Graphics> graphics, sdl::Rect rect, sdl::Colour colour
+    std::shared_ptr<Graphics> graphics, sdl::Rectangle rect, sdl::Colour colour
   );
 
   virtual void Draw() override;
@@ -45,10 +45,10 @@ public:
 
 protected:
   std::shared_ptr<Graphics> graphics_;
-  sdl::Rect base_, drawn_;
+  sdl::Rectangle base_, drawn_;
   sdl::Colour colour_;
   double scale;
 };
-} // namespace nge
+} // namespace nge::shape
 
 #endif

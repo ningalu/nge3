@@ -29,7 +29,7 @@ public:
   virtual void Draw() override;
 
 protected:
-  sdl::Rect frame_dim_;
+  sdl::Rectangle frame_dim_;
   std::shared_ptr<AnimationController> control_;
 };
 } // namespace nge

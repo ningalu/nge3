@@ -29,7 +29,7 @@ class App {
 public:
   App(
     const std::string &name = "DEFAULT APP NAME",
-    sdl::Rect viewport = sdl::Rect{0, 0, 800, 600}
+    sdl::Rectangle viewport = sdl::Rectangle{0, 0, 800, 600}
   );
 
   void SetInitialView(Scene *v);

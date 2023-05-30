@@ -30,15 +30,12 @@ namespace demo {
 void DebugScene::Setup() {
   viewport_ = {100, 100, 1200, 900};
 
-  h1_ = std::make_shared<nge::sdl::Font>(
-    "./resources/pokemon_pixel_font.ttf", 64
-  );
-  h2_ = std::make_shared<nge::sdl::Font>(
-    "./resources/pokemon_pixel_font.ttf", 48
-  );
-  p_ = std::make_shared<nge::sdl::Font>(
-    "./resources/pokemon_pixel_font.ttf", 32
-  );
+  h1_ =
+    std::make_shared<nge::sdl::Font>("./resources/pokemon_pixel_font.ttf", 64);
+  h2_ =
+    std::make_shared<nge::sdl::Font>("./resources/pokemon_pixel_font.ttf", 48);
+  p_ =
+    std::make_shared<nge::sdl::Font>("./resources/pokemon_pixel_font.ttf", 32);
 
   s_ = std::make_shared<nge::Sprite>(graphics_, "resources/Debug/parrot.jpg");
   s_->SetPos(50, 50);
@@ -180,9 +177,9 @@ void DebugScene::Setup() {
   };
   RegisterKeyable(k);
 
-  RegisterDrawable(std::make_shared<nge::Rectangle>(
+  RegisterDrawable(std::make_shared<nge::shape::Rectangle>(
     graphics_,
-    nge::sdl::Rect{400, 400, 50, 50},
+    nge::sdl::Rectangle{400, 400, 50, 50},
     nge::sdl::Colour{255, 0, 0, 255}
   ));
 

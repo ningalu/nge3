@@ -67,4 +67,5 @@ target_link_libraries(
   SDL2::SDL2main 
   SDL2_image::SDL2_image       
   sdl_ttf::sdl_ttf
+  ngl-misc-lib
 )

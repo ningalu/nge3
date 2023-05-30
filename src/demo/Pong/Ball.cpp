@@ -10,7 +10,7 @@
 namespace demo {
 
 Ball::Ball(std::shared_ptr<nge::Graphics> graphics, int32_t x, int32_t y)
-    : Rectangle(graphics, nge::sdl::Rect{x, y, 25, 25}) {
+    : Rectangle(graphics, nge::sdl::Rectangle{x, y, 25, 25}) {
   drawn_.SetX(x);
   drawn_.SetY(y);
 
@@ -25,5 +25,4 @@ Ball::Ball(std::shared_ptr<nge::Graphics> graphics, int32_t x, int32_t y)
   std::cout << xv << " " << yv << "\n";
 }
 
-void Ball::Draw() { nge::Rectangle::Draw(); }
 } // namespace demo

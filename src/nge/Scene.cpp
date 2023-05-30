@@ -18,10 +18,10 @@ void Scene::Teardown() {}
 
 // Viewport should always be initialised to some actual value
 // I wonder if the compiler can see through this
-[[nodiscard]] const std::optional<sdl::Rect> &Scene::GetViewport() const {
+[[nodiscard]] const std::optional<sdl::Rectangle> &Scene::GetViewport() const {
   return viewport_;
 }
-void Scene::SetViewport(const sdl::Rect &viewport) {
+void Scene::SetViewport(const sdl::Rectangle &viewport) {
   viewport_ = viewport;
   graphics_->SetWindowPos({viewport_->GetX(), viewport_->GetY()});
   graphics_->SetWindowSize(viewport_->GetW(), viewport_->GetH());

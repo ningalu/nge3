@@ -12,11 +12,10 @@ class Graphics;
 }
 
 namespace demo {
-class Ball : public nge::Rectangle {
+class Ball : public nge::shape::Rectangle {
 public:
   Ball() = delete;
   Ball(std::shared_ptr<nge::Graphics> graphics, int32_t x, int32_t y);
-  virtual void Draw() override;
 
   int32_t xv, yv;
 
