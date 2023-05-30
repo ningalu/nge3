@@ -23,14 +23,14 @@ void Scene::Teardown() {}
 }
 void Scene::SetViewport(const sdl::Rectangle &viewport) {
   viewport_ = viewport;
-  graphics_->SetWindowPos({viewport_->GetX(), viewport_->GetY()});
-  graphics_->SetWindowSize(viewport_->GetW(), viewport_->GetH());
+  graphics_->SetWindowPos({viewport_->X(), viewport_->Y()});
+  graphics_->SetWindowSize(viewport_->W(), viewport_->H());
 }
 [[nodiscard]] std::tuple<int, int> Scene::GetSize() const {
-  return {viewport_->GetW(), viewport_->GetH()};
+  return {viewport_->W(), viewport_->H()};
 }
 [[nodiscard]] sdl::Point Scene::GetPos() const {
-  return {viewport_->GetX(), viewport_->GetY()};
+  return {viewport_->X(), viewport_->Y()};
 }
 
 void Scene::SetGraphics(const std::shared_ptr<Graphics> &graphics) noexcept {

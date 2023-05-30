@@ -74,6 +74,9 @@ public:
     h_ = static_cast<T>(h);
   }
 
+  void MoveX(T dx) noexcept { x_ += dx; }
+  void MoveY(T dy) noexcept { y_ += dy; }
+
   // relative accesors
 
   template <typename C = T>

@@ -107,7 +107,7 @@ void DebugScene::Setup() {
   mouse_x_label_ = std::make_shared<nge::Text>(
     graphics_, h1_, "Mouse X: ", nge::sdl::Colour{0, 0, 0, 128}
   );
-  mouse_x_label_->SetPos(viewport_->GetW() - (mouse_x_label_->GetW() * 3), 50);
+  mouse_x_label_->SetPos(viewport_->W() - (mouse_x_label_->GetW() * 3), 50);
   RegisterDrawable(mouse_x_label_);
 
   mouse_y_label_ = std::make_shared<nge::Text>(

@@ -32,8 +32,8 @@ Window::Window(std::string title, int x, int y, int w, int h, WindowFlags flags)
     : window_(nullptr, SDL_DestroyWindow) {
   // temporary pending a Display object
 
-  SDL_Window *window
-    = SDL_CreateWindow(title.c_str(), x, y, w, h, static_cast<Uint32>(flags));
+  SDL_Window *window =
+    SDL_CreateWindow(title.c_str(), x, y, w, h, static_cast<Uint32>(flags));
   if (window == nullptr) {
     throw SDLException("Window couldn't be created");
   } else {
@@ -44,12 +44,7 @@ Window::Window(std::string title, int x, int y, int w, int h, WindowFlags flags)
 Window::Window(std::string title, Rectangle r, WindowFlags flags)
     : window_(nullptr, SDL_DestroyWindow) {
   SDL_Window *window = SDL_CreateWindow(
-    title.c_str(),
-    r.GetX(),
-    r.GetY(),
-    r.GetW(),
-    r.GetH(),
-    static_cast<Uint32>(flags)
+    title.c_str(), r.X(), r.Y(), r.W(), r.H(), static_cast<Uint32>(flags)
   );
   if (window == nullptr) {
     throw SDLException("Window couldn't be created");
