@@ -17,6 +17,7 @@ find_package(nlohmann_json)
 find_package(fmt)
 find_package(GTest)
 
+add_subdirectory(${CMAKE_SOURCE_DIR}/src/misc)
 add_subdirectory(${CMAKE_SOURCE_DIR}/src/ngsdl)
 add_subdirectory(${CMAKE_SOURCE_DIR}/src/ngsdl_demo)
 add_subdirectory(${CMAKE_SOURCE_DIR}/src/nge)
@@ -25,3 +26,4 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/src/demo)
 # # Set up unit tests
 enable_testing()
 add_subdirectory(${CMAKE_SOURCE_DIR}/tests/ngsdl)
+add_subdirectory(${CMAKE_SOURCE_DIR}/tests/misc)
