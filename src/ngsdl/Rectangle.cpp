@@ -48,9 +48,4 @@ void Rectangle::SetPos(const Point p) noexcept {
   y_ = p.GetY();
 }
 
-std::ostream &operator<<(std::ostream &os, const Rectangle &rect) {
-  os << "x: " << rect.X() << " y: " << rect.Y() << " w: " << rect.W()
-     << " h: " << rect.H();
-  return os;
-}
 } // namespace nge::sdl

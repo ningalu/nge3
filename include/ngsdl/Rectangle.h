@@ -36,7 +36,6 @@ protected:
   Rectangle(SDL_Rect r);
 };
 
-std::ostream &operator<<(std::ostream &os, const Rectangle &rect);
 } // namespace nge::sdl
 
 #endif

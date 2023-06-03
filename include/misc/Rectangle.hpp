@@ -1,16 +1,40 @@
-#ifndef MISC_RECTANGLE_H
-#define MISC_RECTANGLE_H
+#ifndef MISC_RECTANGLE_HPP
+#define MISC_RECTANGLE_HPP
 
+#include <tuple>
 #include <type_traits>
+
+#include "fmt/format.h"
 
 #include "misc/Arithmetic.hpp"
 
 namespace ngl {
 template <typename T>
   requires Arithmetic<T>
+class Point {
+public:
+  Point(T x, T y) : x_(x), y_(y) {}
+  Point(std::tuple<T, T> pos) : x_(std::get<0>(pos)), y_(std::get<1>(pos)) {}
+
+protected:
+  T x_, y_;
+};
+
+template <typename T>
+  requires Arithmetic<T>
 class Rectangle {
 public:
   Rectangle(T x, T y, T w, T h) : x_(x), y_(y), w_(w), h_(h) {}
+
+  Rectangle(std::tuple<T, T> pos, T w, T h)
+      : x_(std::get<0>(pos)), y_(std::get<1>(pos)), w_(w), h_(h) {}
+
+  Rectangle(T x, T y, std::tuple<T, T> dim)
+      : x_(x), y_(y), w_(std::get<0>(dim)), h_(std::get<1>(dim)) {}
+
+  Rectangle(std::tuple<T, T> pos, std::tuple<T, T> dim)
+      : x_(std::get<0>(pos)), y_(std::get<1>(pos)), w_(std::get<0>(dim)),
+        h_(std::get<1>(dim)) {}
 
   template <typename U>
     requires Arithmetic<U>
@@ -138,6 +162,16 @@ protected:
   T x_, y_;
   T w_, h_;
 };
+
+template <typename T>
+  requires Arithmetic<T>
+std::ostream &operator<<(std::ostream &os, const Rectangle<T> &rect) {
+  os << fmt::format(
+    "x: {0} y: {1} w: {2} h: {3}", rect.X(), rect.Y(), rect.W(), rect.H()
+  );
+  return os;
+}
+
 } // namespace ngl
 
 #endif
