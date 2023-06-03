@@ -3,7 +3,7 @@ namespace demo {
 Paddle::Paddle(std::shared_ptr<nge::Graphics> graphics, PaddleSide side)
     : Rectangle(
       graphics,
-      nge::sdl::Rect{side == PaddleSide::LEFT ? 100 : 675, 75, 25, 150},
+      nge::sdl::Rectangle{side == PaddleSide::LEFT ? 100 : 675, 75, 25, 150},
       nge::sdl::Color{0, 0, 0, 255}
     ),
       up_code_(
@@ -19,12 +19,12 @@ void Paddle::ReleaseKey(nge::sdl::Scancode) {}
 
 void Paddle::Move(nge::sdl::Scancode s) {
   if (s == up_code_) {
-    if (Rectangle::drawn_.GetY() > 0) {
+    if (Rectangle::drawn_.Y() > 0) {
       Rectangle::drawn_.MoveY(-12);
     }
   } else {
     if (s == down_code_) {
-      if ((Rectangle::drawn_.GetY() + Rectangle::drawn_.GetH()) < 600) {
+      if ((Rectangle::drawn_.Y() + Rectangle::drawn_.H()) < 600) {
         Rectangle::drawn_.MoveY(12);
       }
     }

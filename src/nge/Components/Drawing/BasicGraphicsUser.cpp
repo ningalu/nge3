@@ -18,8 +18,8 @@ double BasicGraphicsUser::GetAngle() { return angle_; }
 void BasicGraphicsUser::SetAngle(double angle) { angle_ = angle; }
 
 [[nodiscard]] sdl::Point BasicGraphicsUser::GetPos() { return dst_.GetPos(); }
-[[nodiscard]] int32_t BasicGraphicsUser::GetX() const { return dst_.GetX(); }
-[[nodiscard]] int32_t BasicGraphicsUser::GetY() const { return dst_.GetY(); }
+[[nodiscard]] int32_t BasicGraphicsUser::GetX() const { return dst_.X(); }
+[[nodiscard]] int32_t BasicGraphicsUser::GetY() const { return dst_.Y(); }
 void BasicGraphicsUser::SetPos(sdl::Point p) { dst_.SetPos(p); }
 void BasicGraphicsUser::SetPos(int32_t x, int32_t y) { SetPos({x, y}); }
 void BasicGraphicsUser::SetX(int x) { dst_.SetX(x); }
@@ -45,15 +45,15 @@ void BasicGraphicsUser::SetDrawPriority(int32_t p) noexcept {
   draw_priority_ = p;
 }
 void BasicGraphicsUser::SetScale(double scale) {
-  dst_.SetW(static_cast<int>(static_cast<double>(src_.GetW()) * scale));
-  dst_.SetH(static_cast<int>(static_cast<double>(src_.GetH()) * scale));
+  dst_.SetW(static_cast<int>(static_cast<double>(src_.W()) * scale));
+  dst_.SetH(static_cast<int>(static_cast<double>(src_.H()) * scale));
 }
 
 std::tuple<int32_t, int32_t> BasicGraphicsUser::GetSize() const noexcept {
   return std::tuple<int32_t, int32_t>{GetW(), GetH()};
 }
-int32_t BasicGraphicsUser::GetW() const noexcept { return dst_.GetW(); }
-int32_t BasicGraphicsUser::GetH() const noexcept { return dst_.GetH(); }
+int32_t BasicGraphicsUser::GetW() const noexcept { return dst_.W(); }
+int32_t BasicGraphicsUser::GetH() const noexcept { return dst_.H(); }
 
 BasicGraphicsUser::~BasicGraphicsUser() {}
 } // namespace nge

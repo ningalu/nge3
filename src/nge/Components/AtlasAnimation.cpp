@@ -42,7 +42,7 @@ AtlasAnimation::AtlasAnimation(
 }
 
 void AtlasAnimation::Draw() {
-  src_.SetX(control_->Frame() * frame_dim_.GetW());
+  src_.SetX(control_->Frame() * frame_dim_.W());
   graphics_->Draw(*texture_, src_, dst_, angle_, std::nullopt);
   control_->Tick();
 }

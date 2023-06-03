@@ -29,8 +29,8 @@ void Text::UpdateText(const std::string &text) {
     graphics_->GetRenderer(), *font_, text, type_, colour_, bg_
   );
   src_ = {{0, 0}, texture_->GetSize()};
-  dst_.SetW(src_.GetW());
-  dst_.SetH(src_.GetH());
+  dst_.SetW(src_.W());
+  dst_.SetH(src_.H());
 }
 void Text::UpdateText(
   const std::shared_ptr<sdl::Font> &font,

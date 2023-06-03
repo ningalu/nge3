@@ -6,7 +6,7 @@ AlwaysBreakTemplateDeclarations: "Yes"
 AllowShortLambdasOnASingleLine: "None"
 BinPackArguments: false
 BinPackParameters: false
-BreakBeforeBinaryOperators: "All"
+BreakBeforeBinaryOperators: "NonAssignment"
 AlignAfterOpenBracket: BlockIndent
 ContinuationIndentWidth: 2
 BreakBeforeTernaryOperators: false

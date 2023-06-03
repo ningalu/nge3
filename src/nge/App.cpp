@@ -26,7 +26,7 @@
 
 namespace nge {
 
-App::App(const std::string &name, sdl::Rect viewport) {
+App::App(const std::string &name, sdl::Rectangle viewport) {
   sdl::Init();
   input_ = std::make_shared<Input>();
   graphics_ = std::make_shared<Graphics>(
@@ -36,8 +36,8 @@ App::App(const std::string &name, sdl::Rect viewport) {
     sdl::RendererFlags::ACCELERATED | sdl::RendererFlags::TARGETTEXTURE
   );
   scene_manager_ = std::make_shared<SceneManager>(graphics_, input_);
-  scene_fact_
-    = std::make_shared<nge::SceneFactory>(graphics_, input_, scene_manager_);
+  scene_fact_ =
+    std::make_shared<nge::SceneFactory>(graphics_, input_, scene_manager_);
   fps_ = 60;
   tps_ = 1000;
 }

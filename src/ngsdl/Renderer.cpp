@@ -26,9 +26,8 @@ Renderer::Renderer(const Window &window)
 
 Renderer::Renderer(const Window &window, int index, RendererFlags flags)
     : renderer_(nullptr, SDL_DestroyRenderer) {
-  SDL_Renderer *renderer = SDL_CreateRenderer(
-    window.window_.get(), index, static_cast<Uint32>(flags)
-  );
+  SDL_Renderer *renderer =
+    SDL_CreateRenderer(window.window_.get(), index, static_cast<Uint32>(flags));
 
   if (renderer == nullptr) {
     throw SDLException("Renderer couldn't be constructed");
@@ -73,10 +72,10 @@ void Renderer::Copy(
 ) {
   src.has_value() ?
     SDL_RenderCopy(
-      renderer_.get(), texture.texture_.get(), &src->rect_, &dst.rect_
+      renderer_.get(), texture.texture_.get(), src->bit_cast(), dst.bit_cast()
     ) :
     SDL_RenderCopy(
-      renderer_.get(), texture.texture_.get(), nullptr, &dst.rect_
+      renderer_.get(), texture.texture_.get(), nullptr, dst.bit_cast()
     );
 }
 void Renderer::CopyEx(
@@ -90,8 +89,8 @@ void Renderer::CopyEx(
   SDL_RenderCopyEx(
     renderer_.get(),
     texture.texture_.get(),
-    src == std::nullopt ? nullptr : &src->rect_,
-    &dst.rect_,
+    src == std::nullopt ? nullptr : src->bit_cast(),
+    dst.bit_cast(),
     angle,
     center == std::nullopt ? nullptr : &center->point_,
     static_cast<SDL_RendererFlip>(flip)
@@ -130,11 +129,11 @@ void Renderer::DrawPoint(int32_t x, int32_t y) {
 void Renderer::DrawPoint(const Point &p) { DrawPoint(p.GetX(), p.GetY()); }
 
 void Renderer::DrawRect(const Rectangle &r) {
-  SDL_RenderDrawRect(renderer_.get(), &r.rect_);
+  SDL_RenderDrawRect(renderer_.get(), r.bit_cast());
 }
 
 void Renderer::FillRect(const Rectangle &r) {
-  SDL_RenderFillRect(renderer_.get(), &r.rect_);
+  SDL_RenderFillRect(renderer_.get(), r.bit_cast());
 }
 
 } // namespace nge::sdl

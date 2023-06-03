@@ -33,8 +33,8 @@ public:
   virtual void Tick() = 0;
   virtual void Teardown();
 
-  [[nodiscard]] const std::optional<sdl::Rect> &GetViewport() const;
-  void SetViewport(const sdl::Rect &viewport);
+  [[nodiscard]] const std::optional<sdl::Rectangle> &GetViewport() const;
+  void SetViewport(const sdl::Rectangle &viewport);
 
   [[nodiscard]] std::tuple<int, int> GetSize() const;
   [[nodiscard]] sdl::Point GetPos() const;
@@ -47,7 +47,7 @@ public:
   virtual ~Scene() = default;
 
 protected:
-  std::optional<sdl::Rect> viewport_;
+  std::optional<sdl::Rectangle> viewport_;
   std::shared_ptr<Graphics> graphics_;
   std::shared_ptr<Input> input_;
   std::shared_ptr<SceneManager> scene_manager_;

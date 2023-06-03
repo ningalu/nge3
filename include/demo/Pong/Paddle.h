@@ -10,7 +10,7 @@
 
 namespace demo {
 enum class PaddleSide : bool { LEFT, RIGHT };
-class Paddle : public nge::Rectangle, public nge::Keyable {
+class Paddle : public nge::shape::Rectangle, public nge::Keyable {
 public:
   Paddle() = delete;
   Paddle(std::shared_ptr<nge::Graphics> graphics, PaddleSide side);

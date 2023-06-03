@@ -13,7 +13,7 @@ void Point::SetX(int x) { point_.x = x; }
 void Point::SetY(int y) { point_.y = y; }
 
 [[nodiscard]] bool Point::Within(const Rectangle &r) const {
-  return SDL_PointInRect(&point_, &(r.rect_));
+  return SDL_PointInRect(&point_, r.bit_cast());
 }
 
 Point Point::operator+(const Point &rhs) {
