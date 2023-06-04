@@ -17,6 +17,7 @@ class Rectangle : public ngl::Rectangle<int32_t> {
 
 public:
   Rectangle();
+  Rectangle(ngl::Rectangle<int32_t> r);
   Rectangle(int32_t x, int32_t y, int32_t w, int32_t h);
   Rectangle(const Point &p, int32_t w, int32_t h);
   Rectangle(int32_t x, int32_t y, std::tuple<int32_t, int32_t> size);

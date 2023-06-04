@@ -135,5 +135,8 @@ void Renderer::DrawRect(const Rectangle &r) {
 void Renderer::FillRect(const Rectangle &r) {
   SDL_RenderFillRect(renderer_.get(), r.bit_cast());
 }
+void Renderer::FillRect(const Rectangle *r) {
+  SDL_RenderFillRect(renderer_.get(), r->bit_cast());
+}
 
 } // namespace nge::sdl

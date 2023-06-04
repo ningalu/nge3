@@ -81,6 +81,7 @@ public:
 
   // SDL_RenderFillRect
   void FillRect(const Rectangle &r);
+  void FillRect(const Rectangle *r);
 
   // SDL_RenderFillRects
 

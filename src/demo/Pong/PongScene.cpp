@@ -43,7 +43,7 @@ void PongScene::Render() {
     && (ball_->Bottom() > left_paddle_->Top())) {
 
     if ((ball_->Bottom() > left_paddle_->Top()) && (ball_->Top() < left_paddle_->Top())) {
-      ball_->SetY(left_paddle_->Top() - ball_->GetH());
+      ball_->SetY(left_paddle_->Top() - ball_->H());
       ball_->yv = -std::abs(ball_->yv);
     }
 
@@ -59,7 +59,7 @@ void PongScene::Render() {
     && (ball_->Bottom() > right_paddle_->Top())) {
 
     if ((ball_->Bottom() > right_paddle_->Top()) && (ball_->Top() < right_paddle_->Top())) {
-      ball_->SetY(right_paddle_->Top() - ball_->GetH());
+      ball_->SetY(right_paddle_->Top() - ball_->H());
       ball_->yv = -std::abs(ball_->yv);
     }
 
@@ -69,19 +69,19 @@ void PongScene::Render() {
     }
   }
 
-  auto newx = ball_->GetX()
-              + static_cast<int32_t>(ball_->xv * draw_timer_.GetElapsedTime());
-  auto newy = ball_->GetY()
-              + static_cast<int32_t>(ball_->yv * draw_timer_.GetElapsedTime());
-  auto newright = newx + ball_->GetW();
-  auto newbottom = newy + ball_->GetH();
+  auto newx =
+    ball_->X() + static_cast<int32_t>(ball_->xv * draw_timer_.GetElapsedTime());
+  auto newy =
+    ball_->Y() + static_cast<int32_t>(ball_->yv * draw_timer_.GetElapsedTime());
+  auto newright = newx + ball_->W();
+  auto newbottom = newy + ball_->H();
 
   if (newx < 0) {
     newx = 0;
     ball_->xv = std::abs(ball_->xv);
   }
   if (newright > 800) {
-    newx = 800 - ball_->GetW();
+    newx = 800 - ball_->W();
     ball_->xv = -std::abs(ball_->xv);
   }
 
@@ -90,7 +90,7 @@ void PongScene::Render() {
     ball_->yv = std::abs(ball_->yv);
   }
   if (newbottom > 600) {
-    newy = 600 - ball_->GetH();
+    newy = 600 - ball_->H();
     ball_->yv = -std::abs(ball_->yv);
   }
 
@@ -101,7 +101,7 @@ void PongScene::Render() {
 
     if (ball_->Right() <= left_paddle_->Left()) {
       std::cout << "paddle left/ball right collision\n";
-      newx = left_paddle_->Left() - ball_->GetW();
+      newx = left_paddle_->Left() - ball_->W();
       ball_->xv = -std::abs(ball_->xv);
     }
 
@@ -113,7 +113,7 @@ void PongScene::Render() {
 
     if (ball_->Bottom() <= left_paddle_->Top()) {
       std::cout << "paddle top/ball bottom collision\n";
-      newy = left_paddle_->Top() - ball_->GetH();
+      newy = left_paddle_->Top() - ball_->H();
       ball_->yv = -std::abs(ball_->yv);
     }
     if (ball_->Top() >= left_paddle_->Bottom()) {
@@ -131,7 +131,7 @@ void PongScene::Render() {
 
     if (ball_->Right() <= right_paddle_->Left()) {
       std::cout << "paddle left/ball right collision\n";
-      newx = right_paddle_->Left() - ball_->GetW();
+      newx = right_paddle_->Left() - ball_->W();
       ball_->xv = -std::abs(ball_->xv);
     }
 
@@ -143,7 +143,7 @@ void PongScene::Render() {
 
     if (ball_->Bottom() <= right_paddle_->Top()) {
       std::cout << "paddle top/ball bottom collision\n";
-      newy = right_paddle_->Top() - ball_->GetH();
+      newy = right_paddle_->Top() - ball_->H();
       ball_->yv = -std::abs(ball_->yv);
     }
     if (ball_->Top() >= right_paddle_->Bottom()) {

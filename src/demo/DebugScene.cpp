@@ -177,7 +177,7 @@ void DebugScene::Setup() {
   };
   RegisterKeyable(k);
 
-  RegisterDrawable(std::make_shared<nge::shape::Rectangle>(
+  RegisterDrawable(std::make_shared<nge::Rectangle>(
     graphics_,
     nge::sdl::Rectangle{400, 400, 50, 50},
     nge::sdl::Colour{255, 0, 0, 255}

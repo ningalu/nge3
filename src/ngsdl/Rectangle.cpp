@@ -7,6 +7,8 @@
 
 namespace nge::sdl {
 Rectangle::Rectangle() : ngl::Rectangle<int32_t>(0, 0, 0, 0) {}
+Rectangle::Rectangle(ngl::Rectangle<int32_t> r) : ngl::Rectangle<int32_t>(r) {}
+
 Rectangle::Rectangle(int32_t x, int32_t y, int32_t w, int32_t h)
     : ngl::Rectangle<int32_t>(x, y, w, h) {}
 Rectangle::Rectangle(const Point &p, int32_t w, int32_t h)
