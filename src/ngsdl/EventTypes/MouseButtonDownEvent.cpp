@@ -15,8 +15,8 @@ MouseButtonDownEvent::MouseButtonDownEvent(SDL_MouseButtonEvent e) {
 [[nodiscard]] uint32_t MouseButtonDownEvent::GetMouseID() const noexcept {
   return mouse_id_;
 }
-[[nodiscard]] MouseButton
-MouseButtonDownEvent::GetMouseButton() const noexcept {
+[[nodiscard]] MouseButton MouseButtonDownEvent::GetMouseButton(
+) const noexcept {
   return button_;
 }
 [[nodiscard]] MouseButton MouseButtonDownEvent::GetButton() const noexcept {
@@ -29,9 +29,9 @@ MouseButtonDownEvent::GetMouseButton() const noexcept {
   return position_;
 }
 [[nodiscard]] int32_t MouseButtonDownEvent::GetX() const noexcept {
-  return position_.GetX();
+  return position_.X();
 }
 [[nodiscard]] int32_t MouseButtonDownEvent::GetY() const noexcept {
-  return position_.GetY();
+  return position_.Y();
 }
 } // namespace nge::sdl

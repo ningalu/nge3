@@ -129,16 +129,12 @@ void Input::Update() {
   });
 }
 
-[[nodiscard]] int32_t Input::MouseX() const { return mouse_pos_.GetX(); }
-[[nodiscard]] int32_t Input::MouseY() const { return mouse_pos_.GetY(); }
+[[nodiscard]] int32_t Input::MouseX() const { return mouse_pos_.X(); }
+[[nodiscard]] int32_t Input::MouseY() const { return mouse_pos_.Y(); }
 [[nodiscard]] sdl::Point Input::MousePos() const { return mouse_pos_; }
 
-[[nodiscard]] int32_t Input::PrevMouseX() const {
-  return prev_mouse_pos_.GetX();
-}
-[[nodiscard]] int32_t Input::PrevMouseY() const {
-  return prev_mouse_pos_.GetY();
-}
+[[nodiscard]] int32_t Input::PrevMouseX() const { return prev_mouse_pos_.X(); }
+[[nodiscard]] int32_t Input::PrevMouseY() const { return prev_mouse_pos_.Y(); }
 [[nodiscard]] sdl::Point Input::PrevMousePos() const { return prev_mouse_pos_; }
 
 [[nodiscard]] inline std::vector<sdl::MouseButton> Input::MouseInteraction_(

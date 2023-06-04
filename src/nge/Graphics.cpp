@@ -22,6 +22,12 @@ void Graphics::Draw(const sdl::Rectangle dst, sdl::Colour colour) {
   renderer_.FillRect(dst);
   renderer_.SetDrawColor(background_colour_);
 }
+void Graphics::Draw(const sdl::Rectangle *dst) { renderer_.FillRect(dst); }
+void Graphics::Draw(const sdl::Rectangle *dst, sdl::Colour colour) {
+  renderer_.SetDrawColor(colour);
+  renderer_.FillRect(dst);
+  renderer_.SetDrawColor(background_colour_);
+}
 void Graphics::Draw(
   const sdl::Texture &texture,
   const std::optional<sdl::Rectangle> src,

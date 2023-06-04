@@ -9,162 +9,382 @@
 #include "misc/Arithmetic.hpp"
 
 namespace ngl {
-template <typename T>
-  requires Arithmetic<T>
+// Rectangle Forward Declaration
+template <Arithmetic T>
+class Rectangle;
+} // namespace ngl
+
+namespace ngl {
+// Point Forward Declaration
+template <Arithmetic T>
+class Point;
+} // namespace ngl
+
+// Point Declaration
+namespace ngl {
+template <Arithmetic T>
 class Point {
 public:
-  Point(T x, T y) : x_(x), y_(y) {}
-  Point(std::tuple<T, T> pos) : x_(std::get<0>(pos)), y_(std::get<1>(pos)) {}
+  Point();
+  Point(T x, T y);
+  Point(std::tuple<T, T> pos);
+
+  template <Arithmetic C = T>
+  [[nodiscard]] inline C X() const noexcept;
+  template <Arithmetic C = T>
+  [[nodiscard]] inline C Y() const noexcept;
+
+  inline void SetX(T x) noexcept;
+  inline void SetY(T y) noexcept;
+  template <Arithmetic C>
+  inline void SetX(std::type_identity_t<C> x) noexcept;
+  template <Arithmetic C>
+  inline void SetY(std::type_identity_t<C> y) noexcept;
+
+  template <Arithmetic C>
+  [[nodiscard]] inline bool Within(const Rectangle<C> &r) const noexcept;
 
 protected:
   T x_, y_;
 };
+} // namespace ngl
 
-template <typename T>
-  requires Arithmetic<T>
+// Rectangle Declaration
+namespace ngl {
+template <Arithmetic T>
 class Rectangle {
 public:
-  Rectangle(T x, T y, T w, T h) : x_(x), y_(y), w_(w), h_(h) {}
-
-  Rectangle(std::tuple<T, T> pos, T w, T h)
-      : x_(std::get<0>(pos)), y_(std::get<1>(pos)), w_(w), h_(h) {}
-
-  Rectangle(T x, T y, std::tuple<T, T> dim)
-      : x_(x), y_(y), w_(std::get<0>(dim)), h_(std::get<1>(dim)) {}
-
-  Rectangle(std::tuple<T, T> pos, std::tuple<T, T> dim)
-      : x_(std::get<0>(pos)), y_(std::get<1>(pos)), w_(std::get<0>(dim)),
-        h_(std::get<1>(dim)) {}
-
-  template <typename U>
-    requires Arithmetic<U>
-  Rectangle(Rectangle<U> r)
-      : x_(static_cast<T>(r.X())), y_(static_cast<T>(r.Y())),
-        w_(static_cast<T>(r.W())), h_(static_cast<T>(r.H())) {}
+  Rectangle();
+  Rectangle(T x, T y, T w, T h);
+  Rectangle(std::tuple<T, T> pos, T w, T h);
+  Rectangle(T x, T y, std::tuple<T, T> dim);
+  Rectangle(std::tuple<T, T> pos, std::tuple<T, T> dim);
+  Rectangle(const Point<T> &pos, T w, T h);
+  Rectangle(const Point<T> &pos, std::tuple<T, T> dim);
+  template <Arithmetic U>
+  Rectangle(Rectangle<U> r);
 
   template <typename C>
     requires Arithmetic<C>
-  [[nodiscard]] inline Rectangle<C> As() const noexcept {
-    return Rectangle<C>(*this);
-  }
+  [[nodiscard]] inline Rectangle<C> As() const noexcept;
 
   // direct accessors
 
-  template <typename C = T>
-    requires Arithmetic<T>
-  [[nodiscard]] inline C X() const noexcept {
-    return static_cast<C>(x_);
-  }
-  template <typename C = T>
-    requires Arithmetic<T>
-  [[nodiscard]] inline C Y() const noexcept {
-    return static_cast<C>(y_);
-  }
-  template <typename C = T>
-    requires Arithmetic<T>
-  [[nodiscard]] inline C W() const noexcept {
-    return static_cast<C>(w_);
-  }
-  template <typename C = T>
-    requires Arithmetic<T>
-  [[nodiscard]] inline C H() const noexcept {
-    return static_cast<C>(h_);
-  }
+  template <Arithmetic C = T>
+  [[nodiscard]] inline C X() const noexcept;
+  template <Arithmetic C = T>
+  [[nodiscard]] inline C Y() const noexcept;
+  template <Arithmetic C = T>
+  [[nodiscard]] inline C W() const noexcept;
+  template <Arithmetic C = T>
+  [[nodiscard]] inline C H() const noexcept;
 
   // direct mutators
 
-  inline void SetX(T x) noexcept { x_ = x; }
-  inline void SetY(T y) noexcept { y_ = y; }
-  inline void SetW(T w) noexcept { w_ = w; }
-  inline void SetH(T h) noexcept { h_ = h; }
-  template <typename C>
-    requires Arithmetic<C>
-  inline void SetX(std::type_identity_t<C> x) noexcept {
-    x_ = static_cast<T>(x);
-  }
-  template <typename C>
-    requires Arithmetic<T>
-  inline void SetY(std::type_identity_t<C> y) noexcept {
-    y_ = static_cast<T>(y);
-  }
-  template <typename C>
-    requires Arithmetic<T>
-  inline void SetW(std::type_identity_t<C> w) noexcept {
-    w_ = static_cast<T>(w);
-  }
-  template <typename C>
-    requires Arithmetic<T>
-  inline void SetH(std::type_identity_t<C> h) noexcept {
-    h_ = static_cast<T>(h);
-  }
+  inline void SetX(T x) noexcept;
+  inline void SetY(T y) noexcept;
+  inline void SetW(T w) noexcept;
+  inline void SetH(T h) noexcept;
 
-  void MoveX(T dx) noexcept { x_ += dx; }
-  void MoveY(T dy) noexcept { y_ += dy; }
+  template <Arithmetic C>
+  inline void SetX(std::type_identity_t<C> x) noexcept;
+  template <Arithmetic C>
+  inline void SetY(std::type_identity_t<C> y) noexcept;
+  template <Arithmetic C>
+  inline void SetW(std::type_identity_t<C> w) noexcept;
+  template <Arithmetic C>
+  inline void SetH(std::type_identity_t<C> h) noexcept;
+
+  void MoveX(T dx) noexcept;
+  void MoveY(T dy) noexcept;
 
   // relative accesors
 
-  template <typename C = T>
-    requires Arithmetic<T>
-  [[nodiscard]] inline T Left() const noexcept {
-    return static_cast<C>(x_);
-  }
-  template <typename C = T>
-    requires Arithmetic<T>
-  [[nodiscard]] inline T Right() const noexcept {
-    return static_cast<C>(x_ + w_);
-  }
-  template <typename C = T>
-    requires Arithmetic<T>
-  [[nodiscard]] inline T Top() const noexcept {
-    return static_cast<C>(y_);
-  }
-  template <typename C = T>
-    requires Arithmetic<T>
-  [[nodiscard]] inline T Bottom() const noexcept {
-    return static_cast<C>(y_ + h_);
-  }
+  template <Arithmetic C = T>
+  [[nodiscard]] inline T Left() const noexcept;
+  template <Arithmetic C = T>
+  [[nodiscard]] inline T Right() const noexcept;
+  template <Arithmetic C = T>
+  [[nodiscard]] inline T Top() const noexcept;
+  template <Arithmetic C = T>
+  [[nodiscard]] inline T Bottom() const noexcept;
 
   // relative mutators
 
-  inline void SetLeft(T l) noexcept { x_ = l; }
-  inline void SetRight(T r) noexcept { x_ = r - w_; }
-  inline void SetTop(T t) noexcept { y_ = t; }
-  inline void SetBottom(T b) noexcept { y_ = b - h_; }
-  template <typename C>
-    requires Arithmetic<C>
-  inline void SetLeft(std::type_identity_t<C> l) noexcept {
-    x_ = static_cast<T>(l);
-  }
-  template <typename C>
-    requires Arithmetic<T>
-  inline void SetRight(std::type_identity_t<C> r) noexcept {
-    x_ = static_cast<T>(r - static_cast<C>(w_));
-  }
-  template <typename C>
-    requires Arithmetic<T>
-  inline void SetTop(std::type_identity_t<C> t) noexcept {
-    y_ = static_cast<T>(t);
-  }
-  template <typename C>
-    requires Arithmetic<T>
-  inline void SetBottom(std::type_identity_t<C> b) noexcept {
-    y_ = static_cast<T>(b - static_cast<C>(h_));
-  }
+  inline void SetLeft(T l) noexcept;
+  inline void SetRight(T r) noexcept;
+  inline void SetTop(T t) noexcept;
+  inline void SetBottom(T b) noexcept;
 
-  template <typename U>
-    requires Arithmetic<U>
-  [[nodiscard]] inline bool Intersects(const Rectangle<U> &r) {
-    return (Left() < r.Right()) && (Right() > r.Left()) && (Top() < r.Bottom())
-           && (Bottom() > r.Top());
-  }
+  template <Arithmetic C>
+  inline void SetLeft(std::type_identity_t<C> l) noexcept;
+  template <Arithmetic C>
+  inline void SetRight(std::type_identity_t<C> r) noexcept;
+  template <Arithmetic C>
+  inline void SetTop(std::type_identity_t<C> t) noexcept;
+  template <Arithmetic C>
+  inline void SetBottom(std::type_identity_t<C> b) noexcept;
+
+  template <Arithmetic U>
+  [[nodiscard]] inline bool Intersects(const Rectangle<U> &r) const;
+
+  template <Arithmetic U>
+  [[nodiscard]] inline bool Encloses(U x, U y) const;
+
+  template <typename C = T>
+    requires Arithmetic<C>
+  [[nodiscard]] inline bool Encloses(const Point<C> &p) const;
 
 protected:
   T x_, y_;
   T w_, h_;
 };
+} // namespace ngl
 
-template <typename T>
-  requires Arithmetic<T>
+// Point Implementation
+namespace ngl {
+template <Arithmetic T>
+Point<T>::Point() : x_(0), y_(0) {}
+
+template <Arithmetic T>
+Point<T>::Point(T x, T y) : x_(x), y_(y) {}
+
+template <Arithmetic T>
+Point<T>::Point(std::tuple<T, T> pos)
+    : x_(std::get<0>(pos)), y_(std::get<1>(pos)) {}
+
+template <Arithmetic T>
+template <Arithmetic C>
+[[nodiscard]] inline C Point<T>::X() const noexcept {
+  return static_cast<C>(x_);
+}
+template <Arithmetic T>
+template <Arithmetic C>
+[[nodiscard]] inline C Point<T>::Y() const noexcept {
+  return static_cast<C>(y_);
+}
+
+template <Arithmetic T>
+inline void Point<T>::SetX(T x) noexcept {
+  x_ = x;
+}
+template <Arithmetic T>
+inline void Point<T>::SetY(T y) noexcept {
+  y_ = y;
+}
+
+template <Arithmetic T>
+template <Arithmetic C>
+inline void Point<T>::SetX(std::type_identity_t<C> x) noexcept {
+  x_ = static_cast<T>(x);
+}
+template <Arithmetic T>
+template <Arithmetic C>
+inline void Point<T>::SetY(std::type_identity_t<C> y) noexcept {
+  y_ = static_cast<T>(y);
+}
+
+template <Arithmetic T>
+template <Arithmetic C>
+[[nodiscard]] inline bool Point<T>::Within(const Rectangle<C> &r
+) const noexcept {
+  return r.Encloses(x_, y_);
+}
+
+} // namespace ngl
+
+// Rectangle Implementation
+namespace ngl {
+template <Arithmetic T>
+Rectangle<T>::Rectangle() : x_(0), y_(0), w_(0), h_(0) {}
+template <Arithmetic T>
+Rectangle<T>::Rectangle(T x, T y, T w, T h) : x_(x), y_(y), w_(w), h_(h) {}
+
+template <Arithmetic T>
+Rectangle<T>::Rectangle(std::tuple<T, T> pos, T w, T h)
+    : x_(std::get<0>(pos)), y_(std::get<1>(pos)), w_(w), h_(h) {}
+
+template <Arithmetic T>
+Rectangle<T>::Rectangle(T x, T y, std::tuple<T, T> dim)
+    : x_(x), y_(y), w_(std::get<0>(dim)), h_(std::get<1>(dim)) {}
+
+template <Arithmetic T>
+Rectangle<T>::Rectangle(std::tuple<T, T> pos, std::tuple<T, T> dim)
+    : x_(std::get<0>(pos)), y_(std::get<1>(pos)), w_(std::get<0>(dim)),
+      h_(std::get<1>(dim)) {}
+
+template <Arithmetic T>
+Rectangle<T>::Rectangle(const Point<T> &pos, T w, T h)
+    : x_(pos.X()), y_(pos.Y()), w_(w), h_(h) {}
+
+template <Arithmetic T>
+Rectangle<T>::Rectangle(const Point<T> &pos, std::tuple<T, T> dim)
+    : x_(pos.X()), y_(pos.Y()), w_(std::get<0>(dim)), h_(std::get<1>(dim)) {}
+
+template <Arithmetic T>
+template <Arithmetic U>
+Rectangle<T>::Rectangle(Rectangle<U> r)
+    : x_(static_cast<T>(r.X())), y_(static_cast<T>(r.Y())),
+      w_(static_cast<T>(r.W())), h_(static_cast<T>(r.H())) {}
+
+template <Arithmetic T>
+template <typename C>
+  requires Arithmetic<C>
+[[nodiscard]] inline Rectangle<C> Rectangle<T>::As() const noexcept {
+  return Rectangle<C>(*this);
+}
+
+template <Arithmetic T>
+template <Arithmetic C>
+[[nodiscard]] inline C Rectangle<T>::X() const noexcept {
+  return static_cast<C>(x_);
+}
+template <Arithmetic T>
+template <Arithmetic C>
+[[nodiscard]] inline C Rectangle<T>::Y() const noexcept {
+  return static_cast<C>(y_);
+}
+template <Arithmetic T>
+template <Arithmetic C>
+[[nodiscard]] inline C Rectangle<T>::W() const noexcept {
+  return static_cast<C>(w_);
+}
+template <Arithmetic T>
+template <Arithmetic C>
+[[nodiscard]] inline C Rectangle<T>::H() const noexcept {
+  return static_cast<C>(h_);
+}
+
+template <Arithmetic T>
+inline void Rectangle<T>::SetX(T x) noexcept {
+  x_ = x;
+}
+template <Arithmetic T>
+inline void Rectangle<T>::SetY(T y) noexcept {
+  y_ = y;
+}
+template <Arithmetic T>
+inline void Rectangle<T>::SetW(T w) noexcept {
+  w_ = w;
+}
+template <Arithmetic T>
+inline void Rectangle<T>::SetH(T h) noexcept {
+  h_ = h;
+}
+template <Arithmetic T>
+template <Arithmetic C>
+inline void Rectangle<T>::SetX(std::type_identity_t<C> x) noexcept {
+  x_ = static_cast<T>(x);
+}
+template <Arithmetic T>
+template <Arithmetic C>
+inline void Rectangle<T>::SetY(std::type_identity_t<C> y) noexcept {
+  y_ = static_cast<T>(y);
+}
+template <Arithmetic T>
+template <Arithmetic C>
+inline void Rectangle<T>::SetW(std::type_identity_t<C> w) noexcept {
+  w_ = static_cast<T>(w);
+}
+template <Arithmetic T>
+template <Arithmetic C>
+inline void Rectangle<T>::SetH(std::type_identity_t<C> h) noexcept {
+  h_ = static_cast<T>(h);
+}
+
+template <Arithmetic T>
+void Rectangle<T>::MoveX(T dx) noexcept {
+  x_ += dx;
+}
+template <Arithmetic T>
+void Rectangle<T>::MoveY(T dy) noexcept {
+  y_ += dy;
+}
+
+template <Arithmetic T>
+template <Arithmetic C>
+[[nodiscard]] inline T Rectangle<T>::Left() const noexcept {
+  return static_cast<C>(x_);
+}
+template <Arithmetic T>
+template <Arithmetic C>
+[[nodiscard]] inline T Rectangle<T>::Right() const noexcept {
+  return static_cast<C>(x_ + w_);
+}
+template <Arithmetic T>
+template <Arithmetic C>
+[[nodiscard]] inline T Rectangle<T>::Top() const noexcept {
+  return static_cast<C>(y_);
+}
+template <Arithmetic T>
+template <Arithmetic C>
+[[nodiscard]] inline T Rectangle<T>::Bottom() const noexcept {
+  return static_cast<C>(y_ + h_);
+}
+
+template <Arithmetic T>
+inline void Rectangle<T>::SetLeft(T l) noexcept {
+  x_ = l;
+}
+template <Arithmetic T>
+inline void Rectangle<T>::SetRight(T r) noexcept {
+  x_ = r - w_;
+}
+template <Arithmetic T>
+inline void Rectangle<T>::SetTop(T t) noexcept {
+  y_ = t;
+}
+template <Arithmetic T>
+inline void Rectangle<T>::SetBottom(T b) noexcept {
+  y_ = b - h_;
+}
+
+template <Arithmetic T>
+template <Arithmetic C>
+inline void Rectangle<T>::SetLeft(std::type_identity_t<C> l) noexcept {
+  x_ = static_cast<T>(l);
+}
+template <Arithmetic T>
+template <Arithmetic C>
+inline void Rectangle<T>::SetRight(std::type_identity_t<C> r) noexcept {
+  x_ = static_cast<T>(r - static_cast<C>(w_));
+}
+template <Arithmetic T>
+template <Arithmetic C>
+inline void Rectangle<T>::SetTop(std::type_identity_t<C> t) noexcept {
+  y_ = static_cast<T>(t);
+}
+template <Arithmetic T>
+template <Arithmetic C>
+inline void Rectangle<T>::SetBottom(std::type_identity_t<C> b) noexcept {
+  y_ = static_cast<T>(b - static_cast<C>(h_));
+}
+
+template <Arithmetic T>
+template <Arithmetic U>
+[[nodiscard]] inline bool Rectangle<T>::Intersects(const Rectangle<U> &r
+) const {
+  return (Left() < r.Right()) && (Right() > r.Left()) && (Top() < r.Bottom())
+         && (Bottom() > r.Top());
+}
+
+template <Arithmetic T>
+template <Arithmetic U>
+[[nodiscard]] inline bool Rectangle<T>::Encloses(U x, U y) const {
+  return (Left() < x) && (Right() > x) && (Top() < y) && (Bottom() > y);
+}
+
+template <Arithmetic T>
+template <typename C>
+  requires Arithmetic<C>
+[[nodiscard]] inline bool Rectangle<T>::Encloses(const Point<C> &p) const {
+  return Encloses(p.X(), p.Y());
+}
+
+} // namespace ngl
+
+namespace ngl {
+template <Arithmetic T>
 std::ostream &operator<<(std::ostream &os, const Rectangle<T> &rect) {
   os << fmt::format(
     "x: {0} y: {1} w: {2} h: {3}", rect.X(), rect.Y(), rect.W(), rect.H()

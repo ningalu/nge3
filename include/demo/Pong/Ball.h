@@ -12,7 +12,7 @@ class Graphics;
 }
 
 namespace demo {
-class Ball : public nge::shape::Rectangle {
+class Ball : public nge::Rectangle {
 public:
   Ball() = delete;
   Ball(std::shared_ptr<nge::Graphics> graphics, int32_t x, int32_t y);

@@ -1,12 +1,23 @@
 #include "gtest/gtest.h"
 
-#include "SDL2/SDL.h"
-#include "misc/Rectangle.hpp"
-
 #include <bit>
 #include <cstdint>
 #include <iostream>
 #include <type_traits>
+
+#include "SDL2/SDL.h"
+#include "misc/Rectangle.hpp"
+
+TEST(Rectangle_SDL_Rect_Interop, Layout) {
+  static_assert(
+    std::is_standard_layout<ngl::Rectangle<int32_t>>::value,
+    "Rectangle<int32_t> is not standard layout and wont interop with SDL_Rect"
+  );
+  static_assert(
+    sizeof(ngl::Rectangle<int32_t>) == sizeof(SDL_Rect),
+    "Rectangle<int32_t> is a different size to SDL_Rect"
+  );
+}
 
 TEST(Rectangle_SDL_Rect_Interop, Access) {
   SDL_Rect a{1, 2, 3, 4};

@@ -1,5 +1,6 @@
 #include "ngsdl/Renderer.h"
 
+#include <bit>
 #include <cstdint>
 #include <iostream>
 
@@ -70,13 +71,22 @@ void Renderer::Copy(
   const std::optional<Rectangle> &src,
   const Rectangle &dst
 ) {
-  src.has_value() ?
+  // how do you get ternary statements to clang-format nicely?
+  if (src.has_value()) {
     SDL_RenderCopy(
-      renderer_.get(), texture.texture_.get(), src->bit_cast(), dst.bit_cast()
-    ) :
-    SDL_RenderCopy(
-      renderer_.get(), texture.texture_.get(), nullptr, dst.bit_cast()
+      renderer_.get(),
+      texture.texture_.get(),
+      std::bit_cast<SDL_Rect *>(&src),
+      std::bit_cast<SDL_Rect *>(&dst)
     );
+  } else {
+    SDL_RenderCopy(
+      renderer_.get(),
+      texture.texture_.get(),
+      nullptr,
+      std::bit_cast<SDL_Rect *>(&dst)
+    );
+  }
 }
 void Renderer::CopyEx(
   const Texture &texture,
@@ -89,10 +99,11 @@ void Renderer::CopyEx(
   SDL_RenderCopyEx(
     renderer_.get(),
     texture.texture_.get(),
-    src == std::nullopt ? nullptr : src->bit_cast(),
-    dst.bit_cast(),
+    src == std::nullopt ? nullptr : std::bit_cast<SDL_Rect *>(&src),
+    std::bit_cast<SDL_Rect *>(&dst),
     angle,
-    center == std::nullopt ? nullptr : &center->point_,
+    center == std::nullopt ? nullptr :
+                             std::bit_cast<SDL_Point *>(&center.value()),
     static_cast<SDL_RendererFlip>(flip)
   );
 }
@@ -101,39 +112,31 @@ void Renderer::DrawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2) {
   SDL_RenderDrawLine(renderer_.get(), x1, y1, x2, y2);
 }
 void Renderer::DrawLine(const Point &p1, const Point &p2) {
-  DrawLine(p1.GetX(), p1.GetY(), p2.GetX(), p2.GetY());
+  DrawLine(p1.X(), p1.Y(), p2.X(), p2.Y());
 }
 
-// this is not ideal
-// i dont think creating a new collection here is avoidable without maybe
-// creating collection classes for these wrappers that maintains the list of
-// wrapped objects as well
-// maybe i can hijack the specialisation of the std::vector<Point> constructor
-// maybe look into custom allocators for vector
-// maybe hard cap the number of points so it can be statically allocated each
-// function call
 void Renderer::DrawLines(const std::vector<Point> &points) {
-  std::vector<SDL_Point> sdl_points;
-  sdl_points.reserve(points.size());
-  for (auto it : points) {
-    sdl_points.push_back(it.point_);
-  }
   SDL_RenderDrawLines(
-    renderer_.get(), sdl_points.data(), static_cast<uint32_t>(sdl_points.size())
+    renderer_.get(),
+    std::bit_cast<SDL_Point *>(points.data()),
+    static_cast<int>(points.size())
   );
 }
 
 void Renderer::DrawPoint(int32_t x, int32_t y) {
   SDL_RenderDrawPoint(renderer_.get(), x, y);
 }
-void Renderer::DrawPoint(const Point &p) { DrawPoint(p.GetX(), p.GetY()); }
+void Renderer::DrawPoint(const Point &p) { DrawPoint(p.X(), p.Y()); }
 
 void Renderer::DrawRect(const Rectangle &r) {
-  SDL_RenderDrawRect(renderer_.get(), r.bit_cast());
+  SDL_RenderDrawRect(renderer_.get(), std::bit_cast<SDL_Rect *>(&r));
 }
 
 void Renderer::FillRect(const Rectangle &r) {
-  SDL_RenderFillRect(renderer_.get(), r.bit_cast());
+  SDL_RenderFillRect(renderer_.get(), std::bit_cast<SDL_Rect *>(&r));
+}
+void Renderer::FillRect(const Rectangle *r) {
+  SDL_RenderFillRect(renderer_.get(), std::bit_cast<SDL_Rect *>(&r));
 }
 
 } // namespace nge::sdl

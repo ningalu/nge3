@@ -1,27 +1,18 @@
 #ifndef NGSDL_POINT_H
 #define NGSDL_POINT_H
 
+#include <cstdint>
 #include <ostream>
 
 #include <SDL2/SDL.h>
 
+#include "misc/Point.hpp"
+
 namespace nge::sdl {
-class Renderer;
-class Rectangle;
-class Point {
-  friend class Renderer;
-  friend class Rectangle;
+class Point : public ngl::Point<int32_t> {
 
 public:
-  Point();
-  Point(int32_t x, int32_t y);
-
-  [[nodiscard]] int32_t GetX() const;
-  [[nodiscard]] int32_t GetY() const;
-  void SetX(int32_t x);
-  void SetY(int32_t y);
-
-  [[nodiscard]] bool Within(const Rectangle &r) const;
+  using ngl::Point<int32_t>::Point;
 
   Point operator+(const Point &rhs);
   Point &operator+=(const Point &rhs);
@@ -31,9 +22,6 @@ public:
   Point &operator*=(const Point &rhs);
   Point operator/(const Point &rhs);
   Point &operator/=(const Point &rhs);
-
-protected:
-  SDL_Point point_;
 };
 
 // finnicky about const

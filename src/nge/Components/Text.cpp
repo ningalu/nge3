@@ -20,7 +20,7 @@ Text::Text(
     graphics->GetRenderer(), *font, text, type, color, bg
   );
 
-  src_ = {{0, 0}, texture_->GetSize()};
+  src_ = nge::sdl::Rectangle{0, 0, texture_->GetSize()};
   dst_ = src_;
 }
 
@@ -28,7 +28,7 @@ void Text::UpdateText(const std::string &text) {
   texture_ = std::make_shared<sdl::Texture>(
     graphics_->GetRenderer(), *font_, text, type_, colour_, bg_
   );
-  src_ = {{0, 0}, texture_->GetSize()};
+  src_ = nge::sdl::Rectangle{0, 0, texture_->GetSize()};
   dst_.SetW(src_.W());
   dst_.SetH(src_.H());
 }

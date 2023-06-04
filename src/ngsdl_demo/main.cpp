@@ -24,10 +24,10 @@ int main(int argc, char **argv) {
 
   using namespace nge;
 
-  sdl::Rectangle r(1, 2, 3, 4);
-  std::cout << r << "\n";
-  sdl::Point p(5, 6);
-  std::cout << p << "\n";
+  // sdl::Rectangle r(1, 2, 3, 4);
+  // std::cout << r << "\n";
+  // sdl::Point p(5, 6);
+  // std::cout << p << "\n";
 
   std::vector<sdl::Point> shape = {
     {0, 0}, {50, 0}, {50, 10}, {30, 80}, {20, 80}, {40, 20}, {0, 10}, {0, 0}};
@@ -44,14 +44,18 @@ int main(int argc, char **argv) {
       sdl::RendererFlags::ACCELERATED | sdl::RendererFlags::TARGETTEXTURE};
 
     sdl::Texture t = {r, "./resources/parrot.jpg"};
-    auto blend = t.GetBlendMode();
-    std::cout << blend << "\n";
-    t.SetBlendMode(sdl::BlendMode::ADD);
-    blend = t.GetBlendMode();
-    std::cout << blend << "\n";
-    t.SetBlendMode(sdl::BlendMode::NONE);
-    blend = t.GetBlendMode();
-    std::cout << blend << "\n";
+    try {
+      auto blend = t.GetBlendMode();
+      std::cout << blend << "\n";
+      t.SetBlendMode(sdl::BlendMode::ADD);
+      blend = t.GetBlendMode();
+      std::cout << blend << "\n";
+      t.SetBlendMode(sdl::BlendMode::NONE);
+      blend = t.GetBlendMode();
+      std::cout << blend << "\n";
+    } catch (std::exception &e) {
+      std::cout << e.what() << "\n";
+    }
 
     sdl::Font font{"./resources/pokemon_pixel_font.ttf", 72};
 
@@ -83,7 +87,7 @@ int main(int argc, char **argv) {
         r.CopyEx(
           t,
           std::nullopt,
-          {pos, {550, 550}},
+          ngl::Rectangle{pos, {550, 550}},
           5.0,
           std::nullopt,
           sdl::RendererFlip::HORIZONTAL | sdl::RendererFlip::VERTICAL

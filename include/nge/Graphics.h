@@ -34,6 +34,8 @@ public:
   void Render();
   void Draw(const sdl::Rectangle dst);
   void Draw(const sdl::Rectangle dst, sdl::Colour colour);
+  void Draw(const sdl::Rectangle *dst);
+  void Draw(const sdl::Rectangle *dst, sdl::Colour colour);
   void Draw(
     const sdl::Texture &texture,
     const std::optional<sdl::Rectangle> src,

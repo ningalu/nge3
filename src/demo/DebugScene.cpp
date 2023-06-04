@@ -95,13 +95,13 @@ void DebugScene::Setup() {
     nge::sdl::Colour{128, 128, 0, 255},
     nge::sdl::Colour{0, 128, 128, 255}
   );
-  shaded_->SetPos(50, solid_->GetPos().GetY() + solid_->GetH());
+  shaded_->SetPos(50, solid_->GetPos().Y() + solid_->GetH());
   RegisterDrawable(shaded_);
 
   blended_ = std::make_shared<nge::BlendedText>(
     graphics_, p_, "Blended Text Style", nge::sdl::Colour{0, 128, 128, 255}
   );
-  blended_->SetPos(50, shaded_->GetPos().GetY() + shaded_->GetH());
+  blended_->SetPos(50, shaded_->GetPos().Y() + shaded_->GetH());
   RegisterDrawable(blended_);
 
   mouse_x_label_ = std::make_shared<nge::Text>(
@@ -177,7 +177,7 @@ void DebugScene::Setup() {
   };
   RegisterKeyable(k);
 
-  RegisterDrawable(std::make_shared<nge::shape::Rectangle>(
+  RegisterDrawable(std::make_shared<nge::Rectangle>(
     graphics_,
     nge::sdl::Rectangle{400, 400, 50, 50},
     nge::sdl::Colour{255, 0, 0, 255}

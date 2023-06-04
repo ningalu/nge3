@@ -19,13 +19,13 @@ void Paddle::ReleaseKey(nge::sdl::Scancode) {}
 
 void Paddle::Move(nge::sdl::Scancode s) {
   if (s == up_code_) {
-    if (Rectangle::drawn_.Y() > 0) {
-      Rectangle::drawn_.MoveY(-12);
+    if (Y() > 0) {
+      MoveY(-12);
     }
   } else {
     if (s == down_code_) {
-      if ((Rectangle::drawn_.Y() + Rectangle::drawn_.H()) < 600) {
-        Rectangle::drawn_.MoveY(12);
+      if ((Y() + H()) < 600) {
+        MoveY(12);
       }
     }
   }

@@ -11,8 +11,8 @@ namespace demo {
 
 Ball::Ball(std::shared_ptr<nge::Graphics> graphics, int32_t x, int32_t y)
     : Rectangle(graphics, nge::sdl::Rectangle{x, y, 25, 25}) {
-  drawn_.SetX(x);
-  drawn_.SetY(y);
+  SetX(x);
+  SetY(y);
 
   // stl moment
   std::random_device rd;
