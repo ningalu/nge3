@@ -1,7 +1,9 @@
 add_executable(
     misc_tests
     ./RectangleTests.cpp
+    ./PointTests.cpp
     ./Rectangle_SDL_Rect_Interop.cpp
+    ./Point_SDL_Point_Interop.cpp
 )
 target_compile_features(
     misc_tests
