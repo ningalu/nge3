@@ -25,8 +25,9 @@ namespace ngl {
 template <Arithmetic T>
 class Point {
 public:
-  Point(T x, T y) : x_(x), y_(y) {}
-  Point(std::tuple<T, T> pos) : x_(std::get<0>(pos)), y_(std::get<1>(pos)) {}
+  Point();
+  Point(T x, T y);
+  Point(std::tuple<T, T> pos);
 
   template <Arithmetic C = T>
   [[nodiscard]] inline C X() const noexcept;
@@ -53,14 +54,13 @@ namespace ngl {
 template <Arithmetic T>
 class Rectangle {
 public:
+  Rectangle();
   Rectangle(T x, T y, T w, T h);
-
   Rectangle(std::tuple<T, T> pos, T w, T h);
-
   Rectangle(T x, T y, std::tuple<T, T> dim);
-
   Rectangle(std::tuple<T, T> pos, std::tuple<T, T> dim);
-
+  Rectangle(const Point<T> &pos, T w, T h);
+  Rectangle(const Point<T> &pos, std::tuple<T, T> dim);
   template <Arithmetic U>
   Rectangle(Rectangle<U> r);
 
@@ -144,6 +144,16 @@ protected:
 // Point Implementation
 namespace ngl {
 template <Arithmetic T>
+Point<T>::Point() : x_(0), y_(0) {}
+
+template <Arithmetic T>
+Point<T>::Point(T x, T y) : x_(x), y_(y) {}
+
+template <Arithmetic T>
+Point<T>::Point(std::tuple<T, T> pos)
+    : x_(std::get<0>(pos)), y_(std::get<1>(pos)) {}
+
+template <Arithmetic T>
 template <Arithmetic C>
 [[nodiscard]] inline C Point<T>::X() const noexcept {
   return static_cast<C>(x_);
@@ -183,8 +193,10 @@ template <Arithmetic C>
 
 } // namespace ngl
 
-namespace ngl {
 // Rectangle Implementation
+namespace ngl {
+template <Arithmetic T>
+Rectangle<T>::Rectangle() : x_(0), y_(0), w_(0), h_(0) {}
 template <Arithmetic T>
 Rectangle<T>::Rectangle(T x, T y, T w, T h) : x_(x), y_(y), w_(w), h_(h) {}
 
@@ -200,6 +212,14 @@ template <Arithmetic T>
 Rectangle<T>::Rectangle(std::tuple<T, T> pos, std::tuple<T, T> dim)
     : x_(std::get<0>(pos)), y_(std::get<1>(pos)), w_(std::get<0>(dim)),
       h_(std::get<1>(dim)) {}
+
+template <Arithmetic T>
+Rectangle<T>::Rectangle(const Point<T> &pos, T w, T h)
+    : x_(pos.X()), y_(pos.Y()), w_(w), h_(h) {}
+
+template <Arithmetic T>
+Rectangle<T>::Rectangle(const Point<T> &pos, std::tuple<T, T> dim)
+    : x_(pos.X()), y_(pos.Y()), w_(std::get<0>(dim)), h_(std::get<1>(dim)) {}
 
 template <Arithmetic T>
 template <Arithmetic U>

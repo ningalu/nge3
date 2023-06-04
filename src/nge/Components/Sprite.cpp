@@ -7,7 +7,7 @@ Sprite::Sprite(
 )
     : BasicGraphicsUser(graphics) {
   texture_ = std::make_shared<sdl::Texture>(graphics_->GetRenderer(), filename);
-  src_ = {{0, 0}, texture_->GetSize()};
+  src_ = {0, 0, texture_->GetSize()};
   dst_ = src_;
 }
 

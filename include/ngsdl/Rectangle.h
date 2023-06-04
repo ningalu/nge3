@@ -16,12 +16,13 @@ namespace nge::sdl {
 class Rectangle : public ngl::Rectangle<int32_t> {
 
 public:
-  Rectangle();
-  Rectangle(ngl::Rectangle<int32_t> r);
-  Rectangle(int32_t x, int32_t y, int32_t w, int32_t h);
-  Rectangle(const Point &p, int32_t w, int32_t h);
-  Rectangle(int32_t x, int32_t y, std::tuple<int32_t, int32_t> size);
-  Rectangle(const Point &p, const std::tuple<int32_t, int32_t> &size);
+  // Rectangle();
+  // Rectangle(ngl::Rectangle<int32_t> r);
+  // Rectangle(int32_t x, int32_t y, int32_t w, int32_t h);
+  // Rectangle(const Point &p, int32_t w, int32_t h);
+  // Rectangle(int32_t x, int32_t y, std::tuple<int32_t, int32_t> size);
+  // Rectangle(const Point &p, const std::tuple<int32_t, int32_t> &size);
+  using ngl::Rectangle<int32_t>::Rectangle;
 
   [[nodiscard]] SDL_Rect *bit_cast();
   [[nodiscard]] SDL_Rect *bit_cast() const;
@@ -29,7 +30,6 @@ public:
   [[nodiscard]] Point GetPos() const noexcept;
   void SetPos(const Point pos) noexcept;
 
-  [[nodiscard]] bool Encloses(const Point &p) const noexcept;
   [[nodiscard]] std::optional<Rectangle> GetIntersection(const Rectangle &r
   ) const noexcept;
 
