@@ -71,13 +71,22 @@ void Renderer::Copy(
   const std::optional<Rectangle> &src,
   const Rectangle &dst
 ) {
-  src.has_value() ?
+  // how do you get ternary statements to clang-format nicely?
+  if (src.has_value()) {
     SDL_RenderCopy(
-      renderer_.get(), texture.texture_.get(), src->bit_cast(), dst.bit_cast()
-    ) :
-    SDL_RenderCopy(
-      renderer_.get(), texture.texture_.get(), nullptr, dst.bit_cast()
+      renderer_.get(),
+      texture.texture_.get(),
+      std::bit_cast<SDL_Rect *>(&src),
+      std::bit_cast<SDL_Rect *>(&dst)
     );
+  } else {
+    SDL_RenderCopy(
+      renderer_.get(),
+      texture.texture_.get(),
+      nullptr,
+      std::bit_cast<SDL_Rect *>(&dst)
+    );
+  }
 }
 void Renderer::CopyEx(
   const Texture &texture,
@@ -90,8 +99,8 @@ void Renderer::CopyEx(
   SDL_RenderCopyEx(
     renderer_.get(),
     texture.texture_.get(),
-    src == std::nullopt ? nullptr : src->bit_cast(),
-    dst.bit_cast(),
+    src == std::nullopt ? nullptr : std::bit_cast<SDL_Rect *>(&src),
+    std::bit_cast<SDL_Rect *>(&dst),
     angle,
     center == std::nullopt ? nullptr :
                              std::bit_cast<SDL_Point *>(&center.value()),
@@ -120,14 +129,14 @@ void Renderer::DrawPoint(int32_t x, int32_t y) {
 void Renderer::DrawPoint(const Point &p) { DrawPoint(p.X(), p.Y()); }
 
 void Renderer::DrawRect(const Rectangle &r) {
-  SDL_RenderDrawRect(renderer_.get(), r.bit_cast());
+  SDL_RenderDrawRect(renderer_.get(), std::bit_cast<SDL_Rect *>(&r));
 }
 
 void Renderer::FillRect(const Rectangle &r) {
-  SDL_RenderFillRect(renderer_.get(), r.bit_cast());
+  SDL_RenderFillRect(renderer_.get(), std::bit_cast<SDL_Rect *>(&r));
 }
 void Renderer::FillRect(const Rectangle *r) {
-  SDL_RenderFillRect(renderer_.get(), r->bit_cast());
+  SDL_RenderFillRect(renderer_.get(), std::bit_cast<SDL_Rect *>(&r));
 }
 
 } // namespace nge::sdl
