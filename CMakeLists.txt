@@ -1,6 +1,14 @@
 cmake_minimum_required(VERSION 3.15)
 project(nge3 CXX)
 
+# why does my cmake manage to find versions of gcc other than 11 when its set as 11 everywhere i can find
+if (UNIX)
+  set(CMAKE_CXX_STANDARD 20)
+  set(CMAKE_CXX_STANDARD_REQUIRED true)
+  set(CMAKE_CXX_COMPILER g++-11)
+  set(CMAKE_C_COMPILER gcc-11)
+endif(UNIX)
+
 # painful to do per target
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/lib)

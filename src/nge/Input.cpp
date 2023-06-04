@@ -53,7 +53,7 @@ void Input::Update() {
   std::vector<sdl::Scancode> out;
 
   // keeps for loop on one line lol
-  using i32 = uint32_t;
+  using i32 = int32_t;
   using nge::sdl::Scancode;
 
   for (int i = 0; i < static_cast<i32>(Scancode::CARDINAL_SCANCODE); i++) {
@@ -67,7 +67,7 @@ void Input::Update() {
 [[nodiscard]] std::vector<sdl::Scancode> Input::AllKeysHeld() const {
   std::vector<sdl::Scancode> out;
 
-  using i32 = uint32_t;
+  using i32 = int32_t;
   using nge::sdl::Scancode;
 
   for (int i = 0; i < static_cast<i32>(Scancode::CARDINAL_SCANCODE); i++) {
@@ -81,7 +81,7 @@ void Input::Update() {
 [[nodiscard]] std::vector<sdl::Scancode> Input::AllKeysReleased() const {
   std::vector<sdl::Scancode> out;
 
-  using i32 = uint32_t;
+  using i32 = int32_t;
   using nge::sdl::Scancode;
 
   for (int i = 0; i < static_cast<i32>(Scancode::CARDINAL_SCANCODE); i++) {

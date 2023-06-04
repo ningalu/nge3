@@ -47,7 +47,7 @@ TEST(Rectangle_SDL_Rect_Interop, HasIntersection) {
 }
 
 TEST(Rectangle_SDL_Rect_Interop, test) {
-  SDL_Rect a{0, 0, 50, 50};
-  ngl::Rectangle<int32_t> b{51, 51, 100, 100};
+  [[maybe_unused]] SDL_Rect a{0, 0, 50, 50};
+  [[maybe_unused]] ngl::Rectangle<int32_t> b{51, 51, 100, 100};
   ASSERT_TRUE(true);
 }

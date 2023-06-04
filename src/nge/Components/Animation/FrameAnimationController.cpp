@@ -1,8 +1,9 @@
 #include "nge/Components/Animation/FrameAnimationController.h"
 
 #include <algorithm>
-#include <format>
 #include <string>
+
+#include "fmt/format.h"
 
 namespace nge {
 
@@ -58,8 +59,8 @@ void FrameAnimationController::Init_(
     frame_order_ = frame_order.value();
   }
 
-  unique_frames_
-    = *std::max_element(frame_order_.begin(), frame_order_.end()) + 1;
+  unique_frames_ =
+    *std::max_element(frame_order_.begin(), frame_order_.end()) + 1;
 
   active = true;
 }
@@ -104,24 +105,23 @@ void FrameAnimationController::Tick() {
 
 [[nodiscard]] std::string FrameAnimationController::as_string() const {
 
-  // return std::format(
-  //   "{}\n{}\n{}",
-  //   std::format(
-  //     "Frame Duration: {} frames | Current Subframe: {}",
-  //     max_subframes_,
-  //     current_subframe_
-  //   ),
-  //   std::format(
-  //     "Total Frames: {} | Current Frame: {}", max_frames_, current_frame_
-  //   ),
-  //   std::format(
-  //     "Total Repeats: {} times | Current Repeat: {}",
-  //     max_repeats_ == std::nullopt ? "unlimited" :
-  //                                    std::to_string(max_repeats_.value()),
-  //     current_repeat_
-  //   )
-  // );
-  return "";
+  return fmt::format(
+    "{}\n{}\n{}",
+    fmt::format(
+      "Frame Duration: {} frames | Current Subframe: {}",
+      max_subframes_,
+      current_subframe_
+    ),
+    fmt::format(
+      "Total Frames: {} | Current Frame: {}", max_frames_, current_frame_
+    ),
+    fmt::format(
+      "Total Repeats: {} times | Current Repeat: {}",
+      max_repeats_ == std::nullopt ? "unlimited" :
+                                     std::to_string(max_repeats_.value()),
+      current_repeat_
+    )
+  );
 }
 
 } // namespace nge

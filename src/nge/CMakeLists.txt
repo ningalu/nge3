@@ -20,6 +20,7 @@ add_library(
   
   ./Components/Mouse/ClickController.cpp
   ./Components/Mouse/HoverController.cpp
+  ./Components/Mouse/Hoverable.cpp
   ./Components/Mouse/Clickable.cpp
   ./Components/Mouse/BasicMouseUser.cpp
 
@@ -50,8 +51,6 @@ target_compile_options(
     /external:W0
   >
   $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:
-
-    -stdlib=libc++
 
     -Wall 
     -Wextra 
