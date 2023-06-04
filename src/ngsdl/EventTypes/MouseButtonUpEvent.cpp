@@ -30,9 +30,9 @@ MouseButtonUpEvent::MouseButtonUpEvent(SDL_MouseButtonEvent e) {
   return position_;
 }
 [[nodiscard]] int32_t MouseButtonUpEvent::GetX() const noexcept {
-  return position_.GetX();
+  return position_.X();
 }
 [[nodiscard]] int32_t MouseButtonUpEvent::GetY() const noexcept {
-  return position_.GetY();
+  return position_.Y();
 }
 } // namespace nge::sdl

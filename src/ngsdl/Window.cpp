@@ -110,7 +110,7 @@ void Window::SetOpacity(float opacity) {
 }
 
 void Window::SetPosition(Point point) {
-  SDL_SetWindowPosition(window_.get(), point.GetX(), point.GetY());
+  SDL_SetWindowPosition(window_.get(), point.X(), point.Y());
 }
 Point Window::GetPosition() const {
   int x, y;
@@ -148,7 +148,7 @@ MouseButton Window::GetMouseButtons() const {
 }
 
 Point Window::GetMousePos() const { return std::get<1>(GetMouseState()); }
-int Window::GetMouseX() const { return GetMousePos().GetX(); }
-int Window::GetMouseY() const { return GetMousePos().GetY(); }
+int Window::GetMouseX() const { return GetMousePos().X(); }
+int Window::GetMouseY() const { return GetMousePos().Y(); }
 
 } // namespace nge::sdl
