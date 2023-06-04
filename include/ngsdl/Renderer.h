@@ -55,7 +55,7 @@ public:
   void CopyEx(
     const Texture &texture,
     const std::optional<Rectangle> &src,
-    const Rectangle &dst,
+    const Rectangle dst,
     const double angle,
     const std::optional<Point> &center,
     const RendererFlip flip

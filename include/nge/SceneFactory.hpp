@@ -38,9 +38,9 @@ public:
   }
 
 protected:
-  std::shared_ptr<SceneManager> manager_;
-  std::shared_ptr<Input> input_;
   std::shared_ptr<Graphics> graphics_;
+  std::shared_ptr<Input> input_;
+  std::shared_ptr<SceneManager> manager_;
 };
 
 } // namespace nge

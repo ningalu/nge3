@@ -11,6 +11,7 @@ public:
   virtual void OnStartHover() = 0;
   virtual void OnHoldHover() = 0;
   virtual void OnReleaseHover() = 0;
+  virtual ~Hoverable() = 0;
 };
 } // namespace nge
 

@@ -4,16 +4,16 @@
 
 namespace nge {
 Rectangle::Rectangle(std::shared_ptr<Graphics> graphics, sdl::Rectangle rect)
-    : graphics_(graphics), ngl::Rectangle<int32_t>(rect), base_(rect),
+    : ngl::Rectangle<int32_t>(rect), graphics_(graphics), base_(rect),
       colour_(0, 0, 0, 255) {}
 Rectangle::Rectangle(
   std::shared_ptr<Graphics> graphics, sdl::Rectangle rect, sdl::Colour colour
 )
-    : graphics_(graphics), base_(rect), ngl::Rectangle<int32_t>(rect),
+    : ngl::Rectangle<int32_t>(rect), graphics_(graphics), base_(rect),
       colour_(colour) {}
 
 void Rectangle::Draw() {
-  graphics_->Draw(sdl::Rectangle(this->As<int32_t>()), colour_);
+  graphics_->Draw(sdl::Rectangle(x_, y_, w_, h_), colour_);
 }
 
 void Rectangle::SetScale(double n) {

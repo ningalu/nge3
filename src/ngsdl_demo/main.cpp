@@ -87,7 +87,7 @@ int main(int argc, char **argv) {
         r.CopyEx(
           t,
           std::nullopt,
-          ngl::Rectangle{pos, {550, 550}},
+          nge::sdl::Rectangle{pos, std::tuple<int32_t, int32_t>{550, 550}},
           5.0,
           std::nullopt,
           sdl::RendererFlip::HORIZONTAL | sdl::RendererFlip::VERTICAL

@@ -9,7 +9,7 @@ public:
   virtual void PressKey(nge::sdl::Scancode s) = 0;
   virtual void HoldKey(nge::sdl::Scancode s) = 0;
   virtual void ReleaseKey(nge::sdl::Scancode s) = 0;
-  ~Keyable();
+  virtual ~Keyable() = 0;
 };
 } // namespace nge
 

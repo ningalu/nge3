@@ -1,5 +1,6 @@
 #include "ngsdl/Rectangle.h"
 
+#include <bit>
 #include <cstdint>
 
 #include "ngsdl/Point.h"
