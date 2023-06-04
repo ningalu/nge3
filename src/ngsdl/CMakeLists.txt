@@ -52,7 +52,6 @@ target_compile_options(
     -pedantic
     -Werror
     -std=c++20
-
     -Wno-unknown-pragmas
     -Wno-unused-command-line-argument
 >)
