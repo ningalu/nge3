@@ -3,6 +3,7 @@
 
 #include <string>
 #include <tuple>
+#include <vector>
 
 #include "ngsdl/Rectangle.h"
 #include "ngsdl/Renderer.h"
@@ -32,10 +33,21 @@ public:
   const sdl::Renderer &GetRenderer() const;
 
   void Render();
+
+  void Draw(sdl::Point p);
+  void Draw(const sdl::Point *p);
+  void Draw(const std::vector<sdl::Point> &points);
+
+  void Draw(sdl::Point p1, sdl::Point p2);
+  void Draw(const sdl::Point *p1, const sdl::Point *p2);
+
   void Draw(const sdl::Rectangle dst);
   void Draw(const sdl::Rectangle dst, sdl::Colour colour);
   void Draw(const sdl::Rectangle *dst);
   void Draw(const sdl::Rectangle *dst, sdl::Colour colour);
+  void Draw(const std::vector<sdl::Rectangle> &rects);
+  void Draw(const std::vector<sdl::Rectangle> &rects, sdl::Colour colour);
+
   void Draw(
     const sdl::Texture &texture,
     const std::optional<sdl::Rectangle> src,
@@ -44,6 +56,7 @@ public:
     const std::optional<sdl::Point> center = std::nullopt,
     const sdl::RendererFlip flip = sdl::RendererFlip::NONE
   );
+
   void Clear();
 
   void SetWindowSize(int w, int h);
@@ -53,6 +66,9 @@ public:
   void SetWindowPos(int x, int y);
   void SetWindowPos(sdl::Point pos);
   sdl::Point GetWindowPos() const;
+
+  void SetFillColour(nge::sdl::Colour c);
+  void ResetFillColour();
 
 protected:
   sdl::Window window_;

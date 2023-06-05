@@ -16,6 +16,20 @@ Graphics::Graphics(
 const sdl::Renderer &Graphics::GetRenderer() const { return renderer_; }
 
 void Graphics::Render() { renderer_.Present(); }
+
+void Graphics::Draw(sdl::Point p) { renderer_.DrawPoint(p); }
+void Graphics::Draw(const sdl::Point *p) { renderer_.DrawPoint(p); }
+void Graphics::Draw(const std::vector<sdl::Point> &points) {
+  renderer_.DrawPoints(points);
+}
+
+void Graphics::Draw(sdl::Point p1, sdl::Point p2) {
+  renderer_.DrawLine(p1, p2);
+}
+void Graphics::Draw(const sdl::Point *p1, const sdl::Point *p2) {
+  renderer_.DrawLine(p1, p2);
+}
+
 void Graphics::Draw(const sdl::Rectangle dst) { renderer_.FillRect(dst); }
 void Graphics::Draw(const sdl::Rectangle dst, sdl::Colour colour) {
   renderer_.SetDrawColor(colour);
@@ -28,6 +42,17 @@ void Graphics::Draw(const sdl::Rectangle *dst, sdl::Colour colour) {
   renderer_.FillRect(dst);
   renderer_.SetDrawColor(background_colour_);
 }
+void Graphics::Draw(const std::vector<sdl::Rectangle> &rects) {
+  renderer_.FillRects(rects);
+}
+void Graphics::Draw(
+  const std::vector<sdl::Rectangle> &rects, sdl::Colour colour
+) {
+  renderer_.SetDrawColor(colour);
+  renderer_.FillRects(rects);
+  renderer_.SetDrawColor(background_colour_);
+}
+
 void Graphics::Draw(
   const sdl::Texture &texture,
   const std::optional<sdl::Rectangle> src,
@@ -54,5 +79,8 @@ void Graphics::SetWindowPos(int x, int y) { window_.SetPosition({x, y}); }
 void Graphics::SetWindowPos(sdl::Point pos) { window_.SetPosition(pos); }
 
 sdl::Point Graphics::GetWindowPos() const { return window_.GetPosition(); }
+
+void Graphics::SetFillColour(nge::sdl::Colour c) { renderer_.SetDrawColor(c); }
+void Graphics::ResetFillColour() { renderer_.SetDrawColor(background_colour_); }
 
 } // namespace nge

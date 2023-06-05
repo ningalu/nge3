@@ -63,16 +63,19 @@ public:
 
   // SDL_RenderDrawLine
   void DrawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2);
-  void DrawLine(const Point &p1, const Point &p2);
+  void DrawLine(Point p1, Point p2);
+  void DrawLine(const Point *p1, const Point *p2);
 
   // SDL_RenderDrawLines
   void DrawLines(const std::vector<Point> &points);
 
   // SDL_RenderDrawPoint
   void DrawPoint(int32_t x, int32_t y);
-  void DrawPoint(const Point &p);
+  void DrawPoint(Point p);
+  void DrawPoint(const Point *p);
 
   // SDL_RenderDrawPoints
+  void DrawPoints(const std::vector<Point> &points);
 
   // SDL_RenderDrawRect
   void DrawRect(const Rectangle &r);
@@ -84,6 +87,7 @@ public:
   void FillRect(const Rectangle *r);
 
   // SDL_RenderFillRects
+  void FillRects(const std::vector<Rectangle> &rects);
 
   // SDL_RenderGetClipRect
 
@@ -92,6 +96,13 @@ public:
   // SDL_RenderGetLogicalSize
 
   // SDL_RenderGetScale
+  [[nodiscard]] std::tuple<float, float> RenderScale() const;
+  [[nodiscard]] float XRenderScale() const;
+  [[nodiscard]] float YRenderScale() const;
+  void SetRenderScale(float x, float y);
+  void SetRenderScale(std::tuple<float, float> scale);
+  void SetXRenderScale(float x) const;
+  void SetYRenderScale(float y) const;
 
   // SDL_RenderGetViewport
 

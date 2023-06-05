@@ -111,8 +111,11 @@ void Renderer::CopyEx(
 void Renderer::DrawLine(int32_t x1, int32_t y1, int32_t x2, int32_t y2) {
   SDL_RenderDrawLine(renderer_.get(), x1, y1, x2, y2);
 }
-void Renderer::DrawLine(const Point &p1, const Point &p2) {
+void Renderer::DrawLine(Point p1, Point p2) {
   DrawLine(p1.X(), p1.Y(), p2.X(), p2.Y());
+}
+void Renderer::DrawLine(const Point *p1, const Point *p2) {
+  DrawLine(p1->X(), p1->Y(), p2->X(), p2->Y());
 }
 
 void Renderer::DrawLines(const std::vector<Point> &points) {
@@ -126,7 +129,14 @@ void Renderer::DrawLines(const std::vector<Point> &points) {
 void Renderer::DrawPoint(int32_t x, int32_t y) {
   SDL_RenderDrawPoint(renderer_.get(), x, y);
 }
-void Renderer::DrawPoint(const Point &p) { DrawPoint(p.X(), p.Y()); }
+void Renderer::DrawPoint(Point p) { DrawPoint(p.X(), p.Y()); }
+void Renderer::DrawPoint(const Point *p) { DrawPoint(p->X(), p->Y()); }
+
+void Renderer::DrawPoints(const std::vector<Point> &points) {
+  SDL_RenderDrawPoints(
+    renderer_.get(), std::bit_cast<SDL_Point *>(points.data()), points.size()
+  );
+}
 
 void Renderer::DrawRect(const Rectangle &r) {
   SDL_RenderDrawRect(renderer_.get(), std::bit_cast<SDL_Rect *>(&r));
@@ -139,4 +149,39 @@ void Renderer::FillRect(const Rectangle *r) {
   SDL_RenderFillRect(renderer_.get(), std::bit_cast<SDL_Rect *>(&r));
 }
 
+void Renderer::FillRects(const std::vector<Rectangle> &rects) {
+  SDL_RenderFillRects(
+    renderer_.get(),
+    std::bit_cast<SDL_Rect *>(rects.data()),
+    static_cast<int>(rects.size())
+  );
+}
+
+[[nodiscard]] std::tuple<float, float> Renderer::RenderScale() const {
+  float x, y;
+  SDL_RenderGetScale(renderer_.get(), &x, &y);
+  return std::tuple<float, float>{x, y};
+}
+[[nodiscard]] float Renderer::XRenderScale() const {
+  float x;
+  SDL_RenderGetScale(renderer_.get(), &x, nullptr);
+  return x;
+}
+[[nodiscard]] float Renderer::YRenderScale() const {
+  float y;
+  SDL_RenderGetScale(renderer_.get(), nullptr, &y);
+  return y;
+}
+void Renderer::SetRenderScale(float x, float y) {
+  SDL_RenderSetScale(renderer_.get(), x, y);
+}
+void Renderer::SetRenderScale(std::tuple<float, float> scale) {
+  SDL_RenderSetScale(renderer_.get(), std::get<0>(scale), std::get<1>(scale));
+}
+void Renderer::SetXRenderScale(float x) const {
+  SDL_RenderSetScale(renderer_.get(), x, YRenderScale());
+}
+void Renderer::SetYRenderScale(float y) const {
+  SDL_RenderSetScale(renderer_.get(), XRenderScale(), y);
+}
 } // namespace nge::sdl
