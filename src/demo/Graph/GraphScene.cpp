@@ -10,6 +10,14 @@ static std::vector<nge::sdl::Point> points1, points2;
 namespace demo {
 void GraphScene::Setup() {
   viewport_ = nge::sdl::Rectangle{100, 100, 1200, 900};
+
+  curve1 = {};
+  curve2 = {};
+  drawn1 = {};
+  drawn2 = {};
+  points1 = {};
+  points2 = {};
+
   auto fn = [](int32_t x) {
     return x * x;
   };

@@ -13,6 +13,8 @@ public:
   void OnRelease();
   std::function<void(void)> click, hold, release, lose_hold;
 
+  [[nodiscard]] bool Held() const noexcept;
+
 protected:
   bool held_;
 };

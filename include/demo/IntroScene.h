@@ -7,6 +7,7 @@
 #include "ngsdl/Font.h"
 
 #include "nge/Components/AtlasAnimation.h"
+#include "nge/Components/Button.h"
 #include "nge/Components/Composite.hpp"
 #include "nge/Components/Mouse/BasicMouseUser.h"
 #include "nge/Components/Sprite.h"
@@ -25,14 +26,10 @@ public:
   ~IntroScene();
 
 protected:
-  std::shared_ptr<nge::Sprite> s_;
   std::shared_ptr<nge::Text> nge3_demo_app_text_;
 
-  std::shared_ptr<nge::Text> pong_normal_, pong_selected_;
-  std::shared_ptr<nge::Composite<nge::Text, nge::BasicMouseUser>> text_button_;
-
-  std::shared_ptr<nge::Text> graph_normal_, graph_selected_;
-  std::shared_ptr<nge::Composite<nge::Text, nge::BasicMouseUser>> graph_button_;
+  std::shared_ptr<nge::Button> pong_button_;
+  std::shared_ptr<nge::Button> graph_button_;
 
   std::shared_ptr<nge::sdl::Font> h1_, h2_;
   std::shared_ptr<nge::AtlasAnimation> text_select_;
