@@ -134,7 +134,9 @@ void Renderer::DrawPoint(const Point *p) { DrawPoint(p->X(), p->Y()); }
 
 void Renderer::DrawPoints(const std::vector<Point> &points) {
   SDL_RenderDrawPoints(
-    renderer_.get(), std::bit_cast<SDL_Point *>(points.data()), points.size()
+    renderer_.get(),
+    std::bit_cast<SDL_Point *>(points.data()),
+    static_cast<int>(points.size())
   );
 }
 

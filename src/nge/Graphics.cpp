@@ -22,6 +22,11 @@ void Graphics::Draw(const sdl::Point *p) { renderer_.DrawPoint(p); }
 void Graphics::Draw(const std::vector<sdl::Point> &points) {
   renderer_.DrawPoints(points);
 }
+void Graphics::Draw(const std::vector<sdl::Point> &points, sdl::Colour colour) {
+  renderer_.SetDrawColor(colour);
+  renderer_.DrawPoints(points);
+  renderer_.SetDrawColor(background_colour_);
+}
 
 void Graphics::Draw(sdl::Point p1, sdl::Point p2) {
   renderer_.DrawLine(p1, p2);

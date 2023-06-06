@@ -37,6 +37,7 @@ public:
   void Draw(sdl::Point p);
   void Draw(const sdl::Point *p);
   void Draw(const std::vector<sdl::Point> &points);
+  void Draw(const std::vector<sdl::Point> &points, sdl::Colour colour);
 
   void Draw(sdl::Point p1, sdl::Point p2);
   void Draw(const sdl::Point *p1, const sdl::Point *p2);
