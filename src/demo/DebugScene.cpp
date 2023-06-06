@@ -9,6 +9,7 @@
 #include "nge/Components/Animation/FrameAnimationController.h"
 #include "nge/Components/Animation/TimedAnimationController.h"
 #include "nge/Components/BlendedText.h"
+#include "nge/Components/Button.h"
 #include "nge/Components/Keyboard/BasicKeyUser.h"
 #include "nge/Components/Mouse/BasicMouseUser.h"
 #include "nge/Components/Mouse/ClickController.h"
@@ -169,9 +170,6 @@ void DebugScene::Setup() {
   k->press = [&](nge::sdl::Scancode s) {
     std::cout << "Pressed: " << static_cast<uint32_t>(s) << "\n";
   };
-  // k->hold = [&](nge::sdl::Scancode s) {
-  //   std::cout << "Held: " << static_cast<uint32_t>(s) << "\n";
-  // };
   k->release = [&](nge::sdl::Scancode s) {
     std::cout << "Released: " << static_cast<uint32_t>(s) << "\n";
   };
@@ -182,6 +180,27 @@ void DebugScene::Setup() {
     nge::sdl::Rectangle{400, 400, 50, 50},
     nge::sdl::Colour{255, 0, 0, 255}
   ));
+
+  std::shared_ptr<nge::Button> b = std::make_shared<nge::Button>(
+    graphics_,
+    input_,
+    std::make_shared<nge::Text>(
+      graphics_, h1_, "test", nge::sdl::Colour{0, 255, 0, 255}
+    ),
+    []() {
+      std::cout << "button test\n";
+    }
+  );
+  b->SetHoverGraphic(std::make_shared<nge::Text>(
+    graphics_, h1_, "test", nge::sdl::Colour{0, 0, 255, 255}
+  ));
+  b->SetHoldGraphic(std::make_shared<nge::Text>(
+    graphics_, h1_, "test", nge::sdl::Colour{255, 0, 0, 255}
+  ));
+  b->SetPos(500, 500);
+  RegisterDrawable(b);
+  RegisterClickable(b);
+  RegisterHoverable(b);
 
   frame_timer_.Restart();
   scene_timer_.Restart();
