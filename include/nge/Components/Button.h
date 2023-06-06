@@ -16,7 +16,6 @@ class Button : public Drawable, public BasicMouseUser {
 public:
   Button() = delete;
   Button(
-    std::shared_ptr<Graphics> graphics,
     std::shared_ptr<Input> input,
     std::shared_ptr<BasicGraphicsUser> graphic,
     std::function<void(void)> click
@@ -49,7 +48,6 @@ protected:
   std::shared_ptr<BasicGraphicsUser> hover_graphic;
   std::shared_ptr<BasicGraphicsUser> hold_graphic;
 
-  std::shared_ptr<Graphics> graphics;
   std::shared_ptr<Input> input_;
 };
 } // namespace nge

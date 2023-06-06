@@ -38,7 +38,6 @@ void IntroScene::Setup() {
   RegisterDrawable(nge3_demo_app_text_);
 
   pong_button_ = std::make_shared<nge::Button>(
-    graphics_,
     input_,
     std::make_shared<nge::Text>(graphics_, h2_, "Pong"),
     [&]() {
@@ -62,7 +61,6 @@ void IntroScene::Setup() {
   RegisterDrawable(text_select_);
 
   graph_button_ = std::make_shared<nge::Button>(
-    graphics_,
     input_,
     std::make_shared<nge::Text>(graphics_, h2_, "Graph"),
     [&]() {

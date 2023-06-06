@@ -182,7 +182,6 @@ void DebugScene::Setup() {
   ));
 
   std::shared_ptr<nge::Button> b = std::make_shared<nge::Button>(
-    graphics_,
     input_,
     std::make_shared<nge::Text>(
       graphics_, h1_, "test", nge::sdl::Colour{0, 255, 0, 255}

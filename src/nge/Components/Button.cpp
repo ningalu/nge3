@@ -6,7 +6,6 @@
 
 namespace nge {
 Button::Button(
-  std::shared_ptr<Graphics> graphics,
   std::shared_ptr<Input> input,
   std::shared_ptr<BasicGraphicsUser> graphic,
   std::function<void(void)> click
