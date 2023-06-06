@@ -18,13 +18,13 @@ class Rectangle;
 namespace ngl {
 // Point Forward Declaration
 template <Arithmetic T>
-class Point;
+struct Point;
 } // namespace ngl
 
 // Point Declaration
 namespace ngl {
 template <Arithmetic T>
-class Point {
+struct Point {
 public:
   Point();
   Point(T x, T y);
@@ -47,8 +47,12 @@ public:
 
   [[nodiscard]] inline double Distance(Point<T> p) const noexcept;
 
-protected:
-  T x_, y_;
+  Point<T> &operator+=(const Point<T> &rhs);
+  Point<T> &operator-=(const Point<T> &rhs);
+  Point<T> &operator*=(const Point<T> &rhs);
+  Point<T> &operator/=(const Point<T> &rhs);
+
+  T x, y;
 };
 } // namespace ngl
 
@@ -147,55 +151,96 @@ protected:
 // Point Implementation
 namespace ngl {
 template <Arithmetic T>
-Point<T>::Point() : x_(0), y_(0) {}
+Point<T>::Point() : x(0), y(0) {}
 
 template <Arithmetic T>
-Point<T>::Point(T x, T y) : x_(x), y_(y) {}
+Point<T>::Point(T x, T y) : x(x), y(y) {}
 
 template <Arithmetic T>
 Point<T>::Point(std::tuple<T, T> pos)
-    : x_(std::get<0>(pos)), y_(std::get<1>(pos)) {}
+    : x(std::get<0>(pos)), y(std::get<1>(pos)) {}
 
 template <Arithmetic T>
 template <Arithmetic C>
 [[nodiscard]] inline C Point<T>::X() const noexcept {
-  return static_cast<C>(x_);
+  return static_cast<C>(x);
 }
 template <Arithmetic T>
 template <Arithmetic C>
 [[nodiscard]] inline C Point<T>::Y() const noexcept {
-  return static_cast<C>(y_);
+  return static_cast<C>(y);
 }
 
 template <Arithmetic T>
-inline void Point<T>::SetX(T x) noexcept {
-  x_ = x;
+inline void Point<T>::SetX(T new_x) noexcept {
+  x = new_x;
 }
 template <Arithmetic T>
-inline void Point<T>::SetY(T y) noexcept {
-  y_ = y;
+inline void Point<T>::SetY(T new_y) noexcept {
+  y = new_y;
 }
 
 template <Arithmetic T>
 template <Arithmetic C>
-inline void Point<T>::SetX(std::type_identity_t<C> x) noexcept {
-  x_ = static_cast<T>(x);
+inline void Point<T>::SetX(std::type_identity_t<C> new_x) noexcept {
+  this->x = static_cast<T>(new_x);
 }
 template <Arithmetic T>
 template <Arithmetic C>
-inline void Point<T>::SetY(std::type_identity_t<C> y) noexcept {
-  y_ = static_cast<T>(y);
+inline void Point<T>::SetY(std::type_identity_t<C> new_y) noexcept {
+  this->y = static_cast<T>(new_y);
 }
 
 template <Arithmetic T>
 template <Arithmetic C>
 [[nodiscard]] inline bool Point<T>::Within(const Rectangle<C> &r
 ) const noexcept {
-  return r.Encloses(x_, y_);
+  return r.Encloses(x, y);
 }
 template <Arithmetic T>
 [[nodiscard]] inline double Point<T>::Distance(Point<T> p) const noexcept {
-  return std::sqrt(std::pow(x_ - p.X(), 2) + std::pow(y_ - p.Y(), 2));
+  return std::sqrt(std::pow(x - p.X(), 2) + std::pow(y - p.Y(), 2));
+}
+
+template <Arithmetic T>
+Point<T> operator+(const Point<T> &lhs, const Point<T> &rhs) {
+  return Point{lhs.x + rhs.x, lhs.y + rhs.y};
+}
+template <Arithmetic T>
+Point<T> &Point<T>::operator+=(const Point<T> &rhs) {
+  x += rhs.x;
+  y += rhs.y;
+  return *this;
+}
+template <Arithmetic T>
+Point<T> operator-(const Point<T> &lhs, const Point<T> &rhs) {
+  return Point{lhs.x - rhs.x, lhs.y - rhs.y};
+}
+template <Arithmetic T>
+Point<T> &Point<T>::operator-=(const Point<T> &rhs) {
+  x -= rhs.x;
+  y -= rhs.y;
+  return *this;
+}
+template <Arithmetic T>
+Point<T> operator*(const Point<T> &lhs, const Point<T> &rhs) {
+  return Point{lhs.x * rhs.x, lhs.y * rhs.y};
+}
+template <Arithmetic T>
+Point<T> &Point<T>::operator*=(const Point<T> &rhs) {
+  x *= rhs.x;
+  y *= rhs.y;
+  return *this;
+}
+template <Arithmetic T>
+Point<T> operator/(const Point<T> &lhs, const Point<T> &rhs) {
+  return Point{lhs.x / rhs.x, lhs.y / rhs.y};
+}
+template <Arithmetic T>
+Point<T> &Point<T>::operator/=(const Point<T> &rhs) {
+  x /= rhs.x;
+  y /= rhs.y;
+  return *this;
 }
 
 } // namespace ngl
