@@ -1,6 +1,7 @@
 #ifndef MISC_RECTANGLE_HPP
 #define MISC_RECTANGLE_HPP
 
+#include <algorithm>
 #include <tuple>
 #include <type_traits>
 
@@ -43,6 +44,8 @@ public:
 
   template <Arithmetic C>
   [[nodiscard]] inline bool Within(const Rectangle<C> &r) const noexcept;
+
+  [[nodiscard]] inline double Distance(Point<T> p) const noexcept;
 
 protected:
   T x_, y_;
@@ -189,6 +192,10 @@ template <Arithmetic C>
 [[nodiscard]] inline bool Point<T>::Within(const Rectangle<C> &r
 ) const noexcept {
   return r.Encloses(x_, y_);
+}
+template <Arithmetic T>
+[[nodiscard]] inline double Point<T>::Distance(Point<T> p) const noexcept {
+  return std::sqrt(std::pow(x_ - p.X(), 2) + std::pow(y_ - p.Y(), 2));
 }
 
 } // namespace ngl

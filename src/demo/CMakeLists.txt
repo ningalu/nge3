@@ -9,6 +9,8 @@ add_library(
   ./Pong/PongScene.cpp
   ./Pong/Ball.cpp
   ./Pong/Paddle.cpp
+
+  ./Graph/GraphScene.cpp
 )
 
 target_compile_features(

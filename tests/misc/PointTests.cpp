@@ -36,3 +36,14 @@ TEST(PointTests, Within_Enclosed_FullyEnclosed) {
   ngl::Rectangle<int32_t> r{10, 10, 100, 100};
   EXPECT_TRUE(p.Within(r));
 }
+
+TEST(PointTests, Distance_Integer) {
+  ngl::Point<int32_t> p1{0, 0}, p2{1, 1};
+  EXPECT_EQ(p1.Distance(p2), std::sqrt(2));
+  EXPECT_EQ(p1.Distance(p2), p2.Distance(p1));
+}
+TEST(PointTests, Distance_float) {
+  ngl::Point<double> p1{0, 0}, p2{1, 1};
+  EXPECT_EQ(p1.Distance(p2), std::sqrt(2));
+  EXPECT_EQ(p1.Distance(p2), p2.Distance(p1));
+}

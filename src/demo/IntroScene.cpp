@@ -14,6 +14,7 @@
 #include "ngsdl/FontRenderType.h"
 
 #include "demo/DebugScene.h"
+#include "demo/Graph/GraphScene.h"
 #include "demo/Pong/PongScene.h"
 
 namespace demo {
@@ -47,8 +48,8 @@ void IntroScene::Setup() {
   );
   pong_selected_->SetPos(75, 100);
 
-  text_button_
-    = std::make_shared<nge::Composite<nge::Text, nge::BasicMouseUser>>(
+  text_button_ =
+    std::make_shared<nge::Composite<nge::Text, nge::BasicMouseUser>>(
       *pong_normal_, nge::BasicMouseUser{}
     );
   text_button_->SetPos(75, 100);
@@ -61,16 +62,16 @@ void IntroScene::Setup() {
   };
   text_button_->click_valid = text_button_->hover;
 
-  std::shared_ptr<nge::ClickController> c
-    = std::make_shared<nge::ClickController>();
+  std::shared_ptr<nge::ClickController> c =
+    std::make_shared<nge::ClickController>();
   c->click = [&]() {
     std::cout << "pos: " << text_button_->GetPos() << "\n";
     scene_manager_->PushScene(scene_factory_->Create<demo::PongScene>());
   };
   text_button_->AddClickControl(nge::sdl::MouseButton::LEFT, c);
 
-  std::shared_ptr<nge::HoverController> h
-    = std::make_shared<nge::HoverController>();
+  std::shared_ptr<nge::HoverController> h =
+    std::make_shared<nge::HoverController>();
   h->start = [&]() {
     std::cout << "hover start\n";
     text_button_->set<nge::Text>(*pong_selected_);
@@ -84,6 +85,54 @@ void IntroScene::Setup() {
   RegisterDrawable(text_button_);
   RegisterClickable(text_button_);
   RegisterHoverable(text_button_);
+
+  graph_normal_ = std::make_shared<nge::Text>(
+    graphics_, h2_, "Graph", nge::sdl::Colour{0, 0, 0, 255}
+  );
+  graph_normal_->SetPos(75, 150);
+
+  graph_selected_ = std::make_shared<nge::Text>(
+    graphics_, h2_, "Graph", nge::sdl::Colour{100, 100, 100, 255}
+  );
+  graph_selected_->SetPos(75, 150);
+
+  graph_button_ =
+    std::make_shared<nge::Composite<nge::Text, nge::BasicMouseUser>>(
+      *graph_normal_, nge::BasicMouseUser{}
+    );
+  graph_button_->SetPos(75, 150);
+  graph_button_->hover = [&]() {
+    return graph_button_->Overlaps(input_->MouseX(), input_->MouseY());
+  };
+  graph_button_->prev_hover = [&]() {
+    return graph_button_->Overlaps(input_->PrevMouseX(), input_->PrevMouseY());
+  };
+  graph_button_->click_valid = graph_button_->hover;
+  std::shared_ptr<nge::ClickController> graph_click_control =
+    std::make_shared<nge::ClickController>();
+  graph_click_control->click = [&]() {
+    std::cout << "pos: " << graph_button_->GetPos() << "\n";
+    scene_manager_->PushScene(scene_factory_->Create<demo::GraphScene>());
+  };
+  graph_button_->AddClickControl(
+    nge::sdl::MouseButton::LEFT, graph_click_control
+  );
+
+  std::shared_ptr<nge::HoverController> graph_hover_control =
+    std::make_shared<nge::HoverController>();
+  graph_hover_control->start = [&]() {
+    std::cout << "hover start\n";
+    graph_button_->set<nge::Text>(*graph_selected_);
+  };
+  graph_hover_control->release = [&]() {
+    std::cout << "hover end\n";
+    graph_button_->set<nge::Text>(*graph_normal_);
+  };
+  graph_button_->SetHoverControl(graph_hover_control);
+
+  RegisterDrawable(graph_button_);
+  RegisterClickable(graph_button_);
+  RegisterHoverable(graph_button_);
 
   text_select_ = std::make_shared<nge::AtlasAnimation>(
     graphics_,
