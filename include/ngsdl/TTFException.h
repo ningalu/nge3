@@ -1,5 +1,5 @@
-#ifndef NGE3_NGSDL_TTFEXCEPTION_H
-#define NGE3_NGSDL_TTFEXCEPTION_H
+#ifndef NGSDL_TTFEXCEPTION_H
+#define NGSDL_TTFEXCEPTION_H
 
 #include <stdexcept>
 #include <string>
