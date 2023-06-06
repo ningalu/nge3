@@ -35,4 +35,6 @@ void ClickController::OnRelease() {
     }
   }
 }
+
+[[nodiscard]] bool ClickController::Held() const noexcept { return held_; }
 } // namespace nge
