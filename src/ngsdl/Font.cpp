@@ -17,74 +17,96 @@ Font::Font(const std::string &filename, int point_size)
   font_.reset(f);
 }
 
-Texture Font::CreateBlendedTexture(
+[[nodiscard]] Texture Font::CreateBlendedTexture(
+  const Renderer &renderer, const std::string &text, Colour colour
+) {
+  SDL_Surface *temp_surf;
+  temp_surf = TTF_RenderText_Blended(
+    font_.get(), text.c_str(), std::bit_cast<SDL_Colour>(colour)
+  );
+  SDL_Texture *temp_tex =
+    TextureFromSurface(renderer.renderer_.get(), temp_surf);
+  SDL_FreeSurface(temp_surf);
+  return Texture{temp_tex};
+}
+[[nodiscard]] Texture Font::CreateBlendedTexture(
   const Renderer &renderer,
   const std::string &text,
   Colour colour,
-  std::optional<uint32_t> wrap_length
+  uint32_t wrap_length
 ) {
   SDL_Surface *temp_surf;
-  if (wrap_length == std::nullopt) {
-    temp_surf = TTF_RenderText_Blended(
-      font_.get(), text.c_str(), std::bit_cast<SDL_Colour>(colour)
-    );
-  } else {
-    temp_surf = TTF_RenderText_Blended_Wrapped(
-      font_.get(), text.c_str(), std::bit_cast<SDL_Colour>(colour), *wrap_length
-    );
-  }
+  temp_surf = TTF_RenderText_Blended_Wrapped(
+    font_.get(), text.c_str(), std::bit_cast<SDL_Colour>(colour), wrap_length
+  );
   SDL_Texture *temp_tex =
     TextureFromSurface(renderer.renderer_.get(), temp_surf);
   SDL_FreeSurface(temp_surf);
   return Texture{temp_tex};
 }
 
-Texture Font::CreateShadedTexture(
+[[nodiscard]] Texture Font::CreateShadedTexture(
+  const Renderer &renderer,
+  const std::string &text,
+  Colour foreground,
+  Colour background
+) {
+  SDL_Surface *temp_surf;
+  temp_surf = TTF_RenderText_Shaded(
+    font_.get(),
+    text.c_str(),
+    std::bit_cast<SDL_Colour>(foreground),
+    std::bit_cast<SDL_Colour>(background)
+  );
+  SDL_Texture *temp_tex =
+    TextureFromSurface(renderer.renderer_.get(), temp_surf);
+  SDL_FreeSurface(temp_surf);
+  return Texture{temp_tex};
+}
+
+[[nodiscard]] Texture Font::CreateShadedTexture(
   const Renderer &renderer,
   const std::string &text,
   Colour foreground,
   Colour background,
-  std::optional<uint32_t> wrap_length
+  uint32_t wrap_length
 ) {
   SDL_Surface *temp_surf;
-  if (wrap_length == std::nullopt) {
-    temp_surf = TTF_RenderText_Shaded(
-      font_.get(),
-      text.c_str(),
-      std::bit_cast<SDL_Colour>(foreground),
-      std::bit_cast<SDL_Colour>(background)
-    );
-  } else {
-    temp_surf = TTF_RenderText_Shaded_Wrapped(
-      font_.get(),
-      text.c_str(),
-      std::bit_cast<SDL_Colour>(foreground),
-      std::bit_cast<SDL_Colour>(background),
-      *wrap_length
-    );
-  }
+  temp_surf = TTF_RenderText_Shaded_Wrapped(
+    font_.get(),
+    text.c_str(),
+    std::bit_cast<SDL_Colour>(foreground),
+    std::bit_cast<SDL_Colour>(background),
+    wrap_length
+  );
   SDL_Texture *temp_tex =
     TextureFromSurface(renderer.renderer_.get(), temp_surf);
   SDL_FreeSurface(temp_surf);
   return Texture{temp_tex};
 }
 
-Texture Font::CreateSolidTexture(
+[[nodiscard]] Texture Font::CreateSolidTexture(
+  const Renderer &renderer, const std::string &text, Colour colour
+) {
+  SDL_Surface *temp_surf;
+  temp_surf = TTF_RenderText_Solid(
+    font_.get(), text.c_str(), std::bit_cast<SDL_Colour>(colour)
+  );
+  SDL_Texture *temp_tex =
+    TextureFromSurface(renderer.renderer_.get(), temp_surf);
+  SDL_FreeSurface(temp_surf);
+  return Texture{temp_tex};
+}
+[[nodiscard]] Texture Font::CreateSolidTexture(
   const Renderer &renderer,
   const std::string &text,
   Colour colour,
-  std::optional<uint32_t> wrap_length
+  uint32_t wrap_length
 ) {
   SDL_Surface *temp_surf;
-  if (wrap_length == std::nullopt) {
-    temp_surf = TTF_RenderText_Solid(
-      font_.get(), text.c_str(), std::bit_cast<SDL_Colour>(colour)
-    );
-  } else {
-    temp_surf = TTF_RenderText_Solid_Wrapped(
-      font_.get(), text.c_str(), std::bit_cast<SDL_Colour>(colour), *wrap_length
-    );
-  }
+  temp_surf = TTF_RenderText_Solid_Wrapped(
+    font_.get(), text.c_str(), std::bit_cast<SDL_Colour>(colour), wrap_length
+  );
   SDL_Texture *temp_tex =
     TextureFromSurface(renderer.renderer_.get(), temp_surf);
   SDL_FreeSurface(temp_surf);

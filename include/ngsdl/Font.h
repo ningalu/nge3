@@ -16,40 +16,53 @@ class Font {
   friend class Texture;
 
 public:
-  // Font() = delete;
-  // Font(const Font &) = delete;
+  Font() = delete;
+  Font(const Font &) = default;
   // Font &operator=(const Font &) = delete;
   Font(const std::string &filename, int point_size);
 
   // TTF_RenderText_Blended
+  [[nodiscard]] Texture CreateBlendedTexture(
+    const Renderer &renderer, const std::string &text, Colour colour
+  );
+
   // TTF_RenderText_Blended_Wrapped
-  Texture CreateBlendedTexture(
+  [[nodiscard]] Texture CreateBlendedTexture(
     const Renderer &renderer,
     const std::string &text,
     Colour colour,
-    std::optional<uint32_t> wrap_length = std::nullopt
+    uint32_t wrap_length
   );
 
   // TTF_RenderText_LCD
   // TTF_RenderText_LCD_Wrapped
 
   // TTF_RenderText_Shaded
+  [[nodiscard]] Texture CreateShadedTexture(
+    const Renderer &renderer,
+    const std::string &text,
+    Colour foreground,
+    Colour background
+  );
   // TTF_RenderText_Shaded_Wrapped
-  Texture CreateShadedTexture(
+  [[nodiscard]] Texture CreateShadedTexture(
     const Renderer &renderer,
     const std::string &text,
     Colour foreground,
     Colour background,
-    std::optional<uint32_t> wrap_length = std::nullopt
+    uint32_t wrap_length
   );
 
   // TTF_RenderText_Solid
+  [[nodiscard]] Texture CreateSolidTexture(
+    const Renderer &renderer, const std::string &text, Colour colour
+  );
   // TTF_RenderText_Solid_Wrapped
-  Texture CreateSolidTexture(
+  [[nodiscard]] Texture CreateSolidTexture(
     const Renderer &renderer,
     const std::string &text,
     Colour colour,
-    std::optional<uint32_t> wrap_length = std::nullopt
+    uint32_t wrap_length
   );
 
   // IMG_SetFontSize
