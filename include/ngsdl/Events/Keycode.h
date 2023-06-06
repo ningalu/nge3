@@ -1,5 +1,5 @@
-#ifndef NGSDL_EVENTS_H
-#define NGSDL_EVENTS_H
+#ifndef NGSDL_EVENTS_KEYCODE_H
+#define NGSDL_EVENTS_KEYCODE_H
 
 #include <SDL2/SDL.h>
 

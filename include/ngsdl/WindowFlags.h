@@ -1,5 +1,5 @@
-#ifndef NGE3_SDL_WINDOWFLAGS_H
-#define NGE3_SDL_WINDOWFLAGS_H
+#ifndef SDL_WINDOWFLAGS_H
+#define SDL_WINDOWFLAGS_H
 
 #include <SDL2/SDL.h>
 
