@@ -8,7 +8,7 @@
 
 using nge::sdl::Colour;
 
-TEST(PointTests, Layout) {
+TEST(ColorTests, Layout) {
   static_assert(
     std::is_standard_layout<Colour>::value,
     "nge::sdl::Colour is not standard layout and won't interop with SDL_Color "
@@ -20,7 +20,7 @@ TEST(PointTests, Layout) {
     "correctly"
   );
 }
-TEST(PointTests, Interop) {
+TEST(ColorTests, Interop) {
   Colour c1 = Colour{56, 73, 14, 255};
   SDL_Color c2 = std::bit_cast<SDL_Color>(c1);
   ASSERT_EQ(c1.r, c2.r);

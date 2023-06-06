@@ -2,10 +2,11 @@
 
 #include "SDL2/SDL_ttf.h"
 
-#include "ngsdl/SDLException.h"
-#include "ngsdl/TTFException.h"
-
 #include "ngsdl/Renderer.h"
+#include "ngsdl/SDLException.h"
+#include "ngsdl/Surface.h"
+#include "ngsdl/TTFException.h"
+#include "ngsdl/Texture.h"
 
 namespace nge::sdl {
 Font::Font(const std::string &filename, int point_size)
@@ -20,14 +21,12 @@ Font::Font(const std::string &filename, int point_size)
 [[nodiscard]] Texture Font::CreateBlendedTexture(
   const Renderer &renderer, const std::string &text, Colour colour
 ) {
-  SDL_Surface *temp_surf;
-  temp_surf = TTF_RenderText_Blended(
+  std::unique_ptr<Surface, decltype(&SDL_FreeSurface)> temp_surf{
+    nullptr, SDL_FreeSurface};
+  temp_surf.reset(static_cast<Surface *>(TTF_RenderText_Blended(
     font_.get(), text.c_str(), std::bit_cast<SDL_Colour>(colour)
-  );
-  SDL_Texture *temp_tex =
-    TextureFromSurface(renderer.renderer_.get(), temp_surf);
-  SDL_FreeSurface(temp_surf);
-  return Texture{temp_tex};
+  )));
+  return Texture{renderer, temp_surf};
 }
 [[nodiscard]] Texture Font::CreateBlendedTexture(
   const Renderer &renderer,

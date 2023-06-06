@@ -16,6 +16,7 @@
 namespace nge::sdl {
 class Renderer;
 class Font;
+class Surface;
 class Texture {
   friend class Renderer;
   friend class Font;
@@ -24,6 +25,11 @@ public:
   // SDL_CreateTexture
   Texture(
     const Renderer &renderer, uint32_t format, int access, int32_t w, int32_t h
+  );
+  Texture(const Renderer &renderer, Surface &surf);
+  Texture(
+    const Renderer &renderer,
+    std::unique_ptr<Surface, decltype(&SDL_FreeSurface)> &surf
   );
 
   // Internal SDL_Texture* could get deleted if you can copy from a Texture;

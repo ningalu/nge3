@@ -9,9 +9,11 @@
 #include "ngsdl/Font.h"
 #include "ngsdl/Renderer.h"
 #include "ngsdl/SDLException.h"
+#include "ngsdl/Surface.h"
 #include "ngsdl/TTFException.h"
 
 namespace nge::sdl {
+
 Texture::Texture(
   const Renderer &renderer, uint32_t format, int access, int32_t w, int32_t h
 )
@@ -19,6 +21,26 @@ Texture::Texture(
   texture_.reset(
     SDL_CreateTexture(renderer.renderer_.get(), format, access, w, h)
   );
+}
+
+Texture::Texture(const Renderer &renderer, Surface &surf)
+    : texture_(nullptr, SDL_DestroyTexture) {
+  texture_.reset(SDL_CreateTextureFromSurface(renderer.renderer_.get(), &surf));
+  if (texture_ == nullptr) {
+    throw SDLException("Texture couldn't be created from Surface");
+  }
+}
+Texture::Texture(
+  const Renderer &renderer,
+  std::unique_ptr<Surface, decltype(&SDL_FreeSurface)> &surf
+)
+    : texture_(nullptr, SDL_DestroyTexture) {
+  texture_.reset(
+    SDL_CreateTextureFromSurface(renderer.renderer_.get(), surf.get())
+  );
+  if (texture_ == nullptr) {
+    throw SDLException("Texture couldn't be created from Surface");
+  }
 }
 
 Texture::Texture(const Renderer &renderer, std::string filename)
