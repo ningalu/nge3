@@ -15,6 +15,7 @@
 #include "ngsdl/RendererFlags.h"
 #include "ngsdl/RendererFlip.h"
 #include "ngsdl/SDLException.h"
+#include "ngsdl/Surface.h"
 #include "ngsdl/Texture.h"
 #include "ngsdl/Timer.h"
 #include "ngsdl/Window.h"
@@ -61,10 +62,9 @@ int main(int argc, char **argv) {
 
     sdl::Texture text1{
       r,
-      font,
-      "font test",
-      sdl::FontRenderType::SOLID,
-      sdl::Colour{216, 191, 216, 255}};
+      sdl::Surface::TextSolid(
+        font, "font test", sdl::Colour{216, 191, 216, 255}
+      )};
 
     sdl::Texture text2 =
       font.CreateShadedTexture(r, "shaded", {0, 255, 0, 255}, {0, 0, 255, 255});

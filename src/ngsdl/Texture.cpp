@@ -9,9 +9,11 @@
 #include "ngsdl/Font.h"
 #include "ngsdl/Renderer.h"
 #include "ngsdl/SDLException.h"
+#include "ngsdl/Surface.h"
 #include "ngsdl/TTFException.h"
 
 namespace nge::sdl {
+
 Texture::Texture(
   const Renderer &renderer, uint32_t format, int access, int32_t w, int32_t h
 )
@@ -21,91 +23,41 @@ Texture::Texture(
   );
 }
 
+Texture::Texture(const Renderer &renderer, Surface &surf)
+    : texture_(nullptr, SDL_DestroyTexture) {
+  texture_.reset(SDL_CreateTextureFromSurface(renderer.renderer_.get(), &surf));
+  if (texture_ == nullptr) {
+    throw SDLException("Texture couldn't be created from Surface");
+  }
+}
+Texture::Texture(
+  const Renderer &renderer,
+  std::unique_ptr<Surface, decltype(&SDL_FreeSurface)> &surf
+)
+    : texture_(nullptr, SDL_DestroyTexture) {
+  texture_.reset(
+    SDL_CreateTextureFromSurface(renderer.renderer_.get(), surf.get())
+  );
+  if (texture_ == nullptr) {
+    throw SDLException("Texture couldn't be created from Surface");
+  }
+}
+Texture::Texture(
+  const Renderer &renderer,
+  std::unique_ptr<Surface, decltype(&SDL_FreeSurface)> &&surf
+)
+    : texture_(nullptr, SDL_DestroyTexture) {
+  texture_.reset(
+    SDL_CreateTextureFromSurface(renderer.renderer_.get(), surf.get())
+  );
+  if (texture_ == nullptr) {
+    throw SDLException("Texture couldn't be created from Surface");
+  }
+}
+
 Texture::Texture(const Renderer &renderer, std::string filename)
     : texture_(nullptr, SDL_DestroyTexture) {
   texture_.reset(IMG_LoadTexture(renderer.renderer_.get(), filename.c_str()));
-}
-
-Texture::Texture(
-  const Renderer &renderer,
-  const Font &font,
-  const std::string &text,
-  FontRenderType type,
-  Color color,
-  Color bg
-)
-    : texture_(nullptr, SDL_DestroyTexture) {
-  // no real reason to use library objects internally
-  SDL_Surface *temp_surf = nullptr;
-  switch (type) {
-  case FontRenderType::SOLID:
-    temp_surf
-      = TTF_RenderText_Solid(font.font_.get(), text.c_str(), color.color_);
-    break;
-  case FontRenderType::BLENDED:
-    temp_surf
-      = TTF_RenderText_Blended(font.font_.get(), text.c_str(), color.color_);
-    break;
-  case FontRenderType::SHADED:
-    temp_surf = TTF_RenderText_Shaded(
-      font.font_.get(), text.c_str(), color.color_, bg.color_
-    );
-    break;
-  default:
-    break;
-  }
-  if (temp_surf == nullptr) {
-    throw TTFException("Surface couldn't be created from Font");
-  }
-  SDL_Texture *temp_tex
-    = SDL_CreateTextureFromSurface(renderer.renderer_.get(), temp_surf);
-  if (temp_tex == nullptr) {
-    throw SDLException("Texture couldn't be created from Surface");
-  }
-  SDL_FreeSurface(temp_surf);
-  texture_.reset(temp_tex);
-}
-
-Texture::Texture(
-  const Renderer &renderer,
-  const Font &font,
-  const std::string &text,
-  FontRenderType type,
-  Color color,
-  uint32_t wrap_length,
-  Color bg
-)
-    : texture_(nullptr, SDL_DestroyTexture) {
-  SDL_Surface *temp_surf = nullptr;
-  switch (type) {
-  case FontRenderType::SOLID:
-    temp_surf = TTF_RenderText_Solid_Wrapped(
-      font.font_.get(), text.c_str(), color.color_, wrap_length
-    );
-    break;
-  case FontRenderType::BLENDED:
-    temp_surf = TTF_RenderText_Blended_Wrapped(
-      font.font_.get(), text.c_str(), color.color_, wrap_length
-    );
-    break;
-  case FontRenderType::SHADED:
-    temp_surf = TTF_RenderText_Shaded_Wrapped(
-      font.font_.get(), text.c_str(), color.color_, bg.color_, wrap_length
-    );
-    break;
-  default:
-    break;
-  }
-  if (temp_surf == nullptr) {
-    throw TTFException("Surface couldn't be created from Font");
-  }
-  SDL_Texture *temp_tex
-    = SDL_CreateTextureFromSurface(renderer.renderer_.get(), temp_surf);
-  if (temp_tex == nullptr) {
-    throw SDLException("Texture couldn't be created from Surface");
-  }
-  SDL_FreeSurface(temp_surf);
-  texture_.reset(temp_tex);
 }
 
 Texture::Texture(SDL_Texture *texture)

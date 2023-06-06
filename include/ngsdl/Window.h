@@ -1,5 +1,5 @@
-#ifndef NGE3_NGSDL_WINDOW_H
-#define NGE3_NGSDL_WINDOW_H
+#ifndef NGSDL_WINDOW_H
+#define NGSDL_WINDOW_H
 
 #include <memory>
 #include <string>

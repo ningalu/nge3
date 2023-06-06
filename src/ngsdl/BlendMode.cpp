@@ -1,23 +1,24 @@
 #include "ngsdl/BlendMode.h"
 
 namespace nge::sdl {
-std::ostream &operator<<(std::ostream &os, const BlendMode blend) {
+std::ostream &operator<<(std::ostream &os, BlendMode blend) {
   switch (blend) {
   case sdl::BlendMode::ADD:
     os << "ADD";
-    return os;
+    break;
   case sdl::BlendMode::BLEND:
     os << "BLEND";
-    return os;
+    break;
   case sdl::BlendMode::MOD:
     os << "MOD";
-    return os;
+    break;
   case sdl::BlendMode::NONE:
     os << "NONE";
-    return os;
+    break;
   default:
     os << "Unknown BlendMode";
-    return os;
+    break;
   }
+  return os;
 }
 } // namespace nge::sdl

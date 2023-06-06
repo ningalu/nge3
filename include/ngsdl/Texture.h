@@ -16,6 +16,7 @@
 namespace nge::sdl {
 class Renderer;
 class Font;
+class Surface;
 class Texture {
   friend class Renderer;
   friend class Font;
@@ -26,6 +27,16 @@ public:
     const Renderer &renderer, uint32_t format, int access, int32_t w, int32_t h
   );
 
+  Texture(const Renderer &renderer, Surface &surf);
+  Texture(
+    const Renderer &renderer,
+    std::unique_ptr<Surface, decltype(&SDL_FreeSurface)> &surf
+  );
+  Texture(
+    const Renderer &renderer,
+    std::unique_ptr<Surface, decltype(&SDL_FreeSurface)> &&surf
+  );
+
   // Internal SDL_Texture* could get deleted if you can copy from a Texture;
   // Textures must exclusively own their SDL_Texture*
   Texture(const Texture &) = delete;
@@ -33,33 +44,6 @@ public:
 
   // IMG_LoadTexture
   Texture(const Renderer &renderer, std::string filename);
-
-  // TTF_RenderText_Blended
-  // TTF_RenderText_LCD
-  // TTF_RenderText_Shaded
-  // TTF_RenderText_Solid
-  Texture(
-    const Renderer &renderer,
-    const Font &font,
-    const std::string &text,
-    FontRenderType type,
-    Color color,
-    Color bg = {0, 0, 0, 0}
-  );
-
-  // TTF_RenderText_Blended_Wrapped
-  // TTF_RenderText_LCD_Wrapped
-  // TTF_RenderText_Shaded_Wrapped
-  // TTF_RenderText_Solid_Wrapped
-  Texture(
-    const Renderer &renderer,
-    const Font &font,
-    const std::string &text,
-    FontRenderType type,
-    Color color,
-    uint32_t wrap_length,
-    Color bg = {0, 0, 0, 0}
-  );
 
   // SDL_GetTextureAlphaMod
   // SDL_SetTextureAlphaMod

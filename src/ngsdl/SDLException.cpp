@@ -1,6 +1,6 @@
 #include "ngsdl/SDLException.h"
 
-// #include <format>
+#include "fmt/format.h"
 
 #include <SDL2/SDL.h>
 
@@ -8,8 +8,7 @@ namespace nge::sdl {
 SDLException::SDLException(std::string msg) : message_(msg) {}
 const char *SDLException::what() const noexcept {
 
-  // what_
-  //   = "Message: " + message_ + "\nSDL Error: " + std::string(SDL_GetError());
-  return what_.c_str();
+  return fmt::format("Message: {0}\nSDL Error: {1}", message_, SDL_GetError())
+    .c_str();
 }
 } // namespace nge::sdl

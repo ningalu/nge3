@@ -13,15 +13,7 @@ class Point : public ngl::Point<int32_t> {
 
 public:
   using ngl::Point<int32_t>::Point;
-
-  Point operator+(const Point &rhs);
-  Point &operator+=(const Point &rhs);
-  Point operator-(const Point &rhs);
-  Point &operator-=(const Point &rhs);
-  Point operator*(const Point &rhs);
-  Point &operator*=(const Point &rhs);
-  Point operator/(const Point &rhs);
-  Point &operator/=(const Point &rhs);
+  Point(const ngl::Point<int32_t> &p);
 };
 
 // finnicky about const

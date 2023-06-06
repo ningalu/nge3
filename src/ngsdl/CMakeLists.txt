@@ -16,6 +16,7 @@ add_library(
   ./Font.cpp
   ./Init.cpp
   ./InitFlags.cpp
+  ./Surface.cpp
 
   ./Events/Event.cpp
   ./Events/EventQueue.cpp
