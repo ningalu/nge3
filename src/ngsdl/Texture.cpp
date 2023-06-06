@@ -39,16 +39,21 @@ Texture::Texture(
   SDL_Surface *temp_surf = nullptr;
   switch (type) {
   case FontRenderType::SOLID:
-    temp_surf
-      = TTF_RenderText_Solid(font.font_.get(), text.c_str(), color.color_);
+    temp_surf = TTF_RenderText_Solid(
+      font.font_.get(), text.c_str(), std::bit_cast<SDL_Color>(color)
+    );
     break;
   case FontRenderType::BLENDED:
-    temp_surf
-      = TTF_RenderText_Blended(font.font_.get(), text.c_str(), color.color_);
+    temp_surf = TTF_RenderText_Blended(
+      font.font_.get(), text.c_str(), std::bit_cast<SDL_Color>(color)
+    );
     break;
   case FontRenderType::SHADED:
     temp_surf = TTF_RenderText_Shaded(
-      font.font_.get(), text.c_str(), color.color_, bg.color_
+      font.font_.get(),
+      text.c_str(),
+      std::bit_cast<SDL_Color>(color),
+      std::bit_cast<SDL_Color>(bg)
     );
     break;
   default:
@@ -57,8 +62,8 @@ Texture::Texture(
   if (temp_surf == nullptr) {
     throw TTFException("Surface couldn't be created from Font");
   }
-  SDL_Texture *temp_tex
-    = SDL_CreateTextureFromSurface(renderer.renderer_.get(), temp_surf);
+  SDL_Texture *temp_tex =
+    SDL_CreateTextureFromSurface(renderer.renderer_.get(), temp_surf);
   if (temp_tex == nullptr) {
     throw SDLException("Texture couldn't be created from Surface");
   }
@@ -80,17 +85,27 @@ Texture::Texture(
   switch (type) {
   case FontRenderType::SOLID:
     temp_surf = TTF_RenderText_Solid_Wrapped(
-      font.font_.get(), text.c_str(), color.color_, wrap_length
+      font.font_.get(),
+      text.c_str(),
+      std::bit_cast<SDL_Color>(color),
+      wrap_length
     );
     break;
   case FontRenderType::BLENDED:
     temp_surf = TTF_RenderText_Blended_Wrapped(
-      font.font_.get(), text.c_str(), color.color_, wrap_length
+      font.font_.get(),
+      text.c_str(),
+      std::bit_cast<SDL_Color>(color),
+      wrap_length
     );
     break;
   case FontRenderType::SHADED:
     temp_surf = TTF_RenderText_Shaded_Wrapped(
-      font.font_.get(), text.c_str(), color.color_, bg.color_, wrap_length
+      font.font_.get(),
+      text.c_str(),
+      std::bit_cast<SDL_Color>(color),
+      std::bit_cast<SDL_Color>(bg),
+      wrap_length
     );
     break;
   default:
@@ -99,8 +114,8 @@ Texture::Texture(
   if (temp_surf == nullptr) {
     throw TTFException("Surface couldn't be created from Font");
   }
-  SDL_Texture *temp_tex
-    = SDL_CreateTextureFromSurface(renderer.renderer_.get(), temp_surf);
+  SDL_Texture *temp_tex =
+    SDL_CreateTextureFromSurface(renderer.renderer_.get(), temp_surf);
   if (temp_tex == nullptr) {
     throw SDLException("Texture couldn't be created from Surface");
   }

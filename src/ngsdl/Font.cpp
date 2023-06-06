@@ -20,19 +20,21 @@ Font::Font(const std::string &filename, int point_size)
 Texture Font::CreateBlendedTexture(
   const Renderer &renderer,
   const std::string &text,
-  Color color,
+  Colour colour,
   std::optional<uint32_t> wrap_length
 ) {
   SDL_Surface *temp_surf;
   if (wrap_length == std::nullopt) {
-    temp_surf = TTF_RenderText_Blended(font_.get(), text.c_str(), color.color_);
+    temp_surf = TTF_RenderText_Blended(
+      font_.get(), text.c_str(), std::bit_cast<SDL_Colour>(colour)
+    );
   } else {
     temp_surf = TTF_RenderText_Blended_Wrapped(
-      font_.get(), text.c_str(), color.color_, *wrap_length
+      font_.get(), text.c_str(), std::bit_cast<SDL_Colour>(colour), *wrap_length
     );
   }
-  SDL_Texture *temp_tex
-    = TextureFromSurface(renderer.renderer_.get(), temp_surf);
+  SDL_Texture *temp_tex =
+    TextureFromSurface(renderer.renderer_.get(), temp_surf);
   SDL_FreeSurface(temp_surf);
   return Texture{temp_tex};
 }
@@ -40,26 +42,29 @@ Texture Font::CreateBlendedTexture(
 Texture Font::CreateShadedTexture(
   const Renderer &renderer,
   const std::string &text,
-  Color foreground,
-  Color background,
+  Colour foreground,
+  Colour background,
   std::optional<uint32_t> wrap_length
 ) {
   SDL_Surface *temp_surf;
   if (wrap_length == std::nullopt) {
     temp_surf = TTF_RenderText_Shaded(
-      font_.get(), text.c_str(), foreground.color_, background.color_
+      font_.get(),
+      text.c_str(),
+      std::bit_cast<SDL_Colour>(foreground),
+      std::bit_cast<SDL_Colour>(background)
     );
   } else {
     temp_surf = TTF_RenderText_Shaded_Wrapped(
       font_.get(),
       text.c_str(),
-      foreground.color_,
-      background.color_,
+      std::bit_cast<SDL_Colour>(foreground),
+      std::bit_cast<SDL_Colour>(background),
       *wrap_length
     );
   }
-  SDL_Texture *temp_tex
-    = TextureFromSurface(renderer.renderer_.get(), temp_surf);
+  SDL_Texture *temp_tex =
+    TextureFromSurface(renderer.renderer_.get(), temp_surf);
   SDL_FreeSurface(temp_surf);
   return Texture{temp_tex};
 }
@@ -67,25 +72,28 @@ Texture Font::CreateShadedTexture(
 Texture Font::CreateSolidTexture(
   const Renderer &renderer,
   const std::string &text,
-  Color color,
+  Colour colour,
   std::optional<uint32_t> wrap_length
 ) {
   SDL_Surface *temp_surf;
   if (wrap_length == std::nullopt) {
-    temp_surf = TTF_RenderText_Solid(font_.get(), text.c_str(), color.color_);
+    temp_surf = TTF_RenderText_Solid(
+      font_.get(), text.c_str(), std::bit_cast<SDL_Colour>(colour)
+    );
   } else {
     temp_surf = TTF_RenderText_Solid_Wrapped(
-      font_.get(), text.c_str(), color.color_, *wrap_length
+      font_.get(), text.c_str(), std::bit_cast<SDL_Colour>(colour), *wrap_length
     );
   }
-  SDL_Texture *temp_tex
-    = TextureFromSurface(renderer.renderer_.get(), temp_surf);
+  SDL_Texture *temp_tex =
+    TextureFromSurface(renderer.renderer_.get(), temp_surf);
   SDL_FreeSurface(temp_surf);
   return Texture{temp_tex};
 }
 
-SDL_Texture *
-Font::TextureFromSurface(SDL_Renderer *renderer, SDL_Surface *surf) {
+SDL_Texture *Font::TextureFromSurface(
+  SDL_Renderer *renderer, SDL_Surface *surf
+) {
   if (surf == nullptr) {
     throw TTFException("Surface couldn't be created from Font");
   }

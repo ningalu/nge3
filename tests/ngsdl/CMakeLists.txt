@@ -1,6 +1,9 @@
 add_executable(
     unit_tests
+
     ./PointTests.cpp
+    ./ColorTests.cpp
+    
     ./Events/KeyModTests.cpp
 )
 target_compile_features(
