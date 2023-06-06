@@ -21,12 +21,7 @@ Font::Font(const std::string &filename, int point_size)
 [[nodiscard]] Texture Font::CreateBlendedTexture(
   const Renderer &renderer, const std::string &text, Colour colour
 ) {
-  std::unique_ptr<Surface, decltype(&SDL_FreeSurface)> temp_surf{
-    nullptr, SDL_FreeSurface};
-  temp_surf.reset(static_cast<Surface *>(TTF_RenderText_Blended(
-    font_.get(), text.c_str(), std::bit_cast<SDL_Colour>(colour)
-  )));
-  return Texture{renderer, temp_surf};
+  return Texture{renderer, Surface::TextBlended(this, text, colour)};
 }
 [[nodiscard]] Texture Font::CreateBlendedTexture(
   const Renderer &renderer,
@@ -34,14 +29,8 @@ Font::Font(const std::string &filename, int point_size)
   Colour colour,
   uint32_t wrap_length
 ) {
-  SDL_Surface *temp_surf;
-  temp_surf = TTF_RenderText_Blended_Wrapped(
-    font_.get(), text.c_str(), std::bit_cast<SDL_Colour>(colour), wrap_length
-  );
-  SDL_Texture *temp_tex =
-    TextureFromSurface(renderer.renderer_.get(), temp_surf);
-  SDL_FreeSurface(temp_surf);
-  return Texture{temp_tex};
+  return Texture{
+    renderer, Surface::TextBlended(this, text, colour, wrap_length)};
 }
 
 [[nodiscard]] Texture Font::CreateShadedTexture(
@@ -50,17 +39,8 @@ Font::Font(const std::string &filename, int point_size)
   Colour foreground,
   Colour background
 ) {
-  SDL_Surface *temp_surf;
-  temp_surf = TTF_RenderText_Shaded(
-    font_.get(),
-    text.c_str(),
-    std::bit_cast<SDL_Colour>(foreground),
-    std::bit_cast<SDL_Colour>(background)
-  );
-  SDL_Texture *temp_tex =
-    TextureFromSurface(renderer.renderer_.get(), temp_surf);
-  SDL_FreeSurface(temp_surf);
-  return Texture{temp_tex};
+  return Texture{
+    renderer, Surface::TextShaded(this, text, foreground, background)};
 }
 
 [[nodiscard]] Texture Font::CreateShadedTexture(
@@ -70,31 +50,15 @@ Font::Font(const std::string &filename, int point_size)
   Colour background,
   uint32_t wrap_length
 ) {
-  SDL_Surface *temp_surf;
-  temp_surf = TTF_RenderText_Shaded_Wrapped(
-    font_.get(),
-    text.c_str(),
-    std::bit_cast<SDL_Colour>(foreground),
-    std::bit_cast<SDL_Colour>(background),
-    wrap_length
-  );
-  SDL_Texture *temp_tex =
-    TextureFromSurface(renderer.renderer_.get(), temp_surf);
-  SDL_FreeSurface(temp_surf);
-  return Texture{temp_tex};
+  return Texture{
+    renderer,
+    Surface::TextShaded(this, text, foreground, background, wrap_length)};
 }
 
 [[nodiscard]] Texture Font::CreateSolidTexture(
   const Renderer &renderer, const std::string &text, Colour colour
 ) {
-  SDL_Surface *temp_surf;
-  temp_surf = TTF_RenderText_Solid(
-    font_.get(), text.c_str(), std::bit_cast<SDL_Colour>(colour)
-  );
-  SDL_Texture *temp_tex =
-    TextureFromSurface(renderer.renderer_.get(), temp_surf);
-  SDL_FreeSurface(temp_surf);
-  return Texture{temp_tex};
+  return Texture{renderer, Surface::TextBlended(this, text, colour)};
 }
 [[nodiscard]] Texture Font::CreateSolidTexture(
   const Renderer &renderer,
@@ -102,27 +66,8 @@ Font::Font(const std::string &filename, int point_size)
   Colour colour,
   uint32_t wrap_length
 ) {
-  SDL_Surface *temp_surf;
-  temp_surf = TTF_RenderText_Solid_Wrapped(
-    font_.get(), text.c_str(), std::bit_cast<SDL_Colour>(colour), wrap_length
-  );
-  SDL_Texture *temp_tex =
-    TextureFromSurface(renderer.renderer_.get(), temp_surf);
-  SDL_FreeSurface(temp_surf);
-  return Texture{temp_tex};
-}
-
-SDL_Texture *Font::TextureFromSurface(
-  SDL_Renderer *renderer, SDL_Surface *surf
-) {
-  if (surf == nullptr) {
-    throw TTFException("Surface couldn't be created from Font");
-  }
-  SDL_Texture *temp_tex = SDL_CreateTextureFromSurface(renderer, surf);
-  if (temp_tex == nullptr) {
-    throw SDLException("Texture couldn't be created from Surface");
-  }
-  return temp_tex;
+  return Texture{
+    renderer, Surface::TextBlended(this, text, colour, wrap_length)};
 }
 
 void Font::SetFontSize(int point_size) {

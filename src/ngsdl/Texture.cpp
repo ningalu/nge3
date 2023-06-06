@@ -42,6 +42,18 @@ Texture::Texture(
     throw SDLException("Texture couldn't be created from Surface");
   }
 }
+Texture::Texture(
+  const Renderer &renderer,
+  std::unique_ptr<Surface, decltype(&SDL_FreeSurface)> &&surf
+)
+    : texture_(nullptr, SDL_DestroyTexture) {
+  texture_.reset(
+    SDL_CreateTextureFromSurface(renderer.renderer_.get(), surf.get())
+  );
+  if (texture_ == nullptr) {
+    throw SDLException("Texture couldn't be created from Surface");
+  }
+}
 
 Texture::Texture(const Renderer &renderer, std::string filename)
     : texture_(nullptr, SDL_DestroyTexture) {

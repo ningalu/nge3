@@ -73,10 +73,9 @@ public:
 
   ~Font();
 
-protected:
   std::unique_ptr<TTF_Font, decltype(&TTF_CloseFont)> font_;
 
-  SDL_Texture *TextureFromSurface(SDL_Renderer *renderer, SDL_Surface *surf);
+protected:
 };
 } // namespace nge::sdl
 
