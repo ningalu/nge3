@@ -18,6 +18,27 @@ Font::Font(const std::string &filename, int point_size)
   font_.reset(f);
 }
 
+void Font::BytesSwapped(bool swapped) {
+  // this is fucking stupid
+  TTF_ByteSwappedUNICODE(static_cast<SDL_bool>(swapped));
+}
+
+[[nodiscard]] int32_t Font::FontAscent() const {
+  return TTF_FontAscent(font_.get());
+}
+
+[[nodiscard]] int32_t Font::FontDescent() const {
+  return TTF_FontDescent(font_.get());
+}
+
+[[nodiscard]] std::string_view Font::FamilyName() const {
+  return std::string_view{TTF_FontFaceFamilyName(font_.get())};
+}
+
+[[nodiscard]] bool Font::FixedWidth() const {
+  return TTF_FontFaceIsFixedWidth(font_.get());
+}
+
 [[nodiscard]] Texture Font::CreateBlendedTexture(
   const Renderer &renderer, const std::string &text, Colour colour
 ) {

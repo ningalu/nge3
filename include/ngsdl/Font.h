@@ -4,6 +4,7 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include <string_view>
 
 #include <SDL2/SDL_ttf.h>
 
@@ -12,14 +13,31 @@
 
 namespace nge::sdl {
 class Renderer;
+class Surface;
 class Font {
   friend class Texture;
+  friend class Surface;
 
 public:
   Font() = delete;
-  Font(const Font &) = default;
-  // Font &operator=(const Font &) = delete;
+  Font(const Font &) = delete;
+  Font &operator=(const Font &) = delete;
   Font(const std::string &filename, int point_size);
+
+  // TTF_ByteSwappedUNICODE
+  void BytesSwapped(bool swapped);
+
+  // TTF_FontAscent
+  [[nodiscard]] int32_t FontAscent() const;
+
+  // TTF_FontDescent
+  [[nodiscard]] int32_t FontDescent() const;
+
+  // TTF_FontFaceFamilyName
+  [[nodiscard]] std::string_view FamilyName() const;
+
+  // TTF_FontFaceIsFixedWidth
+  [[nodiscard]] bool FixedWidth() const;
 
   // TTF_RenderText_Blended
   [[nodiscard]] Texture CreateBlendedTexture(
@@ -65,17 +83,16 @@ public:
     uint32_t wrap_length
   );
 
-  // IMG_SetFontSize
+  // TTF_SetFontSize
   void SetFontSize(int point_size);
 
-  // IMG_SizeText
+  // TTF_SizeText
   std::tuple<int, int> CalcTextSize(const std::string &text) const;
 
   ~Font();
 
-  std::unique_ptr<TTF_Font, decltype(&TTF_CloseFont)> font_;
-
 protected:
+  std::unique_ptr<TTF_Font, decltype(&TTF_CloseFont)> font_;
 };
 } // namespace nge::sdl
 

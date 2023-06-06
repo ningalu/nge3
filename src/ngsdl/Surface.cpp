@@ -10,7 +10,7 @@ namespace nge::sdl {
 [[nodiscard]] std::unique_ptr<Surface, decltype(&SDL_FreeSurface)> Surface::
   TextBlended(Font &font, const std::string &text, Colour c) {
   return std::unique_ptr<Surface, decltype(&SDL_FreeSurface)>{
-    std::bit_cast<Surface *>(TTF_RenderText_Blended(
+    std::bit_cast<Surface *>(TTF_RenderUTF8_Blended(
       font.font_.get(), text.c_str(), std::bit_cast<SDL_Color>(c)
     )),
     SDL_FreeSurface};
@@ -18,7 +18,7 @@ namespace nge::sdl {
 [[nodiscard]] std::unique_ptr<Surface, decltype(&SDL_FreeSurface)> Surface::
   TextBlended(Font *font, const std::string &text, Colour c) {
   return std::unique_ptr<Surface, decltype(&SDL_FreeSurface)>{
-    std::bit_cast<Surface *>(TTF_RenderText_Blended(
+    std::bit_cast<Surface *>(TTF_RenderUTF8_Blended(
       font->font_.get(), text.c_str(), std::bit_cast<SDL_Color>(c)
     )),
     SDL_FreeSurface};
@@ -26,7 +26,7 @@ namespace nge::sdl {
 [[nodiscard]] std::unique_ptr<Surface, decltype(&SDL_FreeSurface)> Surface::
   TextBlended(Font &font, const std::string &text, Colour c, uint32_t w) {
   return std::unique_ptr<Surface, decltype(&SDL_FreeSurface)>{
-    std::bit_cast<Surface *>(TTF_RenderText_Blended_Wrapped(
+    std::bit_cast<Surface *>(TTF_RenderUTF8_Blended_Wrapped(
       font.font_.get(), text.c_str(), std::bit_cast<SDL_Color>(c), w
     )),
     SDL_FreeSurface};
@@ -34,7 +34,7 @@ namespace nge::sdl {
 [[nodiscard]] std::unique_ptr<Surface, decltype(&SDL_FreeSurface)> Surface::
   TextBlended(Font *font, const std::string &text, Colour c, uint32_t w) {
   return std::unique_ptr<Surface, decltype(&SDL_FreeSurface)>{
-    std::bit_cast<Surface *>(TTF_RenderText_Blended_Wrapped(
+    std::bit_cast<Surface *>(TTF_RenderUTF8_Blended_Wrapped(
       font->font_.get(), text.c_str(), std::bit_cast<SDL_Color>(c), w
     )),
     SDL_FreeSurface};
@@ -46,7 +46,7 @@ namespace nge::sdl {
     Font &font, const std::string &text, Colour text_colour, Colour background
   ) {
   return std::unique_ptr<Surface, decltype(&SDL_FreeSurface)>{
-    std::bit_cast<Surface *>(TTF_RenderText_Shaded(
+    std::bit_cast<Surface *>(TTF_RenderUTF8_Shaded(
       font.font_.get(),
       text.c_str(),
       std::bit_cast<SDL_Color>(text_colour),
@@ -59,7 +59,7 @@ namespace nge::sdl {
     Font *font, const std::string &text, Colour text_colour, Colour background
   ) {
   return std::unique_ptr<Surface, decltype(&SDL_FreeSurface)>{
-    std::bit_cast<Surface *>(TTF_RenderText_Shaded(
+    std::bit_cast<Surface *>(TTF_RenderUTF8_Shaded(
       font->font_.get(),
       text.c_str(),
       std::bit_cast<SDL_Color>(text_colour),
@@ -78,7 +78,7 @@ namespace nge::sdl {
     uint32_t w
   ) {
   return std::unique_ptr<Surface, decltype(&SDL_FreeSurface)>{
-    std::bit_cast<Surface *>(TTF_RenderText_Shaded_Wrapped(
+    std::bit_cast<Surface *>(TTF_RenderUTF8_Shaded_Wrapped(
       font.font_.get(),
       text.c_str(),
       std::bit_cast<SDL_Color>(text_colour),
@@ -96,7 +96,7 @@ namespace nge::sdl {
     uint32_t w
   ) {
   return std::unique_ptr<Surface, decltype(&SDL_FreeSurface)>{
-    std::bit_cast<Surface *>(TTF_RenderText_Shaded_Wrapped(
+    std::bit_cast<Surface *>(TTF_RenderUTF8_Shaded_Wrapped(
       font->font_.get(),
       text.c_str(),
       std::bit_cast<SDL_Color>(text_colour),
@@ -109,7 +109,7 @@ namespace nge::sdl {
 [[nodiscard]] std::unique_ptr<Surface, decltype(&SDL_FreeSurface)> Surface::
   TextSolid(Font &font, const std::string &text, Colour c) {
   return std::unique_ptr<Surface, decltype(&SDL_FreeSurface)>{
-    std::bit_cast<Surface *>(TTF_RenderText_Solid(
+    std::bit_cast<Surface *>(TTF_RenderUTF8_Solid(
       font.font_.get(), text.c_str(), std::bit_cast<SDL_Color>(c)
     )),
     SDL_FreeSurface};
@@ -117,7 +117,7 @@ namespace nge::sdl {
 [[nodiscard]] std::unique_ptr<Surface, decltype(&SDL_FreeSurface)> Surface::
   TextSolid(Font *font, const std::string &text, Colour c) {
   return std::unique_ptr<Surface, decltype(&SDL_FreeSurface)>{
-    std::bit_cast<Surface *>(TTF_RenderText_Solid(
+    std::bit_cast<Surface *>(TTF_RenderUTF8_Solid(
       font->font_.get(), text.c_str(), std::bit_cast<SDL_Color>(c)
     )),
     SDL_FreeSurface};
@@ -125,7 +125,7 @@ namespace nge::sdl {
 [[nodiscard]] std::unique_ptr<Surface, decltype(&SDL_FreeSurface)> Surface::
   TextSolid(Font &font, const std::string &text, Colour c, uint32_t w) {
   return std::unique_ptr<Surface, decltype(&SDL_FreeSurface)>{
-    std::bit_cast<Surface *>(TTF_RenderText_Solid_Wrapped(
+    std::bit_cast<Surface *>(TTF_RenderUTF8_Solid_Wrapped(
       font.font_.get(), text.c_str(), std::bit_cast<SDL_Color>(c), w
     )),
     SDL_FreeSurface};
@@ -133,7 +133,7 @@ namespace nge::sdl {
 [[nodiscard]] std::unique_ptr<Surface, decltype(&SDL_FreeSurface)> Surface::
   TextSolid(Font *font, const std::string &text, Colour c, uint32_t w) {
   return std::unique_ptr<Surface, decltype(&SDL_FreeSurface)>{
-    std::bit_cast<Surface *>(TTF_RenderText_Solid_Wrapped(
+    std::bit_cast<Surface *>(TTF_RenderUTF8_Solid_Wrapped(
       font->font_.get(), text.c_str(), std::bit_cast<SDL_Color>(c), w
     )),
     SDL_FreeSurface};
