@@ -10,6 +10,7 @@
 #include "nge/Components/Mouse/HoverController.h"
 
 #include "nge/Components/Button.h"
+#include "nge/Components/Canvas.h"
 
 #include "ngsdl/Color.h"
 #include "ngsdl/Events/MouseButton.h"

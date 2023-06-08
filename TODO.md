@@ -6,3 +6,4 @@
 - more components
 - make the repo configure automatically in vs
 - try integrate ninja
+- iterator on canvas/surface

@@ -53,7 +53,7 @@ target_link_libraries(
 
 add_executable(
   ${subproject}-demo 
-  ./main
+  ./main.cpp
 )
 
 target_compile_features(

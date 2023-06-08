@@ -34,6 +34,7 @@ add_library(
   ./Components/BlendedText.cpp
   ./Components/AtlasAnimation.cpp
   ./Components/Button.cpp
+  ./Components/Canvas.cpp
 
   ./Components/Shapes/Rectangle.cpp
 )
