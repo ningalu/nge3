@@ -80,6 +80,7 @@ public:
       std::experimental::dynamic_extent,
       std::experimental::dynamic_extent>>
   Pixels();
+  Colour &Pixels(std::size_t x, std::size_t y);
 };
 } // namespace nge::sdl
 

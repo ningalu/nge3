@@ -10,9 +10,17 @@ namespace nge::sdl {
 [[nodiscard]] std::unique_ptr<Surface, decltype(&SDL_FreeSurface)> Surface::RGB(
   uint32_t w, uint32_t h
 ) {
+  // this seems pretty fucking sketchy
   return std::unique_ptr<Surface, decltype(&SDL_FreeSurface)>{
     std::bit_cast<Surface *>(SDL_CreateRGBSurface(
-      0, w, h, 32 /*sizeof(Colour) * sizeof(byte)*/, 0, 0, 0, 0
+      0,
+      w,
+      h,
+      32 /*sizeof(Colour) * sizeof(byte)*/,
+      0x000000FF,
+      0x0000FF00,
+      0x00FF0000,
+      0xFF000000
     )),
     SDL_FreeSurface};
 }
@@ -156,7 +164,8 @@ std::experimental::mdspan<
     std::experimental::dynamic_extent,
     std::experimental::dynamic_extent>>
 Surface::Pixels() {
-  return std::experimental::mdspan{std::bit_cast<Colour *>(pixels), w, h};
+  return std::experimental::mdspan{std::bit_cast<Colour *>(pixels), h, w};
 }
+Colour &Surface::Pixels(std::size_t x, std::size_t y) { return Pixels()(x, y); }
 
 } // namespace nge::sdl

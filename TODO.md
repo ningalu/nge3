@@ -4,3 +4,5 @@
 - dependency ownership
 - textures as draw targets
 - more components
+- make the repo configure automatically in vs
+- try integrate ninja
