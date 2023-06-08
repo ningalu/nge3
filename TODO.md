@@ -1,0 +1,6 @@
+- const std::string & to std::string_view
+- serialisation
+- inheritance > composition with factory methods for other SDL structs?
+- dependency ownership
+- textures as draw targets
+- more components

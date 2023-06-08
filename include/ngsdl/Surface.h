@@ -1,10 +1,11 @@
 #ifndef NGSDL_SURFACE_H
 #define NGSDL_SURFACE_H
 
-#include "SDL2/SDL.h"
-
+#include <experimental/mdspan>
 #include <memory>
 #include <string>
+
+#include "SDL2/SDL.h"
 
 #include "ngsdl/Color.h"
 
@@ -12,6 +13,13 @@ namespace nge::sdl {
 class Font;
 class Surface : public SDL_Surface {
 public:
+  Surface() = delete;
+
+  // SDL_CreateRGBSurface
+  static [[nodiscard]] std::unique_ptr<Surface, decltype(&SDL_FreeSurface)> RGB(
+    uint32_t w, uint32_t h
+  );
+
   // TTF_RenderText_Blended
   static [[nodiscard]] std::unique_ptr<Surface, decltype(&SDL_FreeSurface)>
   TextBlended(Font &font, const std::string &text, Colour c);
@@ -63,6 +71,15 @@ public:
   TextSolid(Font &font, const std::string &text, Colour c, uint32_t w);
   static [[nodiscard]] std::unique_ptr<Surface, decltype(&SDL_FreeSurface)>
   TextSolid(Font *font, const std::string &text, Colour c, uint32_t w);
+
+  // pixels
+  std::experimental::mdspan<
+    Colour,
+    std::experimental::extents<
+      unsigned long long,
+      std::experimental::dynamic_extent,
+      std::experimental::dynamic_extent>>
+  Pixels();
 };
 } // namespace nge::sdl
 

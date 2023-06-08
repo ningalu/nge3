@@ -1,4 +1,8 @@
+#include <cstdlib>
+#include <experimental/mdspan>
 #include <iostream>
+
+#include "fmt/format.h"
 
 #include "ngsdl/BlendMode.h"
 #include "ngsdl/Events/Event.hpp"
@@ -69,6 +73,30 @@ int main(int argc, char **argv) {
     sdl::Texture text2 =
       font.CreateShadedTexture(r, "shaded", {0, 255, 0, 255}, {0, 0, 255, 255});
 
+    auto s = sdl::Surface::RGB(50, 100);
+    std::cout << fmt::format(
+      "extent 1: {0}, extent 2: {1}, size: {2}",
+      s->Pixels().extent(0),
+      s->Pixels().extent(1),
+      sizeof(s->Pixels())
+    ) << "\n";
+    for (auto i = 0; i < s->Pixels().extent(0); i++) {
+      for (auto j = 0; j < s->Pixels().extent(1); j++) {
+        s->Pixels()(i, j) = sdl::Colour{
+          static_cast<uint8_t>(std::rand() % 256),
+          static_cast<uint8_t>(std::rand() % 256),
+          static_cast<uint8_t>(std::rand() % 256),
+          255};
+      }
+    }
+    // for (auto i = 0; i < 10; i++) {
+    //   for (auto j = 0; j < 10; i++) {
+    //     s->Pixels()(i, j) = sdl::Colour{255, 0, 0, 255};
+    //   }
+    // }
+
+    sdl::Texture t3{r, s};
+
     sdl::Point pos = {50, 50};
 
     SDL_Event buf;
@@ -94,6 +122,21 @@ int main(int argc, char **argv) {
         );
         r.Copy(text1, std::nullopt, {500, 500, text1.GetW(), text1.GetH()});
         r.Copy(text2, std::nullopt, {600, 600, text2.GetW(), text2.GetH()});
+        for (auto i = 0; i < s->Pixels().extent(0); i++) {
+          for (auto j = 0; j < s->Pixels().extent(1); j++) {
+            s->Pixels()(i, j) = sdl::Colour{
+              static_cast<uint8_t>(std::rand() % 256),
+              static_cast<uint8_t>(std::rand() % 256),
+              static_cast<uint8_t>(std::rand() % 256),
+              255};
+          }
+        }
+        auto t4 = sdl::Texture{r, s};
+        r.Copy(
+          t4,
+          std::nullopt,
+          sdl::Rectangle{700, 700, t3.GetW() * 3, t3.GetH() * 2}
+        );
         r.SetDrawColor(255, 0, 0, 255);
         r.DrawLine({0, 0}, {600, 50});
         r.SetDrawColor(0, 0, 255, 255);

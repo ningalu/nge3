@@ -18,6 +18,8 @@ target_include_directories(
 target_link_libraries(
   ${subproject}-demo  
   ngsdl 
+  std::mdspan
+  fmt::fmt
 )
 
 add_custom_command(
