@@ -10,6 +10,7 @@
 #include "nge/Components/Animation/TimedAnimationController.h"
 #include "nge/Components/BlendedText.h"
 #include "nge/Components/Button.h"
+#include "nge/Components/Canvas.h"
 #include "nge/Components/Keyboard/BasicKeyUser.h"
 #include "nge/Components/Mouse/BasicMouseUser.h"
 #include "nge/Components/Mouse/ClickController.h"
@@ -200,6 +201,16 @@ void DebugScene::Setup() {
   RegisterDrawable(b);
   RegisterClickable(b);
   RegisterHoverable(b);
+
+  auto canvas =
+    std::make_shared<nge::Canvas>(graphics_, 50, 100, nge::sdl::Point{500, 50});
+  for (auto i = 0; i < 100; i++) {
+    for (auto j = 0; j < 50; j++) {
+      canvas->at(i, j) = nge::sdl::Colour{
+        static_cast<uint8_t>(i), static_cast<uint8_t>(j), 0, 255};
+    }
+  }
+  RegisterDrawable(canvas);
 
   frame_timer_.Restart();
   scene_timer_.Restart();

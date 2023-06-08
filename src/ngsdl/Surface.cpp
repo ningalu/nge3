@@ -7,6 +7,24 @@
 #include "ngsdl/Font.h"
 
 namespace nge::sdl {
+[[nodiscard]] std::unique_ptr<Surface, decltype(&SDL_FreeSurface)> Surface::RGB(
+  uint32_t w, uint32_t h
+) {
+  // this seems pretty fucking sketchy
+  return std::unique_ptr<Surface, decltype(&SDL_FreeSurface)>{
+    std::bit_cast<Surface *>(SDL_CreateRGBSurface(
+      0,
+      w,
+      h,
+      32 /*sizeof(Colour) * sizeof(byte)*/,
+      0x000000FF,
+      0x0000FF00,
+      0x00FF0000,
+      0xFF000000
+    )),
+    SDL_FreeSurface};
+}
+
 [[nodiscard]] std::unique_ptr<Surface, decltype(&SDL_FreeSurface)> Surface::
   TextBlended(Font &font, const std::string &text, Colour c) {
   return std::unique_ptr<Surface, decltype(&SDL_FreeSurface)>{
@@ -138,5 +156,16 @@ namespace nge::sdl {
     )),
     SDL_FreeSurface};
 }
+
+std::experimental::mdspan<
+  Colour,
+  std::experimental::extents<
+    unsigned long long,
+    std::experimental::dynamic_extent,
+    std::experimental::dynamic_extent>>
+Surface::Pixels() {
+  return std::experimental::mdspan{std::bit_cast<Colour *>(pixels), h, w};
+}
+Colour &Surface::Pixels(std::size_t x, std::size_t y) { return Pixels()(x, y); }
 
 } // namespace nge::sdl

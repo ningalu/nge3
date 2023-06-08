@@ -24,6 +24,7 @@ find_package(SDL2_ttf)
 find_package(nlohmann_json)
 find_package(fmt)
 find_package(GTest)
+find_package(mdspan)
 
 add_subdirectory(${CMAKE_SOURCE_DIR}/src/misc)
 add_subdirectory(${CMAKE_SOURCE_DIR}/src/ngsdl)

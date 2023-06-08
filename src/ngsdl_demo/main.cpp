@@ -1,4 +1,8 @@
+#include <cstdlib>
+#include <experimental/mdspan>
 #include <iostream>
+
+#include "fmt/format.h"
 
 #include "ngsdl/BlendMode.h"
 #include "ngsdl/Events/Event.hpp"
@@ -69,6 +73,44 @@ int main(int argc, char **argv) {
     sdl::Texture text2 =
       font.CreateShadedTexture(r, "shaded", {0, 255, 0, 255}, {0, 0, 255, 255});
 
+    auto s = sdl::Surface::RGB(255, 255);
+
+    sdl::Timer tex_timer;
+    tex_timer.Restart();
+    for (int i = 0; i < 10; i++) {
+      volatile sdl::Texture t_{r, s};
+    }
+    std::cout << fmt::format(
+      "100 surface to texture took {0} ms\n ", tex_timer.GetTicks()
+    );
+
+    std::cout << fmt::format(
+      "extent 1: {0}, extent 2: {1}, size: {2}",
+      s->Pixels().extent(0),
+      s->Pixels().extent(1),
+      sizeof(s->Pixels())
+    ) << "\n";
+
+    // i is row, j is column
+    for (auto i = 0; i < s->Pixels().extent(0); i++) {
+      for (auto j = 0; j < s->Pixels().extent(1); j++) {
+        // s->Pixels()(i, j) = sdl::Colour{
+        //   static_cast<uint8_t>(std::rand() % 256),
+        //   static_cast<uint8_t>(std::rand() % 256),
+        //   static_cast<uint8_t>(std::rand() % 256),
+        //   255};
+        s->Pixels(i, j) =
+          sdl::Colour{static_cast<uint8_t>(i), static_cast<uint8_t>(j), 0, 255};
+      }
+    }
+    // for (auto i = 0; i < 10; i++) {
+    //   for (auto j = 0; j < 10; i++) {
+    //     s->Pixels()(i, j) = sdl::Colour{255, 0, 0, 255};
+    //   }
+    // }
+
+    sdl::Texture t3{r, s};
+
     sdl::Point pos = {50, 50};
 
     SDL_Event buf;
@@ -82,6 +124,7 @@ int main(int argc, char **argv) {
       }
 
       if (frames.GetTicks() > (1000 / 60)) {
+        // std::cout << frames.GetTicks() << "\n";
         frames.Restart();
         r.Clear();
         r.CopyEx(
@@ -94,6 +137,19 @@ int main(int argc, char **argv) {
         );
         r.Copy(text1, std::nullopt, {500, 500, text1.GetW(), text1.GetH()});
         r.Copy(text2, std::nullopt, {600, 600, text2.GetW(), text2.GetH()});
+        // for (auto i = 0; i < s->Pixels().extent(0); i++) {
+        //   for (auto j = 0; j < s->Pixels().extent(1); j++) {
+        //     s->Pixels()(i, j) = sdl::Colour{
+        //       static_cast<uint8_t>(std::rand() % 256),
+        //       static_cast<uint8_t>(std::rand() % 256),
+        //       static_cast<uint8_t>(std::rand() % 256),
+        //       255};
+        //   }
+        // }
+        auto t4 = sdl::Texture{r, s};
+        r.Copy(
+          t4, std::nullopt, sdl::Rectangle{700, 700, t3.GetW(), t3.GetH()}
+        );
         r.SetDrawColor(255, 0, 0, 255);
         r.DrawLine({0, 0}, {600, 50});
         r.SetDrawColor(0, 0, 255, 255);

@@ -6,6 +6,7 @@ sdl_image/2.0.5
 sdl_ttf/2.20.1
 gtest/cci.20210126
 fmt/10.0.0
+mdspan/0.6.0
 
 [generators]
 CMakeDeps
