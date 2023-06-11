@@ -2,6 +2,7 @@
 #define MISC_RECTANGLE_HPP
 
 #include <algorithm>
+#include <ostream>
 #include <tuple>
 #include <type_traits>
 
