@@ -5,7 +5,7 @@ namespace nge {
 [[nodiscard]] bool Drawable::CompareDrawPriority(
   const std::shared_ptr<Drawable> &lhs, const std::shared_ptr<Drawable> &rhs
 ) noexcept {
-  return lhs->GetDrawPriority() < rhs->GetDrawPriority();
+  return lhs->GetDrawPriority() > rhs->GetDrawPriority();
 }
 Drawable::~Drawable() {}
 } // namespace nge
