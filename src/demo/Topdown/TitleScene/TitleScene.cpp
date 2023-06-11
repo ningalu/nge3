@@ -11,6 +11,8 @@
 #include "nge/Timer.h"
 #include "ngsdl/Font.h"
 
+#include "demo/Topdown/Overworld/OverworldScene.h"
+
 static int16_t fade_in;
 static bool fading_in;
 static std::shared_ptr<nge::sdl::Font> h1_, h2_;
@@ -127,6 +129,19 @@ void TitleScene::Tick() {
       text_select_pos %= text_select_options.size();
       text_select->SetY(text_select_options.at(text_select_pos)->GetY());
       text_select_controller->Restart();
+    }
+    if (input_->KeyPressed(nge::sdl::Scancode::RETURN)) {
+      switch (text_select_pos) {
+      case 0:
+        scene_manager_->PushScene(scene_factory_->Create<OverworldScene>());
+        break;
+      case 1:
+        break;
+      case 2:
+        break;
+      default:
+        break;
+      }
     }
   }
 }

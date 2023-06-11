@@ -13,6 +13,8 @@ add_library(
   ./Graph/GraphScene.cpp
 
   ./Topdown/TitleScene/TitleScene.cpp
+
+  ./Topdown/Overworld/OverworldScene.cpp
 )
 
 target_compile_features(
