@@ -95,6 +95,12 @@ void FrameAnimationController::Tick() {
   return frame_order_[current_frame_];
 }
 
+void FrameAnimationController::Restart() {
+  current_frame_ = 0;
+  current_repeat_ = 0;
+  current_subframe_ = 0;
+}
+
 [[nodiscard]] uint32_t FrameAnimationController::TotalFrames() const {
   return max_frames_;
 }

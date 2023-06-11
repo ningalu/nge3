@@ -8,12 +8,14 @@ namespace nge {
 class AnimationController {
 public:
   virtual void Tick() = 0;
+  virtual void Restart() = 0;
   [[nodiscard]] virtual uint32_t Frame() const = 0;
   [[nodiscard]] virtual uint32_t TotalFrames() const = 0;
   [[nodiscard]] virtual uint32_t UniqueFrames() const = 0;
 
-  friend std::ostream &
-  operator<<(std::ostream &os, const AnimationController &ac);
+  friend std::ostream &operator<<(
+    std::ostream &os, const AnimationController &ac
+  );
 
   virtual ~AnimationController() = default;
 

@@ -56,12 +56,14 @@ void TimedAnimationController::Init_(
     frame_order_ = frame_order.value();
   }
 
-  unique_frames_
-    = *std::max_element(frame_order_.begin(), frame_order_.end()) + 1;
+  unique_frames_ =
+    *std::max_element(frame_order_.begin(), frame_order_.end()) + 1;
 
   active = true;
   timer_.Restart();
 }
+
+void TimedAnimationController::Restart() { timer_.Restart(); }
 
 void TimedAnimationController::Tick() {
   if (active) {
