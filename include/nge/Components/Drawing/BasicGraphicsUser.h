@@ -9,6 +9,7 @@
 #include "nge/Components/Drawing/Translatable.h"
 
 #include "ngsdl/Rectangle.h"
+#include "ngsdl/RendererFlip.h"
 
 namespace nge {
 namespace sdl {
@@ -22,7 +23,7 @@ class BasicGraphicsUser : public Drawable,
                           public Rotatable,
                           public Translatable {
 public:
-  BasicGraphicsUser() = default;
+  BasicGraphicsUser() = delete;
   BasicGraphicsUser(const std::shared_ptr<Graphics> &graphics);
 
   virtual void Rotate(double angle) override;
@@ -48,9 +49,12 @@ public:
   void SetDrawPriority(int32_t p) noexcept;
   virtual void SetScale(double n) override;
 
-  virtual std::tuple<int32_t, int32_t> GetSize() const noexcept;
-  virtual int32_t GetW() const noexcept;
-  virtual int32_t GetH() const noexcept;
+  [[nodiscard]] virtual std::tuple<int32_t, int32_t> GetSize() const noexcept;
+  [[nodiscard]] virtual int32_t GetW() const noexcept;
+  [[nodiscard]] virtual int32_t GetH() const noexcept;
+
+  [[nodiscard]] virtual sdl::RendererFlip Flip() const noexcept;
+  virtual void SetFlip(sdl::RendererFlip flip) noexcept;
 
   virtual ~BasicGraphicsUser();
 
@@ -59,6 +63,7 @@ protected:
   std::shared_ptr<sdl::Texture> texture_;
   sdl::Rectangle src_, dst_;
   double angle_;
+  sdl::RendererFlip flip_;
   uint32_t draw_priority_;
 };
 } // namespace nge

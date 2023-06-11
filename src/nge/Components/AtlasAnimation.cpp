@@ -43,7 +43,7 @@ AtlasAnimation::AtlasAnimation(
 
 void AtlasAnimation::Draw() {
   src_.SetX(control_->Frame() * frame_dim_.W());
-  graphics_->Draw(*texture_, src_, dst_, angle_, std::nullopt);
+  graphics_->Draw(*texture_, src_, dst_, angle_, std::nullopt, flip_);
   control_->Tick();
 }
 } // namespace nge
