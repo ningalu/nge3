@@ -11,6 +11,8 @@ add_library(
   ./Pong/Paddle.cpp
 
   ./Graph/GraphScene.cpp
+
+  ./Topdown/TitleScene/TitleScene.cpp
 )
 
 target_compile_features(

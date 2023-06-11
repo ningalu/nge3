@@ -19,6 +19,7 @@
 #include "demo/DebugScene.h"
 #include "demo/Graph/GraphScene.h"
 #include "demo/Pong/PongScene.h"
+#include "demo/Topdown/TitleScene/TitleScene.h"
 
 namespace demo {
 
@@ -26,10 +27,12 @@ void IntroScene::Setup() {
   viewport_ = {50, 50, 800, 600};
 
   h1_ = std::make_shared<nge::sdl::Font>(
-    std::string{SDL_GetBasePath()} + "resources/PKMN-Mystery-Dungeon.ttf", 96
+    std::string{SDL_GetBasePath()} + "resources/Fonts/PKMN-Mystery-Dungeon.ttf",
+    96
   );
   h2_ = std::make_shared<nge::sdl::Font>(
-    std::string{SDL_GetBasePath()} + "resources/PKMN-Mystery-Dungeon.ttf", 72
+    std::string{SDL_GetBasePath()} + "resources/Fonts/PKMN-Mystery-Dungeon.ttf",
+    72
   );
 
   nge3_demo_app_text_ = std::make_shared<nge::Text>(
@@ -75,6 +78,21 @@ void IntroScene::Setup() {
   RegisterDrawable(graph_button_);
   RegisterClickable(graph_button_);
   RegisterHoverable(graph_button_);
+
+  auto game_button = std::make_shared<nge::Button>(
+    input_,
+    std::make_shared<nge::Text>(graphics_, h2_, "Topdown"),
+    [&]() {
+      scene_manager_->PushScene(scene_factory_->Create<demo::TitleScene>());
+    }
+  );
+  game_button->SetHoverGraphic(std::make_shared<nge::Text>(
+    graphics_, h2_, "Topdown", nge::sdl::Colour{100, 100, 100, 255}
+  ));
+  game_button->SetPos(75, 200);
+  RegisterDrawable(game_button);
+  RegisterClickable(game_button);
+  RegisterHoverable(game_button);
 }
 
 void IntroScene::Render() {}
