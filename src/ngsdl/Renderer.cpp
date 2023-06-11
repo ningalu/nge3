@@ -21,6 +21,9 @@ Renderer::Renderer(const Window &window)
     throw SDLException("Renderer couldn't be constructed");
   } else {
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
+    SDL_SetRenderDrawBlendMode(
+      renderer, static_cast<SDL_BlendMode>(BlendMode::BLEND)
+    );
     renderer_.reset(renderer);
   }
 }
@@ -34,6 +37,9 @@ Renderer::Renderer(const Window &window, int index, RendererFlags flags)
     throw SDLException("Renderer couldn't be constructed");
   } else {
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
+    SDL_SetRenderDrawBlendMode(
+      renderer, static_cast<SDL_BlendMode>(BlendMode::BLEND)
+    );
     renderer_.reset(renderer);
   }
 }
