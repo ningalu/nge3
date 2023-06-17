@@ -116,6 +116,12 @@ public:
   [[nodiscard]] inline T Top() const noexcept;
   template <Arithmetic C = T>
   [[nodiscard]] inline T Bottom() const noexcept;
+  template <Arithmetic C = T>
+  [[nodiscard]] inline T CenterX() const noexcept;
+  template <Arithmetic C = T>
+  [[nodiscard]] inline T CenterY() const noexcept;
+  template <Arithmetic C = T>
+  [[nodiscard]] inline Point<C> Center() const noexcept;
 
   // relative mutators
 
@@ -123,6 +129,9 @@ public:
   inline void SetRight(T r) noexcept;
   inline void SetTop(T t) noexcept;
   inline void SetBottom(T b) noexcept;
+  inline void SetCenterX(T b) noexcept;
+  inline void SetCenterY(T b) noexcept;
+  inline void SetCenter(Point<T> b) noexcept;
 
   template <Arithmetic C>
   inline void SetLeft(std::type_identity_t<C> l) noexcept;
@@ -376,6 +385,22 @@ template <Arithmetic C>
 }
 
 template <Arithmetic T>
+template <Arithmetic C>
+[[nodiscard]] inline T Rectangle<T>::CenterX() const noexcept {
+  return static_cast<C>(x_ + (w_ / 2));
+}
+template <Arithmetic T>
+template <Arithmetic C>
+[[nodiscard]] inline T Rectangle<T>::CenterY() const noexcept {
+  return static_cast<C>(y_ + (h_ / 2));
+}
+template <Arithmetic T>
+template <Arithmetic C>
+[[nodiscard]] inline Point<C> Rectangle<T>::Center() const noexcept {
+  return Point<C>{CenterX<C>, CenterY<C>};
+}
+
+template <Arithmetic T>
 inline void Rectangle<T>::SetLeft(T l) noexcept {
   x_ = l;
 }
@@ -411,6 +436,20 @@ template <Arithmetic T>
 template <Arithmetic C>
 inline void Rectangle<T>::SetBottom(std::type_identity_t<C> b) noexcept {
   y_ = static_cast<T>(b - static_cast<C>(h_));
+}
+
+template <Arithmetic T>
+inline void Rectangle<T>::SetCenterX(T b) noexcept {
+  x_ = b - (w_ / 2);
+}
+template <Arithmetic T>
+inline void Rectangle<T>::SetCenterY(T b) noexcept {
+  y_ = b - (h_ / 2);
+}
+template <Arithmetic T>
+inline void Rectangle<T>::SetCenter(Point<T> b) noexcept {
+  SetCenterX(b.x);
+  SetCenterY(b.y);
 }
 
 template <Arithmetic T>

@@ -31,6 +31,7 @@ public:
   );
 
   virtual void Tick() override;
+  virtual void Restart() override;
   [[nodiscard]] virtual uint32_t Frame() const override;
   [[nodiscard]] virtual uint32_t TotalFrames() const override;
   [[nodiscard]] virtual uint32_t UniqueFrames() const override;

@@ -62,7 +62,7 @@ int main(int argc, char **argv) {
       std::cout << e.what() << "\n";
     }
 
-    sdl::Font font{"./resources/pokemon_pixel_font.ttf", 72};
+    sdl::Font font{"./resources/Fonts/pokemon_pixel_font.ttf", 72};
 
     sdl::Texture text1{
       r,

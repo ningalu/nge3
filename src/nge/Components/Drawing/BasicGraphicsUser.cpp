@@ -7,11 +7,7 @@
 
 namespace nge {
 BasicGraphicsUser::BasicGraphicsUser(const std::shared_ptr<Graphics> &graphics)
-    : graphics_(graphics) {
-  angle_ = 0.0;
-  dst_ = {0, 0, 0, 0};
-  src_ = {0, 0, 0, 0};
-}
+    : graphics_(graphics), angle_(0), flip_(sdl::RendererFlip::NONE) {}
 
 void BasicGraphicsUser::Rotate(double angle) { angle_ += angle; }
 double BasicGraphicsUser::GetAngle() { return angle_; }
@@ -28,7 +24,7 @@ void BasicGraphicsUser::MoveX(int x) { dst_.MoveX(x); }
 void BasicGraphicsUser::MoveY(int y) { dst_.MoveY(y); }
 
 void BasicGraphicsUser::Draw() {
-  graphics_->Draw(*texture_, std::nullopt, dst_, angle_, std::nullopt);
+  graphics_->Draw(*texture_, std::nullopt, dst_, angle_, std::nullopt, flip_);
 }
 [[nodiscard]] bool BasicGraphicsUser::Overlaps(int32_t x, int32_t y) const {
   return dst_.Encloses(sdl::Point{x, y});
@@ -49,11 +45,23 @@ void BasicGraphicsUser::SetScale(double scale) {
   dst_.SetH(static_cast<int>(static_cast<double>(src_.H()) * scale));
 }
 
-std::tuple<int32_t, int32_t> BasicGraphicsUser::GetSize() const noexcept {
+[[nodiscard]] std::tuple<int32_t, int32_t> BasicGraphicsUser::GetSize(
+) const noexcept {
   return std::tuple<int32_t, int32_t>{GetW(), GetH()};
 }
-int32_t BasicGraphicsUser::GetW() const noexcept { return dst_.W(); }
-int32_t BasicGraphicsUser::GetH() const noexcept { return dst_.H(); }
+[[nodiscard]] int32_t BasicGraphicsUser::GetW() const noexcept {
+  return dst_.W();
+}
+[[nodiscard]] int32_t BasicGraphicsUser::GetH() const noexcept {
+  return dst_.H();
+}
+
+[[nodiscard]] sdl::RendererFlip BasicGraphicsUser::Flip() const noexcept {
+  return flip_;
+}
+void BasicGraphicsUser::SetFlip(sdl::RendererFlip flip) noexcept {
+  flip_ = flip;
+}
 
 BasicGraphicsUser::~BasicGraphicsUser() {}
 } // namespace nge
